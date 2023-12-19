@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
-import AdminLogin from "../models/adminSchema.js";
+import AdminLogin from "../models/loginSchema.js";
 import jwt from "jsonwebtoken";
 dotenv.config();
 const {SECRET} = process.env
