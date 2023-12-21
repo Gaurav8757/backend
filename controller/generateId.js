@@ -7,3 +7,10 @@ export const generateUniqueId = () => {
   uniqueIdCounter += 1;
   return uniqueId;
 };
+
+let empsIdCounter = 0;
+export const generateEmpId = () => {
+  const empsId = `emp-${empsIdCounter}`;
+  empsIdCounter += 1;
+  return empsId;
+};

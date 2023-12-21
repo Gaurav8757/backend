@@ -1,0 +1,67 @@
+import Mongoose from "mongoose";
+const AddEmployeeSchema = new Mongoose.Schema(
+  {
+    empid: {
+      type: String,
+      required: true,
+    },
+    uniqueid: {
+      type: String,
+      unique: true,
+    },
+    empname: {
+      type: String,
+      required: true,
+    },
+    empdob: {
+      type: String,
+      required: true,
+    },
+    empgender: {
+      type: String,
+      required: true,
+    },
+    empemail: {
+      unique: true,
+      type: String,
+      required: true,
+    },
+    empmobile: {
+      type: Number,
+      required: true,
+    },
+    empjoiningdate: {
+      type: String,
+      required:true,
+    },
+    empbranch: {
+      type: String,
+      required: true,
+    },
+    permanentempaddress: {
+      type: String,
+      required: true,
+    },
+    currentempaddress: {
+      type: String,
+      required: true,
+    },
+    empaadharno: {
+      type: Number,
+      required: true,
+    },
+    empaadharfile: {
+      type: String,
+      unique: true,
+    },
+   
+    empdesignation: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+const AddEmployee = Mongoose.model("AddEmployee", AddEmployeeSchema);
+export default AddEmployee;
