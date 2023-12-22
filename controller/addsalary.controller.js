@@ -28,9 +28,8 @@ import AddEmployee from "../models/addempSchema.js";
       };
 // ************************* List of employeelist ************************* //
       export const empList= async (req, res) => {
-        
        const employeeList = await AddEmployee.find({}, "empid empname");
-       if (!employeeList ) {
+       if (!employeeList) {
         return res.status(400).json({
           status: "Error during Salary Update",
           message: "Invalid employee selected",
@@ -38,9 +37,6 @@ import AddEmployee from "../models/addempSchema.js";
       }else{
         return res.status(200).json(employeeList);
       }
-    
-    
-    
     }
        
     

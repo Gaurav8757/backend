@@ -5,6 +5,7 @@ import { addbranchRegister } from "../controller/addbranch.controller.js";
 import {addempRegister} from "../controller/addemp.controller.js";
 import {addsalaryController, empList}from  "../controller/addsalary.controller.js";
 import { addpolicyRegister } from "../controller/addpolicy.controller.js";
+import { salaryList } from "../controller/gensalary.controller.js";
 import uploadFile from "../middleware/fileUpload.js";
 
 // admin routes
@@ -20,6 +21,8 @@ router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.post("/dashboard/addsalary", addsalaryController);
 // employee list api
 router.get("/api/employee-list", empList);
+// generate salary list api
+router.get("/api/salary-list", salaryList);
 // add policy
 router.post("/dashboard/addpolicy",uploadFile, addpolicyRegister);
 export default router;

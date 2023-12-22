@@ -64,3 +64,6 @@ export const addbranchRegister = async (req, res) => {
     });
   }
 };
+
+// views all branch
+
