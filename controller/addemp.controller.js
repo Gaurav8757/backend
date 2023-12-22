@@ -66,3 +66,16 @@ export const addempRegister = async (req, res) => {
     });
   }
 };
+
+//################### views all employees #####################/
+export const viewEmployee= async (req, res) => {
+  const EmployeeList = await AddEmployee.find({});
+  if (!EmployeeList) {
+   return res.status(400).json({
+     status: "Error during emp lists Update",
+     message: "Invalid emp selected",
+   });
+ }else{
+   return res.status(200).json(EmployeeList);
+ }
+}

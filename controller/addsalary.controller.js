@@ -39,4 +39,15 @@ import AddEmployee from "../models/addempSchema.js";
       }
     }
        
-    
+    // ************************* view salarylist ************************* //
+    export const viewSalary= async (req, res) => {
+      const SalaryList = await AddSalary.find({});
+      if (!SalaryList) {
+       return res.status(400).json({
+         status: "Error during salary lists Update",
+         message: "Invalid salary selected",
+       });
+     }else{
+       return res.status(200).json(SalaryList);
+     }
+    }

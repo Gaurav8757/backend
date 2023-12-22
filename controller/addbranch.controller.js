@@ -65,5 +65,15 @@ export const addbranchRegister = async (req, res) => {
   }
 };
 
-// views all branch
-
+//################### views all branchs #####################/
+export const viewBranch= async (req, res) => {
+    const branchList = await AddBranch.find({});
+    if (!branchList) {
+     return res.status(400).json({
+       status: "Error during branch lists Update",
+       message: "Invalid branch selected",
+     });
+   }else{
+     return res.status(200).json(branchList);
+   }
+ }
