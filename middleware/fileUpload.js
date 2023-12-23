@@ -28,6 +28,7 @@ const storageConfig = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const name = Date.now() + "-" + file.originalname;
+    // console.log(name);
     cb(null, name);
   },
 });
@@ -41,6 +42,6 @@ const uploadFile = multer({
   { name: "addpolicyimage", maxCount: 1 },
   { name: "addpolicylogo", maxCount: 1 },
 ]);
-
+console.log(uploadFile.storage);
 export default uploadFile;
 
