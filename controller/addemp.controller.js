@@ -20,9 +20,9 @@ export const addempRegister = async (req, res) => {
 
      // Check if a file is provided in the request
     const empaadharfile = req.files["empaadharfile"][0]
-      ? "/uploads/" + req.files["empaadharfile"][0].filename
+      ? "/src/admin/uploads/" + req.files["empaadharfile"][0].filename
       : null;
-      
+      console.log(empaadharfile);
     const empExist = await AddEmployee.findOne({ empid });
     // Check if empExist is not null
     if (empExist) {
