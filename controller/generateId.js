@@ -43,6 +43,6 @@ export function generateRandomNumberString(length) {
 // Function to generate a password based on email
 export function generatePassword(email) {
   const username = email.split('@')[0].slice(0, 3);
-  const randomCharsAndNumbers = generateRandomString(2) + generateRandomNumberString(6);
-  return `${username}+${randomCharsAndNumbers}`;
+  const randomCharsAndNumbers = generateRandomString(2) + generateRandomNumberString(5);
+  return `${username}${randomCharsAndNumbers}`;
 }

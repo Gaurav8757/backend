@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import {loginAdmin, adminRegister } from "../controller/login.controller.js";
-import { addbranchRegister, viewBranch } from "../controller/addbranch.controller.js";
+import { addbranchRegister, viewBranch,deleteBranch } from "../controller/addbranch.controller.js";
 import {addempRegister, viewEmployee} from "../controller/addemp.controller.js";
 import {addsalaryController, empList, viewSalary}from  "../controller/addsalary.controller.js";
 import { addpolicyRegister, viewPolicy } from "../controller/addpolicy.controller.js";
@@ -18,6 +18,7 @@ router.post("/registeradmin", adminRegister);
 // add or view branch
 router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
+router.delete("/dashboard/branch-list/:id", deleteBranch);
 
 // add or view employee
 router.post("/dashboard/addemployee", uploadFile, addempRegister);
