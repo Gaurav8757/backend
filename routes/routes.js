@@ -2,8 +2,8 @@ import express from "express";
 const router = express.Router();
 import {loginAdmin, adminRegister } from "../controller/login.controller.js";
 import { addbranchRegister, viewBranch,deleteBranch } from "../controller/addbranch.controller.js";
-import {addempRegister, viewEmployee} from "../controller/addemp.controller.js";
-import {addsalaryController, empList, viewSalary}from  "../controller/addsalary.controller.js";
+import {addempRegister, deleteEmployee, viewEmployee} from "../controller/addemp.controller.js";
+import {addsalaryController, deleteSalary, empList, viewSalary}from  "../controller/addsalary.controller.js";
 import { addpolicyRegister, viewPolicy } from "../controller/addpolicy.controller.js";
 // import { salaryList } from "../controller/gensalary.controller.js";
 import uploadFile from "../middleware/fileUpload.js";
@@ -24,10 +24,11 @@ router.delete("/dashboard/branch-list/:id", deleteBranch);
 // add or view employee
 router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.get("/api/employee-list", viewEmployee);
-
+router.delete("/dashboard/employee-list/:id", deleteEmployee);
 // add or view salary
 router.post("/dashboard/addsalary", addsalaryController);
 router.get("/api/salary-list", viewSalary);
+router.delete("/dashboard/salary-list/:id", deleteSalary);
 // for add salary
 router.get("/api/salary-lists", salaryList);
 
@@ -42,7 +43,7 @@ router.get("/api/employee-lists", empList);
 
 
 // login Branch using Addbranch database
-router.post("/loginbranch", loginBranch);
+router.get("/loginbranch", loginBranch);
 
 
 

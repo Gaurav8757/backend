@@ -80,3 +80,20 @@ export const viewEmployee= async (req, res) => {
    return res.status(200).json(EmployeeList);
  }
 }
+
+
+
+//  delete employee controller
+export const deleteEmployee = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const deletedUser = await AddEmployee.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json({ message: "User deleted successfully", deletedUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};

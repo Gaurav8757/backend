@@ -51,3 +51,19 @@ import AddEmployee from "../models/addempSchema.js";
        return res.status(200).json(SalaryList);
      }
     }
+
+
+    //  delete employee controller
+export const deleteSalary = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const deletedUser = await AddSalary.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json({ message: "User deleted successfully", deletedUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
