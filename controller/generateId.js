@@ -17,11 +17,7 @@ export const generateEmpId = () => {
 
 
 
-// Function to generate a unique ID
-export function generateUniqueId() {
-  // Implement your unique ID generation logic here
-  // Example: return someUniqueValue;
-}
+
 // Helper function to generate a random string of a given length
 export function generateRandomString(length) {
   const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
