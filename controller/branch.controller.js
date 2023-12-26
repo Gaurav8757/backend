@@ -1,4 +1,4 @@
-// import AddBranch from "../models/addbranchSchema.js";
+import AddBranch from "../models/addbranchSchema.js";
 import Branches from "../models/branchSchema.js";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
@@ -8,16 +8,16 @@ const { SECRET } = process.env;
 
 export const loginBranch = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { branchemail, password } = req.body;
         // console.log(email, password);
         let user;
-        if (email) user = await Branches.findOne({ email });
+        if (branchemail) user = await AddBranch.findOne({ branchemail });
         if (!user) {
             return res.status(401).json({
                 message: "Branch Not Found",
             });
         }
-        console.log(user);
+       
         // Simple password check
         if (password !== user.password) {
             return res.status(400).json({
@@ -38,7 +38,6 @@ export const loginBranch = async (req, res) => {
 
         return res.status(200).json({
             message: "Login Successful",
-            user,
             token,
         });
     } catch (err) {
