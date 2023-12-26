@@ -20,7 +20,7 @@ const AddBranchSchema = new Mongoose.Schema(
         required:true,
     },
     branchemail: {
-        unique: true,
+      unique: true,
       type: String,
       required: true,
     },

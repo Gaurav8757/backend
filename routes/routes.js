@@ -8,6 +8,7 @@ import { addpolicyRegister, viewPolicy } from "../controller/addpolicy.controlle
 // import { salaryList } from "../controller/gensalary.controller.js";
 import uploadFile from "../middleware/fileUpload.js";
 import { salaryList } from "../controller/gensalary.controller.js";
+import { loginBranch } from "../controller/branch.controller.js";
 
 // admin routes
 // login
@@ -37,6 +38,14 @@ router.get("/api/policy-list", viewPolicy);
 
 // employee list api for add salary
 router.get("/api/employee-lists", empList);
+
+
+
+// login Branch using Addbranch database
+router.post("/loginbranch", loginBranch);
+
+
+
 
 
 export default router;

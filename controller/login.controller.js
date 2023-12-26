@@ -84,9 +84,7 @@ export const loginAdmin = async (req, res) => {
         expiresIn: "24h",
       }
     );
-  //     // store LOGIN userId in session
-  //   req.session.userId = user._id;
-  // console.log(req.session.userId);
+ 
    return res.status(200).json({
         message: "Login Successful",
         email: user.email,
