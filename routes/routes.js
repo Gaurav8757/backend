@@ -19,23 +19,23 @@ router.post("/registeradmin", adminRegister);
 // add or view branch
 router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
-router.delete("/dashboard/branch-list/:id", deleteBranch);
+router.delete("/dashboard/:id", deleteBranch);
 
 // add or view employee
 router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.get("/api/employee-list", viewEmployee);
-router.delete("/dashboard/employee-list/:id", deleteEmployee);
+router.delete("/dashboard/:id", deleteEmployee);
 // add or view salary
 router.post("/dashboard/addsalary", addsalaryController);
 router.get("/api/salary-list", viewSalary);
-router.delete("/dashboard/salary-list/:id", deleteSalary);
+router.delete("/dashboard/:id", deleteSalary);
 // for add salary
 router.get("/api/salary-lists", salaryList);
 
 // add policy
 router.post("/dashboard/addpolicy",uploadFile, addpolicyRegister);
 router.get("/api/policy-list", viewPolicy);
-router.delete("/dashboard/policy-list/:id", deletePolicy);
+router.delete("/dashboard/:id", deletePolicy);
 
 // employee list api for add salary
 router.get("/api/employee-lists", empList);
