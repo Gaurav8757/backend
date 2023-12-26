@@ -4,7 +4,7 @@ import {loginAdmin, adminRegister } from "../controller/login.controller.js";
 import { addbranchRegister, viewBranch,deleteBranch } from "../controller/addbranch.controller.js";
 import {addempRegister, deleteEmployee, viewEmployee} from "../controller/addemp.controller.js";
 import {addsalaryController, deleteSalary, empList, viewSalary}from  "../controller/addsalary.controller.js";
-import { addpolicyRegister, viewPolicy } from "../controller/addpolicy.controller.js";
+import { addpolicyRegister, deletePolicy, viewPolicy } from "../controller/addpolicy.controller.js";
 // import { salaryList } from "../controller/gensalary.controller.js";
 import uploadFile from "../middleware/fileUpload.js";
 import { salaryList } from "../controller/gensalary.controller.js";
@@ -35,7 +35,7 @@ router.get("/api/salary-lists", salaryList);
 // add policy
 router.post("/dashboard/addpolicy",uploadFile, addpolicyRegister);
 router.get("/api/policy-list", viewPolicy);
-
+router.delete("/dashboard/policy-list/:id", deletePolicy);
 
 // employee list api for add salary
 router.get("/api/employee-lists", empList);
