@@ -7,7 +7,7 @@ import {addsalaryController, deleteSalary, empList, viewSalary}from  "../control
 import { addpolicyRegister, deletePolicy, viewPolicy } from "../controller/addpolicy.controller.js";
 // import { salaryList } from "../controller/gensalary.controller.js";
 import uploadFile from "../middleware/fileUpload.js";
-import { salaryList } from "../controller/gensalary.controller.js";
+import { deleteGenSalary, salaryList } from "../controller/gensalary.controller.js";
 import { loginBranch } from "../controller/branch.controller.js";
 
 // admin routes
@@ -31,7 +31,7 @@ router.get("/api/salary-list", viewSalary);
 router.delete("/dashboard/:id", deleteSalary);
 // for add salary
 router.get("/api/salary-lists", salaryList);
-
+router.delete("/dashboard/:id", deleteGenSalary);
 // add policy
 router.post("/dashboard/addpolicy",uploadFile, addpolicyRegister);
 router.get("/api/policy-list", viewPolicy);
