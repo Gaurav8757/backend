@@ -1,5 +1,5 @@
 import AddBranch from '../models/addbranchSchema.js'; // Replace with the actual path to your AdminLogin model
-import { generateUniqueId } from "../controller/generateId.js"; // Replace with the actual path to your unique ID generator function
+import { generateUniqueId, generatePassword } from "../controller/generateId.js"; // Replace with the actual path to your unique ID generator function
 
 // Function to generate unique ID for branches
 const generateBranchId = () => {
@@ -32,7 +32,12 @@ export const addbranchRegister = async (req, res) => {
 
     // Generate a unique branch ID
     const branchid = generateBranchId();
-
+// Use the functions as needed
+// const randomString = generateRandomString(5);
+// const randomNumberString = generateRandomNumberString(3);
+// const generatedPassword = generatePassword('example@email.com');
+//  // Generate a password
+ const password = generatePassword(branchemail);
     // Create a new branch
     const addnewBranch = new AddBranch({
       branchid,
@@ -46,6 +51,7 @@ export const addbranchRegister = async (req, res) => {
       branchdistrict,
       branchstate,
       branchpincode,
+      password
     });
 
     // Save the new branch to the database

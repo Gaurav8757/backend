@@ -50,6 +50,10 @@ const AddBranchSchema = new Mongoose.Schema(
       type: Number,
        required: true,
     },
+    password: {
+      type: String,
+       required: true,
+    },
   },
   { timestamps: true }
 );

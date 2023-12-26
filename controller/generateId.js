@@ -14,3 +14,39 @@ export const generateEmpId = () => {
   empsIdCounter += 1;
   return empsId;
 };
+
+
+
+// Function to generate a unique ID
+export function generateUniqueId() {
+  // Implement your unique ID generation logic here
+  // Example: return someUniqueValue;
+}
+// Helper function to generate a random string of a given length
+export function generateRandomString(length) {
+  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let randomString = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+  return randomString;
+}
+
+// Helper function to generate a random string of digits of a given length
+export function generateRandomNumberString(length) {
+  const numbers = '0123456789';
+  let randomNumberString = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * numbers.length);
+    randomNumberString += numbers.charAt(randomIndex);
+  }
+  return randomNumberString;
+}
+
+// Function to generate a password based on email
+export function generatePassword(email) {
+  const username = email.split('@')[0].slice(0, 3);
+  const randomCharsAndNumbers = generateRandomString(2) + generateRandomNumberString(6);
+  return `${username}+${randomCharsAndNumbers}`;
+}
