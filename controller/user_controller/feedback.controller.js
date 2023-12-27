@@ -1,4 +1,3 @@
-import Feedback from "../../../policy-bazaar/src/components/feedback/Feedback.jsx";
 import UserFeedback from "../../models/user_models/userfeedbackSchema.js";
 
 export const userFeedback = async (req, res) => {
