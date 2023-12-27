@@ -1,3 +1,4 @@
+import Feedback from "../../../policy-bazaar/src/components/feedback/Feedback.jsx";
 import UserFeedback from "../../models/user_models/userfeedbackSchema.js";
 
 export const userFeedback = async (req, res) => {
@@ -7,9 +8,14 @@ export const userFeedback = async (req, res) => {
         feedbackuser_email,
         feedbackuser_mobile,
         feedbackuser_query,
-        feedbackuser_upload,
+        feedbackuser_upload, 
        
       } = req.body;
+      // Check if a file is provided in the request
+     const uploadfile = req.files["feedbackuser_upload"] && req.files["feedbackuser_upload"][0]
+     ? "/src/admin/uploads/" + req.files["feedbackuser_upload"][0].filename
+     : null;
+   
   
       // Check if the branch with the given branchcode already exists
       const emailExist = await UserFeedback.findOne({feedbackuser_email});
@@ -26,7 +32,7 @@ export const userFeedback = async (req, res) => {
         feedbackuser_email,
         feedbackuser_mobile,
         feedbackuser_query,
-        feedbackuser_upload,
+        feedbackuser_upload: uploadfile,
       });
       // Save the new branch to the database
       await newComplaint.save();
@@ -43,4 +49,15 @@ export const userFeedback = async (req, res) => {
       });
     }
   };
-
+// ************************* view lists ************************* //
+export const viewFeedback = async (req, res) => {
+  const feedbackList = await UserFeedback.find({});
+  if (!feedbackList) {
+    return res.status(400).json({
+      status: "Error during claim lists Update",
+      message: "Invalid claim selected",
+    });
+  } else {
+    return res.status(200).json(feedbackList);
+  }
+};
