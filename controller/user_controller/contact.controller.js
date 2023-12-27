@@ -40,3 +40,15 @@ export const userContact = async (req, res) => {
     }
   };
 
+// ************************* view lists ************************* //
+export const viewContacts = async (req, res) => {
+  const contactList = await UserContact.find({});
+  if (!contactList) {
+    return res.status(400).json({
+      status: "Error during contactList  Update",
+      message: "Invalid contactList Selected",
+    });
+  } else {
+    return res.status(200).json(contactList);
+  }
+};

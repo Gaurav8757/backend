@@ -1,7 +1,7 @@
 import express from "express";
 import {claimAdded, viewClaim} from "../../controller/user_controller/userclaim.controller.js";
 import { userComplaint, viewComplaint } from "../../controller/user_controller/usercomplaint.controller.js";
-import { userContact } from "../../controller/user_controller/contact.controller.js";
+import { userContact, viewContacts } from "../../controller/user_controller/contact.controller.js";
 const router = express.Router();
 
 
@@ -16,6 +16,8 @@ router.post("/complaint", userComplaint);
 router.get("/viewcomplaint", viewComplaint);
 // CONTACT
 router.post("/contactus", userContact);
+// views lists
+router.get("/viewcontact", viewContacts);
 
 
 
