@@ -3,16 +3,16 @@ import UserFeedback from "../../models/user_models/userfeedbackSchema.js";
 export const userFeedback = async (req, res) => {
     try {
       const {
-        complaint_name,
-        complaint_email,
-        complaint_mobile,
-        complaint_subject,
-        complaint_query,
+        feedbackuser_name,
+        feedbackuser_email,
+        feedbackuser_mobile,
+        feedbackuser_query,
+        feedbackuser_upload,
        
       } = req.body;
   
       // Check if the branch with the given branchcode already exists
-      const emailExist = await UserFeedback.findOne({complaint_email});
+      const emailExist = await UserFeedback.findOne({feedbackuser_email});
       if (emailExist) {
         return res.status(400).json({
           status: "Feedback Already Exists",
@@ -22,11 +22,11 @@ export const userFeedback = async (req, res) => {
 //   console.log(emailExist);
       // Create a new branch
       const newComplaint = new UserFeedback({
-        complaint_name,
-        complaint_email,
-        complaint_mobile,
-        complaint_subject,
-        complaint_query,
+        feedbackuser_name,
+        feedbackuser_email,
+        feedbackuser_mobile,
+        feedbackuser_query,
+        feedbackuser_upload,
       });
       // Save the new branch to the database
       await newComplaint.save();
