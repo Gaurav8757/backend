@@ -44,3 +44,15 @@ export const userComplaint = async (req, res) => {
     }
   };
 
+// ************************* view lists ************************* //
+export const viewComplaint = async (req, res) => {
+  const ComplaintList = await UserComplaint.find({});
+  if (!ComplaintList) {
+    return res.status(400).json({
+      status: "Error during complain lists Update",
+      message: "Invalid complain selected",
+    });
+  } else {
+    return res.status(200).json(ComplaintList);
+  }
+};
