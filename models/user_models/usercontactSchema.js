@@ -9,7 +9,7 @@ const UserContactSchema = new Mongoose.Schema(
       type: Number,
       required: true,
     },
-    feedbackuser_query: {
+    usercontact_query: {
         type: String,
         required: true,
       },

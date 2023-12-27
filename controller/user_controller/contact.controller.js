@@ -5,7 +5,7 @@ export const userContact = async (req, res) => {
       const {
         usercontact_email,
         usercontact_mobile,
-        feedbackuser_query,
+        usercontact_query,
        
       } = req.body;
   
@@ -22,7 +22,7 @@ export const userContact = async (req, res) => {
       const newContact = new UserContact({
         usercontact_email,
         usercontact_mobile,
-        feedbackuser_query,
+        usercontact_query,
       });
       // Save the new branch to the database
       await newContact.save();
