@@ -21,7 +21,7 @@ export const userComplaint = async (req, res) => {
       }
 //   console.log(emailExist);
       // Create a new branch
-      const newComplaint = new UserClaim({
+      const newComplaint = new UserComplaint({
         complaint_name,
         complaint_email,
         complaint_mobile,
