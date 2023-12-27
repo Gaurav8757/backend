@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import routes from "./user_routes/usersRoutes.js";
 import {loginAdmin, adminRegister } from "../controller/login.controller.js";
 import { addbranchRegister, viewBranch,deleteBranch } from "../controller/addbranch.controller.js";
 import {addempRegister, deleteEmployee, viewEmployee} from "../controller/addemp.controller.js";
@@ -9,6 +10,12 @@ import { addpolicyRegister, deletePolicy, viewPolicy } from "../controller/addpo
 import uploadFile from "../middleware/fileUpload.js";
 import { deleteGenSalary, salaryList } from "../controller/gensalary.controller.js";
 import { loginBranch } from "../controller/branch.controller.js";
+
+
+
+// users Routes
+router.use("/users", routes);
+
 
 // admin routes
 // login

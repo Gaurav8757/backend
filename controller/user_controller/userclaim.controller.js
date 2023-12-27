@@ -1,0 +1,51 @@
+import UserClaim from "../../models/user_models/useclaimSchema.js";
+
+export const claimAdded = async (req, res) => {
+    try {
+      const {
+        userclaim_name,
+        userclaim_email,
+        userclaim_mobile,
+        userclaim_insurance_name,
+        userclaim_policyno,
+        userclaim_date,
+        userclaim_time,
+        userclaim_policyexp
+      } = req.body;
+  
+      // Check if the branch with the given branchcode already exists
+      const emailExist = await UserClaim.findOne({userclaim_email});
+      if (emailExist) {
+        return res.status(400).json({
+          status: "User Already Exists",
+          message: "This user already exists.",
+        });
+      }
+  console.log(emailExist);
+      // Create a new branch
+      const newClaim = new UserClaim({
+        userclaim_name,
+        userclaim_email,
+        userclaim_mobile,
+        userclaim_insurance_name,
+        userclaim_policyno,
+        userclaim_date,
+        userclaim_time,
+        userclaim_policyexp
+      });
+      // Save the new branch to the database
+      await newClaim.save();
+      return res.status(201).json({
+        status: "Claimed Successfully!",
+        message: {
+            newClaim,
+        },
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: "Error during registration",
+        message: err.message,
+      });
+    }
+  };
+
