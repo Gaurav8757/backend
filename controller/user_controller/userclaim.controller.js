@@ -48,4 +48,15 @@ export const claimAdded = async (req, res) => {
       });
     }
   };
-
+// ************************* view lists ************************* //
+export const viewClaim = async (req, res) => {
+  const ClaimList = await UserClaim.find({});
+  if (!ClaimList) {
+    return res.status(400).json({
+      status: "Error during claim lists Update",
+      message: "Invalid claim selected",
+    });
+  } else {
+    return res.status(200).json(ClaimList);
+  }
+};

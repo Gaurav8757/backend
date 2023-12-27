@@ -1,5 +1,5 @@
 import express from "express";
-import {claimAdded} from "../../controller/user_controller/userclaim.controller.js";
+import {claimAdded, viewClaim} from "../../controller/user_controller/userclaim.controller.js";
 import { userComplaint } from "../../controller/user_controller/usercomplaint.controller.js";
 import { userContact } from "../../controller/user_controller/contact.controller.js";
 const router = express.Router();
@@ -8,6 +8,7 @@ const router = express.Router();
 
 // add claim
 router.post("/claim", claimAdded);
+router.get("/viewclaim", viewClaim);
 // add complaint
 router.post("/complaint", userComplaint);
 
