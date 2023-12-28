@@ -57,11 +57,11 @@ import AddEmployee from "../models/addempSchema.js";
 export const deleteSalary = async (req, res) => {
   try {
     const userId = req.params.id;
-    const deletedUser = await AddSalary.findByIdAndDelete(userId);
-    if (!deletedUser) {
-      return res.status(404).json({ message: "User not found" });
+    const deletedSalary = await AddSalary.findByIdAndDelete(userId);
+    if (!deletedSalary) {
+      return res.status(404).json({ message: "Salary not found" });
     }
-    return res.json({ message: "User deleted successfully", deletedUser });
+    return res.json({ message: "Salary deleted successfully", deletedSalary });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

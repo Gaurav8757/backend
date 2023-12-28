@@ -58,11 +58,11 @@ export const viewPolicy = async (req, res) => {
  export const deletePolicy = async (req, res) => {
   try {
     const userId = req.params.id;
-    const deletedUser = await AddPolicy.findByIdAndDelete(userId);
-    if (!deletedUser) {
-      return res.status(404).json({ message: "User not found" });
+    const deletedPolicy = await AddPolicy.findByIdAndDelete(userId);
+    if (!ddeletedPolicy) {
+      return res.status(404).json({ message: "Policy not found" });
     }
-    return res.json({ message: "User deleted successfully", deletedUser });
+    return res.json({ message: "Policy deleted successfully", deletedPolicy});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

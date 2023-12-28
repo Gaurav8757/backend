@@ -87,11 +87,11 @@ export const viewEmployee= async (req, res) => {
 export const deleteEmployee = async (req, res) => {
   try {
     const userId = req.params.id;
-    const deletedUser = await AddEmployee.findByIdAndDelete(userId);
-    if (!deletedUser) {
-      return res.status(404).json({ message: "User not found" });
+    const deletedEmployee = await AddEmployee.findByIdAndDelete(userId);
+    if (!deletedEmployee) {
+      return res.status(404).json({ message: "Employee not found" });
     }
-    return res.json({ message: "User deleted successfully", deletedUser });
+    return res.json({ message: "User deleted successfully", deletedEmployee });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
