@@ -87,7 +87,7 @@ export const deleteBranch = async (req, res) => {
   try {
     const userId = req.params.id;
     console.log(userId);
-    const deletedUser = await AddBranch.deleteOne(userId);
+    const deletedUser = await AddBranch.findByIdAndDelete(userId);
     if (!deletedUser) {
       return res.status(404).json({ message: "User not found" });
     }
