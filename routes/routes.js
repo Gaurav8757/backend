@@ -31,18 +31,18 @@ router.delete("/dashboard/api/:id", deleteBranch);
 // add or view employee
 router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.get("/api/employee-list", viewEmployee);
-router.delete("/dashboard/api/:id", deleteEmployee);
+router.delete("/emp/api/:id", deleteEmployee);
 // add or view salary
 router.post("/dashboard/addsalary", addsalaryController);
 router.get("/api/salary-list", viewSalary);
-router.delete("/dashboard/api/:id", deleteSalary);
+router.delete("/salary/api/:id", deleteSalary);
 // for add salary
 router.get("/api/salary-lists", salaryList);
-router.delete("/dashboard/api/:id", deleteGenSalary);
+router.delete("/salaries/api/:id", deleteGenSalary);
 // add policy
 router.post("/dashboard/addpolicy",uploadFile, addpolicyRegister);
 router.get("/api/policy-list", viewPolicy);
-router.delete("/dashboard/api/:id", deletePolicy);
+router.delete("/policies/api/:id", deletePolicy);
 
 // employee list api for add salary
 router.get("/api/employee-lists", empList);
