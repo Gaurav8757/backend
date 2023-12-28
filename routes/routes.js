@@ -26,7 +26,7 @@ router.post("/registeradmin", adminRegister);
 // add or view branch
 router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
-router.delete("/dashboard/:id", deleteBranch);
+router.delete("/dashboard/api/:id", deleteBranch);
 
 // add or view employee
 router.post("/dashboard/addemployee", uploadFile, addempRegister);
