@@ -98,39 +98,3 @@ export const loginAdmin = async (req, res) => {
     res.status(500).send("Server Error");
   }
 }
-
-
-// ############################ Read User ###############################
-// export const readAllUsers = async (req, res) => {
-//     const token = req.headers["authorization"];
-//     //  this query get all users details at a time
-//     const userExist = await User.find({});
-//     if (!token) {
-//       return res.status(401).json({ error: " Token Unauthorized" });
-//     }
-//     jwt.verify(token, process.env.pass_key, (err, decoded) => {
-//       if (err) {
-//         return res.status(401).json({ error: "Unauthorized" });
-//       }
-//       return res.json({
-//         // message: "Welcome to the admin page",
-//         userExist,
-//       });
-//     });
-//   };
-  
-  //############################ Delete User ###############################
-//   export const deleteUser = async (req, res) => {
-//     try {
-//       const userId = req.params.id;
-//       const deletedUser = await User.findByIdAndRemove(userId);
-//       if (!deletedUser) {
-//         return res.status(404).json({ message: "User not found" });
-//       }
-//       return res.json({ message: "User deleted successfully", deletedUser });
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ message: "Internal Server Error" });
-//     }
-//   };
-  
