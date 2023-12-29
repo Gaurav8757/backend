@@ -62,7 +62,7 @@ export const viewClaim = async (req, res) => {
 };
 
 
-//  delete branch controller
+//  delete claim controller
 export const deleteClaim = async (req, res) => {
   try {
     const userId = req.params.id;
