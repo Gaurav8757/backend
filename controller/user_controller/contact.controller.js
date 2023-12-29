@@ -45,16 +45,16 @@ export const viewContacts = async (req, res) => {
 };
 
 // delete contacts
-//  delete branch controller
-export const deleteBranch = async (req, res) => {
+
+export const deleteContact = async (req, res) => {
   try {
     const userId = req.params.id;
     
-    const deletedUser = await AddBranch.findByIdAndDelete(userId);
-    if (!deletedUser) {
-      return res.status(404).json({ message: "Branch not found" });
+    const deletedContact = await UserContact.findByIdAndDelete(userId);
+    if (!deletedContact) {
+      return res.status(404).json({ message: "Contact not found" });
     }
-    return res.json({ message: "Branch deleted successfully", deletedUser });
+    return res.json({ message: "Contact deleted successfully", deletedContact });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

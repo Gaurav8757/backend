@@ -2,7 +2,7 @@ import express from "express";
 import uploadFile from "../../middleware/fileUpload.js";
 import {claimAdded, viewClaim, deleteClaim} from "../../controller/user_controller/userclaim.controller.js";
 import { deleteComplaint, userComplaint, viewComplaint } from "../../controller/user_controller/usercomplaint.controller.js";
-import { userContact, viewContacts } from "../../controller/user_controller/contact.controller.js";
+import { userContact, viewContacts, deleteContact } from "../../controller/user_controller/contact.controller.js";
 import { userFeedback,viewFeedback, deleteFeedback } from "../../controller/user_controller/feedback.controller.js";
 
 const router = express.Router();
@@ -32,7 +32,8 @@ router.delete("/deletefeedback/:id", deleteFeedback);
 router.post("/contactus", userContact);
 // views lists
 router.get("/viewcontact", viewContacts);
-
+// delete list of contact
+router.delete("/deletecontact/:id", deleteContact);
 
 
 export default router;
