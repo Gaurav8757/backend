@@ -10,8 +10,8 @@ export const userContact = async (req, res) => {
       } = req.body;
   
       // Check if the branch with the given branchcode already exists
-      const exists_id = await UserContact.findOne({_id});
-      if (exists_id) {
+      const emailExist = await UserContact.findOne({usercontact_email});
+      if (emailExist) {
         return res.status(400).json({
           status: "Contact Already Exists",
           message: "This contact already exists.",
