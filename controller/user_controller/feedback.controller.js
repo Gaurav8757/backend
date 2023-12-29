@@ -60,3 +60,20 @@ export const viewFeedback = async (req, res) => {
     return res.status(200).json(feedbackList);
   }
 };
+
+
+//  delete branch controller
+export const deleteBranch = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    
+    const deletedUser = await AddBranch.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "Branch not found" });
+    }
+    return res.json({ message: "Branch deleted successfully", deletedUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};

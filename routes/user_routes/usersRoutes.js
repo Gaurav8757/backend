@@ -1,6 +1,6 @@
 import express from "express";
 import uploadFile from "../../middleware/fileUpload.js";
-import {claimAdded, viewClaim} from "../../controller/user_controller/userclaim.controller.js";
+import {claimAdded, viewClaim, deleteClaim} from "../../controller/user_controller/userclaim.controller.js";
 import { userComplaint, viewComplaint } from "../../controller/user_controller/usercomplaint.controller.js";
 import { userContact, viewContacts } from "../../controller/user_controller/contact.controller.js";
 import { userFeedback,viewFeedback } from "../../controller/user_controller/feedback.controller.js";
@@ -13,6 +13,9 @@ const router = express.Router();
 router.post("/claim", claimAdded);
 // view lists
 router.get("/viewclaim", viewClaim);
+// delete list of claim
+router.delete("/deleteclaim/:id", deleteClaim);
+
 // add complaint
 router.post("/complaint", userComplaint);
 // view lists

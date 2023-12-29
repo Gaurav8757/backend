@@ -60,3 +60,20 @@ export const viewClaim = async (req, res) => {
     return res.status(200).json(ClaimList);
   }
 };
+
+
+//  delete branch controller
+export const deleteClaim = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    
+    const deletedClaim = await UserClaim.findByIdAndDelete(userId);
+    if (!deletedClaim ) {
+      return res.status(404).json({ message: "Claim not found" });
+    }
+    return res.json({ message: "Claim deleted successfully", deletedClaim});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
