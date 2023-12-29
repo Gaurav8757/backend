@@ -59,7 +59,7 @@ export const viewPolicy = async (req, res) => {
   try {
     const userId = req.params.id;
     const deletedPolicy = await AddPolicy.findByIdAndDelete(userId);
-    if (!ddeletedPolicy) {
+    if (!deletedPolicy) {
       return res.status(404).json({ message: "Policy not found" });
     }
     return res.json({ message: "Policy deleted successfully", deletedPolicy});
