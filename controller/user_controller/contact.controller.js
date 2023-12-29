@@ -2,12 +2,12 @@ import UserContact from "../../models/user_models/usercontactSchema.js";
 
 export const userContact = async (req, res) => {
     try {
-      // const {
-      //   usercontact_email,
-      //   usercontact_mobile,
-      //   usercontact_query,
+      const {
+        usercontact_email,
+        usercontact_mobile,
+        usercontact_query,
        
-      // } = req.body;
+      } = req.body;
   
       // Check if the branch with the given branchcode already exists
       // const emailExist = await UserContact.findOne({usercontact_email});
@@ -20,9 +20,9 @@ export const userContact = async (req, res) => {
 //   console.log(emailExist);
       // Create a new branch
       const newContact = new UserContact({
-        usercontact_email: req.body.usercontact_email,
-        usercontact_mobile: req.body.usercontact_mobile,
-        usercontact_query: req.body.usercontact_query,
+        usercontact_email,
+        usercontact_mobile,
+        usercontact_query,
       });
       // Save the new branch to the database
       await newContact.save();
