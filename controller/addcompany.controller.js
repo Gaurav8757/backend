@@ -13,7 +13,7 @@ export const addCompany = async (req, res) => {
       // Create a new company instance
       const addNewCompany = new AddCompanies({
         comp_insurance,
-        comp_category,
+        comp_category: comp_category || "def",
         comp_establishment,
         comp_cname,
         comp_cfiles,
@@ -51,6 +51,48 @@ export const viewCompany = async (req, res) => {
     return res.status(200).json(CompanyList);
   }
 };
+// filter view list on Health Insurance
+export const viewHealthInsuranceCompanies = async (req, res) => {
+  try {
+    const HealthInsuranceList = await AddCompanies.find({ comp_insurance: "Health Insurance" });
+    return res.status(200).json(HealthInsuranceList);
+  } catch (err) {
+    return res.status(500).json({
+      status: "Error during Health Insurance CompanyList Update",
+      message: err.message,
+    });
+  }
+};
+
+
+// New API for Motor Insurance
+export const viewMotorInsuranceCompanies = async (req, res) => {
+  try {
+    const MotorInsuranceList = await AddCompanies.find({ comp_insurance: "Motor Insurance" });
+    return res.status(200).json(MotorInsuranceList);
+  } catch (err) {
+    return res.status(500).json({
+      status: "Error during Motor Insurance CompanyList Update",
+      message: err.message,
+    });
+  }
+};
+
+
+// New API for Non-Motor Insurance
+export const viewNonMotorInsuranceCompanies = async (req, res) => {
+  try {
+    const NonMotorInsuranceList = await AddCompanies.find({ comp_insurance: "Non-motor Insurance" });
+    return res.status(200).json(NonMotorInsuranceList);
+  } catch (err) {
+    return res.status(500).json({
+      status: "Error during Non-Motor Insurance CompanyList Update",
+      message: err.message,
+    });
+  }
+};
+
+
 
 //  delete employee controller
 export const deleteCompany = async (req, res) => {
