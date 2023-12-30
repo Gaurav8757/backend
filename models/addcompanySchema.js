@@ -5,10 +5,10 @@ const AddCompanySchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
-    comp_category: {
+    comp_categories: {
       type: String,
       required:true,
-      default: "def",
+      
     },
     comp_establishment: {
       type: String,
