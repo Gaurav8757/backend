@@ -1,23 +1,23 @@
 import Mongoose from "mongoose";
 const AddCompanySchema = new Mongoose.Schema(
   {
-    insurance: {
+    comp_insurance: {
       type: String,
       required: true,
     },
-    category: {
+    comp_category: {
       type: String,
       required:true,
     },
-    establishment: {
+    comp_establishment: {
       type: String,
       required: true,
     },
-    cname: {
+    comp_cname: {
       type: String,
       required: true,
     },
-    cfiles: {
+    comp_cfiles: {
       type: String,
       required:true,
     },

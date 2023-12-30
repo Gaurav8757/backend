@@ -9,14 +9,17 @@ export const addCompany = async (req, res) => {
         req.files && req.files["cfiles"] && req.files["cfiles"][0]
           ? "/src/admin/uploads/" + req.files["cfiles"][0].filename
           : null;
-  
+          
+          console.log("Request Body:", req.body);
+          console.log("Request Files:", req.files);
+    
       // Create a new company instance
       const addNewCompany = new AddCompanies({
         insurance,
         category,
         establishment,
         cname,
-        cfiles: cfiles,
+        cfiles,
       });
   
       // Save the company to the database
