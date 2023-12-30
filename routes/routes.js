@@ -28,7 +28,7 @@ router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
 router.delete("/dashboard/api/:id", deleteBranch);
 // COMPANY
-router.post("/dashboard/addcompany", addCompany);
+router.post("/dashboard/addcompany",uploadFile, addCompany);
 router.get("/api/company-list", viewCompany);
 router.delete("/company/api/:id", deleteCompany);
 

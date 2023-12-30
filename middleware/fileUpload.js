@@ -36,13 +36,14 @@ const storageConfig = multer.diskStorage({
 const uploadFile = multer({
   storage: storageConfig,
   fileFilter: imageFilter,
-}).fields([
+})
+.fields([
   { name: "empaadhar", maxCount: 1 },
   { name: "empaadharfile", maxCount: 1 },
   { name: "addpolicyimage", maxCount: 1 },
   { name: "addpolicylogo", maxCount: 1 },
   { name: "feedbackuser_upload", maxCount: 1 },
-  { name: "cfiles", maxCount: 1 },
+  { name: "comp_cfiles", maxCount: 1 },
 ]);
 console.log(uploadFile.storage);
 export default uploadFile;
