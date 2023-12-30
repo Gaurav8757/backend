@@ -2,24 +2,24 @@ import AddCompanies from "../models/addcompanySchema.js";
 // adding to db
 export const addCompany = async (req, res) => {
     try {
-      const { insurance, category, establishment, cname } = req.body;
+      const { comp_insurance, comp_category, comp_establishment, comp_cname } = req.body;
       
       // Check if a file is provided in the request
-      const cfiles =
+      const comp_cfiles =
         req.files && req.files["cfiles"] && req.files["cfiles"][0]
           ? "/src/admin/uploads/" + req.files["cfiles"][0].filename
           : null;
-          
+
           console.log("Request Body:", req.body);
           console.log("Request Files:", req.files);
     
       // Create a new company instance
       const addNewCompany = new AddCompanies({
-        insurance,
-        category,
-        establishment,
-        cname,
-        cfiles,
+        comp_insurance,
+        comp_category,
+        comp_establishment,
+        comp_cname,
+        comp_cfiles,
       });
   
       // Save the company to the database
@@ -34,7 +34,7 @@ export const addCompany = async (req, res) => {
       });
     } catch (err) {
       return res.status(400).json({
-        status: "Error during Company Update",
+        status: "Error during Company Add to db",
         message: err.message,
       });
     }
