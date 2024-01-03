@@ -40,7 +40,7 @@ export const addCompany = async (req, res) => {
 
 //   VIEW COMPANY LISTS
 // ************************* view plicylist ************************* //
-export const viewCompany = async (req, res) => {
+export const viewCompanies = async (req, res) => {
   const CompanyList = await AddCompanies.find({});
   if (!CompanyList) {
     return res.status(400).json({

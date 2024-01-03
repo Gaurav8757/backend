@@ -10,7 +10,7 @@ import { addpolicyRegister, deletePolicy, viewPolicy } from "../controller/addpo
 import uploadFile from "../middleware/fileUpload.js";
 import { deleteGenSalary, salaryList } from "../controller/gensalary.controller.js";
 import { loginBranch } from "../controller/branch.controller.js";
-import { addCompany, deleteCompany, viewCompany, viewHealthInsuranceCompanies, viewMotorInsuranceCompanies, viewNonMotorInsuranceCompanies } from "../controller/addcompany.controller.js";
+import { addCompany, deleteCompany, viewCompanies, viewHealthInsuranceCompanies, viewMotorInsuranceCompanies, viewNonMotorInsuranceCompanies } from "../controller/addcompany.controller.js";
 
 
 // users Routes
@@ -29,7 +29,7 @@ router.get("/api/branch-list", viewBranch);
 router.delete("/dashboard/api/:id", deleteBranch);
 // COMPANY
 router.post("/dashboard/addcompany", uploadFile, addCompany);
-router.get("/api/company-list", viewCompany);
+router.get("/api/company/company-list", viewCompanies);
 router.get("/api/company/health-list", viewHealthInsuranceCompanies);
 router.get("/api/company/motor-list", viewMotorInsuranceCompanies);
 router.get("/api/company/nonmotor-list", viewNonMotorInsuranceCompanies);
