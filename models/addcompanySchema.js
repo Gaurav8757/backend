@@ -20,7 +20,7 @@ const AddCompanySchema = new Mongoose.Schema(
     },
     comp_cfiles: {
       type: String,
-      required:true,
+      // required:true,
     },
    
    
