@@ -7,7 +7,7 @@ export const addCompany = async (req, res) => {
       // Check if a file is provided in the request
       const comp_cfiles =
         req.files && req.files["comp_cfiles"] && req.files["comp_cfiles"][0]
-          ? "/src/admin/uploads/" + req.files["comp_cfiles"][0].filename
+          ? "/backend/assets/" + req.files["comp_cfiles"][0].filename
           : null;
   //  console.log(comp_cfiles);
       // Create a new company instance
