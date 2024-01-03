@@ -4,9 +4,7 @@ import { fileURLToPath } from 'url';
 
 // Get the directory name of the current module file
 const currentModuleFile = fileURLToPath(import.meta.url);
-// const currentModuleDir = dirname(currentModuleFile);
-// console.log(currentModuleFile);
-// Import the path module
+
 import path from 'path';
 
 // Define a function to filter files to only accept image files
@@ -23,7 +21,7 @@ const imageFilter = (req, file, cb) => {
 const storageConfig = multer.diskStorage({
   destination: (req, file, cb) => {
     // Construct the upload path
-    const uploadPath = path.join( '/backend/assets/');
+    const uploadPath = path.join( 'F:/policy/backend/assets');
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
