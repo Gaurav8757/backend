@@ -58,7 +58,7 @@ router.get("/api/employee-lists", empList);
 
 
 // login Branch using Addbranch database
-router.get("/loginbranch", loginBranch);
+router.post("/branches/loginbranch", loginBranch);
 
 
 

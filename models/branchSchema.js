@@ -8,7 +8,7 @@ const BranchSchema = new Mongoose.Schema(
       required: true,
     },
 
-    email: {
+    branchemail: {
       type: String,
       ref: AddBranch,
       required: true,
