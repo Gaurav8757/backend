@@ -20,6 +20,11 @@ const UserFeedbackSchema = new Mongoose.Schema(
       feedbackuser_upload: {
       type: String,
     },
+    feedbackuser_status:{
+      type: Boolean,
+      default:false,
+      required:true
+    }
   },
   { timestamps: true }
 );

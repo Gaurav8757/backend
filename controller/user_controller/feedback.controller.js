@@ -8,6 +8,7 @@ export const userFeedback = async (req, res) => {
         feedbackuser_mobile,
         feedbackuser_query,
         feedbackuser_upload, 
+        feedbackuser_status
        
       } = req.body;
       // Check if a file is provided in the request
@@ -32,6 +33,7 @@ export const userFeedback = async (req, res) => {
         feedbackuser_mobile,
         feedbackuser_query,
         feedbackuser_upload: uploadfile,
+        feedbackuser_status,
       });
       // Save the new branch to the database
       await newComplaint.save();
@@ -56,7 +58,16 @@ export const viewFeedback = async (req, res) => {
       status: "Error during claim lists Update",
       message: "Invalid claim selected",
     });
-  } else {
+  } 
+  // if(feedbackList){
+  //   const feedbackWithShowStatus = feedbackList.map((feedback) => ({
+  //     ...feedback.toObject(),
+  //     show: true, // Set the initial show status to false
+  //   }));
+
+  //   return res.status(200).json(feedbackWithShowStatus);
+  // }
+  else {
     return res.status(200).json(feedbackList);
   }
 };
