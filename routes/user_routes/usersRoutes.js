@@ -3,7 +3,7 @@ import uploadFile from "../../middleware/fileUpload.js";
 import {claimAdded, viewClaim, deleteClaim} from "../../controller/user_controller/userclaim.controller.js";
 import { deleteComplaint, userComplaint, viewComplaint } from "../../controller/user_controller/usercomplaint.controller.js";
 import { userContact, viewContacts, deleteContact } from "../../controller/user_controller/contact.controller.js";
-import { userFeedback,viewFeedback, deleteFeedback } from "../../controller/user_controller/feedback.controller.js";
+import { userFeedback,viewFeedback, deleteFeedback, updateFeedback} from "../../controller/user_controller/feedback.controller.js";
 
 const router = express.Router();
 
@@ -26,6 +26,7 @@ router.delete("/deletecomplaint/:id", deleteComplaint);
 router.post("/feedback", uploadFile, userFeedback);
 // view all feedback
 router.get("/viewfeedback", viewFeedback);
+router.patch('/updatefeedbackstatus/:id', updateFeedback),
 // delete list of feedback
 router.delete("/deletefeedback/:id", deleteFeedback);
 // CONTACT

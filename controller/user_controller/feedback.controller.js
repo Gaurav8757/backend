@@ -73,6 +73,25 @@ export const viewFeedback = async (req, res) => {
 };
 
 
+// Update feedback status
+export const updateFeedback =  async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { feedbackuser_status } = req.body;
+
+    // Update the status in the database
+    const updatedFeedback = await UserFeedback.findByIdAndUpdate(
+      id,
+      { feedbackuser_status },
+      { new: true }
+    );
+    res.json(updatedFeedback);
+  } catch (error) {
+    console.error('Error updating feedback status:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
 //  delete feedback controller
 export const deleteFeedback = async (req, res) => {
   try {
