@@ -73,24 +73,31 @@ export const viewFeedback = async (req, res) => {
 };
 
 
-// Update feedback status
-export const updateFeedback =  async (req, res) => {
+export const updateFeedback = async (req, res) => {
   try {
     const { id } = req.params;
-    const { feedbackuser_status } = req.body;
 
-    // Update the status in the database
+    // Find the existing feedback
+    const existingFeedback = await UserFeedback.findById(id);
+
+    if (!existingFeedback) {
+      return res.status(404).json({ message: 'Feedback not found' });
+    }
+
+    // Toggle the feedback status between true and false
     const updatedFeedback = await UserFeedback.findByIdAndUpdate(
       id,
-      { feedbackuser_status },
+      { feedbackuser_status: !existingFeedback.feedbackuser_status },
       { new: true }
     );
+
     res.json(updatedFeedback);
   } catch (error) {
     console.error('Error updating feedback status:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
-}
+};
+
 
 //  delete feedback controller
 export const deleteFeedback = async (req, res) => {
