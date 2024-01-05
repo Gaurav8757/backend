@@ -59,3 +59,17 @@ export const firstUserCarousel = async (req, res) => {
     }
   };
   
+// delete carousel
+  export const deleteCarousel= async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const deletedCarousel = await UserCarousel.findByIdAndDelete(userId);
+      if (!deletedCarousel ) {
+        return res.status(404).json({ message: "Carousel not found" });
+      }
+      return res.json({ message: "Carousel deleted successfully", deletedCarousel});
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  };

@@ -21,7 +21,7 @@ export const claimAdded = async (req, res) => {
           message: "This user already exists.",
         });
       }
-  console.log(emailExist);
+  // console.log(emailExist);
       // Create a new branch
       const newClaim = new UserClaim({
         userclaim_name,
