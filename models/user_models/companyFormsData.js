@@ -1,5 +1,5 @@
 import Mongoose from "mongoose";
-const CompanyFormSchema = new Mongoose.Schema(
+const companyFormSchema = new Mongoose.Schema(
   {
     h_name: {
       type: String,
@@ -24,5 +24,5 @@ const CompanyFormSchema = new Mongoose.Schema(
   { timestamps: true }
 );
 
-const CompanyFilled = Mongoose.model("CompanyFilled", CompanyFormSchema);
+const CompanyFilled = Mongoose.model("CompanyFilled", companyFormSchema);
 export default CompanyFilled;

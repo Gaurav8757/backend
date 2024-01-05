@@ -1,4 +1,4 @@
-import CompanyFilled from "../../models/user_models/CompanyFormsData.js";
+import CompanyFilled from "../../models/user_models/companyFormsData.js";
 
 export const userFillCompanyForm = async (req, res) => {
   try {
