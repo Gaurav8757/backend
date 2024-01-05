@@ -1,4 +1,5 @@
 import express from "express";
+import router1 from "../usercarousel_routes/userCarousel_routes.js";
 import uploadFile from "../../middleware/fileUpload.js";
 import {claimAdded, viewClaim, deleteClaim} from "../../controller/user_controller/userclaim.controller.js";
 import { deleteComplaint, userComplaint, viewComplaint } from "../../controller/user_controller/usercomplaint.controller.js";
@@ -6,7 +7,8 @@ import { userContact, viewContacts, deleteContact } from "../../controller/user_
 import { userFeedback,viewFeedback, deleteFeedback, updateFeedback, getActiveUsers} from "../../controller/user_controller/feedback.controller.js";
 
 const router = express.Router();
-
+// carousel router imports
+router.use("/first", router1);
 
 
 // add claim

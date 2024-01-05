@@ -42,6 +42,7 @@ const uploadFile = multer({
   { name: "addpolicylogo", maxCount: 1 },
   { name: "feedbackuser_upload", maxCount: 1 },
   { name: "comp_cfiles", maxCount: 1 },
+  { name: "usercarousel_upload", maxCount: 1 },
 ]);
 console.log(uploadFile.storage);
 export default uploadFile;
