@@ -41,6 +41,6 @@ router.delete("/deletecontact/:id", deleteContact);
 // add user details with company
 router.post("/userdetails", userFillCompanyForm);
 // view all filled user data
-router.get("/view/userDetails", viewUserFillCompanyForm);
+router.get("/view/userdetails", viewUserFillCompanyForm);
 
 export default router;
