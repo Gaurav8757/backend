@@ -39,7 +39,7 @@ router.get("/viewcontact", viewContacts);
 // delete list of contact
 router.delete("/deletecontact/:id", deleteContact);
 // add user details with company
-router.post("/userDetails", userFillCompanyForm);
+router.post("/userdetails", userFillCompanyForm);
 // view all filled user data
 router.get("/view/userDetails", viewUserFillCompanyForm);
 
