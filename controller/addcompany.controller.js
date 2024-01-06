@@ -86,7 +86,7 @@ export const viewHealthInsuranceCompanies = async (req, res) => {
 // New API for Motor Insurance
 export const viewMotorInsuranceCompanies = async (req, res) => {
   try {
-    const MotorInsuranceList = await AddCompanies.find({ comp_categories: "Motor Insurance" || "Motor insurance" || "motor insurance"});
+    const MotorInsuranceList = await AddCompanies.find({ comp_insurance: "Motor Insurance" || "Motor insurance" || "motor insurance"});
     return res.status(200).json(MotorInsuranceList);
   } catch (err) {
     return res.status(500).json({
@@ -100,7 +100,7 @@ export const viewMotorInsuranceCompanies = async (req, res) => {
 // New API for Non-Motor Insurance
 export const viewNonMotorInsuranceCompanies = async (req, res) => {
   try {
-    const NonMotorInsuranceList = await AddCompanies.find({ comp_categories: "Non-motor Insurance" || "Non-Motor Insurance" || "Non-Motor insurance" || "non-Motor Insurance" || "non-motor Insurance" || "non-motor insurance"});
+    const NonMotorInsuranceList = await AddCompanies.find({ comp_insurance: "Non-motor Insurance" || "Non-Motor Insurance" || "Non-Motor insurance" || "non-Motor Insurance" || "non-motor Insurance" || "non-motor insurance"});
     return res.status(200).json(NonMotorInsuranceList);
   } catch (err) {
     return res.status(500).json({
