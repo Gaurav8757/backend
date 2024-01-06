@@ -60,7 +60,7 @@ export const viewCompanies = async (req, res) => {
 // filter view list on Health Insurance
 export const viewHealthInsuranceCompanies = async (req, res) => {
   try {
-    const HealthInsuranceList = await AddCompanies.find({ comp_categories: "Health Insurance" || "Health insurance" || "health insurance"});
+    const HealthInsuranceList = await AddCompanies.find({ comp_insurance: "Health Insurance" || "Health insurance" || "health insurance"});
     return res.status(200).json(HealthInsuranceList);
   } catch (err) {
     return res.status(500).json({
@@ -69,6 +69,18 @@ export const viewHealthInsuranceCompanies = async (req, res) => {
     });
   }
 };
+// filter view list on Family Health Insurance
+// export const viewHealthInsuranceCompanies1 = async (req, res) => {
+//   try {
+//     const HealthInsuranceList1 = await AddCompanies.find({ comp_categories: "Family Health Insurance" || "family Health insurance" || "family health insurance"});
+//     return res.status(200).json(HealthInsuranceList1);
+//   } catch (err) {
+//     return res.status(500).json({
+//       status: "Error during Family Health Insurance CompanyList Update",
+//       message: err.message,
+//     });
+//   }
+// };
 
 
 // New API for Motor Insurance
