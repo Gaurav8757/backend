@@ -5,7 +5,7 @@ import {claimAdded, viewClaim, deleteClaim} from "../../controller/user_controll
 import { deleteComplaint, userComplaint, viewComplaint } from "../../controller/user_controller/usercomplaint.controller.js";
 import { userContact, viewContacts, deleteContact } from "../../controller/user_controller/contact.controller.js";
 import { userFeedback,viewFeedback, deleteFeedback, updateFeedback, getActiveUsers} from "../../controller/user_controller/feedback.controller.js";
-import { userFillCompanyForm, viewUserFillCompanyForm } from "../../controller/user_controller/compForm.contoller.js";
+import { deleteUserFillCompanyForm, userFillCompanyForm, viewUserFillCompanyForm } from "../../controller/user_controller/compForm.contoller.js";
 
 const router = express.Router();
 // carousel router imports
@@ -43,5 +43,5 @@ router.post("/userdetails", userFillCompanyForm);
 // view all filled user data
 router.get("/view/userdetails", viewUserFillCompanyForm);
 // delete list of userfilled throgh c-name
-router.delete("/delete/userdetails/:id", deleteContact);
+router.delete("/delete/userdetails/:id", deleteUserFillCompanyForm);
 export default router;
