@@ -49,7 +49,7 @@ export const viewUserFillCompanyForm = async (req, res) => {
 export const deleteUserFillCompanyForm = async (req, res) => {
   try {
     const userId = req.params.id;
-    
+    // console.log(req.params);
     const deletedfilled = await CompanyFilled.findByIdAndDelete(userId);
     if (!deletedfilled) {
       return res.status(404).json({ message: "UserFillCompanyForm not found" });
