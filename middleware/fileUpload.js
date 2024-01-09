@@ -21,7 +21,7 @@ const imageFilter = (req, file, cb) => {
 const storageConfig = multer.diskStorage({
   destination: (req, file, cb) => {
     // Construct the upload path
-    const uploadPath = path.join( 'F:/policy/policy-bazaar/src/admin/uploads');
+    const uploadPath = path.join( 'F:/policy/backend/assets');
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
