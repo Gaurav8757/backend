@@ -18,11 +18,7 @@ const __dirname = path.dirname(__filename);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// Serve static files from the uploads directory
-// app.use('/uploads', express.static(path.join(currentModuleDir, "F:/policy/policy-bazaar/src/admin/uploads")));
-// Define the directory where your uploaded files are stored
 const uploadsDirectory = path.join(__dirname, 'uploads');
-
 // Create a route handler to serve static files from the uploads directory
 app.use('/uploads', express.static(uploadsDirectory));
 app.use('/', Routes);

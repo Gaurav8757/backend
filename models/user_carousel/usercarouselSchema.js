@@ -14,7 +14,7 @@ const UserCarouselSchema = new Mongoose.Schema(
       required: true,
     },
     usercarousel_upload: {
-      type: Binary,
+      type: String,
     },
   },
   { timestamps: true }
