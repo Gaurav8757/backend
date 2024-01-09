@@ -9,12 +9,13 @@ export const firstUserCarousel = async (req, res) => {
         usercarousel_upload
       } = req.body;
       // Check if a file is provided in the request
+      // const uploadfile =
+      //   req.files["usercarousel_upload"] && req.files["usercarousel_upload"][0]
+      //     ? "/src/admin/uploads/" + req.files["usercarousel_upload"][0].filename
+      //     : null;
       const uploadfile =
-        req.files["usercarousel_upload"] && req.files["usercarousel_upload"][0]
-          ?  req.protocol + '://' + req.get('host') + "/src/admin/uploads/" + req.files["usercarousel_upload"][0].filename
-          : null;
-          
-  
+      req.file ? req.file.path.replace('F:\\policy\\policy-bazaar', '') : null;
+
       // Check if the carousel with the given carousellink already exists
       const linkExist = await UserCarousel.findOne({ usercarousel_link });
       if (linkExist) {
