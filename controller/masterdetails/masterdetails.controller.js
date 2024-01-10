@@ -2,12 +2,122 @@
 import AllInsurance from "../../models/masterDetails/masterdetailSchema.js";
 
 export const createAllInsurance = async (req, res) => {
+  
   try {
-    const newInsurance = new AllInsurance(req.body);
-    const savedInsurance = await newInsurance.save();
-    res.status(201).json(savedInsurance);
+    const {entryDate,
+      company,
+      category,
+      segment,
+      sourcing,
+      policyNo,
+      insuredName,
+      contactNo,
+      vehRegNo,
+      policyStartDate,
+      policyEndDate,
+      odExpiry,
+      tpExpiry,
+      idv,
+      bodyType,
+      makeModel,
+      mfgYear,
+      registrationDate,
+      vehicleAge,
+      fuel,
+      gvw,
+      cc,
+      engNo,
+      chsNo,
+      policyType,
+      productCode,
+      odPremium,
+      liabilityPremium,
+      netPremium,
+      finalEntryFields,
+      odDiscount,
+      ncb,
+      advisorName,
+      subAdvisor,
+      policyMadeBy,
+      branch,
+      payoutOn,
+      advisorPayout,
+      policyPaymentMode,
+      paymentDoneBy,
+      chqNoRefNo,
+      bankName,
+      chqPaymentDate,
+      chqStatus,
+      advisorPayableAmount,
+      branchPayout,
+      branchPayableAmount,
+      companyPayout,
+      profitLoss,
+      } = req.body;
+
+    const newInsurance = new AllInsurance({
+      entryDate,
+      company,
+      category,
+      segment,
+      sourcing,
+      policyNo,
+      insuredName,
+      contactNo,
+      vehRegNo,
+      policyStartDate,
+      policyEndDate,
+      odExpiry,
+      tpExpiry,
+      idv,
+      bodyType,
+      makeModel,
+      mfgYear,
+      registrationDate,
+      vehicleAge,
+      fuel,
+      gvw,
+      cc,
+      engNo,
+      chsNo,
+      policyType,
+      productCode,
+      odPremium,
+      liabilityPremium,
+      netPremium,
+      finalEntryFields,
+      odDiscount,
+      ncb,
+      advisorName,
+      subAdvisor,
+      policyMadeBy,
+      branch,
+      payoutOn,
+      advisorPayout,
+      policyPaymentMode,
+      paymentDoneBy,
+      chqNoRefNo,
+      bankName,
+      chqPaymentDate,
+      chqStatus,
+      advisorPayableAmount,
+      branchPayout,
+      branchPayableAmount,
+      companyPayout,
+      profitLoss,
+      });
+  
+      // Save the company to the database
+      await newInsurance.save();
+      return res.status(201).json({
+        status: "All Details Added Successfully!",
+        message: {
+          newInsurance,
+        },
+      });
+    
   } catch (error) {
     console.error('Error creating insurance policy:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error', error});
   }
 };
