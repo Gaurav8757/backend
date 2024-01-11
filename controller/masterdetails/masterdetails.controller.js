@@ -121,3 +121,17 @@ export const createAllInsurance = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error', error});
   }
 };
+
+
+// view lists
+export const viewAllList= async (req, res) => {
+  const allList = await AllInsurance.find({});
+  if (!allList) {
+   return res.status(400).json({
+     status: "Error during view lists Update",
+     message: "Invalid view list selected",
+   });
+ }else{
+   return res.status(200).json(allList);
+ }
+}
