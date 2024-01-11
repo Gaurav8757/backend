@@ -138,7 +138,7 @@ export const viewAllList= async (req, res) => {
 
 // delete
 //  delete branch controller
-export const deleteBranch = async (req, res) => {
+export const deleteAllList = async (req, res) => {
   try {
     const userId = req.params.id;
     
