@@ -135,3 +135,20 @@ export const viewAllList= async (req, res) => {
    return res.status(200).json(allList);
  }
 }
+
+// delete
+//  delete branch controller
+export const deleteBranch = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    
+    const deletedAllInsurance = await AllInsurance.findByIdAndDelete(userId);
+    if (!deletedAllInsurance) {
+      return res.status(404).json({ message: "AllInsurance not found" });
+    }
+    return res.json({ message: "AllInsurance deleted successfully", deletedAllInsurance });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
