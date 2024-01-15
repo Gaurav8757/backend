@@ -10,9 +10,10 @@ export const firstUserCarousel = async (req, res) => {
       } = req.body;
       // Check if a file is provided in the request
       const usercarousel_upload =
-        req.files["usercarousel_upload"] && req.files["usercarousel_upload"][0]
+      req.files && req.files["usercarousel_upload"] && req.files["usercarousel_upload"][0]
           ? "/src/" + req.files["usercarousel_upload"][0].filename
           : null;
+       
      
 
       // Check if the carousel with the given carousellink already exists
