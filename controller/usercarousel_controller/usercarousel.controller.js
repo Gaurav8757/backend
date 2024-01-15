@@ -6,12 +6,12 @@ export const firstUserCarousel = async (req, res) => {
         usercarousel_title,
         usercarousel_desc,
         usercarousel_link,
-        usercarousel_upload
+      
       } = req.body;
       // Check if a file is provided in the request
-      const uploadfile =
+      const usercarousel_upload =
         req.files["usercarousel_upload"] && req.files["usercarousel_upload"][0]
-          ? "/src/admin/uploads/" + req.files["usercarousel_upload"][0].filename
+          ? "/src/" + req.files["usercarousel_upload"][0].filename
           : null;
      
 
@@ -28,7 +28,7 @@ export const firstUserCarousel = async (req, res) => {
         usercarousel_title,
         usercarousel_desc,
         usercarousel_link,
-        usercarousel_upload: uploadfile,
+        usercarousel_upload,
        
       });
       // Save the new carousel to the database
