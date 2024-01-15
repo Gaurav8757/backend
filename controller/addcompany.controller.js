@@ -2,8 +2,6 @@ import AddCompanies from "../models/addcompanySchema.js";
 
 // adding to db
 export const addCompany = async (req, res) => {
- 
-
 
     try {
       const { comp_insurance, comp_categories, comp_establishment, comp_cname } = req.body;
@@ -11,7 +9,7 @@ export const addCompany = async (req, res) => {
       // Check if a file is provided in the request
       const comp_cfiles =
         req.files && req.files["comp_cfiles"] && req.files["comp_cfiles"][0]
-          ? serverURL + "/src/admin/uploads/" + req.files["comp_cfiles"][0].filename
+          ? "/src/" + req.files["comp_cfiles"][0].filename
           : null;
   //  console.log(comp_cfiles);
       // Create a new company instance
