@@ -20,7 +20,7 @@ export const addempRegister = async (req, res) => {
 
      // Check if a file is provided in the request
      const empaadharfile = req.files["empaadharfile"] && req.files["empaadharfile"][0]
-     ? "/src/admin/uploads/" + req.files["empaadharfile"][0].filename
+     ? "/src/" + req.files["empaadharfile"][0].filename
      : null;
    
       // console.log(empaadharfile);
