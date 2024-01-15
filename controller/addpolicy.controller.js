@@ -7,14 +7,14 @@ export const addpolicyRegister = async (req, res) => {
 
     // Check if files are provided in the request
     const addpolicyimage =
-      req.files["addpolicyimage"] && req.files["addpolicyimage"][0]
-        ? "/uploads/" + req.files["addpolicyimage"][0].filename
-        : null;
+        req.files && req.files["addpolicyimage"] && req.files["addpolicyimage"][0]
+          ? "/src/" + req.files["addpolicyimage"][0].filename
+          : null;
 
     const addpolicylogo =
-      req.files["addpolicylogo"] && req.files["addpolicylogo"][0]
-        ? "/uploads/" + req.files["addpolicylogo"][0].filename
-        : null;
+    req.files && req.files["addpolicylogo"] && req.files["addpolicylogo"][0]
+    ? "/src/" + req.files["addpolicylogo"][0].filename
+    : null;
 
     // Create a new employee instance
     const addnewPolicy = new AddPolicy({
