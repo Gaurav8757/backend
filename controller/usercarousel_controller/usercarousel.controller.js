@@ -11,7 +11,7 @@ export const firstUserCarousel = async (req, res) => {
       // Check if a file is provided in the request
       const usercarousel_upload =
       req.files && req.files["usercarousel_upload"] && req.files["usercarousel_upload"][0]
-          ? "/src/" + req.files["usercarousel_upload"][0].filename
+          ? "/uploads/" + req.files["usercarousel_upload"][0].filename
           : null;
        
      

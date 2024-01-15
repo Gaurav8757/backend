@@ -12,9 +12,10 @@ export const userFeedback = async (req, res) => {
     } = req.body;
     // Check if a file is provided in the request
     const uploadfile =
-      req.files["feedbackuser_upload"] && req.files["feedbackuser_upload"][0]
-        ? "/src/admin/uploads/" + req.files["feedbackuser_upload"][0].filename
-        : null;
+    req.files && req.files["feedbackuser_upload"] && req.files["feedbackuser_upload"][0]
+    ? "/uploads/" + req.files["feedbackuser_upload"][0].filename
+    : null;
+    
 
     // Check if the branch with the given branchcode already exists
     const emailExist = await UserFeedback.findOne({ feedbackuser_email });

@@ -15,7 +15,7 @@ export const addCompany = async (req, res) => {
       // Check if a file is provided in the request
       const comp_cfiles =
         req.files && req.files["comp_cfiles"] && req.files["comp_cfiles"][0]
-          ? "/src/" + req.files["comp_cfiles"][0].filename
+          ? "/uploads/" + req.files["comp_cfiles"][0].filename
           : null;
   //  console.log(comp_cfiles);
       // Create a new company instance
@@ -51,61 +51,20 @@ export const addCompany = async (req, res) => {
 
 //   VIEW COMPANY LISTS
 // ************************* view plicylist ************************* //
-// export const viewCompanies = async (req, res) => {
-//   const CompanyList = await AddCompanies.find({});
-//   if (!CompanyList) {
-//     return res.status(400).json({
-//       status: "Error during CompanyList  Update",
-//       message: "Invalid Company selected",
-//     });
-//   } else {
-//     return res.status(200).json(CompanyList);
-//   }
-// };
-
-
 export const viewCompanies = async (req, res) => {
-  try {
-    const companies = await AddCompanies.find({});
-
-    if (!companies || companies.length === 0) {
-      return res.status(404).json({
-        status: "No companies found",
-        message: "No companies found in the database.",
-      });
-    }
-
-    const responseData = companies.map((company) => {
-      const filePath = path.join(__dirname, '../uploads', company.comp_cfiles);
-console.log(responseData);
-      if (!fs.existsSync(filePath)) {
-        return null; // Skip if the file does not exist
-      }
-
-      try {
-        const fileContent = fs.readFileSync(filePath);
-
-        return {
-          comp_id: company._id,
-          comp_name: company.comp_cname,
-          file_data: fileContent.toString('base64'), // Convert binary data to base64 for sending in JSON
-          file_type: path.extname(company.comp_cfiles).toLowerCase(), // Get file extension
-        };
-      } catch (error) {
-        console.error("Error reading file:", error);
-        return null;
-      }
-    }).filter((data) => data !== null); // Filter out files that don't exist
-
-    return res.status(200).json(responseData);
-  } catch (error) {
-    console.error("Error in viewCompanies:", error);
-    return res.status(500).json({
-      status: "Error",
-      message: "Internal Server Error",
+  const CompanyList = await AddCompanies.find({});
+  if (!CompanyList) {
+    return res.status(400).json({
+      status: "Error during CompanyList  Update",
+      message: "Invalid Company selected",
     });
+  } else {
+    return res.status(200).json(CompanyList);
   }
 };
+
+
+
 
 
 
