@@ -34,11 +34,12 @@ export const addCompany = async (req, res) => {
         },
       });
     } catch (err) {
-      return res.status(400).json({
-        status: "Error during Company Add to db",
-        message: err.message,
+      console.error('Error during Company Add to db:', err);
+      return res.status(500).json({
+          status: "Internal Server Error",
+          message: err.message,
       });
-    }
+  }
 }
 
 

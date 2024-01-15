@@ -1,11 +1,23 @@
 import multer from "multer";
 import { fileURLToPath } from 'url';
-// import { dirname } from 'path';
-
-// Get the directory name of the current module file
-const currentModuleFile = fileURLToPath(import.meta.url);
-
+import { dirname } from 'path';
 import path from 'path';
+const currentModuleFile = fileURLToPath(import.meta.url);
+const __dirname = dirname(currentModuleFile);
+
+
+
+const storageConfig = multer.diskStorage({
+  destination: (req, file, cb) => {
+    // Construct the upload path
+    const uploadPath = path.join(__dirname, "../uploads");
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    const name = Date.now() + "-" + file.originalname;
+    cb(null, name);
+  },
+});
 
 // Define a function to filter files to only accept image files
 const imageFilter = (req, file, cb) => {
@@ -18,18 +30,6 @@ const imageFilter = (req, file, cb) => {
   cb(null, true);
 };
 
-const storageConfig = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // Construct the upload path
-    const uploadPath = path.join( 'F:/policy/policy-bazaar/src/');
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    const name = Date.now() + "-" + file.originalname;
-    // console.log(name);
-    cb(null, name);
-  },
-});
 
 const uploadFile = multer({
   storage: storageConfig,
@@ -44,6 +44,6 @@ const uploadFile = multer({
   { name: "comp_cfiles", maxCount: 1 },
   { name: "usercarousel_upload", maxCount: 1 },
 ]);
-console.log(uploadFile.storage);
+// console.log(uploadFile.storage);
 export default uploadFile;
 
