@@ -73,7 +73,7 @@ export const viewCompanies = async (req, res) => {
     } else {
       // Assuming your server is running on 
       CompanyList.forEach(company => {
-        company.usercarousel_upload = `https://eleedomimf.com${company.usercarousel_upload}`;
+        company.usercarousel_upload = `https://eleedomimf.onrender.com${company.usercarousel_upload}`;
       });
 
       return res.status(200).json(CompanyList);
