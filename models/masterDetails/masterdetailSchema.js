@@ -113,7 +113,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     payoutOn: {
       type: String,
     },
-    advisorPayout: {
+    taxes: {
       type: Number,
     },
     policyPaymentMode: {
