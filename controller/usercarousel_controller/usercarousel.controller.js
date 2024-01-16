@@ -14,8 +14,6 @@ export const firstUserCarousel = async (req, res) => {
           ? "/uploads/" + req.files["usercarousel_upload"][0].filename
           : null;
        
-     
-
       // Check if the carousel with the given carousellink already exists
       const linkExist = await UserCarousel.findOne({ usercarousel_link });
       if (linkExist) {
@@ -61,6 +59,8 @@ export const firstUserCarousel = async (req, res) => {
     }
   };
   
+
+
 // delete carousel
   export const deleteCarousel= async (req, res) => {
     try {
