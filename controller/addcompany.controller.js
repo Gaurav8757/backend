@@ -15,7 +15,7 @@ export const addCompany = async (req, res) => {
       // Check if a file is provided in the request
       const comp_cfiles =
         req.files && req.files["comp_cfiles"] && req.files["comp_cfiles"][0]
-          ? "/uploads/" + req.files["comp_cfiles"][0].filename
+          ? "https://eleedomimf.onrender.com/uploads/" + req.files["comp_cfiles"][0].filename
           : null;
   //  console.log(comp_cfiles);
       // Create a new company instance

@@ -13,7 +13,7 @@ export const userFeedback = async (req, res) => {
     // Check if a file is provided in the request
     const uploadfile =
     req.files && req.files["feedbackuser_upload"] && req.files["feedbackuser_upload"][0]
-    ? "/uploads/" + req.files["feedbackuser_upload"][0].filename
+    ? "https://eleedomimf.onrender.com/uploads/" + req.files["feedbackuser_upload"][0].filename
     : null;
     
 

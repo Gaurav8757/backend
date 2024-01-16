@@ -20,7 +20,7 @@ export const addempRegister = async (req, res) => {
 
      // Check if a file is provided in the request
      const empaadharfile = req.files && req.files["empaadharfile"] && req.files["empaadharfile"][0]
-     ? "/uploads/" + req.files["empaadharfile"][0].filename
+     ? "https://eleedomimf.onrender.com/uploads/" + req.files["empaadharfile"][0].filename
      : null;
      
      
