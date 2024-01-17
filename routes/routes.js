@@ -33,12 +33,14 @@ import { loginBranch } from "../controller/branch.controller.js";
 import {
   addCompany,
   deleteCompany,
+  updateCompany,
   viewCompanies,
   viewHealthInsuranceCompanies,
   viewMotorInsuranceCompanies,
   viewNonMotorInsuranceCompanies,
 } from "../controller/addcompany.controller.js";
 import m_details_routes from "./masterDetails/masterdetails.routes.js";
+import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdvisor } from "../controller/advisor/advisor.controller.js";
 
 // users Routes
 router.use("/users", routes);
@@ -61,6 +63,7 @@ router.get("/api/company/company-list", viewCompanies);
 router.get("/api/company/health-list", viewHealthInsuranceCompanies);
 router.get("/api/company/motor-list", viewMotorInsuranceCompanies);
 router.get("/api/company/nonmotor-list", viewNonMotorInsuranceCompanies);
+router.patch("/api/company/updatecomp/:id", updateCompany);
 router.delete("/company/api/:id", deleteCompany);
 
 // add or view employee
@@ -81,6 +84,16 @@ router.delete("/policies/api/:id", deletePolicy);
 
 // employee list api for add salary
 router.get("/api/employee-lists", empList);
+
+
+// advisor register 
+router.post("/advisor/register", advisorRegister);
+router.post("/advisor/login", loginAdvisor);
+router.get("/advisor/lists", viewAdvisor);
+router.patch("/advisor/update/:id", updateAdvisor);
+router.delete("/advisor/lists/:id", deleteAdvisor);
+
+
 
 // login Branch using Addbranch database
 router.post("/branches/loginbranch", loginBranch);
