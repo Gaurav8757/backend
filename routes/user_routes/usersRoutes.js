@@ -37,7 +37,7 @@ router.post("/contactus", userContact);
 // views lists
 router.get("/viewcontact", viewContacts);
 // update lists
-router.patch("/updatecontact/:id", updateContact);
+router.put("/updatecontact/:id", updateContact);
 // delete list of contact
 router.delete("/deletecontact/:id", deleteContact);
 // add user details with company
