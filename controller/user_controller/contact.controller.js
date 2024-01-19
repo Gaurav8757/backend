@@ -53,7 +53,7 @@ export const updateContact = async (req, res) => {
     const usercontactId = req.params.id;
     const updatedContactData = req.body;
 
-    // Check if the company exists before attempting to update
+    // Check if the contact exists before attempting to update
     const existingContact = await UserContact.findById(usercontactId);
 
     if (!existingContact) {
@@ -81,6 +81,15 @@ export const updateContact = async (req, res) => {
     });
   } catch (err) {
     console.error("Error during Contact Update:", err);
+
+    // Handle Mongoose validation errors
+    if (err.name === 'ValidationError') {
+      return res.status(400).json({
+        status: "Validation Error",
+        message: err.message,
+      });
+    }
+
     return res.status(500).json({
       status: "Internal Server Error",
       message: err.message,
