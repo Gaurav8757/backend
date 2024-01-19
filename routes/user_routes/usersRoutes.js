@@ -46,4 +46,5 @@ router.post("/userdetails", userFillCompanyForm);
 router.get("/view/userdetails", viewUserFillCompanyForm);
 // delete list of userfilled throgh c-name
 router.delete("/delete/userdetails/:id", deleteUserFillCompanyForm);
+
 export default router;
