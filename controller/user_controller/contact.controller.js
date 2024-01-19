@@ -64,7 +64,7 @@ export const updateContact = async (req, res) => {
     }
 
     // Perform the update
-    const updatedContact = await UserContact.updateOne(
+    const updatedContact = await UserContact.findByIdAndUpdate(
       usercontactId,
       updatedContactData,
       {
