@@ -1,8 +1,11 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
+import Mailgen from "mailgen";
 import Advisor from "../../models/advisor/advisorSchema.js";
 dotenv.config();
 const { SECRET } = process.env;
+
 // ************************* Advisor ************************* //
 export const advisorRegister = async (req, res) => {
   try {
@@ -140,6 +143,85 @@ export const updateAdvisor = async (req, res) => {
     });
   }
 };
+
+
+
+// forgot password
+export const ForgotPassword = async (req, res) => {
+  try {
+    const user = await Advisor.findOne({ email: req.body.email });
+    if (!user) {
+      req.flash("error", );
+      return res.status(400).json("Email not found. Register Now!");
+    }
+    // Generate a random token
+    const secret = user._id + SECRET;
+    let token = jwt.sign({ userId: user._id }, secret, {
+      expiresIn: "15m",
+    });
+    // const link = `https://gauravnodejsauthentication.onrender.com/resetPassword/${user._id}/${token}`;
+    const link = `http://localhost:7000/resetPassword/${user._id}/${token}`;
+    
+    //...................................Nodemailer code.......................................//
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL, //own email id
+        pass: process.env.PASSWORD, // own emailid password
+      },
+    });
+    const mailGenerator = new Mailgen({
+      theme: "cerberus",
+      product: {
+        // .......................Appears in header & footer of e-mails......................//
+        name: "Eleedom Pvt Ltd",
+        link: "https://mailgen.js/",
+        copyright:
+          "Copyright © 2024 Eleedom Pvt Ltd. All rights reserved.",
+      },
+    });
+    //...................................Prepare email contents..............................//
+    let response = {
+      body: {
+        name: "User",
+        intro: [
+          "You have received this email because a password reset request for your account was received.",
+          "Valid till 15 Minutes only!",
+        ],
+        action: {
+          instructions: "Click the button below to reset your password:",
+          button: {
+            color: "#DC4D2F",
+            text: "Reset your password",
+            link: link,
+          },
+        },
+        outro:
+          "If you did not request a password reset, no further action is required on your part.",
+      },
+    };
+    // .......................................Generate email....................................//
+    const mail = mailGenerator.generate(response);
+    //........................................Send email........................................//
+    transporter.sendMail(
+      {
+        from: '"Eleedom Pvt Ltd"<example@gmail.com>', // sender address
+        to: user.email, // list of receivers
+        subject: "Password Reset Request", // Subject line
+        html: mail,
+      },
+
+      (error, info) => {
+        if (error) {
+          res.status(500).json("Email not sent. Register Yourself!");
+        }
+        return res.status(200).json("Email sent successfully...!");
+      }
+    );
+  } catch (error) {
+    return res.status(500).json("An error occurred");
+  }
+}
 
 //################### delete advisors #####################/
 export const deleteAdvisor = async (req, res) => {
