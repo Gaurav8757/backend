@@ -123,6 +123,48 @@ export const createAllInsurance = async (req, res) => {
 };
 
 
+// Controller function to handle updating specific fields of a company
+export const updateMasterDetails = async (req, res) => {
+  try {
+    const detailsId = req.params.id;
+    const updateDetails = req.body;
+
+    // Check if the company exists before attempting to update
+    const existingDetails = await AllInsurance.findById(detailsId);
+
+    if (!existingDetails) {
+      return res.status(404).json({
+        status: "Company not found",
+        message: "The specified company ID does not exist in the database",
+      });
+    }
+
+    // Perform the update
+    const updatedDetails = await AllInsurance.findByIdAndUpdate(
+      detailsId,
+      updateDetails,
+      {
+        new: true,
+      }
+    );
+
+    return res.status(200).json({
+      status: "Insurance Updated Successfully!",
+      message: {
+        updatedDetails,
+      },
+    });
+  } catch (err) {
+    console.error('Error during Insurance Update:', err);
+    return res.status(500).json({
+      status: "Internal Server Error",
+      message: err.message,
+    });
+  }
+};
+
+
+
 // view lists
 export const viewAllList= async (req, res) => {
   const allList = await AllInsurance.find({});

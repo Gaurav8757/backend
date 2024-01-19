@@ -3,12 +3,16 @@ import express from "express";
 import {
   createAllInsurance,
   viewAllList,
-  deleteAllList
+  deleteAllList,
+  updateMasterDetails
 } from "../../controller/masterdetails/masterdetails.controller.js";
 
 const m_details_routes = express.Router();
 // add
 m_details_routes.post("/adddata", createAllInsurance);
+
+// update
+m_details_routes.patch("/updatedata/:id", updateMasterDetails)
 // view
 m_details_routes.get("/viewdata", viewAllList);
 
