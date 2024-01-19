@@ -12,7 +12,7 @@ const m_details_routes = express.Router();
 m_details_routes.post("/adddata", createAllInsurance);
 
 // update
-m_details_routes.patch("/updatedata/:id", updateMasterDetails)
+m_details_routes.put("/updatedata/:id", updateMasterDetails)
 // view
 m_details_routes.get("/viewdata", viewAllList);
 
