@@ -36,7 +36,7 @@ export const viewContacts = async (req, res) => {
   const contactList = await UserContact.find({});
   if (!contactList) {
     return res.status(400).json({
-      status: "Error during contactList  Update",
+      status: "Error during contactList Update",
       message: "Invalid contactList Selected",
     });
   } else {
@@ -44,8 +44,53 @@ export const viewContacts = async (req, res) => {
   }
 };
 
-// delete contacts
 
+
+
+// ******** Controller function to handle updating specific fields of a contact *********/
+export const updateContact = async (req, res) => {
+  try {
+    const usercontactId = req.params.id;
+    const updatedContactData = req.body;
+
+    // Check if the company exists before attempting to update
+    const existingContact = await UserContact.findById(usercontactId);
+
+    if (!existingContact) {
+      return res.status(404).json({
+        status: "Contact not found",
+        message: "The specified Contact ID does not exist in the database",
+      });
+    }
+
+    // Perform the update
+    const updatedContact = await UserContact.findByIdAndUpdate(
+      advisorId,
+      updatedContactData,
+      {
+        new: true,
+        runValidators: true, // Optional: Run Mongoose validation
+      }
+    );
+
+    return res.status(200).json({
+      status: "Contact Updated Successfully!",
+      message: {
+        updatedContact,
+      },
+    });
+  } catch (err) {
+    console.error("Error during Contact Update:", err);
+    return res.status(500).json({
+      status: "Internal Server Error",
+      message: err.message,
+    });
+  }
+};
+
+
+
+// ************* delete contacts ****************//
 export const deleteContact = async (req, res) => {
   try {
     const userId = req.params.id;

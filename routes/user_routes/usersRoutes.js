@@ -3,7 +3,7 @@ import router1 from "../usercarousel_routes/userCarousel_routes.js";
 import uploadFile from "../../middleware/fileUpload.js";
 import {claimAdded, viewClaim, deleteClaim} from "../../controller/user_controller/userclaim.controller.js";
 import { deleteComplaint, userComplaint, viewComplaint } from "../../controller/user_controller/usercomplaint.controller.js";
-import { userContact, viewContacts, deleteContact } from "../../controller/user_controller/contact.controller.js";
+import { userContact, viewContacts, deleteContact, updateContact } from "../../controller/user_controller/contact.controller.js";
 import { userFeedback,viewFeedback, deleteFeedback, updateFeedback, getActiveUsers} from "../../controller/user_controller/feedback.controller.js";
 import { deleteUserFillCompanyForm, userFillCompanyForm, viewUserFillCompanyForm } from "../../controller/user_controller/compForm.contoller.js";
 
@@ -36,6 +36,8 @@ router.delete("/deletefeedback/:id", deleteFeedback);
 router.post("/contactus", userContact);
 // views lists
 router.get("/viewcontact", viewContacts);
+// update lists
+router.patch("/updatecontact/:id", updateContact);
 // delete list of contact
 router.delete("/deletecontact/:id", deleteContact);
 // add user details with company
