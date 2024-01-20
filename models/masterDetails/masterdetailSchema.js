@@ -57,7 +57,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
       type: String,
     },
     vehicleAge: {
-      type: Number,
+      type: String,
     },
     fuel: {
       type: String,
