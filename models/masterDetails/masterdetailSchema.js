@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const AllInsurancePolicySchema = new mongoose.Schema(
   {
     entryDate: {
-      type: Date,
+      type: String,
     },
     company: {
       type: String,
