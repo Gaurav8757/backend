@@ -30,16 +30,16 @@ const AllInsurancePolicySchema = new mongoose.Schema(
       type: String,
     },
     policyStartDate: {
-      type: Date,
+      type: String,
     },
     policyEndDate: {
-      type: Date,
+      type: String,
     },
     odExpiry: {
-      type: Date,
+      type: String,
     },
     tpExpiry: {
-      type: Date,
+      type: String,
     },
     idv: {
       type: Number,
@@ -54,7 +54,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
       type: Number,
     },
     registrationDate: {
-      type: Date,
+      type: String,
     },
     vehicleAge: {
       type: Number,
@@ -129,7 +129,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
       type: String,
     },
     chqPaymentDate: {
-      type: Date,
+      type: String,
     },
     chqStatus: {
       type: String,
