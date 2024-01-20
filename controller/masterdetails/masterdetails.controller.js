@@ -2,9 +2,9 @@
 import AllInsurance from "../../models/masterDetails/masterdetailSchema.js";
 
 export const createAllInsurance = async (req, res) => {
-  
   try {
-    const {entryDate,
+    const {
+      entryDate,
       company,
       category,
       segment,
@@ -53,7 +53,7 @@ export const createAllInsurance = async (req, res) => {
       branchPayableAmount,
       companyPayout,
       profitLoss,
-      } = req.body;
+    } = req.body;
 
     const newInsurance = new AllInsurance({
       entryDate,
@@ -105,23 +105,21 @@ export const createAllInsurance = async (req, res) => {
       branchPayableAmount,
       companyPayout,
       profitLoss,
-      });
-  
-      // Save the company to the database
-      await newInsurance.save();
-      return res.status(201).json({
-        status: "All Details Added Successfully!",
-        message: {
-          newInsurance,
-        },
-      });
-    
+    });
+
+    // Save the company to the database
+    await newInsurance.save();
+    return res.status(201).json({
+      status: "All Details Added Successfully!",
+      message: {
+        newInsurance,
+      },
+    });
   } catch (error) {
-    console.error('Error creating insurance policy:', error);
-    res.status(500).json({ error: 'Internal Server Error', error});
+    console.error("Error creating insurance policy:", error);
+    res.status(500).json({ error: "Internal Server Error", error });
   }
 };
-
 
 // Controller function to handle updating specific fields of a company
 export const updateMasterDetails = async (req, res) => {
@@ -134,7 +132,7 @@ export const updateMasterDetails = async (req, res) => {
 
     if (!existingDetails) {
       return res.status(404).json({
-        status: "Company not found",
+        status: "Insurance Details not found",
         message: "The specified company ID does not exist in the database",
       });
     }
@@ -145,6 +143,7 @@ export const updateMasterDetails = async (req, res) => {
       updateDetails,
       {
         new: true,
+        runValidators: true,
       }
     );
 
@@ -155,7 +154,16 @@ export const updateMasterDetails = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error('Error during Insurance Update:', err);
+    console.error("Error during Insurance Update:", err);
+
+    // Handle Mongoose validation errors
+    if (err.name === "ValidationError") {
+      return res.status(400).json({
+        status: "Validation Error",
+        message: err.message,
+      });
+    }
+
     return res.status(500).json({
       status: "Internal Server Error",
       message: err.message,
@@ -163,32 +171,33 @@ export const updateMasterDetails = async (req, res) => {
   }
 };
 
-
-
 // view lists
-export const viewAllList= async (req, res) => {
+export const viewAllList = async (req, res) => {
   const allList = await AllInsurance.find({});
   if (!allList) {
-   return res.status(400).json({
-     status: "Error during view lists Update",
-     message: "Invalid view list selected",
-   });
- }else{
-   return res.status(200).json(allList);
- }
-}
+    return res.status(400).json({
+      status: "Error during view lists Update",
+      message: "Invalid view list selected",
+    });
+  } else {
+    return res.status(200).json(allList);
+  }
+};
 
 // delete
 //  delete branch controller
 export const deleteAllList = async (req, res) => {
   try {
     const userId = req.params.id;
-    
+
     const deletedAllInsurance = await AllInsurance.findByIdAndDelete(userId);
     if (!deletedAllInsurance) {
       return res.status(404).json({ message: "AllInsurance not found" });
     }
-    return res.json({ message: "AllInsurance deleted successfully", deletedAllInsurance });
+    return res.json({
+      message: "AllInsurance deleted successfully",
+      deletedAllInsurance,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
