@@ -131,29 +131,14 @@ export const viewNonMotorInsuranceCompanies = async (req, res) => {
 // Controller function to handle updating specific fields of a company
 export const updateCompany = async (req, res) => {
 const  {id, ...rest } = req.body;
-try {
-  const updatedCompany = await AddCompanies.updateOne({ _id: id }, rest);
 
-  if (updatedCompany) {
-    return res.status(200).json({
+const updatedCompany = await AddCompanies.updateOne({_id: _id}, rest)
+return res.status(200).json({
       status: "Company Updated Successfully!",
-      message: {
-        updatedCompany,
-      },
+        updatedCompany, 
     });
-  } else {
-    return res.status(404).json({
-      status: "Company not found or not updated!",
-    });
-  }
-} catch (error) {
-  console.error("Error updating company:", error);
-  return res.status(500).json({
-    status: "Internal Server Error",
-    error: error.message,
-  });
-}
-}
+};
+
 
 
 
