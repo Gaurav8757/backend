@@ -63,7 +63,7 @@ router.get("/api/company/company-list", viewCompanies);
 router.get("/api/company/health-list", viewHealthInsuranceCompanies);
 router.get("/api/company/motor-list", viewMotorInsuranceCompanies);
 router.get("/api/company/nonmotor-list", viewNonMotorInsuranceCompanies);
-router.patch("/api/company/updatecomp/:id", updateCompany);
+router.patch("/api/company/updatecomp/:id", uploadFile, updateCompany);
 router.delete("/company/api/:id", deleteCompany);
 
 // add or view employee
