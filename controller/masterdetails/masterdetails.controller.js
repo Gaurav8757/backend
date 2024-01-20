@@ -127,13 +127,13 @@ export const updateMasterDetails = async (req, res) => {
     const detailsId = req.params.id;
     const updateDetails = req.body;
 
-    // Check if the company exists before attempting to update
+    // Check if the insurace lists exists before attempting to update
     const existingDetails = await AllInsurance.findById(detailsId);
 
     if (!existingDetails) {
       return res.status(404).json({
         status: "Insurance Details not found",
-        message: "The specified company ID does not exist in the database",
+        message: "The specified Insurance ID does not exist in the database",
       });
     }
 
