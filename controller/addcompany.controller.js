@@ -130,43 +130,51 @@ export const viewNonMotorInsuranceCompanies = async (req, res) => {
 
 // Controller function to handle updating specific fields of a company
 export const updateCompany = async (req, res) => {
-  try {
-    const companyId = req.params.id;
-    const updatedCompanyData = req.body;
+  // try {
+  //   const companyId = req.params.id;
+  //   const updatedCompanyData = req.body;
 
-    // Check if the company exists before attempting to update
-    const existingCompany = await AddCompanies.findById(companyId);
+  //   // Check if the company exists before attempting to update
+  //   const existingCompany = await AddCompanies.findById(companyId);
 
-    if (!existingCompany) {
-      return res.status(404).json({
-        status: "Company not found",
-        message: "The specified company ID does not exist in the database",
-      });
-    }
+  //   if (!existingCompany) {
+  //     return res.status(404).json({
+  //       status: "Company not found",
+  //       message: "The specified company ID does not exist in the database",
+  //     });
+  //   }
 
-    // Perform the update
-    const updatedCompany = await AddCompanies.findByIdAndUpdate(
-      companyId,
-      updatedCompanyData,
-      {
-        new: true,
-        runValidators: true, // Optional: Run Mongoose validation
-      }
-    );
+  //   // Perform the update
+  //   const updatedCompany = await AddCompanies.findByIdAndUpdate(
+  //     companyId,
+  //     updatedCompanyData,
+  //     {
+  //       new: true,
+  //       runValidators: true, // Optional: Run Mongoose validation
+  //     }
+  //   );
 
-    return res.status(200).json({
+  //   return res.status(200).json({
+  //     status: "Company Updated Successfully!",
+  //     message: {
+  //       updatedCompany,
+  //     },
+  //   });
+  // } catch (err) {
+  //   console.error('Error during Company Update:', err);
+  //   return res.status(500).json({
+  //     status: "Internal Server Error",
+  //     message: err.message,
+  //   });
+  // }
+const  {id, ...rest } = req.body;
+const updatedCompany = await AddCompanies.updateOne({_id: _id}, rest)
+return res.status(200).json({
       status: "Company Updated Successfully!",
       message: {
         updatedCompany,
       },
     });
-  } catch (err) {
-    console.error('Error during Company Update:', err);
-    return res.status(500).json({
-      status: "Internal Server Error",
-      message: err.message,
-    });
-  }
 };
 
 
