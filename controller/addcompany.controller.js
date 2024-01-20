@@ -134,7 +134,7 @@ const  {id, ...rest } = req.body;
 try {
   const updatedCompany = await AddCompanies.updateOne({ _id: id }, rest);
 
-  if (updatedCompany.nModified > 0) {
+  if (updatedCompany) {
     return res.status(200).json({
       status: "Company Updated Successfully!",
       message: {
