@@ -131,7 +131,6 @@ export const viewNonMotorInsuranceCompanies = async (req, res) => {
 // Controller function to handle updating specific fields of a company
 export const updateCompany = async (req, res) => {
 const  {id, ...rest } = req.body;
-
 try {
   const updatedCompany = await AddCompanies.updateOne({ _id: id }, rest);
 
@@ -153,6 +152,7 @@ try {
     status: "Internal Server Error",
     error: error.message,
   });
+}
 }
 
 
