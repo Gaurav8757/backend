@@ -132,7 +132,7 @@ export const viewNonMotorInsuranceCompanies = async (req, res) => {
 export const updateCompany = async (req, res) => {
 const  {id, ...rest } = req.body;
 try {
-  const updatedCompany = await AddCompanies.updateOne({ _id: id }, rest);
+  const updatedCompany = await AddCompanies.updateOne({ id: _id }, rest);
 
   if (updatedCompany) {
     return res.status(200).json({
