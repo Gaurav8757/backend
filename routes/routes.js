@@ -76,16 +76,15 @@ router.get("/api/employee-list", viewEmployee);
 router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
 
-
 // add or view salary
 router.post("/dashboard/addsalary", addsalaryController);
 router.get("/api/salary-list", viewSalary);
 router.put("/api/salary/update/:id", updateSalary);
 router.delete("/salary/api/:id", deleteSalary);
+
 // for add salary
 router.get("/api/salary-lists", salaryList);
 router.delete("/salaries/api/:id", deleteGenSalary);
-
 
 // add policy
 router.post("/dashboard/addpolicy", uploadFile, addpolicyRegister);
@@ -95,15 +94,12 @@ router.delete("/policies/api/:id", deletePolicy);
 // employee list api for add salary
 router.get("/api/employee-lists", empList);
 
-
 // advisor register 
 router.post("/advisor/register", advisorRegister);
 router.post("/advisor/login", loginAdvisor);
 router.get("/advisor/lists", viewAdvisor);
 router.put("/advisor/update/:id", updateAdvisor);
 router.delete("/advisor/lists/:id", deleteAdvisor);
-
-
 
 // login Branch using Addbranch database
 router.post("/branches/loginbranch", loginBranch);
