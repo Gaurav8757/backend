@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 import Mailgen from "mailgen";
 import Advisor from "../../models/advisor/advisorSchema.js";
@@ -20,13 +21,15 @@ export const advisorRegister = async (req, res) => {
         message: "Advisor with this email already exists.",
       });
     }
-
+   // Hash the password
+   const salt = await bcrypt.genSalt(10);
+   const hashedPassword = await bcrypt.hash(advisorpassword, salt);
     // Create a new user
     const newAdvisor = new Advisor({
       advisorname,
       advisoremail,
       advisormobile,
-      advisorpassword,
+      advisorpassword: hashedPassword,
     });
     // Save the new user to the database
     await newAdvisor.save();
@@ -60,12 +63,12 @@ export const loginAdvisor = async (req, res) => {
           message: "Advisor Not Found",
         });
       }
-      // Simple password check
-      if (advisorpassword !== advisory.advisorpassword) {
-        return res.status(400).json({
-            message: "Password is Incorrect",
-        });
-    }
+
+
+      const isValidPassword = await bcrypt.compare(advisorpassword, advisory.advisorpassword);
+      if (!isValidPassword) {
+        return res.status(400).json("Password is Incorrect");
+      }else{
      
     const token = jwt.sign(
         {
@@ -82,6 +85,7 @@ export const loginAdvisor = async (req, res) => {
         token,
     })
 }
+    }
      catch (err) {
       console.log(err);
       res.status(500).send("Server Error");
