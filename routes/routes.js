@@ -11,6 +11,7 @@ import {
 import {
   addempRegister,
   deleteEmployee,
+  updateEmployee,
   viewEmployee,
 } from "../controller/addemp.controller.js";
 import {
@@ -57,7 +58,7 @@ router.post("/registeradmin", adminRegister);
 // add or view branch
 router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
-router.patch("/api/branch/update/:id", updateBranch)
+router.put("/api/branch/update/:id", updateBranch)
 router.delete("/dashboard/api/:id", deleteBranch);
 // COMPANY
 router.post("/dashboard/addcompany", uploadFile, addCompany);
@@ -65,12 +66,13 @@ router.get("/api/company/company-list", viewCompanies);
 router.get("/api/company/health-list", viewHealthInsuranceCompanies);
 router.get("/api/company/motor-list", viewMotorInsuranceCompanies);
 router.get("/api/company/nonmotor-list", viewNonMotorInsuranceCompanies);
-router.patch("/api/company/updatecomp/:id", uploadFile, updateCompany);
+router.put("/api/company/updatecomp/:id", uploadFile, updateCompany);
 router.delete("/company/api/:id", deleteCompany);
 
 // add or view employee
 router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.get("/api/employee-list", viewEmployee);
+router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
 // add or view salary
 router.post("/dashboard/addsalary", addsalaryController);

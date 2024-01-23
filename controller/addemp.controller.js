@@ -85,6 +85,58 @@ export const viewEmployee= async (req, res) => {
 }
 
 
+// update code 
+export const updateEmployee = async (req, res) => {
+  try {
+    const employeeId = req.params.id;
+    const employeeData = req.body;
+
+    // Check if the empoyee exists before attempting to update
+    const existingEmployee = await AddEmployee.findById(employeeId);
+
+    if (!existingEmployee) {
+      return res.status(404).json({
+        status: "Employee not found",
+        message: "The specified Employee ID does not exist in the database",
+      });
+    }
+
+    // Perform the update
+    const updatedEmployee = await AddEmployee.findByIdAndUpdate(
+      employeeId,
+      employeeData,
+      {
+        new: true,
+        runValidators: true, // Optional: Run Mongoose validation
+      }
+    );
+
+    return res.status(200).json({
+      status: "Employee Updated Successfully!",
+      message: {
+        updatedEmployee,
+      },
+    });
+  } catch (err) {
+    console.error("Error during Employee Update:", err);
+
+    // Handle Mongoose validation errors
+    if (err.name === 'ValidationError') {
+      return res.status(400).json({
+        status: "Validation Error",
+        message: err.message,
+      });
+    }
+
+    return res.status(500).json({
+      status: "Internal Server Error",
+      message: err.message,
+    });
+  }
+};
+
+
+
 
 //  delete employee controller
 export const deleteEmployee = async (req, res) => {
