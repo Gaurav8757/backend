@@ -17,8 +17,8 @@ const GenPolicySchema = new Mongoose.Schema(
       default: 0,
       required: true,
     },
-    genMonths:{
-type: String,
+    genMonths: {
+      type: String,
     },
 
     totalDays: {
