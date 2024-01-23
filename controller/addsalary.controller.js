@@ -39,7 +39,7 @@ export const empList = async (req, res) => {
   }
 };
 
-// ************************* view salarylist ************************* //
+// **************************** view salarylist **************************** //
 export const viewSalary = async (req, res) => {
   const SalaryList = await AddSalary.find({});
   if (!SalaryList) {
@@ -52,7 +52,7 @@ export const viewSalary = async (req, res) => {
   }
 };
 
-//  delete employee controller
+// ******************** delete employee controller ************************* //
 export const deleteSalary = async (req, res) => {
   try {
     const userId = req.params.id;

@@ -74,6 +74,8 @@ router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.get("/api/employee-list", viewEmployee);
 router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
+
+
 // add or view salary
 router.post("/dashboard/addsalary", addsalaryController);
 router.get("/api/salary-list", viewSalary);
@@ -81,6 +83,8 @@ router.delete("/salary/api/:id", deleteSalary);
 // for add salary
 router.get("/api/salary-lists", salaryList);
 router.delete("/salaries/api/:id", deleteGenSalary);
+
+
 // add policy
 router.post("/dashboard/addpolicy", uploadFile, addpolicyRegister);
 router.get("/api/policy-list", viewPolicy);
