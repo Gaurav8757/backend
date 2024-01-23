@@ -18,6 +18,7 @@ import {
   addsalaryController,
   deleteSalary,
   empList,
+  updateSalary,
   viewSalary,
 } from "../controller/addsalary.controller.js";
 import {
@@ -79,6 +80,7 @@ router.delete("/emp/api/:id", deleteEmployee);
 // add or view salary
 router.post("/dashboard/addsalary", addsalaryController);
 router.get("/api/salary-list", viewSalary);
+router.put("/api/salary/update/:id", updateSalary);
 router.delete("/salary/api/:id", deleteSalary);
 // for add salary
 router.get("/api/salary-lists", salaryList);

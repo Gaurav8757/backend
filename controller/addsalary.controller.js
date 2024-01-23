@@ -52,6 +52,59 @@ export const viewSalary = async (req, res) => {
   }
 };
 
+// update  salary code 
+export const updateSalary = async (req, res) => {
+  try {
+    const salaryId = req.params.id;
+    const salaryData = req.body;
+
+    // Check if the empoyee exists before attempting to update
+    const existingSalary = await AddSalary.findById(salaryId);
+
+    if (!existingSalary) {
+      return res.status(404).json({
+        status: "Salary not found",
+        message: "The specified Salary ID does not exist in the database",
+      });
+    }
+
+    // Perform the update
+    const updatedSalary = await AddSalary.findByIdAndUpdate(
+      salaryId,
+      salaryData,
+      {
+        new: true,
+        runValidators: true, // Optional: Run Mongoose validation
+      }
+    );
+
+    return res.status(200).json({
+      status: "Salary Updated Successfully!",
+      message: {
+        updatedSalary
+      },
+    });
+  } catch (err) {
+    console.error("Error during Salary Update:", err);
+
+    // Handle Mongoose validation errors
+    if (err.name === 'ValidationError') {
+      return res.status(400).json({
+        status: "Validation Error",
+        message: err.message,
+      });
+    }
+
+    return res.status(500).json({
+      status: "Internal Server Error",
+      message: err.message,
+    });
+  }
+};
+
+
+
+
 // ******************** delete employee controller ************************* //
 export const deleteSalary = async (req, res) => {
   try {
