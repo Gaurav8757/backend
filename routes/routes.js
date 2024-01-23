@@ -6,6 +6,7 @@ import {
   addbranchRegister,
   viewBranch,
   deleteBranch,
+  updateBranch,
 } from "../controller/addbranch.controller.js";
 import {
   addempRegister,
@@ -56,6 +57,7 @@ router.post("/registeradmin", adminRegister);
 // add or view branch
 router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
+router.patch("/api/branch/update/:id", updateBranch)
 router.delete("/dashboard/api/:id", deleteBranch);
 // COMPANY
 router.post("/dashboard/addcompany", uploadFile, addCompany);

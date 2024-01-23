@@ -80,6 +80,55 @@ export const viewBranch= async (req, res) => {
    }
  }
 
+// update code 
+export const updateBranch = async (req, res) => {
+  try {
+    const branchId = req.params.id;
+    const branchData = req.body;
+
+    // Check if the contact exists before attempting to update
+    const existingBranch = await AddBranch.findById(branchId);
+
+    if (!existingBranch) {
+      return res.status(404).json({
+        status: "Branch not found",
+        message: "The specified Branch ID does not exist in the database",
+      });
+    }
+
+    // Perform the update
+    const updatedBranch = await AddBranch.findByIdAndUpdate(
+      branchId,
+      branchData,
+      {
+        new: true,
+        runValidators: true, // Optional: Run Mongoose validation
+      }
+    );
+
+    return res.status(200).json({
+      status: "Branch Updated Successfully!",
+      message: {
+        updatedBranch,
+      },
+    });
+  } catch (err) {
+    console.error("Error during Contact Update:", err);
+
+    // Handle Mongoose validation errors
+    if (err.name === 'ValidationError') {
+      return res.status(400).json({
+        status: "Validation Error",
+        message: err.message,
+      });
+    }
+
+    return res.status(500).json({
+      status: "Internal Server Error",
+      message: err.message,
+    });
+  }
+};
 
 
 //  delete branch controller
