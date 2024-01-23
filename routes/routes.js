@@ -94,7 +94,7 @@ router.get("/api/employee-lists", empList);
 router.post("/advisor/register", advisorRegister);
 router.post("/advisor/login", loginAdvisor);
 router.get("/advisor/lists", viewAdvisor);
-router.patch("/advisor/update/:id", updateAdvisor);
+router.put("/advisor/update/:id", updateAdvisor);
 router.delete("/advisor/lists/:id", deleteAdvisor);
 
 
