@@ -30,6 +30,7 @@ import {
 import uploadFile from "../middleware/fileUpload.js";
 import {
   deleteGenSalary,
+  genSalaryController,
   salaryList,
 } from "../controller/gensalary.controller.js";
 import { loginBranch } from "../controller/branch.controller.js";
@@ -82,7 +83,8 @@ router.get("/api/salary-list", viewSalary);
 router.put("/api/salary/update/:id", updateSalary);
 router.delete("/salary/api/:id", deleteSalary);
 
-// for add salary
+// for genrate salary
+router.post("/dashboard/gensalary", genSalaryController);
 router.get("/api/salary-lists", salaryList);
 router.delete("/salaries/api/:id", deleteGenSalary);
 

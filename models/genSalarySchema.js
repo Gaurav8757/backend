@@ -1,0 +1,57 @@
+import Mongoose from "mongoose";
+const GenPolicySchema = new Mongoose.Schema(
+  {
+    empName: {
+      type: String,
+      ref: "AddSalary",
+      required: true,
+    },
+    monthsalary: {
+      type: Number,
+      ref: "AddSalary",
+      required: true,
+    },
+    monthleave: {
+      type: Number,
+      ref: "AddSalary",
+      default: 0,
+      required: true,
+    },
+    genMonths:{
+type: String,
+    },
+
+    totalDays: {
+      type: Number,
+      required: true,
+    },
+    presentDays: {
+      type: Number,
+      required: true,
+    },
+    totalHalfDays: {
+      type: Number,
+      required: true,
+    },
+    totalAbsent: {
+      type: Number,
+      required: true,
+    },
+    genSalary: {
+      type: Number,
+      required: true,
+    },
+    incentive: {
+      type: Number,
+      required: true,
+    },
+    totalAmount: {
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+const Genpolicy = Mongoose.model("Genpolicy", GenPolicySchema);
+export default Genpolicy;
