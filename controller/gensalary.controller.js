@@ -50,10 +50,7 @@ export const genSalaryController = async (req, res) => {
 
 // LISTS
 export const salaryList = async (req, res) => {
-  const salariesList = await GenSalary.find(
-    {},
-    "empName salmonth saleavemonth"
-  );
+  const salariesList = await GenSalary.find({});
   if (!salariesList) {
     return res.status(400).json({
       status: "Error during Salary Update",
