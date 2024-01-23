@@ -85,7 +85,7 @@ router.delete("/salary/api/:id", deleteSalary);
 
 // for genrate salary
 router.post("/dashboard/gensalary", genSalaryController);
-router.get("/api/salary-list", salaryList);
+router.get("/api/salaries-list", salaryList);
 router.delete("/salaries/api/:id", deleteGenSalary);
 
 // add policy
