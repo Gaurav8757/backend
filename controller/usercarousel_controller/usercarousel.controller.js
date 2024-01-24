@@ -91,13 +91,7 @@ export const updateCarousel = async (req, res) => {
   } catch (err) {
     console.error("Error during Carousel Update:", err);
 
-    // Handle Mongoose validation errors
-    if (err.name === "ValidationError") {
-      return res.status(400).json({
-        status: "Validation Error",
-        message: err.message,
-      });
-    }
+   
 
     return res.status(500).json({
       status: "Internal Server Error",
