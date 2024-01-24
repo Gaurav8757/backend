@@ -67,7 +67,7 @@ export const updateCarousel = async (req, res) => {
 
     if (!existingCarousel) {
       return res.status(404).json({
-        status: "Salary not found",
+        status: "Carousel not found",
         message: "The specified Carousel ID does not exist in the database",
       });
     }

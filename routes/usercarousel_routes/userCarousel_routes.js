@@ -9,7 +9,7 @@ router1.post("/carousel", uploadFile ,firstUserCarousel);
 // view carousel lists
 router1.get("/view", firstUserCarouselList);
 // update carousel
-router1.put("/update/:id", uploadFile, updateCarousel);
+router1.put("/carousel/update/:id", uploadFile, updateCarousel);
 // delete list of carousel
 router1.delete("/deletecarousel/:id", deleteCarousel);
 
