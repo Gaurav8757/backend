@@ -83,40 +83,41 @@ export const loginEmployee = async (req, res) => {
     const { empemail, empmobile, password } = req.body;
 
     let user;
-    if (email) user = await AddEmployee.findOne({ empemail });
-    else if (mobile) user = await AddEmployee.findOne({ empmobile });
+    if (empemail) {
+      user = await AddEmployee.findOne({ empemail });
+    } else if (empmobile) {
+      user = await AddEmployee.findOne({ empmobile });
+    }
 
     if (!user) {
       return res.status(401).json({
         message: "Employee Not Found",
       });
     }
-    // password check
-    // const isValidPassword = await bcrypt.compare(password, user.emppassword);
-    // if (!isValidPassword) {
-    //   return res.status(400).json("Password is Incorrect");
-    if(password !== user.emppassword){
-      return res.status(400).json("Password is Incorrect");
-    
-    }else{
-   
+
+    // Simple password check
+    if (password !== user.emppassword) {
+      return res.status(400).json({
+        message: "Password is Incorrect",
+      });
+    }
+
     // User authentication successful; create a JWT token
     const token = jwt.sign(
       {
         userId: user._id,
       },
-     SECRET,
+      SECRET,
       {
         expiresIn: "24h",
       }
     );
- 
-   return res.status(200).json({
-        message: "Login SuccessfulLy...!",
-        token,
-      });
-    }}
-   catch (err) {
+
+    return res.status(200).json({
+      message: "Login Successfully!",
+      token,
+    });
+  } catch (err) {
     console.log(err);
     res.status(500).send("Server Error");
   }
