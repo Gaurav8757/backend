@@ -35,7 +35,7 @@ export const genSalaryController = async (req, res) => {
       status: "Salary Generated Successfully",
       message: {
         genNewSalary ,
-        // Include the list of employees in the response
+        // Include the list of salary in the response
       },
     });
   } catch (err) {
@@ -54,7 +54,7 @@ export const salaryList = async (req, res) => {
   if (!salariesList) {
     return res.status(400).json({
       status: "Error during Salary Update",
-      message: "Invalid employee selected",
+      message: "Invalid Salary selected",
     });
   } else {
     return res.status(200).json(salariesList);
@@ -79,7 +79,7 @@ export const updateGenSalary = async (req, res) => {
 
     // Perform the update
     const updatedGenSalary = await GenSalary.findByIdAndUpdate(
-      employeeId,
+      gensalaryId,
       gensalaryData,
       {
         new: true,
