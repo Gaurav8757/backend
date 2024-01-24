@@ -1,5 +1,5 @@
 import AddEmployee from "../models/addempSchema.js";
-import { generateEmpId } from "./generateId.js";
+import { generateEmpId, generatePassword } from "./generateId.js";
 import bcrypt from "bcryptjs";
 export const addempRegister = async (req, res) => {
   try {
@@ -15,7 +15,6 @@ export const addempRegister = async (req, res) => {
       permanentempaddress,
       currentempaddress,
       empaadharno,
-      emppassword,
       empdesignation,
     } = req.body;
 
@@ -23,12 +22,14 @@ export const addempRegister = async (req, res) => {
      const empaadharfile = req.files && req.files["empaadharfile"] && req.files["empaadharfile"][0]
      ? "https://eleedomimf.onrender.com/uploads/" + req.files["empaadharfile"][0].filename
      : null;
-     
+
+       // Generate a password
+ const emppasswords = generatePassword(empemail);
+    //  encrypt password
      const salt = await bcrypt.genSalt(10);
-     const hashedPassword = await bcrypt.hash(emppassword, salt);
-     
-   
-      // console.log(empaadharfile);
+     const hashedPassword = await bcrypt.hash(emppasswords, salt);
+
+
     const empExist = await AddEmployee.findOne({ empid });
     // Check if empExist is not null
     if (empExist) {
@@ -56,10 +57,8 @@ export const addempRegister = async (req, res) => {
       empdesignation,
       empaadharfile,
     });
-
     // Save the employee to the database
     await addnewEmployee.save();
-
     return res.status(201).json({
       status: "Employee Added Successfully",
       message: {
