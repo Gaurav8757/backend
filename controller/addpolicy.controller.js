@@ -23,9 +23,9 @@ export const addpolicyRegister = async (req, res) => {
       addpolicytype: addpolicytype.toString(),
       addpolicytitle,
       addpolicydesc,
-      addpolicyimage: addpolicyimage.toString(),
+      addpolicyimage,
       addpolicycname,
-      addpolicylogo: addpolicylogo.toString(),
+      addpolicylogo,
     });
     // Save the employee to the database
     await addnewPolicy.save();
