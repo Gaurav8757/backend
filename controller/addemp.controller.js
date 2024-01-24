@@ -1,5 +1,9 @@
 import AddEmployee from "../models/addempSchema.js";
+import dotenv from "dotenv";
 import { generateEmpId, generatePassword } from "./generateId.js";
+
+dotenv.config();
+const {SECRET} = process.env;
 // import bcrypt from "bcryptjs";
 export const addempRegister = async (req, res) => {
   try {
@@ -88,9 +92,12 @@ export const loginEmployee = async (req, res) => {
       });
     }
     // password check
-    const isValidPassword = await bcrypt.compare(password, user.emppassword);
-    if (!isValidPassword) {
+    // const isValidPassword = await bcrypt.compare(password, user.emppassword);
+    // if (!isValidPassword) {
+    //   return res.status(400).json("Password is Incorrect");
+    if(password !== user.emppassword){
       return res.status(400).json("Password is Incorrect");
+    
     }else{
    
     // User authentication successful; create a JWT token
