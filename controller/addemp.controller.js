@@ -1,6 +1,6 @@
 import AddEmployee from "../models/addempSchema.js";
 import { generateEmpId, generatePassword } from "./generateId.js";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 export const addempRegister = async (req, res) => {
   try {
     const {
