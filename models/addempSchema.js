@@ -13,6 +13,10 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+    emppassword: {
+      type: String,
+      required: true,
+    },
     empdob: {
       type: String,
       required: true,

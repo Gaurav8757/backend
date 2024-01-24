@@ -1,6 +1,6 @@
 import AddEmployee from "../models/addempSchema.js";
 import { generateEmpId } from "./generateId.js";
-
+import bcrypt from "bcryptjs";
 export const addempRegister = async (req, res) => {
   try {
     const {
@@ -15,6 +15,7 @@ export const addempRegister = async (req, res) => {
       permanentempaddress,
       currentempaddress,
       empaadharno,
+      emppassword,
       empdesignation,
     } = req.body;
 
@@ -23,7 +24,8 @@ export const addempRegister = async (req, res) => {
      ? "https://eleedomimf.onrender.com/uploads/" + req.files["empaadharfile"][0].filename
      : null;
      
-     
+     const salt = await bcrypt.genSalt(10);
+     const hashedPassword = await bcrypt.hash(emppassword, salt);
      
    
       // console.log(empaadharfile);
@@ -43,6 +45,7 @@ export const addempRegister = async (req, res) => {
       empname,
       empemail,
       empmobile,
+      emppassword: hashedPassword,
       empgender,
       empdob,
       empjoiningdate,
