@@ -171,6 +171,8 @@ export const updateMasterDetails = async (req, res) => {
   }
 };
 
+
+
 // view lists
 export const viewAllList = async (req, res) => {
   const allList = await AllInsurance.find({});
