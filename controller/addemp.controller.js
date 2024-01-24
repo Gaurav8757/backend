@@ -26,8 +26,8 @@ export const addempRegister = async (req, res) => {
        // Generate a password
  const emppasswords = generatePassword(empemail);
     //  encrypt password
-     const salt = await bcrypt.genSalt(10);
-     const hashedPassword = await bcrypt.hash(emppasswords, salt);
+    //  const salt = await bcrypt.genSalt(10);
+    //  const hashedPassword = await bcrypt.hash(emppasswords, salt);
 
 
     const empExist = await AddEmployee.findOne({ empid });
@@ -46,7 +46,7 @@ export const addempRegister = async (req, res) => {
       empname,
       empemail,
       empmobile,
-      emppassword: hashedPassword,
+      emppassword: emppasswords,
       empgender,
       empdob,
       empjoiningdate,
