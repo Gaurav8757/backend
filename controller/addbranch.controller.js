@@ -71,6 +71,14 @@ export const addbranchRegister = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
+
+
 //################### views all branchs #####################/
 export const viewBranch= async (req, res) => {
     const branchList = await AddBranch.find({});
