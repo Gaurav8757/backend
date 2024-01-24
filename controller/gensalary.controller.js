@@ -17,7 +17,7 @@ export const genSalaryController = async (req, res) => {
     } = req.body;
     // Create a new salary instance
     const genNewSalary = new GenSalary({
-      empName,
+      empName: empName.toString(),
       monthsalary,
       monthleave,
       totalDays,
@@ -60,6 +60,65 @@ export const salaryList = async (req, res) => {
     return res.status(200).json(salariesList);
   }
 };
+
+// update salary
+export const updateGenSalary = async (req, res) => {
+  try {
+    const gensalaryId = req.params.id;
+    const gensalaryData = req.body;
+
+    // Check if the Gen Salary exists before attempting to update
+    const existingGensalary = await GenSalary.findById(gensalaryId);
+
+    if (!existingGensalary) {
+      return res.status(404).json({
+        status: "Gen Salary not found",
+        message: "The specified Gen Salary ID does not exist in the database",
+      });
+    }
+
+    // Perform the update
+    const updatedGenSalary = await GenSalary.findByIdAndUpdate(
+      employeeId,
+      gensalaryData,
+      {
+        new: true,
+        runValidators: true, // Optional: Run Mongoose validation
+      }
+    );
+
+    return res.status(200).json({
+      status: "Salary Generate Updated Successfully!",
+      message: {
+        updatedGenSalary
+      },
+    });
+  } catch (err) {
+    console.error("Error during Salary Generate:", err);
+
+    // Handle Mongoose validation errors
+    if (err.name === 'ValidationError') {
+      return res.status(400).json({
+        status: "Validation Error",
+        message: err.message,
+      });
+    }
+
+    return res.status(500).json({
+      status: "Internal Server Error",
+      message: err.message,
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
 
 // ************************* view salarylist ************************* //
 export const viewGenList = async (req, res) => {

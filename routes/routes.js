@@ -32,6 +32,7 @@ import {
   deleteGenSalary,
   genSalaryController,
   salaryList,
+  updateGenSalary,
 } from "../controller/gensalary.controller.js";
 import { loginBranch } from "../controller/branch.controller.js";
 import {
@@ -86,6 +87,7 @@ router.delete("/salary/api/:id", deleteSalary);
 // for genrate salary
 router.post("/dashboard/gensalary", genSalaryController);
 router.get("/api/salaries-list", salaryList);
+router.put("/api/salaries/:id", updateGenSalary);
 router.delete("/salaries/api/:id", deleteGenSalary);
 
 // add policy
