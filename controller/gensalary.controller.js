@@ -17,7 +17,7 @@ export const genSalaryController = async (req, res) => {
     } = req.body;
     // Create a new salary instance
     const genNewSalary = new GenSalary({
-      empName: empName.toString(),
+      empName,
       monthsalary,
       monthleave,
       totalDays,
