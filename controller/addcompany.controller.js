@@ -183,20 +183,6 @@ export const updateCompany = async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //  delete employee controller
 export const deleteCompany = async (req, res) => {
   try {

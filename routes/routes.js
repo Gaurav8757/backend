@@ -24,6 +24,7 @@ import {
 import {
   addpolicyRegister,
   deletePolicy,
+  updatePolicy,
   viewPolicy,
 } from "../controller/addpolicy.controller.js";
 
@@ -93,6 +94,7 @@ router.delete("/salaries/api/:id", deleteGenSalary);
 // add policy
 router.post("/dashboard/addpolicy", uploadFile, addpolicyRegister);
 router.get("/api/policy-list", viewPolicy);
+router.put("/policies/update/:id", updatePolicy);
 router.delete("/policies/api/:id", deletePolicy);
 
 // employee list api for add salary
@@ -102,7 +104,7 @@ router.get("/api/employee-lists", empList);
 router.post("/advisor/register", advisorRegister);
 router.post("/advisor/login", loginAdvisor);
 router.get("/advisor/lists", viewAdvisor);
-router.put("/advisor/update/:id", updateAdvisor);
+router.put("/advisor/update/:id", uploadFile, updateAdvisor);
 router.delete("/advisor/lists/:id", deleteAdvisor);
 
 // login Branch using Addbranch database
