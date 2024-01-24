@@ -26,7 +26,7 @@ export const firstUserCarousel = async (req, res) => {
       usercarousel_title,
       usercarousel_desc,
       usercarousel_link,
-      usercarousel_upload,
+      usercarousel_upload: usercarousel_upload || "",
     });
     // Save the new carousel to the database
     await newCarousel.save();
