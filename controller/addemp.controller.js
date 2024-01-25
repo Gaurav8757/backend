@@ -81,7 +81,7 @@ export const addempRegister = async (req, res) => {
 export const loginEmployee = async (req, res) => {
   try {
     const { empemail, empmobile, emppassword } = req.body;
-
+    console.log(empemail, emppassword);
     let user;
     if (empemail) {
       user = await AddEmployee.findOne({ empemail });
