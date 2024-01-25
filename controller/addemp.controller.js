@@ -1,9 +1,10 @@
 import AddEmployee from "../models/addempSchema.js";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 import { generateEmpId, generatePassword } from "./generateId.js";
-
 dotenv.config();
-const {SECRET} = process.env;
+const { SECRET } = process.env;
+
 // import bcrypt from "bcryptjs";
 export const addempRegister = async (req, res) => {
   try {
@@ -81,7 +82,6 @@ export const addempRegister = async (req, res) => {
 export const loginEmployee = async (req, res) => {
   try {
     const { empemail, empmobile, emppassword } = req.body;
-    console.log(empemail, emppassword);
     let user;
     if (empemail) {
       user = await AddEmployee.findOne({ empemail });
