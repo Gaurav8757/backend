@@ -48,6 +48,7 @@ import {
 } from "../controller/addcompany.controller.js";
 import m_details_routes from "./masterDetails/masterdetails.routes.js";
 import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdvisor } from "../controller/advisor/advisor.controller.js";
+import { addHrRegister, deleteHr, loginHr, updateHr, viewHr } from "../controller/human_resources/hr.controller.js";
 
 // users Routes
 router.use("/users", routes);
@@ -111,5 +112,12 @@ router.delete("/advisor/lists/:id", deleteAdvisor);
 
 // login Branch using Addbranch database
 router.post("/branches/loginbranch", loginBranch);
+
+// HR ROUTES
+router.post("/hr/addhr",uploadFile ,addHrRegister);
+router.post("/hr/login", loginHr);
+router.get("/hr/lists", viewHr);
+router.put("/hr/update/:id", updateHr);
+router.delete("/hr/data/:id", deleteHr);
 
 export default router;

@@ -22,11 +22,9 @@ const storageConfig = multer.diskStorage({
 // Define a function to filter files to only accept image files
 const imageFilter = (req, file, cb) => {
   const allowedExtensions = /\.(jpg|jpeg|png|gif|heic|pdf|docx|avif)$/;
-
   if (!allowedExtensions.test(path.extname(file.originalname).toLowerCase())) {
     return cb(new Error("Only image, pdf, or docx files are allowed."), false);
   }
-
   cb(null, true);
 };
 
@@ -43,7 +41,7 @@ const uploadFile = multer({
   { name: "feedbackuser_upload", maxCount: 1 },
   { name: "comp_cfiles", maxCount: 1 },
   { name: "usercarousel_upload", maxCount: 1 },
+  {name: "hraadharfile", maxCount:1}
 ]);
-// console.log(uploadFile.storage);
 export default uploadFile;
 
