@@ -80,7 +80,7 @@ export const addempRegister = async (req, res) => {
 //######################## login employee ###########################//
 export const loginEmployee = async (req, res) => {
   try {
-    const { empemail, empmobile, password } = req.body;
+    const { empemail, empmobile, emppassword } = req.body;
 
     let user;
     if (empemail) {
@@ -96,7 +96,7 @@ export const loginEmployee = async (req, res) => {
     }
 
     // Simple password check
-    if (password !== user.emppassword) {
+    if (emppassword !== user.emppassword) {
       return res.status(400).json({
         message: "Password is Incorrect",
       });
