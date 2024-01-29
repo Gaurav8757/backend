@@ -1,33 +1,33 @@
-import GenSalary from "../models/genSalarySchema.js";
+import GenHRSalary from "../../models/hr/genSalary.js";
 
-export const genSalaryController = async (req, res) => {
+export const genHrSalaryController = async (req, res) => {
   try {
     const {
-      empName,
-      monthsalary,
-      monthleave,
-      totalDays,
-      presentDays,
-      totalHalfDays,
-      totalAbsent,
-      genSalary,
-      genMonths,
-      incentive,
-      totalAmount,
+      hrname,
+      hrmonthlySalary,
+      hrmonthlyLeave,
+      genhrMonths,
+      totalhrDays,
+      presenthrDays,
+      totalhrHalfDays,
+      totalhrAbsent,
+      genhrSalary,
+      hrincentive,
+      totalhrAmount,
     } = req.body;
     // Create a new salary instance
-    const genNewSalary = new GenSalary({
-      empName: empName.toString(),
-      monthsalary,
-      monthleave,
-      totalDays,
-      presentDays,
-      totalHalfDays,
-      totalAbsent,
-      genSalary,
-      genMonths,
-      incentive,
-      totalAmount,
+    const genNewSalary = new GenHRSalary({   
+      hrname: hrname.toString(),
+      hrmonthlySalary,
+      hrmonthlyLeave,
+      genhrMonths,
+      totalhrDays,
+      presenthrDays,
+      totalhrHalfDays,
+      totalhrAbsent,
+      genhrSalary,
+      hrincentive,
+      totalhrAmount,
     });
     // Save the salary to the database
     await genNewSalary .save();
@@ -40,7 +40,7 @@ export const genSalaryController = async (req, res) => {
     });
   } catch (err) {
     return res.status(400).json({
-      status: "Error during Salary Update",
+      status: "Error during HR Salary Update",
       message: err.message,
     });
   }
@@ -49,8 +49,8 @@ export const genSalaryController = async (req, res) => {
 
 
 // LISTS
-export const salaryList = async (req, res) => {
-  const salariesList = await GenSalary.find({});
+export const salaryHrList = async (req, res) => {
+  const salariesList = await GenHRSalary.find({});
   if (!salariesList) {
     return res.status(400).json({
       status: "Error during Salary Update",
@@ -62,23 +62,23 @@ export const salaryList = async (req, res) => {
 };
 
 // update salary
-export const updateGenSalary = async (req, res) => {
+export const updateHrGenSalary = async (req, res) => {
   try {
     const gensalaryId = req.params.id;
     const gensalaryData = req.body;
 
     // Check if the Gen Salary exists before attempting to update
-    const existingGensalary = await GenSalary.findById(gensalaryId);
+    const existingGensalary = await GenHRSalary.findById(gensalaryId);
 
     if (!existingGensalary) {
       return res.status(404).json({
         status: "Gen Salary not found",
-        message: "The specified Gen Salary ID does not exist in the database",
+        message: "The specified Gen HR Salary ID does not exist in the database",
       });
     }
 
     // Perform the update
-    const updatedGenSalary = await GenSalary.findByIdAndUpdate(
+    const updatedGenSalary = await GenHRSalary.findByIdAndUpdate(
       gensalaryId,
       gensalaryData,
       {
@@ -88,13 +88,13 @@ export const updateGenSalary = async (req, res) => {
     );
 
     return res.status(200).json({
-      status: "Salary Generate Updated Successfully!",
+      status: "HR Salary Generate Updated Successfully!",
       message: {
         updatedGenSalary
       },
     });
   } catch (err) {
-    console.error("Error during Salary Generate:", err);
+    console.error("Error during HR Salary Generate:", err);
 
     // Handle Mongoose validation errors
     if (err.name === 'ValidationError') {
@@ -112,20 +112,12 @@ export const updateGenSalary = async (req, res) => {
 };
 
 
-
-
-
-
-
-
-
-
 // ************************* view salarylist ************************* //
-export const viewGenList = async (req, res) => {
-  const SalaryList = await GenSalary.find({});
+export const viewGenHrList = async (req, res) => {
+  const SalaryList = await GenHRSalary.find({});
   if (!SalaryList) {
     return res.status(400).json({
-      status: "Error during salary lists Update",
+      status: "Error during hr salary lists Update",
       message: "Invalid salary selected",
     });
   } else {
@@ -134,14 +126,14 @@ export const viewGenList = async (req, res) => {
 };
 
 //  delete genSalary controller
-export const deleteGenSalary = async (req, res) => {
+export const deleteHrGenSalary = async (req, res) => {
   try {
     const userId = req.params.id;
-    const deletedUser = await GenSalary.findByIdAndDelete(userId);
+    const deletedUser = await GenHRSalary.findByIdAndDelete(userId);
     if (!deletedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    return res.json({ message: "Salary deleted successfully", deletedUser });
+    return res.json({ message: "HR Salary deleted successfully", deletedUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

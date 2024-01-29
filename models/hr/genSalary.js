@@ -1,0 +1,57 @@
+import Mongoose from "mongoose";
+const GenHRSchema = new Mongoose.Schema(
+  {
+    hrname: {
+      type: String,
+      ref: "HRSalary",
+      required: true,
+    },
+    hrmonthlySalary: {
+      type: Number,
+      ref: "HRSalary",
+      required: true,
+    },
+    hrmonthlyLeave: {
+      type: Number,
+      ref: "HRSalary",
+      default: 0,
+      required: true,
+    },
+
+    genhrMonths: {
+      type: String,
+    },
+    genhrMonths: {
+      type: Number,
+      required: true,
+    },
+    presenthrDays: {
+      type: Number,
+      required: true,
+    },
+    totalhrHalfDays: {
+      type: Number,
+      required: true,
+    },
+    totalhrAbsent: {
+      type: Number,
+      required: true,
+    },
+    genhrSalary: {
+      type: Number,
+      required: true,
+    },
+    hrincentive: {
+      type: Number,
+      required: true,
+    },
+    totalhrAmount: {
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+const GenHRSalary = Mongoose.model("GenHRSalary", GenHRSchema);
+export default GenHRSalary;
