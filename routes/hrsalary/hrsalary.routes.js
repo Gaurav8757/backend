@@ -9,7 +9,7 @@ import { hrSalaryController, viewHrSalary, updateHRSalary, deleteHRSalary } from
 hrouter.post("/hr/addsalary", hrSalaryController);
 hrouter.get("/hr/viewsalary", viewHrSalary);
 hrouter.put("/hr/update/salary/:id", updateHRSalary);
-hrouter.delete("/hr/delete/salary/id", deleteHRSalary);
+hrouter.delete("/hr/delete/salary/:id", deleteHRSalary);
 
 
 export default hrouter;
