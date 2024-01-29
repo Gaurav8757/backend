@@ -1,7 +1,7 @@
 import express from "express";
 const hrouter = express.Router();
 
-import { hrSalaryController, viewHrSalary, updateHRSalary, deleteHRSalary } from "../../controller/human_resources/salaryhr.controller";
+import { hrSalaryController, viewHrSalary, updateHRSalary, deleteHRSalary } from "../../controller/human_resources/salaryhr.controller.js";
 
 
 
