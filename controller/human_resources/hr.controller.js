@@ -35,11 +35,11 @@ export const addHrRegister = async (req, res) => {
     //  encrypt password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(hrpasswords, salt);
-    const HrExist = await AddHr.findOne({ empid });
+    const HrExist = await AddHr.findOne({ hrid });
     if (HrExist) {
       return res.status(400).json({
         status: "HR Already Exists",
-        message: "HR with the given empid already exists.",
+        message: "HR with the given hrid already exists.",
       });
     }
     const hruniqueid = generateEmpId();
