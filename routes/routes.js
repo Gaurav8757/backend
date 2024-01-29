@@ -49,11 +49,13 @@ import {
 import m_details_routes from "./masterDetails/masterdetails.routes.js";
 import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdvisor } from "../controller/advisor/advisor.controller.js";
 import { addHrRegister, deleteHr, loginHr, updateHr, viewHr } from "../controller/human_resources/hr.controller.js";
-
+import hrouter from "./hrsalary/hrsalary.routes.js";
 // users Routes
 router.use("/users", routes);
 // master routes
 router.use("/alldetails", m_details_routes);
+// hrsalary
+router.use("/dashboard", hrouter);
 
 // admin routes
 // login

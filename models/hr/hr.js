@@ -63,6 +63,7 @@ const AddHRSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+  
   },
   { timestamps: true }
 );
