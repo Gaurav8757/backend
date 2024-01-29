@@ -12,7 +12,6 @@ const AddCompanySchema = new Mongoose.Schema(
     },
     comp_establishment: {
       type: String,
-      required: true,
     },
     comp_cname: {
       type: String,
