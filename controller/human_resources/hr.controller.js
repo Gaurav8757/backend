@@ -142,7 +142,7 @@ export const updateHr = async (req, res) => {
     const hrId = req.params.id;
     const hrData = req.body;
 
-    // Check if the empoyee exists before attempting to update
+    // Check if the hr exists before attempting to update
     const existingHr = await AddHr.findById(hrId);
 
     if (!existingHr) {
