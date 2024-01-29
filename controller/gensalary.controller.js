@@ -13,6 +13,16 @@ export const genSalaryController = async (req, res) => {
       genSalary,
       genMonths,
       incentive,
+      empgrossSalary,
+      empbasicSalary,
+      emphra,
+      empca,
+      empmedical,
+      emptiffin,
+      empcompanyPf,
+      emppf,
+      empesi,
+      emploanemi,
       totalAmount,
     } = req.body;
     // Create a new salary instance
@@ -27,6 +37,17 @@ export const genSalaryController = async (req, res) => {
       genSalary,
       genMonths,
       incentive,
+      
+      empgrossSalary,
+      empbasicSalary,
+      emphra,
+      empca,
+      empmedical,
+      emptiffin,
+      empcompanyPf,
+      emppf,
+      empesi,
+      emploanemi,
       totalAmount,
     });
     // Save the salary to the database

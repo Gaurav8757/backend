@@ -49,6 +49,48 @@ const GenPolicySchema = new Mongoose.Schema(
       type: Number,
       required: true,
     },
+    
+    empgrossSalary: {
+        type: Number,
+        required: true,
+      },
+      empbasicSalary: {
+        type: Number,
+        required: true,
+      },
+      emphra: {
+        type: Number,
+        required: true,
+      },
+      empca: {
+        type: Number,
+        required: true,
+      },
+      empmedical: {
+        type: Number,
+        required: true,
+      },
+      emptiffin: {
+        type: Number,
+        required: true,
+      },
+
+      empcompanyPf: {
+        type: Number,
+        required: true,
+      },
+      emppf: {
+        type: Number,
+        required: true,
+      },
+      empesi: {
+        type: Number,
+        required: true,
+      },
+      emploanemi: {
+        type: Number,
+        required: true,
+      },
   },
   { timestamps: true }
 );
