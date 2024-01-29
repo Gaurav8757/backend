@@ -20,6 +20,7 @@ const GenHRSchema = new Mongoose.Schema(
 
     genHrMonths: {
       type: String,
+      required: true,
     },
     genhrMonths: {
       type: Number,
