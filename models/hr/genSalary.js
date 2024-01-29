@@ -50,6 +50,47 @@ const GenHRSchema = new Mongoose.Schema(
       type: Number,
       required: true,
     },
+    grossSalary: {
+        type: Number,
+        required: true,
+      },
+      basicSalary: {
+        type: Number,
+        required: true,
+      },
+      hra: {
+        type: Number,
+        required: true,
+      },
+      ca: {
+        type: Number,
+        required: true,
+      },
+      medical: {
+        type: Number,
+        required: true,
+      },
+      tiffin: {
+        type: Number,
+        required: true,
+      },
+
+      companyPf: {
+        type: Number,
+        required: true,
+      },
+      pf: {
+        type: Number,
+        required: true,
+      },
+      esi: {
+        type: Number,
+        required: true,
+      },
+      loanemi: {
+        type: Number,
+        required: true,
+      },
   },
   { timestamps: true }
 );

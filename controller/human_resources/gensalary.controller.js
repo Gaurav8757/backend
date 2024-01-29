@@ -14,6 +14,17 @@ export const genHrSalaryController = async (req, res) => {
       genhrSalary,
       hrincentive,
       totalhrAmount,
+      grossSalary,
+      basicSalary,
+      hra,
+      ca, 
+      medical,
+      tiffin,
+      companyPf,
+      pf,
+      esi,
+      loanemi,
+
     } = req.body;
     // Create a new salary instance
     const genNewSalary = new GenHRSalary({   
@@ -28,6 +39,16 @@ export const genHrSalaryController = async (req, res) => {
       genhrSalary,
       hrincentive,
       totalhrAmount,
+      grossSalary,
+      basicSalary,
+      hra,
+      ca, 
+      medical,
+      tiffin,
+      companyPf,
+      pf,
+      esi,
+      loanemi,
     });
     // Save the salary to the database
     await genNewSalary .save();
