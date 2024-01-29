@@ -22,7 +22,10 @@ const GenHRSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
-   
+    totalhrDays: {
+        type: String,
+        required: true,
+      },
     presenthrDays: {
       type: Number,
       required: true,
