@@ -18,7 +18,7 @@ const GenHRSchema = new Mongoose.Schema(
       required: true,
     },
 
-    genhrMonths: {
+    genHrMonths: {
       type: String,
     },
     genhrMonths: {
