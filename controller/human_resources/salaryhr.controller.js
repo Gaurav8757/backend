@@ -25,18 +25,6 @@ export const hrSalaryController = async (req, res) => {
     });
   }
 };
-// ************************* List of employeelist ************************* //
-export const empList = async (req, res) => {
-  const employeeList = await AddEmployee.find({}, "empid empname");
-  if (!employeeList) {
-    return res.status(400).json({
-      status: "Error during Salary Update",
-      message: "Invalid employee selected",
-    });
-  } else {
-    return res.status(200).json(employeeList);
-  }
-};
 
 // **************************** view salarylist **************************** //
 export const viewHrSalary = async (req, res) => {
@@ -104,12 +92,12 @@ export const updateHRSalary = async (req, res) => {
 // ******************** delete HR controller ************************* //
 export const deleteHRSalary = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const deletedSalary = await HRSalary.findByIdAndDelete(userId);
-    if (!deletedSalary) {
+    const hrId = req.params.id;
+    const deletedHRSalary = await HRSalary.findByIdAndDelete(hrId);
+    if (!deletedHRSalary) {
       return res.status(404).json({ message: "HR Salary not found" });
     }
-    return res.json({ message: "HR Salary deleted successfully", deletedSalary });
+    return res.json({ message: "HR Salary deleted successfully", deletedHRSalary });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
