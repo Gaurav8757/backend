@@ -1,6 +1,6 @@
 import AddHr from "../../models/hr/hr.js";
 import dotenv from "dotenv";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { generateEmpId, generatePassword } from "../generateId.js";
 dotenv.config();
@@ -33,8 +33,8 @@ export const addHrRegister = async (req, res) => {
     // Generate a password
     const hrpasswords = generatePassword(hremail);
     //  encrypt password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(hrpasswords, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(hrpasswords, salt);
     const HrExist = await AddHr.findOne({ hrid });
     if (HrExist) {
       return res.status(400).json({
@@ -50,7 +50,7 @@ export const addHrRegister = async (req, res) => {
       hrname,
       hremail,
       hrmobile,
-      hrpassword: hashedPassword,
+      hrpassword:hrpasswords,
       hrgender,
       hrdob,
       hrjoiningdate,
@@ -95,8 +95,8 @@ export const loginHr = async (req, res) => {
     }
 
     // Simple password check
-    const isValidPassword = await bcrypt.compare(hrpassword, user.hrpassword);
-    if (!isValidPassword) {
+    // const isValidPassword = await bcrypt.compare(hrpassword, user.hrpassword);
+    if (hrpassword !== user.hrpassword) {
       return res.status(400).json({
         message: "Password is Incorrect",
       });
