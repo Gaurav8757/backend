@@ -50,6 +50,7 @@ import m_details_routes from "./masterDetails/masterdetails.routes.js";
 import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdvisor } from "../controller/advisor/advisor.controller.js";
 import { addHrRegister, deleteHr, loginHr, updateHr, viewHr } from "../controller/human_resources/hr.controller.js";
 import hrouter from "./hrsalary/hrsalary.routes.js";
+import {markAttendance, getEmployeeAttendance} from "../controller/empattendance.controller.js"
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -84,6 +85,9 @@ router.get("/api/employee-list", viewEmployee);
 router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
 
+// attendace of employee
+router.post("/employee/attendance", markAttendance);
+router.get("/employee/emp/attendance/:empid", viewEmployee);
 // add or view salary
 router.post("/dashboard/addsalary", addsalaryController);
 router.get("/api/salary-list", viewSalary);
