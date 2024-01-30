@@ -1,7 +1,7 @@
 // attendance.controller.js
 import EmpAttendance from "../models/empattendanceSchema.js";
 // markEmployeeAttendance
-const markAttendance = async (req, res) => {
+export const markAttendance = async (req, res) => {
   try {
     const { empid, date, status } = req.body;
 
@@ -21,7 +21,7 @@ const markAttendance = async (req, res) => {
 };
 
 // getEmployeeAttendance
-const getEmployeeAttendance = async (req, res) => {
+export const getEmployeeAttendance = async (req, res) => {
   try {
     const { empid } = req.params;
 
@@ -34,7 +34,4 @@ const getEmployeeAttendance = async (req, res) => {
   }
 };
 
-export default {
-  markAttendance,
-  getEmployeeAttendance,
-};
+
