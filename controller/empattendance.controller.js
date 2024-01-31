@@ -6,26 +6,21 @@ export const markAttendance = async (req, res) => {
   try {
     const { employeeId } = req.params;
     const { status } = req.body;
-console.log(employeeId);
-console.log(status);
+
     try {
       // Fetch employee information by _id
       const employee = await AddEmployee.findById(employeeId);
-console.log(employee);
+
       if (!employee) {
         return res.status(404).json({ message: 'Employee not found' });
       }
 
-      // Check authentication and permissions (implement your logic)
-      // Here, assuming req.user_id is the logged-in user's ID
-
-      // Create attendance record
+      // Create attendance record with the current date and time
       const attendanceRecord = new EmpAttendance({
         employee_id: employee._id,
-        date: new Date(),
         empname: employee.empname,
-        status: status, // status can be 'Present', 'Absent', 'Halfday', 'Holiday'
-        // other attendance details
+        date: new Date(),
+        status: status,
       });
 
       // Save the attendance record
