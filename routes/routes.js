@@ -87,7 +87,7 @@ router.delete("/emp/api/:id", deleteEmployee);
 
 // attendace of employee
 router.post("/employee/mark/attendance/:employeeId", markAttendance);
-router.get("/employee/emp/attendance/:empid", getEmployeeAttendance);
+router.get("/employee/emp/attendance/:employeeId", getEmployeeAttendance);
 
 
 // add or view salary
