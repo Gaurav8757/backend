@@ -20,7 +20,7 @@ export const markAttendance = async (req, res) => {
         employee_id: employee._id,
         empname: employee.empname,
         date: new Date(),
-        status: status,
+        statused: status,
       });
 
       // Save the attendance record
