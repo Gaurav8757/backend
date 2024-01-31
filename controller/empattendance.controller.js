@@ -1,12 +1,18 @@
 // attendance.controller.js
 import EmpAttendance from "../models/empattendanceSchema.js";
 import AddEmployee from "../models/addempSchema.js";
-// markEmployeeAttendance
-export const markAttendance = async (req, res) => {
-  
-    const { employeeId } = req.params;
-    const { status } = req.body;
 
+// get current date time
+// const getCurrentDateAndTime = () => {
+//   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+//   const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date());
+//   return formattedDate;
+// };
+// const currentDateTime = getCurrentDateAndTime();
+// // markEmployeeAttendance
+export const markAttendance = async (req, res) => {
+    const { employeeId } = req.params;
+    const { status, currentDateTime } = req.body;
     try {
       // Fetch employee information by _id
       const employee = await AddEmployee.findById(employeeId);
@@ -14,12 +20,11 @@ export const markAttendance = async (req, res) => {
       if (!employee) {
         return res.status(404).json({ message: 'Employee not found' });
       }
-
       // Create attendance record with the current date and time
       const attendanceRecord = new EmpAttendance({
         employee_id: employee._id,
         empname: employee.empname,
-        date: new Date(),
+        date: currentDateTime,
         status: status,
       });
 
@@ -47,5 +52,9 @@ export const getEmployeeAttendance = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+
+
+
 
 
