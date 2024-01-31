@@ -24,7 +24,7 @@ export const markAttendance = async (req, res) => {
       const attendanceRecord = new EmpAttendance({
         employee_id: employee._id,
         empname: employee.empname,
-        date: currentDateTime || curentDateTime,
+        date: curentDateTime,
         status: status,
       });
 
