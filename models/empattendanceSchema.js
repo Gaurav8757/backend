@@ -8,6 +8,11 @@ const AttendanceSchema = new mongoose.Schema(
       ref: 'AddEmployee',
       required: true,
     },
+    empname: {
+      type: String,
+      ref: 'AddEmployee',
+      required: true,
+    },
     date: {
       type: String,
       required: true,

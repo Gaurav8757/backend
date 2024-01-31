@@ -23,6 +23,7 @@ console.log(employee);
       const attendanceRecord = new EmpAttendance({
         employee_id: employee._id,
         date: new Date(),
+        empname: employee.empname,
         status: status, // status can be 'Present', 'Absent', 'Halfday', 'Holiday'
         // other attendance details
       });
