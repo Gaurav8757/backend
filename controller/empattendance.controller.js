@@ -24,7 +24,7 @@ export const markAttendance = async (req, res) => {
     res.status(200).json({ message: 'Attendance marked successfully' });
   } catch (error) {
     console.error('Failed to mark attendance:', error);
-    res.status(500).json({ error: 'Failed to mark attendance' });
+    res.status(500).json({ error: 'Failed to mark attendance', error });
   }
 }
 
