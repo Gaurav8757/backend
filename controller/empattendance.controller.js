@@ -4,7 +4,7 @@ import AddEmployee from "../models/addempSchema.js";
 // markEmployeeAttendance
 export const markAttendance = async (req, res) => {
   try {
-    const employeeId = req.params.empid;
+    const employeeId = req.params._id;
 console.log(employeeId);
     try {
       // Fetch employee information by _id
