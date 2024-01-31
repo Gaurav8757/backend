@@ -29,11 +29,11 @@ export const markAttendance = async (req, res) => {
       res.status(201).json({ message: 'Attendance added successfully' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
+      res.status(500).json({ message: 'Internal Server Error', error });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: 'Internal Server Error', error });
   }
 };
 
