@@ -12,7 +12,7 @@ const currentDateTime = getCurrentDateAndTime();
 // markEmployeeAttendance
 export const markAttendance = async (req, res) => {
     const { employeeId } = req.params;
-    const { status, curentDateTime } = req.body;
+    const { status, date } = req.body;
     try {
       // Fetch employee information by _id
       const employee = await AddEmployee.findById(employeeId);
@@ -24,7 +24,7 @@ export const markAttendance = async (req, res) => {
       const attendanceRecord = new EmpAttendance({
         employee_id: employee._id,
         empname: employee.empname,
-        date: curentDateTime,
+        date: date,
         status: status,
       });
 
