@@ -4,24 +4,25 @@ import AddEmployee from "../models/addempSchema.js";
 // markEmployeeAttendance
 export const markAttendance = async (req, res) => {
   try {
-    const { identifier } = req.body;
-
+    const employeeId = req.params.employeeId;
+console.log(employeeId);
     try {
-      // Fetch employee information by _id or empid
-      const employee = await AddEmployee.findOne({ $or: [{ _id: identifier }, { empid: identifier }] });
-
+      // Fetch employee information by _id
+      const employee = await AddEmployee.findById(employeeId);
+console.log(employee);
       if (!employee) {
-          return res.status(404).json({ message: 'Employee not found' });
+        return res.status(404).json({ message: 'Employee not found' });
       }
 
       // Check authentication and permissions (implement your logic)
+      // Here, assuming req.user_id is the logged-in user's ID
 
       // Create attendance record
       const attendanceRecord = new EmpAttendance({
-          employee_id: employee._id,
-          date: new Date(),
-          status: 'Present'
-          // other attendance details
+        employee_id: employee._id,
+        date: new Date(),
+        status: 'Present',
+        // other attendance details
       });
 
       // Save the attendance record
