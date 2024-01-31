@@ -3,16 +3,16 @@ import EmpAttendance from "../models/empattendanceSchema.js";
 import AddEmployee from "../models/addempSchema.js";
 
 // get current date time
-// const getCurrentDateAndTime = () => {
-//   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-//   const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date());
-//   return formattedDate;
-// };
-// const currentDateTime = getCurrentDateAndTime();
-// // markEmployeeAttendance
+const getCurrentDateAndTime = () => {
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+  const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date());
+  return formattedDate;
+};
+const currentDateTime = getCurrentDateAndTime();
+// markEmployeeAttendance
 export const markAttendance = async (req, res) => {
     const { employeeId } = req.params;
-    const { status, currentDateTime } = req.body;
+    const { status, curentDateTime } = req.body;
     try {
       // Fetch employee information by _id
       const employee = await AddEmployee.findById(employeeId);
@@ -24,7 +24,7 @@ export const markAttendance = async (req, res) => {
       const attendanceRecord = new EmpAttendance({
         employee_id: employee._id,
         empname: employee.empname,
-        date: currentDateTime,
+        date: currentDateTime || curentDateTime,
         status: status,
       });
 
