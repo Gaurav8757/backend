@@ -117,11 +117,7 @@ export const loginEmployee = async (req, res) => {
     return res.status(200).json({
       message: "Login Successfully!",
       token,
-      user:{
-        empname,
-      empemail,
-      _id
-      },
+      user,
     });
   } catch (err) {
     console.log(err);
