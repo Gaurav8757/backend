@@ -6,11 +6,12 @@ export const markAttendance = async (req, res) => {
   try {
     const { employeeId } = req.params;
     const { status } = req.body;
-
+console.log(employeeId);
+console.log(status);
     try {
       // Fetch employee information by _id
       const employee = await AddEmployee.findById(employeeId);
-
+console.log(employee);
       if (!employee) {
         return res.status(404).json({ message: 'Employee not found' });
       }
