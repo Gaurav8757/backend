@@ -106,6 +106,7 @@ export const loginEmployee = async (req, res) => {
     const token = jwt.sign(
       {
         userId: user._id,
+
       },
       SECRET,
       {
@@ -116,6 +117,7 @@ export const loginEmployee = async (req, res) => {
     return res.status(200).json({
       message: "Login Successfully!",
       token,
+      user,
     });
   } catch (err) {
     console.log(err);

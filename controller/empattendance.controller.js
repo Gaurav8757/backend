@@ -4,12 +4,13 @@ import AddEmployee from "../models/addempSchema.js";
 // markEmployeeAttendance
 export const markAttendance = async (req, res) => {
   try {
-    const employeeId = req.params._id;
-console.log(employeeId);
+    const { employeeId } = req.params;
+    const { status } = req.body;
+
     try {
       // Fetch employee information by _id
       const employee = await AddEmployee.findById(employeeId);
-console.log(employee);
+
       if (!employee) {
         return res.status(404).json({ message: 'Employee not found' });
       }
@@ -21,7 +22,7 @@ console.log(employee);
       const attendanceRecord = new EmpAttendance({
         employee_id: employee._id,
         date: new Date(),
-        status: 'Present',
+        status: status, // status can be 'Present', 'Absent', 'Halfday', 'Holiday'
         // other attendance details
       });
 
