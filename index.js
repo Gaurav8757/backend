@@ -3,24 +3,22 @@ import connectDB from "./connection/connection.js";
 import cors from "cors";
 import path from "path";
 import Routes from "./routes/routes.js";
+import fileUpload from "./middleware/fileUpload.js"
 const app = express();
 const port = process.env.PORT || 7000;
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// Get the directory name of the current module file
-// const currentModuleFile = fileURLToPath(import.meta.url);
-// const currentModuleDir = dirname(currentModuleFile);
-
+// Get the current module's directory using import.meta.url
+const currentModuleFile = new URL(import.meta.url).pathname;
+const basePath = path.dirname(currentModuleFile);
+ // Adjust this line based on your project structure
 // middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const uploadsDirectory = path.join(__dirname, 'uploads');
 // Create a route handler to serve static files from the uploads directory
-app.use('/uploads', express.static(uploadsDirectory));
+app.use('/uploads', express.static(path.join(basePath, 'uploads')));
+
 app.use('/', Routes);
 // middleware call
 connectDB();
