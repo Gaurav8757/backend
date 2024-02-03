@@ -149,30 +149,8 @@ export const viewEmployee = async (req, res) => {
           foreignField: "employee_id",
           as: "employeeDetails"
         }
-      },
-      {
-        $project: {
-          _id: 1,
-          empid: 1,
-          uniqueid: 1,
-          empname: 1,
-          emppassword: 1,
-          empdob: 1,
-          empgender: 1,
-          empemail: 1,
-          empmobile: 1,
-          empjoiningdate: 1,
-          empbranch: 1,
-          permanentempaddress: 1,
-          currentempaddress: 1,
-          empaadharno: 1,
-          empaadharfile: 1,
-          empdesignation: 1,
-          employeeDetails: {
-            $ifNull: [{ $arrayElemAt: ["$employeeDetails", 0] }, null]
-          }
-        }
       }
+     
     ]);
 
     res.json(result);
