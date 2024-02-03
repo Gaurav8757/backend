@@ -36,8 +36,8 @@ export const addbranchRegister = async (req, res) => {
  const password = generatePassword(branchemail);
  
   //.................................hash the password................................//
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+  // const salt = await bcrypt.genSalt(10);
+  // const hashedPassword = await bcrypt.hash(password, salt);
     // Create a new branch
     const addnewBranch = new AddBranch({
       branchid,
@@ -51,7 +51,7 @@ export const addbranchRegister = async (req, res) => {
       branchdistrict,
       branchstate,
       branchpincode,
-      password: hashedPassword
+      password
     });
 
     // Save the new branch to the database
