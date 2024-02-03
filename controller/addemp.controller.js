@@ -127,17 +127,60 @@ export const loginEmployee = async (req, res) => {
 
 
 //################### views all employees #####################/
-export const viewEmployee= async (req, res) => {
-  const EmployeeList = await AddEmployee.find({});
-  if (!EmployeeList) {
-   return res.status(400).json({
-     status: "Error during emp lists Update",
-     message: "Invalid emp selected",
-   });
- }else{
-   return res.status(200).json(EmployeeList);
- }
-}
+// export const = async (req, res) => {
+//   const EmployeeList = await AddEmployee.find({});
+//   if (!EmployeeList) {
+//    return res.status(400).json({
+//      status: "Error during emp lists Update",
+//      message: "Invalid emp selected",
+//    });
+//  }else{
+//    return res.status(200).json(EmployeeList);
+//  }
+// }
+// Employee Attendance view lists
+export const viewEmployee = async (req, res) => {
+  try {
+    const result = await AddEmployee.aggregate([
+      {
+        $lookup: {
+          from: "empattendances",
+          localField: "_id",
+          foreignField: "employee_id",
+          as: "employeeDetails"
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          empid: 1,
+          uniqueid: 1,
+          empname: 1,
+          emppassword: 1,
+          empdob: 1,
+          empgender: 1,
+          empemail: 1,
+          empmobile: 1,
+          empjoiningdate: 1,
+          empbranch: 1,
+          permanentempaddress: 1,
+          currentempaddress: 1,
+          empaadharno: 1,
+          empaadharfile: 1,
+          empdesignation: 1,
+          employeeDetails: {
+            $ifNull: [{ $arrayElemAt: ["$employeeDetails", 0] }, null]
+          }
+        }
+      }
+    ]);
+
+    res.json(result);
+  } catch (error) {
+    console.error("Error fetching employee attendance list:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 
 // update code 

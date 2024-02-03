@@ -81,6 +81,8 @@ router.delete("/company/api/:id", deleteCompany);
 // add or view employee
 router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.post("/login/employee", loginEmployee);
+
+// get all employees details inside hr
 router.get("/api/employee-list", viewEmployee);
 router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
@@ -127,5 +129,7 @@ router.post("/hr/login", loginHr);
 router.get("/hr/lists", viewHr);
 router.put("/hr/update/:id", updateHr);
 router.delete("/hr/data/:id", deleteHr);
+
+
 
 export default router;

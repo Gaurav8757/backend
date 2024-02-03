@@ -1,6 +1,7 @@
 import AddHr from "../../models/hr/hr.js";
 import dotenv from "dotenv";
-// import bcrypt from "bcryptjs";
+import AddEmployee from "../../models/addempSchema.js";
+import EmpAttendance from "../../models/empattendanceSchema.js";
 import jwt from "jsonwebtoken";
 import { generateEmpId, generatePassword } from "../generateId.js";
 dotenv.config();
@@ -181,6 +182,17 @@ export const updateHr = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
 
 //  delete hr controller
 export const deleteHr = async (req, res) => {
