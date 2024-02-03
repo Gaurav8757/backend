@@ -7,17 +7,6 @@ console.log(currentModuleFile);
 const __dirname = dirname(currentModuleFile);
 console.log(__dirname);
 
-// const storageConfig = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     // Use the passed base path to construct the upload path
-//     const uploadPath = path.join(basePath, "uploads");
-//     cb(null, uploadPath);
-//   },
-//   filename: (req, file, cb) => {
-//     const name = Date.now() + "-" + file.originalname;
-//     cb(null, name);
-//   },
-// });
 
 const storageConfig = multer.diskStorage({
   destination: (req, file, cb) => {
