@@ -1,6 +1,6 @@
 // hr.attendance.controller.js
 import AddHr from "../../models/hr/hr.js";
-import AddHrAttendance from "../../../policy-bazaar/src/HumanResources/attendance/AddHrAttendance.js";
+import AddHrAttendance from "../../models/hr/hrattendance.js";
 
 // markEmployeeAttendance
 export const markHrAttendance = async (req, res) => {
