@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import routes from "./user_routes/usersRoutes.js";
+import hr from "./hrsalary/hrattend.routes.js"
 import { loginAdmin, adminRegister } from "../controller/login.controller.js";
 import {
   addbranchRegister,
@@ -58,6 +59,9 @@ router.use("/alldetails", m_details_routes);
 // hrsalary
 router.use("/dashboard", hrouter);
 
+
+// hr attendance
+router.use("/hr", hr);
 // admin routes
 // login
 router.post("/loginadmin", loginAdmin);
