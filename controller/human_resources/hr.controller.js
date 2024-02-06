@@ -1,7 +1,6 @@
 import AddHr from "../../models/hr/hr.js";
 import dotenv from "dotenv";
-import AddEmployee from "../../models/addempSchema.js";
-import EmpAttendance from "../../models/empattendanceSchema.js";
+
 import jwt from "jsonwebtoken";
 import { generateEmpId, generatePassword } from "../generateId.js";
 dotenv.config();
