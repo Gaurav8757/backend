@@ -52,7 +52,7 @@ import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdviso
 import { addHrRegister, deleteHr, loginHr, updateHr, viewHr } from "../controller/human_resources/hr.controller.js";
 import hrouter from "./hrsalary/hrsalary.routes.js";
 import {markAttendance, getEmployeeAttendance} from "../controller/empattendance.controller.js"
-import { staffType } from "../controller/staff/type.controller.js";
+import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -137,5 +137,7 @@ router.delete("/hr/data/:id", deleteHr);
 
 // add staff type
 router.post("/add/staff", staffType);
+router.get("/staff/lists", staffList);
+router.delete("/staff/lists/:id", deleteStaff);
 
 export default router;
