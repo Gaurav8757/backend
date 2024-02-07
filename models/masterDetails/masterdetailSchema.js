@@ -157,6 +157,9 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     }, 
     staffType:{
       type: String,
+    },
+    employee_id:{
+      type: String
     }
   },
   { timestamps: true }
