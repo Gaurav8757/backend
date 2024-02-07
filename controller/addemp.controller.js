@@ -154,7 +154,7 @@ export const listOfEmp = async (req, res)=>{
         {
             $group: {
                 _id: "$staffType",
-                empnames: { $push: "$empname" }
+                empnames: { $push: { _id: "$_id", empname: "$empname" } }
             }
         }
     ]);
