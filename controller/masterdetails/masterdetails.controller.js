@@ -53,6 +53,9 @@ export const createAllInsurance = async (req, res) => {
       branchPayableAmount,
       companyPayout,
       profitLoss,
+      hypo,
+      staffName,
+      staffType
     } = req.body;
 
     const newInsurance = new AllInsurance({
@@ -105,6 +108,9 @@ export const createAllInsurance = async (req, res) => {
       branchPayableAmount,
       companyPayout,
       profitLoss,
+      hypo,
+      staffName,
+      staffType
     });
 
     // Save the company to the database

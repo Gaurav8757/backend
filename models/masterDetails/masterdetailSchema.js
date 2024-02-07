@@ -149,6 +149,15 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     profitLoss: {
       type: Number,
     },
+    hypo:{
+      type:String,
+    },
+    staffName:{
+      type: String,
+    }, 
+    staffType:{
+      type: String,
+    }
   },
   { timestamps: true }
 );
