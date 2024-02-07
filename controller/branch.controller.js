@@ -17,15 +17,12 @@ export const loginBranch = async(req, res) => {
                 message: "Branch Not Found",
             });
         }
-       
-      
         // Simple password check
         if (password !== user.password) {
             return res.status(400).json({
                 message: "Password is Incorrect",
             });
         }
-
         // User authentication successful; create a JWT token
         const token = jwt.sign(
             {

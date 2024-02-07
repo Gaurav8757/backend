@@ -158,14 +158,13 @@ export const listOfEmp = async (req, res)=>{
             }
         }
     ]);
-
+    
     if (!aggregatedResult || aggregatedResult.length === 0) {
         return res.status(404).json({
             status: "Error",
             message: "No data found"
         });
     }
-
     return res.status(200).json(aggregatedResult);
 } catch (error) {
     console.error("Error during aggregation:", error);
