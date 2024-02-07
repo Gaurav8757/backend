@@ -12,6 +12,7 @@ import {
 import {
   addempRegister,
   deleteEmployee,
+  listOfEmp,
   loginEmployee,
   updateEmployee,
   viewEmployee,
@@ -127,13 +128,14 @@ router.delete("/advisor/lists/:id", deleteAdvisor);
 
 // login Branch using Addbranch database
 router.post("/branches/loginbranch", loginBranch);
-
 // HR ROUTES
 router.post("/hr/addhr",uploadFile ,addHrRegister);
 router.post("/hr/login", loginHr);
 router.get("/hr/lists", viewHr);
 router.put("/hr/update/:id", updateHr);
 router.delete("/hr/data/:id", deleteHr);
+//
+router.get("/hr/staff/type", listOfEmp);
 
 // add staff type
 router.post("/add/staff", staffType);

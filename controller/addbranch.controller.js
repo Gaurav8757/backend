@@ -36,8 +36,6 @@ export const addbranchRegister = async (req, res) => {
  const password = generatePassword(branchemail);
  
   //.................................hash the password................................//
-  // const salt = await bcrypt.genSalt(10);
-  // const hashedPassword = await bcrypt.hash(password, salt);
     // Create a new branch
     const addnewBranch = new AddBranch({
       branchid,
@@ -72,13 +70,6 @@ export const addbranchRegister = async (req, res) => {
 };
 
 
-
-
-
-
-
-
-
 //################### views all branchs #####################/
 export const viewBranch= async (req, res) => {
     const branchList = await AddBranch.find({});
@@ -91,6 +82,11 @@ export const viewBranch= async (req, res) => {
      return res.status(200).json(branchList);
    }
  }
+
+
+
+
+
 
 // update code 
 export const updateBranch = async (req, res) => {

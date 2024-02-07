@@ -125,18 +125,6 @@ export const loginEmployee = async (req, res) => {
 
 
 //################### views all employees #####################/
-// export const = async (req, res) => {
-//   const EmployeeList = await AddEmployee.find({});
-//   if (!EmployeeList) {
-//    return res.status(400).json({
-//      status: "Error during emp lists Update",
-//      message: "Invalid emp selected",
-//    });
-//  }else{
-//    return res.status(200).json(EmployeeList);
-//  }
-// }
-// Employee Attendance view lists
 export const viewEmployee = async (req, res) => {
   try {
     const result = await AddEmployee.aggregate([
@@ -157,6 +145,38 @@ export const viewEmployee = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+//####### list of employee name based on staff type #######/
+export const listOfEmp = async (req, res)=>{
+  try {
+    // Aggregate to group employees by staffType and push empname into an array
+    const aggregatedResult = await AddEmployee.aggregate([
+        {
+            $group: {
+                _id: "$staffType",
+                empnames: { $push: "$empname" }
+            }
+        }
+    ]);
+
+    if (!aggregatedResult || aggregatedResult.length === 0) {
+        return res.status(404).json({
+            status: "Error",
+            message: "No data found"
+        });
+    }
+
+    return res.status(200).json(aggregatedResult);
+} catch (error) {
+    console.error("Error during aggregation:", error);
+    return res.status(500).json({
+        status: "Error",
+        message: "Internal server error"
+    });
+}
+}
+
+
 
 
 // update code 

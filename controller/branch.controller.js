@@ -1,4 +1,5 @@
 import AddBranch from "../models/addbranchSchema.js";
+
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 
@@ -44,3 +45,6 @@ export const loginBranch = async(req, res) => {
         res.status(500).send("Server Error");
     }
 };
+
+
+
