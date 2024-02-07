@@ -18,7 +18,7 @@ m_details_routes.put("/updatedata/:id", updateMasterDetails);
 m_details_routes.get("/viewdata", viewAllList);
 
 // view
-m_details_routes.get("/viewdata/:employeeId", viewAllList);
+m_details_routes.get("/viewdata/:employee_id", viewAllList);
 
 // delete
 m_details_routes.delete("/deletedata/:id", deleteAllList);
