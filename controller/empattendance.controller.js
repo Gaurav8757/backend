@@ -4,11 +4,11 @@ import AddEmployee from "../models/addempSchema.js";
 
 
 export const markAttendance = async (req, res) => {
-  const { employeeId } = req.params;
+  const { employee_id } = req.params;
   const { status, date, time, weekday } = req.body;
   try {
     // Fetch employee information by _id
-    const employee = await AddEmployee.findById(employeeId);
+    const employee = await AddEmployee.findById(employee_id);
 
     if (!employee) {
       return res.status(404).json({ message: "Employee not found" });
