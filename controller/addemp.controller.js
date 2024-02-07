@@ -20,6 +20,7 @@ export const addempRegister = async (req, res) => {
       permanentempaddress,
       currentempaddress,
       empaadharno,
+      staffType,
       empdesignation,
     } = req.body;
 
@@ -29,11 +30,7 @@ export const addempRegister = async (req, res) => {
      : null;
 
        // Generate a password
- const emppasswords = generatePassword(empemail);
-    //  encrypt password
-    //  const salt = await bcrypt.genSalt(10);
-    //  const hashedPassword = await bcrypt.hash(emppasswords, salt);
-
+    const emppasswords = generatePassword(empemail);
 
     const empExist = await AddEmployee.findOne({ empid });
     // Check if empExist is not null
@@ -59,6 +56,7 @@ export const addempRegister = async (req, res) => {
       permanentempaddress,
       currentempaddress,
       empaadharno,
+      staffType,
       empdesignation,
       empaadharfile,
     });

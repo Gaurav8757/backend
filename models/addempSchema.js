@@ -58,7 +58,10 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: String,
       unique: true,
     },
-   
+    staffType:{
+      type: String,
+      required: true,
+    },
     empdesignation: {
       type: String,
       required: true,
