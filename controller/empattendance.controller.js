@@ -48,10 +48,8 @@ export const markAttendance = async (req, res) => {
 // getEmployeeAttendance
 export const getEmployeeAttendance = async (req, res) => {
   try {
-    const { empid } = req.params;
-    const attendance = await EmpAttendance.find({ empid }).sort({
-      date: "asc",
-    });
+    const { employee_id } = req.params;
+    const attendance = await EmpAttendance.find({ employee_id });
     res.status(200).json(attendance);
   } catch (error) {
     console.error("Error fetching employee attendance:", error);

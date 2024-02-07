@@ -94,8 +94,8 @@ router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
 
 // attendace of employee
-router.post("/employee/mark/attendance/:employeeId", markAttendance);
-router.get("/employee/emp/attendance/:employeeId", getEmployeeAttendance);
+router.post("/employee/mark/attendance/:employee_id", markAttendance);
+router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
 
 
 // add or view salary
