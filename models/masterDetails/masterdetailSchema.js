@@ -159,7 +159,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
       type: String,
     },
     employee_id:{
-      type: String
+      type: String,
     }
   },
   { timestamps: true }
