@@ -76,7 +76,7 @@ export const loginOps = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        message: "HR Not Found",
+        message: "ops Admin Not Found",
       });
     }
 
