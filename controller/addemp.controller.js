@@ -178,7 +178,7 @@ export const listOfEmp = async (req, res)=>{
 
 
 
-// update code 
+//################ update code ########################/
 export const updateEmployee = async (req, res) => {
   try {
     const employeeId = req.params.id;
