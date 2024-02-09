@@ -5,7 +5,8 @@ import {
   viewAllList,
   deleteAllList,
   updateMasterDetails,
-  viewHajipurList 
+  viewHajipurList, 
+  viewPolicyBasedonId
 } from "../../controller/masterdetails/masterdetails.controller.js";
 
 const m_details_routes = express.Router();
@@ -21,7 +22,7 @@ m_details_routes.get("/viewdata", viewAllList);
 
 m_details_routes.get("/viewdata/branch/hpur", viewHajipurList);
 // view
-// m_details_routes.get("/viewdata/:employee_id", viewAllList);
+m_details_routes.get("/viewdata/:employee_id", viewPolicyBasedonId);
 
 // delete
 m_details_routes.delete("/deletedata/:id", deleteAllList);

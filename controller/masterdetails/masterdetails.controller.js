@@ -182,18 +182,18 @@ export const updateMasterDetails = async (req, res) => {
 
 
 // // view lists
-// export const viewAllList = async (req, res) => {
-//   const { employee_id } = req.params;
-//   const allList = await AllInsurance.find({employee_id});
-//   if (!allList) {
-//     return res.status(400).json({
-//       status: "Error during view lists Update",
-//       message: "Invalid view list selected",
-//     });
-//   } else {
-//     return res.status(200).json(allList);
-//   }
-// };
+export const viewPolicyBasedonId = async (req, res) => {
+  const { employee_id } = req.params;
+  const policyBasedonId = await AllInsurance.find({employee_id});
+  if (!policyBasedonId) {
+    return res.status(400).json({
+      status: "Error during view lists Update",
+      message: "Invalid view list selected",
+    });
+  } else {
+    return res.status(200).json(policyBasedonId);
+  }
+};
 
 
 export const viewAllList = async (req, res) => {
