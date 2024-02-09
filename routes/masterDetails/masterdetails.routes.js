@@ -4,8 +4,10 @@ import {
   createAllInsurance,
   viewAllList,
   deleteAllList,
-  updateMasterDetails
+  updateMasterDetails,
+  viewHajipurList 
 } from "../../controller/masterdetails/masterdetails.controller.js";
+
 const m_details_routes = express.Router();
 
 // add
@@ -17,6 +19,9 @@ m_details_routes.put("/updatedata/:id", updateMasterDetails);
 // view
 m_details_routes.get("/viewdata", viewAllList);
 
+
+
+m_details_routes.get("/viewdata/branch/hpur", viewHajipurList);
 // view
 m_details_routes.get("/viewdata/:employee_id", viewAllList);
 

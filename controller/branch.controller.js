@@ -1,5 +1,4 @@
 import AddBranch from "../models/addbranchSchema.js";
-
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 

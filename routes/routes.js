@@ -55,6 +55,7 @@ import hrouter from "./hrsalary/hrsalary.routes.js";
 import {markAttendance, getEmployeeAttendance} from "../controller/empattendance.controller.js"
 import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
 import { addOpsRegister, loginOps } from "../controller/opsAdmin/opsAdmin.js";
+
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -76,6 +77,7 @@ router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
 router.put("/api/branch/update/:id", updateBranch)
 router.delete("/dashboard/api/:id", deleteBranch);
+
 // COMPANY
 router.post("/dashboard/addcompany", uploadFile, addCompany);
 router.get("/api/company/company-list", viewCompanies);
