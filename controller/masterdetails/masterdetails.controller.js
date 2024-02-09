@@ -196,22 +196,6 @@ export const viewAllList = async (req, res) => {
 };
 
 
-// export const viewHajipurList = async (req, res) => {
-//   const { employee_id } = req.params;
-//   const hajipurList = await AllInsurance.find({
-//     employee_id,
-//     branch: { $in: ["Hajipur", "hajipur", "HAJIPUR"] }
-//   });
-  
-//   if (!hajipurList || hajipurList.length === 0) {
-//     return res.status(400).json({
-//       status: "Error during view lists Update",
-//       message: "Invalid view list selected or no lists available for Hajipur branch",
-//     });
-//   } else {
-//     return res.status(200).json(hajipurList);
-//   }
-// };
 export const viewHajipurList = async (req, res) => {
   const { branch } = req.query;
   // Constructing case-insensitive regex for matching branch name
