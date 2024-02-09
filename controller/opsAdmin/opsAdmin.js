@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { generatePassword } from "../generateId.js";
 dotenv.config();
 const { SECRET } = process.env;
-
+// register ops
 export const addOpsRegister = async (req, res) => {
   try {
     const {
@@ -17,7 +17,6 @@ export const addOpsRegister = async (req, res) => {
       opsjoiningdate,
       permanentopsaddress,
       currentopsaddress,
-      
     } = req.body;
 
 
@@ -63,7 +62,7 @@ export const addOpsRegister = async (req, res) => {
   }
 };
 
-//######################## login HR ###########################//
+//######################## login ops ###########################//
 export const loginOps = async (req, res) => {
   try {
     const { opsemail, opsmobile, opspassword } = req.body;

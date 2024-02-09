@@ -19,11 +19,9 @@ m_details_routes.put("/updatedata/:id", updateMasterDetails);
 // view
 m_details_routes.get("/viewdata", viewAllList);
 
-
-
 m_details_routes.get("/viewdata/branch/hpur", viewHajipurList);
 // view
-m_details_routes.get("/viewdata/:employee_id", viewAllList);
+// m_details_routes.get("/viewdata/:employee_id", viewAllList);
 
 // delete
 m_details_routes.delete("/deletedata/:id", deleteAllList);

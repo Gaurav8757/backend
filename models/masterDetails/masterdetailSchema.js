@@ -160,6 +160,11 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     },
     employee_id:{
       type: String,
+    },
+    status:{
+      type: String,
+      enum: ["Pending", "Sent"],
+      default: "Pending"
     }
   },
   { timestamps: true }

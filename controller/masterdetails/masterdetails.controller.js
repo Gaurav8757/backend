@@ -181,21 +181,52 @@ export const updateMasterDetails = async (req, res) => {
 
 
 
-// view lists
+// // view lists
+// export const viewAllList = async (req, res) => {
+//   const { employee_id } = req.params;
+//   const allList = await AllInsurance.find({employee_id});
+//   if (!allList) {
+//     return res.status(400).json({
+//       status: "Error during view lists Update",
+//       message: "Invalid view list selected",
+//     });
+//   } else {
+//     return res.status(200).json(allList);
+//   }
+// };
+
+
 export const viewAllList = async (req, res) => {
-  const { employee_id } = req.params;
-  const allList = await AllInsurance.find({employee_id});
-  if (!allList) {
-    return res.status(400).json({
-      status: "Error during view lists Update",
-      message: "Invalid view list selected",
+  // const { employee_id } = req.params;
+  try {
+    const allList = await AllInsurance.aggregate([
+      {
+        $lookup: {
+          from: "addemployees", // Name of the employees collection
+          localField: "empname", // Field in the insurance collection
+          foreignField: "employee_id", // Field in the employees collection
+          as: "allpolicyemployee" // Name of the field to store the employee details
+        }
+      }
+    ]);
+    if (allList.length === 0) { // Check if the result is empty
+      return res.status(404).json({
+        status: "Error",
+        message: "No lists found for the given employee ID"
+      });
+    } else {
+      return res.status(200).json(allList);
+    }
+  } catch (error) {
+    console.error("Error viewing lists:", error);
+    return res.status(500).json({
+      status: "Error",
+      message: "Internal server error"
     });
-  } else {
-    return res.status(200).json(allList);
   }
 };
 
-
+// show data on the basis of branch name query
 export const viewHajipurList = async (req, res) => {
   const { branch } = req.query;
   // Constructing case-insensitive regex for matching branch name
@@ -215,8 +246,6 @@ export const viewHajipurList = async (req, res) => {
 };
 
 
-
-// delete
 //  delete branch controller
 export const deleteAllList = async (req, res) => {
   try {
