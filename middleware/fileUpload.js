@@ -3,9 +3,9 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from 'path';
 const currentModuleFile = fileURLToPath(import.meta.url);
-console.log(currentModuleFile);
+// console.log(currentModuleFile);
 const __dirname = dirname(currentModuleFile);
-console.log(__dirname);
+// console.log(__dirname);
 
 
 const storageConfig = multer.diskStorage({
