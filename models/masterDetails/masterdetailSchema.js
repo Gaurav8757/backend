@@ -163,8 +163,6 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     },
     status:{
       type: String,
-      enum: ["Pending", "Sent"],
-      default: "Pending"
     }
   },
   { timestamps: true }
