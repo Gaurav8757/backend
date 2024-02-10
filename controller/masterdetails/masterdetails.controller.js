@@ -156,7 +156,7 @@ export const updateMasterDetails = async (req, res) => {
     );
 
     return res.status(200).json({
-      status: "Insurance Updated Successfully!",
+      status: "Policy Sent to ",
       message: {
         updatedDetails,
       },
