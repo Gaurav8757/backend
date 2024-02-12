@@ -67,6 +67,10 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: Number,
       required: true,
     },
+    pan: {
+      type: String,
+      required: true,
+    },
     empaadharfile: {
       type: String,
       unique: true,
