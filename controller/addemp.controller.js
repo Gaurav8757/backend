@@ -20,6 +20,9 @@ export const addempRegister = async (req, res) => {
       permanentempaddress,
       currentempaddress,
       empaadharno,
+      accNumber,
+      ifcs,
+      bankName,
       staffType,
       empdesignation,
     } = req.body;
