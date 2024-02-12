@@ -82,7 +82,7 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     empdesignation: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   { timestamps: true }
