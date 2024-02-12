@@ -64,8 +64,8 @@ const AddEmployeeSchema = new Mongoose.Schema(
       required: true,
     },
     ifcs: {
-      type: Number,
-      required: true,
+      type: String,
+      
     },
     pan: {
       type: String,
