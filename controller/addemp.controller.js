@@ -57,6 +57,9 @@ export const addempRegister = async (req, res) => {
       currentempaddress,
       empaadharno,
       staffType,
+      accNumber,
+      ifcs,
+      bankName,
       empdesignation,
       empaadharfile,
     });

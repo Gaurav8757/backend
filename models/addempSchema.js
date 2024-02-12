@@ -54,6 +54,19 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: Number,
       required: true,
     },
+
+    accNumber: {
+      type: String,
+      required: true,
+    },
+    bankName: {
+      type: String,
+      required: true,
+    },
+    ifcs: {
+      type: Number,
+      required: true,
+    },
     empaadharfile: {
       type: String,
       unique: true,
