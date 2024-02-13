@@ -1,7 +1,7 @@
 import AddEmployee from "../models/addempSchema.js";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import { generateEmpId, generatePassword } from "./generateId.js";
+import {generatePassword } from "./generateId.js";
 dotenv.config();
 const { SECRET } = process.env;
 
@@ -47,11 +47,11 @@ export const addempRegister = async (req, res) => {
         message: "Employee with the given empid already exists.",
       });
     }
-    const uniqueid = generateEmpId();
+    // const uniqueid = generateEmpId();
     // Create a new employee instance
     const addnewEmployee = new AddEmployee({
       empid,
-      uniqueid,
+      // uniqueid,
       empname,
       empemail,
       empmobile,
