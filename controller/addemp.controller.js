@@ -23,9 +23,8 @@ export const addempRegister = async (req, res) => {
       accNumber,
       ifsc,
       bankName,
-      staffType,
-      
-      panno,
+      staffType,  
+      pan,
       empdesignation,
     } = req.body;
 
@@ -33,8 +32,8 @@ export const addempRegister = async (req, res) => {
      const empaadharfile = req.files && req.files["empaadharfile"] && req.files["empaadharfile"][0]
      ? "https://eleedomimf.onrender.com/uploads/" + req.files["empaadharfile"][0].filename
      : null;
-     const pan = req.files && req.files["pan"] && req.files["pan"][0]
-     ? "https://eleedomimf.onrender.com/uploads/" + req.files["pan"][0].filename
+     const panno = req.files && req.files["panno"] && req.files["panno"][0]
+     ? "https://eleedomimf.onrender.com/uploads/" + req.files["panno"][0].filename
      : null;
 
        // Generate a password
