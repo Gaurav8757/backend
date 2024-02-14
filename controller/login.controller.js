@@ -202,7 +202,7 @@ export const adminPasswordReset = async (req, res) => {
         const hashedPassword1 = await bcrypt.hash(confirm_password, salt);
         await AdminLogin.findByIdAndUpdate(user._id, {
           $set: {
-            password: hashedPassword,
+            password: hashedPassword || hashedPassword1,
             // password: hashedPassword1,
           },
         });
