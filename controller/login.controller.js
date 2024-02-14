@@ -188,8 +188,8 @@ export const forgotAdminPassword = async (req, res) => {
 // .......................................Update Password..................................//
 export const adminPasswordReset = async (req, res) => {
   const { password, confirm_password } = req.body;
-  const { id, token } = req.params;
-  const user = await AdminLogin.findById(id);
+  const { _id, token } = req.params;
+  const user = await AdminLogin.findById(_id);
   const new_secret = user._id + SECRET;
   try {
     jwt.verify(token, new_secret);
