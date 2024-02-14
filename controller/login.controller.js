@@ -189,7 +189,6 @@ export const forgotAdminPassword = async (req, res) => {
 export const adminPasswordReset = async (req, res) => {
   const { password, confirm_password } = req.body;
   const { id, token } = req.params; // Access id from params
-  console.log(id); // Check if id is received correctly
   const user = await AdminLogin.findById(id);
   const new_secret = user._id + SECRET;
   try {
@@ -207,7 +206,30 @@ export const adminPasswordReset = async (req, res) => {
             confirm_password: hashedPassword1,
           },
         });
-        console.log();
+        
+         // Send email to user with the updated password
+         const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: EMAIL, 
+            pass: PASSWORD, 
+          },
+        });
+
+        const mailOptions = {
+          from: "Eleedom IMF Pvt Ltd <your_email@gmail.com>",
+          to: user.email,
+          subject: "Your Password has been Reset",
+          text: `Your password has been successfully reset. Your new password is: ${password}`,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log("Error occurred while sending email:", error);
+          } else {
+            console.log("Email sent:", info.response);
+          }
+        });
         return res.status(200).json("Password Updated Successfully..!");
       }
     }
