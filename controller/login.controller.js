@@ -5,7 +5,7 @@ import Mailgen from "mailgen";
 import AdminLogin from "../models/loginSchema.js"
 import jwt from "jsonwebtoken";
 dotenv.config();
-const {SECRET, EMAIL, PASSWORD} = process.env;
+const {SECRET, EMAIL, PASSWORD, LINK} = process.env;
 
 // ####################################### Register User ###########################################//
 export const adminRegister = async (req, res) => {
@@ -117,7 +117,7 @@ export const forgotAdminPassword = async (req, res) => {
       });
 
       // Generate reset password link
-      const link = `http://localhost:7000/resetPassword/${user._id}/${token}`;
+      const link =`${LINK}${user._id}/${token}`;
 
       // Nodemailer setup
       const transporter = nodemailer.createTransport({
