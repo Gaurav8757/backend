@@ -117,7 +117,7 @@ export const forgotAdminPassword = async (req, res) => {
       });
 
       // Generate reset password link
-      const link =`${LINK}${user._id}/${token}`;
+      const link =`${LINK}/${user._id}/${token}`;
 
       // Nodemailer setup
       const transporter = nodemailer.createTransport({
