@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
+import Mailgen from "mailgen";
 import AdminLogin from "../models/loginSchema.js";
 import jwt from "jsonwebtoken";
 dotenv.config();
@@ -104,75 +105,78 @@ export const loginAdmin = async (req, res) => {
 
 export const forgotAdminPassword = async (req, res) => {
   try {
-    const user = await AdminLogin.findOne({ email: req.body.email });
-    if (!user) {
-      return res.status(400).json("Email not found. Register Now!");
-    }
-    // Generate a random token
-    const secret = user._id + SECRET;
-    let token = jwt.sign({ userId: user._id }, secret, {
-      expiresIn: "15m",
-    });
-    // const link = `https://gauravnodejsauthentication.onrender.com/resetPassword/${user._id}/${token}`;
-    const link = `http://localhost:7000/resetPassword/${user._id}/${token}`;
-    
-    //...................................Nodemailer code.......................................//
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: EMAIL, //own email id
-        pass: PASSWORD, // own emailid password
-      },
-    });
-    const mailGenerator = new Mailgen({
-      theme: "cerberus",
-      product: {
-        // .......................Appears in header & footer of e-mails......................//
-        name: "Eleedom IMF Pvt Ltd",
-        link: "https://mailgen.js/",
-        copyright:
-          "Copyright © 2024 Eleedom IMF Pvt Ltd. All rights reserved.",
-      },
-    });
-    //...................................Prepare email contents..............................//
-    let response = {
-      body: {
-        name: "Admin",
-        intro: [
-          "You have received this email because a password reset request for your account was received.",
-          "Valid till 15 Minutes only!",
-        ],
-        action: {
-          instructions: "Click the button below to reset your password:",
-          button: {
-            color: "#A31217",
-            text: "Reset your password",
-            link: link,
-          },
-        },
-        outro:
-          "If you did not request a password reset, no further action is required on your part.",
-      },
-    };
-    // .......................................Generate email....................................//
-    const mail = mailGenerator.generate(response);
-    //........................................Send email........................................//
-    transporter.sendMail(
-      {
-        from: '"Eleedom IMF Pvt Ltd"<example@gmail.com>', // sender address
-        to: user.email, // list of receivers
-        subject: "Password Reset Request", // Subject line
-        html: mail,
-      },
-
-      (error, info) => {
-        if (error) {
-          res.status(500).json("Email not sent. Register Yourself!", error);
-        }
-        return res.status(200).json("Email sent successfully.");
+      const user = await AdminLogin.findOne({ email: req.body.email });
+      console.log(user);
+      if (!user) {
+          return res.status(400).json("Email not found. Register Now!");
       }
-    );
+
+      // Generate a random token
+      const secret = user._id + SECRET;
+      const token = jwt.sign({ userId: user._id }, secret, {
+          expiresIn: "15m",
+      });
+
+      // Generate reset password link
+      const link = `http://localhost:7000/resetPassword/${user._id}/${token}`;
+
+      // Nodemailer setup
+      const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+              user: EMAIL, // Your email id
+              pass: PASSWORD, // Your email password
+          },
+      });
+
+      // Mailgen setup
+      const mailGenerator = new Mailgen({
+          theme: "cerberus",
+          product: {
+              name: "Eleedom IMF Pvt Ltd",
+              link: "https://mailgen.js/",
+              // Adjust the following line accordingly
+              // This will be displayed in the footer of the email
+              copyright: "Copyright © 2024 Eleedom IMF Pvt Ltd. All rights reserved.",
+          },
+      });
+
+      // Prepare email content
+      const response = {
+          body: {
+              name: "Admin",
+              intro: [
+                  "You have received this email because a password reset request for your account was received.",
+                  "Valid for 15 Minutes only!",
+              ],
+              action: {
+                  instructions: "Click the button below to reset your password:",
+                  button: {
+                      color: "#A31217",
+                      text: "Reset your password",
+                      link: link,
+                  },
+              },
+              outro: "If you did not request a password reset, no further action is required on your part.",
+          },
+      };
+
+      // Generate email
+      const mail = mailGenerator.generate(response);
+
+      // Send email
+      transporter.sendMail({
+          from: '"Eleedom IMF Pvt Ltd" <example@gmail.com>', // Sender address
+          to: user.email, // Receiver's email address
+          subject: "Password Reset Request", // Email subject
+          html: mail, // Email content
+      }, (error, info) => {
+          if (error) {
+              return res.status(500).json("Email not sent. Register Yourself!", error);
+          }
+          return res.status(200).json("Email sent successfully.");
+      });
   } catch (error) {
-    return res.status(500).json("An error occurred..!", error);
+      return res.status(500).json("An error occurred..!", error);
   }
 };
