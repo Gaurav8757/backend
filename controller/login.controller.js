@@ -203,7 +203,7 @@ export const adminPasswordReset = async (req, res) => {
         await AdminLogin.findByIdAndUpdate(user._id, {
           $set: {
             password: hashedPassword,
-            confirm_password: hashedPassword1,
+            // password: hashedPassword1,
           },
         });
         return res.status(200).json("Password Updated Successfully..!")
