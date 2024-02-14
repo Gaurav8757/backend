@@ -153,7 +153,7 @@ export const forgotAdminPassword = async (req, res) => {
                   button: {
                       color: "#A31217",
                       text: "Reset your password",
-                      link: link,
+                      link: "https://eleedomimf.com/admin/pass/update",
                   },
               },
               outro: "If you did not request a password reset, no further action is required on your part.",
