@@ -180,3 +180,33 @@ export const forgotAdminPassword = async (req, res) => {
       return res.status(500).json("An error occurred..!");
   }
 };
+
+// update forgetted [password]
+// .......................................Update Password..................................//
+export const adminPasswordReset = async (req, res) => {
+  const { password, confirm_password } = req.body;
+  const { id, token } = req.params;
+  const user = await AdminLogin.findById(id);
+  const new_secret = user._id + SECRET;
+  try {
+    jwt.verify(token, new_secret);
+    if (password && confirm_password) {
+      if (password !== confirm_password) {
+        return res.status(400).json("Passwords does'nt Matched. Try Again..!")
+      } else {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const hashedPassword1 = await bcrypt.hash(confirm_password, salt);
+        await AdminLogin.findByIdAndUpdate(user._id, {
+          $set: {
+            password: hashedPassword,
+            confirm_password: hashedPassword1,
+          },
+        });
+        return res.status(200).json("Password Updated Successfully..!")
+      }
+    }
+  } catch (error) {
+    return res.status(400).json("Invalid Link or Expired..!", error);
+  }
+};
