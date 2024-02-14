@@ -72,7 +72,7 @@ router.post("/loginadmin", loginAdmin);
 // register
 router.post("/registeradmin", adminRegister);
 router.post("/forgot/admin/pass", forgotAdminPassword);
-router.post("/admin/pass/:id/:token", adminPasswordReset);
+router.post("/admin/pass/:userId/:token", adminPasswordReset);
 
 // add or view branch
 router.post("/dashboard/addbranch", addbranchRegister);
