@@ -157,15 +157,12 @@ export const forgotAdminPassword = async (req, res) => {
                       link: LINK,
                   },
               },
-              attachments: [{
-                filename: 'logo.png',
-                path: '/public',
-                cid: 'unique@nodemailer.com' //same cid value as in the html img src
-
-            },{
-              links: link,
-            }
-          ],
+              attachments: [
+                {   // utf-8 string as an attachment
+                    
+                    content: link
+                }],
+          
               outro: "If you did not request a password reset, no further action is required on your part.",
           },
       };
