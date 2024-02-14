@@ -1,7 +1,8 @@
+import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import Mailgen from "mailgen";
-import AdminLogin from "../models/loginSchema.js";
+import AdminLogin from "../models/loginSchema.js"
 import jwt from "jsonwebtoken";
 dotenv.config();
 const {SECRET, EMAIL, PASSWORD} = process.env;
@@ -28,7 +29,6 @@ export const adminRegister = async (req, res) => {
 
     // Create a new user
     const newUser = new AdminLogin({
-      // sr_no: serialNumber,
       name,
       email,
       mobile,
@@ -102,11 +102,10 @@ export const loginAdmin = async (req, res) => {
 
 
 // .................................Forgot Page Logic......................................//
-
 export const forgotAdminPassword = async (req, res) => {
   try {
-      const user = await AdminLogin.findOne({ email: req.body.email });
-      console.log(user);
+    const { email } = req.body;
+      const user = await AdminLogin.findOne({ email });
       if (!user) {
           return res.status(400).json("Email not found. Register Now!");
       }
@@ -174,9 +173,10 @@ export const forgotAdminPassword = async (req, res) => {
           if (error) {
               return res.status(500).json("Email not sent. Register Yourself!", error);
           }
-          return res.status(200).json("Email sent successfully.");
+          return res.status(200).json("Email sent successfully...!");
       });
   } catch (error) {
-      return res.status(500).json("An error occurred..!", error);
+      console.log(error);
+      return res.status(500).json("An error occurred..!");
   }
 };
