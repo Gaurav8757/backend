@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import routes from "./user_routes/usersRoutes.js";
 import hr from "./hrsalary/hrattend.routes.js"
-import { loginAdmin, adminRegister } from "../controller/login.controller.js";
+import { loginAdmin, adminRegister, forgotAdminPassword } from "../controller/login.controller.js";
 import {
   addbranchRegister,
   viewBranch,
@@ -71,6 +71,7 @@ router.use("/hr", hr);
 router.post("/loginadmin", loginAdmin);
 // register
 router.post("/registeradmin", adminRegister);
+router.post("/forgot/admin/pass", forgotAdminPassword);
 
 // add or view branch
 router.post("/dashboard/addbranch", addbranchRegister);
