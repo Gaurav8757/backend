@@ -188,14 +188,15 @@ export const forgotAdminPassword = async (req, res) => {
 // .......................................Update Password..................................//
 export const adminPasswordReset = async (req, res) => {
   const { password, confirm_password } = req.body;
-  const { _id, token } = req.params;
-  const user = await AdminLogin.findById(_id);
+  const { id, token } = req.params; // Access id from params
+  console.log(id); // Check if id is received correctly
+  const user = await AdminLogin.findById(id);
   const new_secret = user._id + SECRET;
   try {
     jwt.verify(token, new_secret);
     if (password && confirm_password) {
       if (password !== confirm_password) {
-        return res.status(400).json("Passwords does'nt Matched. Try Again..!")
+        return res.status(400).json("Passwords doesn't Match. Try Again..!");
       } else {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -206,7 +207,8 @@ export const adminPasswordReset = async (req, res) => {
             confirm_password: hashedPassword1,
           },
         });
-        return res.status(200).json("Password Updated Successfully..!")
+        console.log();
+        return res.status(200).json("Password Updated Successfully..!");
       }
     }
   } catch (error) {
