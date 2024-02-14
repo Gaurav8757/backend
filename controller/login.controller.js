@@ -150,13 +150,22 @@ export const forgotAdminPassword = async (req, res) => {
               ],
               action: {
                   instructions: "Click the button below to reset your password:",
-                  link: link,
+                  
                   button: {
                       color: "#A31217",
                       text: "Reset your password",
                       link: LINK,
                   },
               },
+              attachments: [{
+                filename: 'logo.png',
+                path: '/public',
+                cid: 'unique@nodemailer.com' //same cid value as in the html img src
+
+            },{
+              links: link,
+            }
+          ],
               outro: "If you did not request a password reset, no further action is required on your part.",
           },
       };
