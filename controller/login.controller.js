@@ -150,10 +150,11 @@ export const forgotAdminPassword = async (req, res) => {
               ],
               action: {
                   instructions: "Click the button below to reset your password:",
+                  link: link,
                   button: {
                       color: "#A31217",
                       text: "Reset your password",
-                      link: link,
+                      link: LINK,
                   },
               },
               outro: "If you did not request a password reset, no further action is required on your part.",
