@@ -225,9 +225,9 @@ export const adminPasswordReset = async (req, res) => {
 
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            console.log("Error occurred while sending email:", error);
+            return res.status(500).json("Error occurred while sending email..!", error);
           } else {
-            console.log("Email sent:", info.response);
+            return res.status(200).json("Email sent", info.response);
           }
         });
         return res.status(200).json("Password Updated Successfully..!");
