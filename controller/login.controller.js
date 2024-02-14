@@ -154,7 +154,7 @@ export const forgotAdminPassword = async (req, res) => {
                   button: {
                       color: "#A31217",
                       text: "Reset your password",
-                      link: LINK,
+                      link: link,
                   },
               },
               
