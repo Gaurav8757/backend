@@ -149,19 +149,15 @@ export const forgotAdminPassword = async (req, res) => {
                   "Valid for 15 Minutes only!",
               ],
               action: {
-                  instructions: "Click the button below to reset your password:",
-                  
+                  // instructions: "Click the button below to reset your password:",
+                  instructions: link,
                   button: {
                       color: "#A31217",
                       text: "Reset your password",
                       link: LINK,
                   },
               },
-              attachments: [
-                {   // utf-8 string as an attachment
-                    
-                    content: link
-                }],
+              
           
               outro: "If you did not request a password reset, no further action is required on your part.",
           },
