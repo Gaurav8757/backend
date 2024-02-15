@@ -85,17 +85,17 @@ const response = {
           "Valid for 15 Minutes only!",
       ],
       
-      action: {
+      action: [{
           button: {
-              color: "#00FF00",
+              color: "#209320",
               text: `Email: ${branchemail}`,
           },
           button: {
-            color: "#00FF00",
+            color: "#209320",
             text: `Password: ${password}`, 
         },
           instructions: "You can now log in to your account and start using our services.",
-      },
+      }],
       
   
       outro: "Best regards,",
