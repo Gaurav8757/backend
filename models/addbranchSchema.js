@@ -53,6 +53,9 @@ const AddBranchSchema = new Mongoose.Schema(
       type: String,
        required: true,
     },
+    confirm_password: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
