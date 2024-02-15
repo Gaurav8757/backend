@@ -42,7 +42,7 @@ export const loginBranch = async (req, res) => {
     }
    catch (err) {
     console.log(err);
-    return res.status(500).send("Server Error");
+    return res.status(500).json("Server Error", err);
   }
 };
 
