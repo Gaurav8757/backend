@@ -1,7 +1,10 @@
 import OpsAdmin from "../../models/ops/opsadmin.js";
 import dotenv from "dotenv";
+import nodemailer from "nodemailer";
+import Mailgen from 'mailgen';
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { generatePassword } from "../generateId.js";
+
 dotenv.config();
 const { SECRET, LINK2, EMAIL, PASSWORD } = process.env;
 // register ops
@@ -17,22 +20,19 @@ export const addOpsRegister = async (req, res) => {
       opsjoiningdate,
       permanentopsaddress,
       currentopsaddress,
+      opspassword
     } = req.body;
 
-
-    // Generate a password
-    const opspasswords = generatePassword(opsemail);
-    //  encrypt password
-    // const salt = await bcrypt.genSalt(10);
-    // const hashedPassword = await bcrypt.hash(hrpasswords, salt);
-    const OpsExist = await OpsAdmin.findOne({ opsid });
+    const OpsExist = await OpsAdmin.findOne({ opsemail });
     if (OpsExist) {
       return res.status(400).json({
         status: "HR Already Exists",
         message: "HR with the given hrid already exists.",
       });
     }
-  
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(opspassword, salt);
+    
     // Create a new ops instance
     const newOps = new OpsAdmin({
         opsid,
@@ -40,7 +40,7 @@ export const addOpsRegister = async (req, res) => {
         opsemail,
         opsmobile,
         opsgender,
-        opspassword: opspasswords,
+        opspassword: hashedPassword,
         opsdate,
         opsjoiningdate,
         permanentopsaddress,
@@ -48,6 +48,82 @@ export const addOpsRegister = async (req, res) => {
     });
     // Save the hr to the database
     await newOps.save();
+
+ // Send email to the newly registered user
+ const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: EMAIL, // Your email id
+    pass: PASSWORD, // Your email password
+  },
+});
+
+// Mailgen setup
+const mailGenerator = new Mailgen({
+theme: "cerberus",
+product: {
+  name: "Eleedom IMF Pvt Ltd",
+  link: "https://mailgen.js/",
+  // Adjust the following line accordingly
+  // This will be displayed in the footer of the email
+  copyright: `Copyright © ${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
+},
+});
+
+// Prepare email content
+const response = {
+body: {
+  name: opsname,
+  intro: [
+      "Welcome to My Company!.",
+      "Your account has been successfully created with the following credentials:",
+  ],
+  
+  action: [{
+      button: {
+          color: "#209320",
+          text: `Email:   ${opsemail}`,
+      }, 
+  },
+  {
+    button: {
+      color: "#209320",
+      text: `Password:   ${opspassword}`, 
+  },
+  }
+],
+  
+  outro: "You can now log in to your account and start using our services.",
+},
+};
+
+// Generate email
+const mail = mailGenerator.generate(response);
+
+
+
+
+const mailOptions = {
+  from: `"Eleedom IMF Pvt Ltd (Branch)" your_email@gmail.com`, // Sender address
+  to: opsemail, // Receiver's email address
+  subject: "Welcome to Your Application!", // Email subject
+  html: mail
+  
+};
+
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) {
+    console.log(error);
+    return res.status(500).json({
+      status: "Email not sent",
+      message: "Error sending welcome email",
+    }, error);
+  }
+  return res.status(200).json("Email sent successfully...!" + info.response);
+});
+
+
+
     return res.status(201).json({
       status: "Ops Admin Added Successfully",
       message: {

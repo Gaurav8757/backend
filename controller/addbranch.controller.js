@@ -81,7 +81,7 @@ const response = {
   body: {
       name: branchname,
       intro: [
-          "Welcome to Your Application!.",
+          "Welcome to My Company!.",
           "Your account has been successfully created with the following credentials:",
         
       ],
