@@ -56,8 +56,8 @@ export const loginBranch = async(req, res) => {
 // .................................Forgot Page Logic......................................//
 export const forgotBranchPassword = async (req, res) => {
     try {
-      const { email } = req.body;
-        const user = await AddBranch.findOne({ email });
+      const { branchemail } = req.body;
+        const user = await AddBranch.findOne({ branchemail });
         if (!user) {
             return res.status(400).json("Email not found. Register Now!");
         }
@@ -170,7 +170,7 @@ export const forgotBranchPassword = async (req, res) => {
   
           const mailOptions = {
             from: "Eleedom IMF Pvt Ltd <your_email@gmail.com>",
-            to: user.email,
+            to: user.branchemail,
             subject: "Your Password has been Reset",
             text: `Your password has been successfully reset. Your new password is: ${password}`,
           };
