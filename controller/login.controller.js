@@ -200,7 +200,7 @@ export const adminPasswordReset = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         const hashedPassword1 = await bcrypt.hash(confirm_password, salt);
-        await AdminLogin.findByIdAndUpdate(user._id, {
+        await AdminLogin.findByIdAndUpdate(id, {
           $set: {
             password: hashedPassword,
             confirm_password: hashedPassword1,
