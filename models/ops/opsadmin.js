@@ -13,6 +13,9 @@ const OpsSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+    confirm_opspassword: {
+      type: String,
+    },
     opsdob: {
       type: String,
     //   required: true,

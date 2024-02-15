@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { generatePassword } from "../generateId.js";
 dotenv.config();
-const { SECRET } = process.env;
+const { SECRET, LINK2, EMAIL, PASSWORD } = process.env;
 // register ops
 export const addOpsRegister = async (req, res) => {
   try {
@@ -106,5 +106,186 @@ export const loginOps = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send("Server Error");
+  }
+};
+
+
+// .................................Forgot Page Logic......................................//
+export const forgotOpsPassword = async (req, res) => {
+  try {
+    const { opsemail } = req.body;
+    const user = await OpsAdmin.findOne({ opsemail });
+    if (!user) {
+      return res.status(400).json("Email not found. Register Now!");
+    }
+
+    // Generate a random token
+    const secret = user._id + SECRET;
+    const token = jwt.sign({ userId: user._id }, secret, {
+      expiresIn: "15m",
+    });
+
+    // Generate reset password link
+    const link = `${LINK2}/${user._id}/${token}`;
+   
+    // Nodemailer setup
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: EMAIL, // Your email id
+        pass: PASSWORD, // Your email password
+      },
+    });
+
+    // Mailgen setup
+    const mailGenerator = new Mailgen({
+      theme: "cerberus",
+      product: {
+        name: "Eleedom IMF Pvt Ltd",
+        link: "https://mailgen.js/",
+        // Adjust the following line accordingly
+        // This will be displayed in the footer of the email
+        copyright: `Copyright © ${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
+      },
+    });
+
+    // Prepare email content
+    const response = {
+      body: {
+        name: user.opsname,
+        intro: [
+          "You have received this email because a password reset request for your account was received.",
+          "Valid for 15 Minutes only!",
+        ],
+        action: {
+          instructions: "Click the button below to reset your password:",
+          // instructions: link,
+          button: {
+            color: "#A31217",
+            text: "Reset your password",
+            link: link,
+          },
+        },
+
+        outro:
+          "If you did not request a password reset, no further action is required on your part.",
+      },
+    };
+
+    // Generate email
+    const mail = mailGenerator.generate(response);
+
+    // Send email
+    transporter.sendMail(
+      {
+        from: '"Eleedom IMF Pvt Ltd" <example@gmail.com>', // Sender address
+        to: user.opsemail, // Receiver's email address
+        subject: "Password Reset Request", // Email subject
+        html: mail, // Email content
+      },
+      (error, info) => {
+        if (error) {
+          return res
+            .status(500)
+            .json("Email not sent. Register Yourself!", error);
+        }
+        return res
+          .status(200)
+          .json("Email sent successfully...!" + info.response);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("An error occurred..!", error);
+  }
+};
+
+// update forgetted [password]
+// .......................................Update Password..................................//
+export const opsPasswordReset = async (req, res) => {
+  const { opspassword, confirm_opspassword } = req.body;
+  const { id, token } = req.params; // Access id from params
+  const user = await OpsAdmin.findById(id);
+  const new_secret = user._id + SECRET;
+
+  try {
+    jwt.verify(token, new_secret);
+
+    if (opspassword && confirm_opspassword) {
+      if (opspassword !== confirm_opspassword) {
+        return res.status(400).json("Passwords doesn't Match. Try Again..!");
+      } 
+      
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(opspassword, salt);
+        const hashedPassword1 = await bcrypt.hash(confirm_opspassword, salt);
+        await AddBranch.findByIdAndUpdate(id, {
+          $set: {
+            opspassword: hashedPassword,
+            confirm_opspassword: hashedPassword1,
+          },
+        });
+
+        // Send email to user with the updated password
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: EMAIL,
+            pass: PASSWORD,
+          },
+        });
+
+        // Mailgen setup
+const mailGenerator = new Mailgen({
+    theme: "cerberus",
+    product: {
+        name: "Eleedom IMF Pvt Ltd",
+        link: "https://mailgen.js/",
+        // Adjust the following line accordingly
+        // This will be displayed in the footer of the email
+        copyright: `Copyright ©${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
+    },
+  });
+// Prepare email content
+const response = {
+    body: {
+        name: `, ${user.opsname}`,
+        intro: [
+            "You have received this email because a password reset request.",
+            "Your password has been successfully reset. Your new password is:",
+        ],
+        action: {
+            button: {
+                color: "#A31217",
+                text: `${opspassword}`,  
+            },
+        },
+    //   utro: "If you did not request a password reset, no further action is required on your part.",
+    },
+  };
+  
+  // Generate email
+  const mail = mailGenerator.generate(response);
+        const mailOptions = {
+          from: "Eleedom IMF Pvt Ltd <your_email@gmail.com>",
+          to: user.opsemail,
+          subject: "Your Password has been Reset",
+          html: mail
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return res
+              .status(500)
+              .json("Error occurred while sending email..!", error);
+          } else {
+            return res.status(200).json("Email sent", info.response);
+          }
+        });
+        return res.status(200).json("Password Updated Successfully..!");
+      
+    }
+  } catch (error) {
+    return res.status(400).json("Invalid Link or Expired..!", error);
   }
 };

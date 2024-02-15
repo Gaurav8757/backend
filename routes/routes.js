@@ -54,7 +54,7 @@ import { addHrRegister, deleteHr, loginHr, updateHr, viewHr } from "../controlle
 import hrouter from "./hrsalary/hrsalary.routes.js";
 import {markAttendance, getEmployeeAttendance} from "../controller/empattendance.controller.js"
 import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
-import { addOpsRegister, loginOps } from "../controller/opsAdmin/opsAdmin.js";
+import { addOpsRegister, forgotOpsPassword, loginOps, opsPasswordReset } from "../controller/opsAdmin/opsAdmin.js";
 
 // users Routes
 router.use("/users", routes);
@@ -153,7 +153,9 @@ router.delete("/staff/lists/:id", deleteStaff);
 // ops Admin
 router.post("/ops/register", addOpsRegister);
 router.post("/ops/login", loginOps);
-
+// password change
+router.post("/forgot/ops/pass", forgotOpsPassword);
+router.post("/ops/pass/:id/:token", opsPasswordReset);
 
 
 
