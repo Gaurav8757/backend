@@ -1,7 +1,10 @@
 import AddBranch from '../models/addbranchSchema.js'; // Replace with the actual path to your AdminLogin model
 import bcrypt from "bcryptjs";
+import Mailgen from 'mailgen';
+import dotenv from "dotenv";
 // Function to generate unique ID for branches
-
+dotenv.config();
+const { SECRET, LINK, EMAIL, PASSWORD } = process.env;
 
 export const addbranchRegister = async (req, res) => {
   try {
@@ -27,13 +30,11 @@ export const addbranchRegister = async (req, res) => {
         message: "This branch already exists.",
       });
     }
-// Hash the password
-const salt = await bcrypt.genSalt(10);
-const hashedPassword = await bcrypt.hash(password, salt);
-   
- 
- 
-  //.................................hash the password................................//
+
+    // Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     // Create a new branch
     const addnewBranch = new AddBranch({
       branchid,
@@ -52,6 +53,43 @@ const hashedPassword = await bcrypt.hash(password, salt);
 
     // Save the new branch to the database
     await addnewBranch.save();
+
+    // Send email to the newly registered user
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: EMAIL, // Your email id
+        pass: PASSWORD, // Your email password
+      },
+    });
+
+    const mailOptions = {
+      from: `"Eleedom IMF Pvt Ltd" your_email@gmail.com`, // Sender address
+      to: branchemail, // Receiver's email address
+      subject: "Welcome to Your Application!", // Email subject
+      html: `
+      <div class="p-4 bg-gray-100">
+        <p class="text-lg font-bold">Hello ${concernperson},</p>
+        <p class="mt-4">Welcome to Your Application! Your account has been successfully created with the following credentials:</p>
+        <p class="mt-4">Email: ${branchemail}</p>
+        <p class="mt-2">Password: ${password}</p>
+        <p class="mt-4">You can now log in to your account and start using our services.</p>
+        <p class="mt-4">Best regards,</p>
+        <p class="mt-2">Your Application Team</p>
+      </div>
+    `,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({
+          status: "Email not sent",
+          message: "Error sending welcome email",
+        }, error);
+      }
+      return res.status(200).json("Email sent successfully...!" + info.response);
+    });
 
     return res.status(201).json({
       status: "Branch added Successfully!",

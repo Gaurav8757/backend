@@ -63,7 +63,6 @@ export const forgotBranchPassword = async (req, res) => {
   
         // Generate reset password link
         const link =`${LINK}/${user._id}/${token}`;
-  console.log(link);
         // Nodemailer setup
         const transporter = nodemailer.createTransport({
             service: "gmail",
@@ -121,7 +120,7 @@ export const forgotBranchPassword = async (req, res) => {
             if (error) {
                 return res.status(500).json("Email not sent. Register Yourself!", error);
             }
-            return res.status(200).json("Email sent successfully...!");
+            return res.status(200).json("Email sent successfully...!" + info.response);
         });
     } catch (error) {
         console.log(error);
