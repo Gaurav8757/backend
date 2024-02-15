@@ -26,8 +26,8 @@ export const addOpsRegister = async (req, res) => {
     const OpsExist = await OpsAdmin.findOne({ opsemail });
     if (OpsExist) {
       return res.status(400).json({
-        status: "HR Already Exists",
-        message: "HR with the given hrid already exists.",
+        status: "ops Already Exists",
+        message: "ops with the given opsid already exists.",
       });
     }
     const salt = await bcrypt.genSalt(10);
@@ -104,7 +104,7 @@ const mail = mailGenerator.generate(response);
 
 
 const mailOptions = {
-  from: `"Eleedom IMF Pvt Ltd (Branch)" your_email@gmail.com`, // Sender address
+  from: `"Eleedom IMF Pvt Ltd (OPS Admin)" your_email@gmail.com`, // Sender address
   to: opsemail, // Receiver's email address
   subject: "Welcome to Your Application!", // Email subject
   html: mail

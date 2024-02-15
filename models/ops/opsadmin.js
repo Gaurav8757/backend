@@ -7,7 +7,7 @@ const OpsSchema = new Mongoose.Schema(
     },
     opsname: {
       type: String,
-    //   required: true,
+       required: true,
     },
     opspassword: {
       type: String,
@@ -25,7 +25,6 @@ const OpsSchema = new Mongoose.Schema(
     //   required: true,
     },
     opsemail: {
-      unique: true,
       type: String,
       required: true,
     },
