@@ -100,15 +100,11 @@ body: {
 // Generate email
 const mail = mailGenerator.generate(response);
 
-
-
-
 const mailOptions = {
   from: `"Eleedom IMF Pvt Ltd (OPS Admin)" your_email@gmail.com`, // Sender address
   to: opsemail, // Receiver's email address
   subject: "Welcome to Your Application!", // Email subject
   html: mail
-  
 };
 
 transporter.sendMail(mailOptions, (error, info) => {
@@ -122,8 +118,6 @@ transporter.sendMail(mailOptions, (error, info) => {
   return res.status(200).json("Email sent successfully...!" + info.response);
 });
 
-
-
     return res.status(201).json({
       status: "Ops Admin Added Successfully",
       message: {
@@ -134,7 +128,7 @@ transporter.sendMail(mailOptions, (error, info) => {
     return res.status(400).json({
       status: "Error during Registration",
       message: err.message,
-    });
+    } + err);
   }
 };
 
@@ -143,6 +137,7 @@ export const loginOps = async (req, res) => {
   try {
     const { opsemail, opsmobile, opspassword } = req.body;
     let user;
+
     if (opsemail) {
       user = await OpsAdmin.findOne({ opsemail });
     } else if (opsmobile) {
@@ -151,16 +146,13 @@ export const loginOps = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        message: "ops Admin Not Found",
+        message: "OPS Admin Not Found",
       });
     }
 
-    // Simple password check
-    // const isValidPassword = await bcrypt.compare(hrpassword, user.hrpassword);
-    if (opspassword !== user.opspassword) {
-      return res.status(400).json({
-        message: "Password is Incorrect",
-      });
+    const isValidPassword = await bcrypt.compare(opspassword, user.opspassword);
+    if (!isValidPassword) {
+      return res.status(400).json({ message: "Password is Incorrect" });
     }
 
     // User authentication successful; create a JWT token
@@ -180,10 +172,11 @@ export const loginOps = async (req, res) => {
       user
     });
   } catch (err) {
-    console.log(err);
-    res.status(500).send("Server Error");
+    console.error(err);
+    return res.status(500).json({ message: "Server Error" });
   }
 };
+
 
 
 // .................................Forgot Page Logic......................................//

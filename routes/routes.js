@@ -157,6 +157,4 @@ router.post("/ops/login", loginOps);
 router.post("/forgot/ops/pass", forgotOpsPassword);
 router.post("/ops/pass/:id/:token", opsPasswordReset);
 
-
-
 export default router;
