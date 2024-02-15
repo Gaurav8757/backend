@@ -355,6 +355,6 @@ const response = {
       
     }
   } catch (error) {
-    return res.status(400).json("Invalid Link or Expired..!", error);
+    return res.status(500).json("Invalid Link or Expired..!" + error);
   }
 };
