@@ -238,7 +238,7 @@ const mailGenerator = new Mailgen({
 // Prepare email content
 const response = {
   body: {
-      name: user.branchname,
+      name: user.email,
       intro: [
           "You have received this email because a password reset request.",
           "Your password has been successfully reset. Your new password is:",
