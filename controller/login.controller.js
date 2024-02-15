@@ -6,7 +6,14 @@ import AdminLogin from "../models/loginSchema.js"
 import jwt from "jsonwebtoken";
 dotenv.config();
 const {SECRET, EMAIL, PASSWORD, LINK} = process.env;
+function getCurrentYear() {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  return currentYear;
+}
 
+// Example usage
+const year = getCurrentYear();
 // ####################################### Register User ###########################################//
 export const adminRegister = async (req, res) => {
   try {
@@ -136,7 +143,7 @@ export const forgotAdminPassword = async (req, res) => {
               link: "https://mailgen.js/",
               // Adjust the following line accordingly
               // This will be displayed in the footer of the email
-              copyright: "Copyright © 2024 Eleedom IMF Pvt Ltd. All rights reserved.",
+              copyright: `Copyright ©${year} Eleedom IMF Pvt Ltd. All rights reserved.`,
           },
       });
 
@@ -216,11 +223,54 @@ export const adminPasswordReset = async (req, res) => {
           },
         });
 
+// Mailgen setup
+const mailGenerator = new Mailgen({
+  theme: "cerberus",
+  product: {
+      name: "Eleedom IMF Pvt Ltd",
+      link: "https://mailgen.js/",
+      // Adjust the following line accordingly
+      // This will be displayed in the footer of the email
+      copyright: `Copyright ©${year} Eleedom IMF Pvt Ltd. All rights reserved.`,
+  },
+});
+
+// Prepare email content
+const response = {
+  body: {
+      name: user.branchname,
+      intro: [
+          "You have received this email because a password reset request:.",
+          
+      ],
+      action: {
+          instructions: "Your password has been successfully reset. Your new password is:",
+          // instructions: link,
+          button: {
+              color: "#A31217",
+              text: `${password}`,
+              
+          },
+      },
+      
+  
+      // outro: "If you did not request a password reset, no further action is required on your part.",
+  },
+};
+
+// Generate email
+const mail = mailGenerator.generate(response);
+
+
+
+
+
         const mailOptions = {
           from: "Eleedom IMF Pvt Ltd <your_email@gmail.com>",
           to: user.email,
           subject: "Your Password has been Reset",
-          text: `Your password has been successfully reset. Your new password is: ${password}`,
+          // text: `Your password has been successfully reset. Your new password is: ${password}`,
+          html: mail, // Email content
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
