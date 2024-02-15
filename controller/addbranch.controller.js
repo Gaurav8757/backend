@@ -69,7 +69,7 @@ export const addbranchRegister = async (req, res) => {
       subject: "Welcome to Your Application!", // Email subject
       html: `
       <div class="p-4 bg-gray-100">
-        <p class="text-lg font-bold">Hello ${concernperson},</p>
+        <p class="text-lg font-bold">Hello ${branchname},</p>
         <p class="mt-4">Welcome to Your Application! Your account has been successfully created with the following credentials:</p>
         <p class="mt-4">Email: ${branchemail}</p>
         <p class="mt-2">Password: ${password}</p>
