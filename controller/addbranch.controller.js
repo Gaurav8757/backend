@@ -1,5 +1,6 @@
 import AddBranch from '../models/addbranchSchema.js'; // Replace with the actual path to your AdminLogin model
 import bcrypt from "bcryptjs";
+import nodemailer from "nodemailer";
 import Mailgen from 'mailgen';
 import dotenv from "dotenv";
 // Function to generate unique ID for branches
