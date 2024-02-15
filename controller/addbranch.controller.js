@@ -112,7 +112,7 @@ const mail = mailGenerator.generate(response);
 
 
     const mailOptions = {
-      from: `"Eleedom IMF Pvt Ltd" your_email@gmail.com`, // Sender address
+      from: `"Eleedom IMF Pvt Ltd (Branch)" your_email@gmail.com`, // Sender address
       to: branchemail, // Receiver's email address
       subject: "Welcome to Your Application!", // Email subject
       html: mail
