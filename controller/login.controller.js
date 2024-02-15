@@ -224,7 +224,7 @@ const mailGenerator = new Mailgen({
       link: "https://mailgen.js/",
       // Adjust the following line accordingly
       // This will be displayed in the footer of the email
-      copyright: `Copyright ©${year} Eleedom IMF Pvt Ltd. All rights reserved.`,
+      copyright: `Copyright ©${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
   },
 });
 
@@ -251,10 +251,6 @@ const response = {
 // Generate email
 const mail = mailGenerator.generate(response);
 
-
-
-
-
         const mailOptions = {
           from: "Eleedom IMF Pvt Ltd <your_email@gmail.com>",
           to: user.email,
@@ -274,6 +270,6 @@ const mail = mailGenerator.generate(response);
       }
     }
   } catch (error) {
-    return res.status(400).json("Invalid Link or Expired..!", error);
+    return res.status(400).json("Invalid Link or Expired..!" + error);
   }
 };
