@@ -10,9 +10,8 @@ const { SECRET, LINK, EMAIL, PASSWORD } = process.env;
 export const loginBranch = async (req, res) => {
   try {
     const { branchemail, password } = req.body;
-    
-    let user;
-    if (branchemail) user = await AddBranch.findOne({ branchemail });
+    const user = await AddBranch.findOne({ branchemail });
+
     if (!user) {
       return res.status(401).json({
         message: "Branch Not Found",
@@ -23,7 +22,7 @@ export const loginBranch = async (req, res) => {
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       return res.status(400).json("Password is Incorrect");
-    } else {
+    } 
       // User authentication successful; create a JWT token
       const token = jwt.sign(
         {
@@ -41,9 +40,9 @@ export const loginBranch = async (req, res) => {
         user,
       });
     }
-  } catch (err) {
+   catch (err) {
     console.log(err);
-    res.status(500).send("Server Error");
+    return res.status(500).send("Server Error");
   }
 };
 
