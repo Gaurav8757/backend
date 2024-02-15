@@ -64,21 +64,57 @@ export const addbranchRegister = async (req, res) => {
       },
     });
 
+// Mailgen setup
+const mailGenerator = new Mailgen({
+  theme: "cerberus",
+  product: {
+      name: "Eleedom IMF Pvt Ltd",
+      link: "https://mailgen.js/",
+      // Adjust the following line accordingly
+      // This will be displayed in the footer of the email
+      copyright: `Copyright © ${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
+  },
+});
+
+// Prepare email content
+const response = {
+  body: {
+      name: user.branchname,
+      intro: [
+          "Welcome to Your Application! Your account has been successfully created with the following credentials:.",
+          "Valid for 15 Minutes only!",
+      ],
+      
+      action: {
+          button: {
+              color: "#00FF00",
+              text: `Email: ${branchemail}`,
+          },
+          button: {
+            color: "#00FF00",
+            text: `Password: ${password}`, 
+        },
+          instructions: "You can now log in to your account and start using our services.",
+      },
+      
+  
+      outro: "Best regards,",
+      outro: "Eleedom IMF Pvt Ltd",
+  },
+};
+
+// Generate email
+const mail = mailGenerator.generate(response);
+
+
+
+
     const mailOptions = {
       from: `"Eleedom IMF Pvt Ltd" your_email@gmail.com`, // Sender address
       to: branchemail, // Receiver's email address
       subject: "Welcome to Your Application!", // Email subject
-      html: `
-      <div class="p-4 bg-gray-100">
-        <p class="text-lg font-bold">Hello ${branchname},</p>
-        <p class="mt-4">Welcome to Your Application! Your account has been successfully created with the following credentials:</p>
-        <p class="mt-4">Email: ${branchemail}</p>
-        <p class="mt-2">Password: ${password}</p>
-        <p class="mt-4">You can now log in to your account and start using our services.</p>
-        <p class="mt-4">Best regards,</p>
-        <p class="mt-2">Your Application Team</p>
-      </div>
-    `,
+      html: mail
+      
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
