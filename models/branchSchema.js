@@ -19,6 +19,11 @@ const BranchSchema = new Mongoose.Schema(
       ref: AddBranch,
       required: true,
     },
+    confirm_password: {
+      type: String,
+      ref: AddBranch,
+      required: true,
+    },
   },
   { timestamps: true }
 );

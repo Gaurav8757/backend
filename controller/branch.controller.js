@@ -102,7 +102,6 @@ export const forgotBranchPassword = async (req, res) => {
                 ],
                 action: {
                     instructions: "Click the button below to reset your password:",
-                    // instructions: link,
                     button: {
                         color: "#A31217",
                         text: "Reset your password",
