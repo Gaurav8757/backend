@@ -2,6 +2,7 @@ import AddBranch from "../models/addbranchSchema.js";
 import nodemailer from "nodemailer";
 import Mailgen from "mailgen";
 import dotenv from "dotenv";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 dotenv.config();
@@ -42,7 +43,7 @@ export const loginBranch = async (req, res) => {
     }
    catch (err) {
     console.log(err);
-    return res.status(500).json("Server Error", err);
+    return res.status(500).json("Server Error" + err);
   }
 };
 
