@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 dotenv.config();
-const { SECRET, LINK, EMAIL, PASSWORD } = process.env;
+const { SECRET, LINK1, EMAIL, PASSWORD } = process.env;
 
 export const loginBranch = async (req, res) => {
   try {
@@ -63,7 +63,7 @@ export const forgotBranchPassword = async (req, res) => {
     });
 
     // Generate reset password link
-    const link = `${LINK}/${user._id}/${token}`;
+    const link = `${LINK1}/${user._id}/${token}`;
    
     // Nodemailer setup
     const transporter = nodemailer.createTransport({
