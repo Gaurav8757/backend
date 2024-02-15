@@ -79,7 +79,7 @@ const mailGenerator = new Mailgen({
 // Prepare email content
 const response = {
   body: {
-      name: user.branchname,
+      name: branchname,
       intro: [
           "Welcome to Your Application! Your account has been successfully created with the following credentials:.",
           "Valid for 15 Minutes only!",
