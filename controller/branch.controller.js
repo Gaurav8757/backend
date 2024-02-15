@@ -172,11 +172,42 @@ export const branchPasswordReset = async (req, res) => {
           },
         });
 
+        // Mailgen setup
+const mailGenerator = new Mailgen({
+    theme: "cerberus",
+    product: {
+        name: "Eleedom IMF Pvt Ltd",
+        link: "https://mailgen.js/",
+        // Adjust the following line accordingly
+        // This will be displayed in the footer of the email
+        copyright: `Copyright ©${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
+    },
+  });
+// Prepare email content
+const response = {
+    body: {
+        name: `, ${user.branchname}`,
+        intro: [
+            "You have received this email because a password reset request.",
+            "Your password has been successfully reset. Your new password is:",
+        ],
+        action: {
+            button: {
+                color: "#A31217",
+                text: `${password}`,  
+            },
+        },
+    //   utro: "If you did not request a password reset, no further action is required on your part.",
+    },
+  };
+  
+  // Generate email
+  const mail = mailGenerator.generate(response);
         const mailOptions = {
           from: "Eleedom IMF Pvt Ltd <your_email@gmail.com>",
           to: user.branchemail,
           subject: "Your Password has been Reset",
-          text: `Your password has been successfully reset. Your new password is: ${password}`,
+          html: mail
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
