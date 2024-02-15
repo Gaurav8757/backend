@@ -37,7 +37,7 @@ export const addbranchRegister = async (req, res) => {
 
     // Create a new branch
     const addnewBranch = new AddBranch({
-      branchid,
+      // branchid,
       concernperson,
       branchname,
       branchcode,
