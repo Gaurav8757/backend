@@ -38,7 +38,7 @@ import {
   salaryList,
   updateGenSalary,
 } from "../controller/gensalary.controller.js";
-import { loginBranch } from "../controller/branch.controller.js";
+import { branchPasswordReset, forgotBranchPassword, loginBranch } from "../controller/branch.controller.js";
 import {
   addCompany,
   deleteCompany,
@@ -79,6 +79,9 @@ router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
 router.put("/api/branch/update/:id", updateBranch)
 router.delete("/dashboard/api/:id", deleteBranch);
+// password change
+router.post("/forgot/branch/pass", forgotBranchPassword);
+router.post("/branch/pass/:id/:token", branchPasswordReset);
 
 // COMPANY
 router.post("/dashboard/addcompany", uploadFile, addCompany);
