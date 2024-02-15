@@ -143,16 +143,19 @@ export const branchPasswordReset = async (req, res) => {
   const { id, token } = req.params; // Access id from params
   const user = await AddBranch.findById(id);
   const new_secret = user._id + SECRET;
+
   try {
     jwt.verify(token, new_secret);
+
     if (password && confirm_password) {
       if (password !== confirm_password) {
         return res.status(400).json("Passwords doesn't Match. Try Again..!");
-      } else {
+      } 
+      
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         const hashedPassword1 = await bcrypt.hash(confirm_password, salt);
-        await AddBranch.findByIdAndUpdate(user._id, {
+        await AddBranch.findByIdAndUpdate(id, {
           $set: {
             password: hashedPassword,
             confirm_password: hashedPassword1,
@@ -185,7 +188,7 @@ export const branchPasswordReset = async (req, res) => {
           }
         });
         return res.status(200).json("Password Updated Successfully..!");
-      }
+      
     }
   } catch (error) {
     return res.status(400).json("Invalid Link or Expired..!", error);
