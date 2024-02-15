@@ -6,14 +6,7 @@ import AdminLogin from "../models/loginSchema.js"
 import jwt from "jsonwebtoken";
 dotenv.config();
 const {SECRET, EMAIL, PASSWORD, LINK} = process.env;
-function getCurrentYear() {
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  return currentYear;
-}
 
-// Example usage
-const year = getCurrentYear();
 // ####################################### Register User ###########################################//
 export const adminRegister = async (req, res) => {
   try {
@@ -143,7 +136,7 @@ export const forgotAdminPassword = async (req, res) => {
               link: "https://mailgen.js/",
               // Adjust the following line accordingly
               // This will be displayed in the footer of the email
-              copyright: `Copyright ©${year} Eleedom IMF Pvt Ltd. All rights reserved.`,
+              copyright: `Copyright © ${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
           },
       });
 

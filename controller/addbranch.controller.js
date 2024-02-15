@@ -16,6 +16,7 @@ export const addbranchRegister = async (req, res) => {
       branchdistrict,
       branchstate,
       branchpincode,
+      password
     } = req.body;
 
     // Check if the branch with the given branchcode already exists

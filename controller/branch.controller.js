@@ -1,18 +1,11 @@
 import AddBranch from "../models/addbranchSchema.js";
+import nodemailer from 'nodemailer';
+import Mailgen from 'mailgen';
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 
 dotenv.config();
 const { SECRET, LINK, EMAIL, PASSWORD } = process.env;
-
-function getCurrentYear() {
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    return currentYear;
-}
-
-// Example usage
-const year = getCurrentYear();
 
 
 export const loginBranch = async(req, res) => {
@@ -70,7 +63,7 @@ export const forgotBranchPassword = async (req, res) => {
   
         // Generate reset password link
         const link =`${LINK}/${user._id}/${token}`;
-  
+  console.log(link);
         // Nodemailer setup
         const transporter = nodemailer.createTransport({
             service: "gmail",
@@ -88,7 +81,7 @@ export const forgotBranchPassword = async (req, res) => {
                 link: "https://mailgen.js/",
                 // Adjust the following line accordingly
                 // This will be displayed in the footer of the email
-                copyright: `Copyright ©${year} Eleedom IMF Pvt Ltd. All rights reserved.`,
+                copyright: `Copyright © ${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
             },
         });
   
