@@ -81,8 +81,9 @@ const response = {
   body: {
       name: branchname,
       intro: [
-          "Welcome to Your Application! Your account has been successfully created with the following credentials:.",
-          "Valid for 15 Minutes only!",
+          "Welcome to Your Application!.",
+          "Your account has been successfully created with the following credentials:",
+        
       ],
       
       action: [{
@@ -90,16 +91,17 @@ const response = {
               color: "#209320",
               text: `Email: ${branchemail}`,
           },
-          button: {
-            color: "#209320",
-            text: `Password: ${password}`, 
-        },
-          instructions: "You can now log in to your account and start using our services.",
-      }],
+         
+      },
+      {
+        button: {
+          color: "#209320",
+          text: `Password: ${password}`, 
+      },
+      }
+    ],
       
-  
-      outro: "Best regards,",
-      outro: "Eleedom IMF Pvt Ltd",
+      outro: "You can now log in to your account and start using our services.",
   },
 };
 
