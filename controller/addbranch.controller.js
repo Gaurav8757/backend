@@ -89,14 +89,14 @@ const response = {
       action: [{
           button: {
               color: "#209320",
-              text: `Email: ${branchemail}`,
+              text: `Email:   ${branchemail}`,
           },
          
       },
       {
         button: {
           color: "#209320",
-          text: `Password: ${password}`, 
+          text: `Password:   ${password}`, 
       },
       }
     ],
