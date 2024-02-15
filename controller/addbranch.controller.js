@@ -1,10 +1,7 @@
 import AddBranch from '../models/addbranchSchema.js'; // Replace with the actual path to your AdminLogin model
-import { generateUniqueId, generatePassword } from "../controller/generateId.js"; // Replace with the actual path to your unique ID generator function
 import bcrypt from "bcryptjs";
 // Function to generate unique ID for branches
-const generateBranchId = () => {
-  return generateUniqueId(); // You need to have a generateUniqueId function in your code
-};
+
 
 export const addbranchRegister = async (req, res) => {
   try {
@@ -29,11 +26,11 @@ export const addbranchRegister = async (req, res) => {
         message: "This branch already exists.",
       });
     }
-
-    // Generate a unique branch ID
-    const branchid = generateBranchId();
-   // Generate a password
- const password = generatePassword(branchemail);
+// Hash the password
+const salt = await bcrypt.genSalt(10);
+const hashedPassword = await bcrypt.hash(password, salt);
+   
+ 
  
   //.................................hash the password................................//
     // Create a new branch
@@ -49,7 +46,7 @@ export const addbranchRegister = async (req, res) => {
       branchdistrict,
       branchstate,
       branchpincode,
-      password
+      password: hashedPassword
     });
 
     // Save the new branch to the database

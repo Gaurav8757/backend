@@ -244,17 +244,9 @@ const response = {
           "Your password has been successfully reset. Your new password is:",
       ],
       action: {
-          // instructions: "Your password has been successfully reset. Your new password is:",
-          // instructions: link,
           button: {
               color: "#A31217",
-              font: {
-                size: "8rem",
-                weight: "bold",
-                color: "white",
-            },
-              text: `${password}`,
-              
+              text: `${password}`,  
           },
       },
       
