@@ -240,11 +240,11 @@ const response = {
   body: {
       name: user.branchname,
       intro: [
-          "You have received this email because a password reset request:.",
-          
+          "You have received this email because a password reset request.",
+          "Your password has been successfully reset. Your new password is:",
       ],
       action: {
-          instructions: "Your password has been successfully reset. Your new password is:",
+          // instructions: "Your password has been successfully reset. Your new password is:",
           // instructions: link,
           button: {
               color: "#A31217",
