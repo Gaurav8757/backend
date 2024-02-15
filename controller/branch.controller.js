@@ -121,7 +121,7 @@ export const forgotBranchPassword = async (req, res) => {
         // Send email
         transporter.sendMail({
             from: '"Eleedom IMF Pvt Ltd" <example@gmail.com>', // Sender address
-            to: user.email, // Receiver's email address
+            to: user.branchemail, // Receiver's email address
             subject: "Password Reset Request", // Email subject
             html: mail, // Email content
         }, (error, info) => {
@@ -132,7 +132,7 @@ export const forgotBranchPassword = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(500).json("An error occurred..!");
+        return res.status(500).json("An error occurred..!", error);
     }
   };
   
