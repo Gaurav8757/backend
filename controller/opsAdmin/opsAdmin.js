@@ -288,7 +288,7 @@ export const opsPasswordReset = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(opspassword, salt);
         const hashedPassword1 = await bcrypt.hash(confirm_opspassword, salt);
-        await AddBranch.findByIdAndUpdate(id, {
+        await AddBranch.findByIdAndUpdate(user._id, {
           $set: {
             opspassword: hashedPassword,
             confirm_opspassword: hashedPassword1,
