@@ -4,7 +4,7 @@ import Mailgen from 'mailgen';
 import dotenv from "dotenv";
 // Function to generate unique ID for branches
 dotenv.config();
-const { SECRET, LINK, EMAIL, PASSWORD } = process.env;
+const { EMAIL, PASSWORD } = process.env;
 
 export const addbranchRegister = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ export const addbranchRegister = async (req, res) => {
     } = req.body;
 
     // Check if the branch with the given branchcode already exists
-    const branchExist = await AddBranch.findOne({ branchcode });
+    const branchExist = await AddBranch.findOne({ branchemail });
     if (branchExist) {
       return res.status(400).json({
         status: "Branch Already Exists",
