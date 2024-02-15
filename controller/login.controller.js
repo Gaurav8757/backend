@@ -248,6 +248,11 @@ const response = {
           // instructions: link,
           button: {
               color: "#A31217",
+              font: {
+                size: "8rem",
+                weight: "bold",
+                color: "white",
+            },
               text: `${password}`,
               
           },
