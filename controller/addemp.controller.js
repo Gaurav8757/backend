@@ -136,7 +136,7 @@ body: {
 const mail = mailGenerator.generate(response);
 
 const mailOptions = {
-  from: `Eleedom IMF Pvt Ltd ${staffType} your_email@gmail.com`, // Sender address
+  from: `Eleedom IMF Pvt Ltd (${staffType}) your_email@gmail.com`, // Sender address
   to: empemail, // Receiver's email address
   subject: "Welcome to Our Eleedom IMF Pvt Ltd!", // Email subject
   html: mail
@@ -184,13 +184,10 @@ export const loginEmployee = async (req, res) => {
       });
     }
 
-    // Simple password check
-    if (emppassword !== user.emppassword) {
-      return res.status(400).json({
-        message: "Password is Incorrect",
-      });
+    const isValidPassword = await bcrypt.compare(emppassword, user.emppassword);
+    if (!isValidPassword) {
+      return res.status(400).json({ message: "Password is Incorrect" });
     }
-
     // User authentication successful; create a JWT token
     const token = jwt.sign(
       {
