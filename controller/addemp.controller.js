@@ -183,13 +183,12 @@ export const loginEmployee = async (req, res) => {
         message: "Employee Not Found",
       });
     }
-if(emppassword !== user.emppassword){
-  return res.status(400).json({ message: "Password is Incorrect" });
-}
-    // const isValidPassword = await bcrypt.compare(emppassword, user.emppassword);
-    // if (!isValidPassword) {
-    //   return res.status(400).json({ message: "Password is Incorrect" });
-    // }
+
+    const isValidPassword = await bcrypt.compare(emppassword, user.emppassword);
+    if (!isValidPassword) {
+      return res.status(400).json({ message: "Password is Incorrect" });
+    }
+
     // User authentication successful; create a JWT token
     const token = jwt.sign(
       {
