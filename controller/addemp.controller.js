@@ -5,7 +5,7 @@ import nodemailer from "nodemailer";
 import Mailgen from 'mailgen';
 import bcrypt from "bcryptjs";
 dotenv.config();
-const { SECRET, EMAIL, PASSWORD } = process.env;
+const { SECRET, EMAIL, PASSWORD, LINK3 } = process.env;
 
 export const addempRegister = async (req, res) => {
   try {
@@ -319,10 +319,10 @@ export const updateEmployee = async (req, res) => {
 
 
 // .................................Forgot Page Logic......................................//
-export const forgotOpsPassword = async (req, res) => {
+export const forgotEmpPassword = async (req, res) => {
   try {
-    const { opsemail } = req.body;
-    const user = await OpsAdmin.findOne({ opsemail });
+    const { empemail } = req.body;
+    const user = await AddEmployee.findOne({ empemail });
     if (!user) {
       return res.status(400).json("Email not found. Register Now!");
     }
@@ -334,7 +334,7 @@ export const forgotOpsPassword = async (req, res) => {
     });
 
     // Generate reset password link
-    const link = `${LINK2}/${user._id}/${token}`;
+    const link = `${LINK3}/${user._id}/${token}`;
    
     // Nodemailer setup
     const transporter = nodemailer.createTransport({
@@ -360,7 +360,7 @@ export const forgotOpsPassword = async (req, res) => {
     // Prepare email content
     const response = {
       body: {
-        name: user.opsname,
+        name: user.empname,
         intro: [
           "You have received this email because a password reset request for your account was received.",
           "Valid for 15 Minutes only!",
@@ -387,7 +387,7 @@ export const forgotOpsPassword = async (req, res) => {
     transporter.sendMail(
       {
         from: '"Eleedom IMF Pvt Ltd" <example@gmail.com>', // Sender address
-        to: user.opsemail, // Receiver's email address
+        to: user.empemail, // Receiver's email address
         subject: "Password Reset Request", // Email subject
         html: mail, // Email content
       },
@@ -410,27 +410,27 @@ export const forgotOpsPassword = async (req, res) => {
 
 // update forgetted [password]
 // .......................................Update Password..................................//
-export const opsPasswordReset = async (req, res) => {
-  const { opspassword, confirm_opspassword } = req.body;
+export const empPasswordReset = async (req, res) => {
+  const { emppassword, confirmemp_password } = req.body;
   const { id, token } = req.params; // Access id from params
-  const user = await OpsAdmin.findById(id);
+  const user = await AddEmployee.findById(id);
   const new_secret = user._id + SECRET;
 
   try {
     jwt.verify(token, new_secret);
 
-    if (opspassword && confirm_opspassword) {
-      if (opspassword !== confirm_opspassword) {
+    if (emppassword && confirmemp_password) {
+      if (emppassword !== confirmemp_password) {
         return res.status(400).json("Passwords doesn't Match. Try Again..!");
       } 
       
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(opspassword, salt);
-        const hashedPassword1 = await bcrypt.hash(confirm_opspassword, salt);
-        await OpsAdmin.findByIdAndUpdate(user._id, {
+        const hashedPassword = await bcrypt.hash(emppassword, salt);
+        const hashedPassword1 = await bcrypt.hash(confirmemp_password, salt);
+        await AddEmployee.findByIdAndUpdate(user._id, {
           $set: {
             opspassword: hashedPassword,
-            confirm_opspassword: hashedPassword1,
+            confirmemp_password: hashedPassword1,
           },
         });
 
@@ -457,7 +457,7 @@ const mailGenerator = new Mailgen({
 // Prepare email content
 const response = {
     body: {
-        name: `, ${user.opsname}`,
+        name: `, ${user.empname}`,
         intro: [
             "You have received this email because a password reset request.",
             "Your password has been successfully reset. Your new password is:",
@@ -465,7 +465,7 @@ const response = {
         action: {
             button: {
                 color: "#A31217",
-                text: `${opspassword}`,  
+                text: `${emppassword}`,  
             },
         },
     //   utro: "If you did not request a password reset, no further action is required on your part.",
@@ -476,7 +476,7 @@ const response = {
   const mail = mailGenerator.generate(response);
         const mailOptions = {
           from: "Eleedom IMF Pvt Ltd <your_email@gmail.com>",
-          to: user.opsemail,
+          to: user.empemail,
           subject: "Your Password has been Reset",
           html: mail
         };

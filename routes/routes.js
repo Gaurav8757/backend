@@ -12,6 +12,8 @@ import {
 import {
   addempRegister,
   deleteEmployee,
+  empPasswordReset,
+  forgotEmpPassword,
   listOfEmp,
   loginEmployee,
   updateEmployee,
@@ -100,6 +102,10 @@ router.post("/login/employee", loginEmployee);
 router.get("/api/employee-list", viewEmployee);
 router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
+
+// password change
+router.post("/forgot/emp/pass", forgotEmpPassword);
+router.post("/emp/pass/:id/:token", empPasswordReset);
 
 // attendace of employee
 router.post("/employee/mark/attendance/:employeeId", markAttendance);
