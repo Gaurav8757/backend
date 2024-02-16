@@ -40,8 +40,6 @@ export const addempRegister = async (req, res) => {
      : null;
 
        // Generate a password
-    
-
     const empExist = await AddEmployee.findOne({ empid });
     // Check if empExist is not null
     if (empExist) {
@@ -54,8 +52,6 @@ export const addempRegister = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(emppassword, salt);
     
-
-
     // Create a new employee instance
     const addnewEmployee = new AddEmployee({
       empid,
