@@ -56,7 +56,6 @@ export const addempRegister = async (req, res) => {
     
 
 
-    // const uniqueid = generateEmpId();
     // Create a new employee instance
     const addnewEmployee = new AddEmployee({
       empid,
