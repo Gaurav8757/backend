@@ -486,9 +486,9 @@ const response = {
           if (error) {
             return res
               .status(500)
-              .json("Error occurred while sending email..!", error);
+              .json("Error occurred while sending email..!" + error);
           } else {
-            return res.status(200).json("Email sent", info.response);
+            return res.status(200).json("Email sent" + info.response);
           }
         });
         return res.status(200).json("Password Updated Successfully..!");
