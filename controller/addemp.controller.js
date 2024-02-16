@@ -430,7 +430,7 @@ export const empPasswordReset = async (req, res) => {
         const hashedPassword1 = await bcrypt.hash(confirmemp_password, salt);
         await AddEmployee.findByIdAndUpdate(user._id, {
           $set: {
-            opspassword: hashedPassword,
+            emppassword: hashedPassword,
             confirmemp_password: hashedPassword1,
           },
         });
