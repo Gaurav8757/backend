@@ -136,7 +136,7 @@ body: {
 const mail = mailGenerator.generate(response);
 
 const mailOptions = {
-  from: `"Eleedom IMF Pvt Ltd (Employee)" your_email@gmail.com`, // Sender address
+  from: `Eleedom IMF Pvt Ltd ${staffType} your_email@gmail.com`, // Sender address
   to: empemail, // Receiver's email address
   subject: "Welcome to Our Eleedom IMF Pvt Ltd!", // Email subject
   html: mail
