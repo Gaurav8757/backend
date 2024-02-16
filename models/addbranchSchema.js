@@ -3,9 +3,10 @@ const AddBranchSchema = new Mongoose.Schema(
   {
 
     branchid: {
-        type: String,
-       
+        type: String, 
+        default: 0
     },
+
     concernperson: {
         type: String,
         required: true,

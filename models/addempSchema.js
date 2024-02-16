@@ -5,6 +5,7 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+    
   
     empname: {
       type: String,
