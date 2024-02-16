@@ -5,10 +5,7 @@ const AddHRSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
-    hruniqueid: {
-      type: String,
-      unique: true,
-    },
+   
     hrname: {
       type: String,
       required: true,

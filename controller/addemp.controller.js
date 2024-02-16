@@ -27,7 +27,7 @@ export const addempRegister = async (req, res) => {
       staffType,  
       pan,
       emppassword,
-      confirmemp_password,
+      // confirmemp_password,
       empdesignation,
     } = req.body;
 
@@ -159,8 +159,9 @@ transporter.sendMail(mailOptions, (error, info) => {
       },
     });
   } catch (err) {
+    console.log(err);
     return res.status(400).json({
-      status: "Error during Registration",
+      status: "Error during Registration" + err,
       message: err.message,
     });
   }
