@@ -5,8 +5,10 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
-    
-  
+    uniqueid:{
+      type: Number,
+      default: 0
+    },
     empname: {
       type: String,
       required: true,
