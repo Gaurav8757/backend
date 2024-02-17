@@ -3,7 +3,7 @@ const AddHrAdminSchema = new Mongoose.Schema(
   {
     hradname: {
       type: String,
-      required: true,
+    //   required: true,
     },
     hradpassword: {
       type: String,
