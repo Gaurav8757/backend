@@ -57,7 +57,7 @@ import hrouter from "./hrsalary/hrsalary.routes.js";
 import {markAttendance, getEmployeeAttendance} from "../controller/empattendance.controller.js"
 import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
 import { addOpsRegister, forgotOpsPassword, loginOps, opsPasswordReset } from "../controller/opsAdmin/opsAdmin.js";
-import { HrAdRegister, hrAdminLogin } from "../controller/hradmin/hradmin.controller.js";
+import { HrAdPassReset, HrAdRegister, forgotHrAdminPassword, hrAdminLogin } from "../controller/hradmin/hradmin.controller.js";
 
 // users Routes
 router.use("/users", routes);
@@ -145,10 +145,12 @@ router.delete("/advisor/lists/:id", deleteAdvisor);
 router.post("/branches/loginbranch", loginBranch);
 // HR ROUTES
 router.post("/hr/addhr",uploadFile ,addHrRegister);
+
 // hr admin register
 router.post("/hradmin/register", HrAdRegister);
 router.post("/hradmin/login", hrAdminLogin);
-
+router.post("/forgot/hradmin/pass", forgotHrAdminPassword);
+router.post("/hradmin/pass/:id/:token", HrAdPassReset);
 
 
 router.post("/hr/login", loginHr);
