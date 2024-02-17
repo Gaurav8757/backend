@@ -265,7 +265,7 @@ export const forgotHrAdminPassword = async (req, res) => {
       // Send email
       transporter.sendMail(
         {
-          from: `Eleedom IMF Pvt Ltd (${hradname}) <example@gmail.com>`, // Sender address
+          from: `Eleedom IMF Pvt Ltd (${user.hradname}) <example@gmail.com>`, // Sender address
           to: user.hrademail, // Receiver's email address
           subject: "Password Reset Request", // Email subject
           html: mail, // Email content
@@ -307,7 +307,7 @@ export const HrAdPassReset = async (req, res) => {
           const salt = await bcrypt.genSalt(10);
           const hashedPassword = await bcrypt.hash(hradpassword, salt);
           const hashedPassword1 = await bcrypt.hash(confirmehrad_password, salt);
-          await AddBranch.findByIdAndUpdate(id, {
+          await HrAdmin.findByIdAndUpdate(id, {
             $set: {
                 hradpassword: hashedPassword,
                 confirmehrad_password: hashedPassword1,
