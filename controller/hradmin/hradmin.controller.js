@@ -186,6 +186,7 @@ export const hrAdminLogin = async (req, res) => {
         email: user.hrademail,
         mobile: user.hradmobile,
         name: user.hradname,
+        id: user._id,
         token,
       });
     }
