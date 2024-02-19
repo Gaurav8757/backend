@@ -4,11 +4,12 @@ import AddHrAttendance from "../../models/hr/hrattendance.js";
 
 // markEmployeeAttendance
 export const markHrAttendance = async (req, res) => {
-  const { hrId } = req.params;
+  const { hrid } = req.params;
+  console.log(hrid);
   const { status, date, time, weekday } = req.body;
   try {
     // Fetch employee information by _id
-    const hr = await AddHr.findById(hrId);
+    const hr = await AddHr.findById(hrid);
 
     if (!hr) {
       return res.status(404).json({ message: "HR not found" });
