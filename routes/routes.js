@@ -58,6 +58,7 @@ import {markAttendance, getEmployeeAttendance} from "../controller/empattendance
 import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
 import { addOpsRegister, forgotOpsPassword, loginOps, opsPasswordReset } from "../controller/opsAdmin/opsAdmin.js";
 import { HrAdPassReset, HrAdRegister, forgotHrAdminPassword, hrAdminLogin } from "../controller/hradmin/hradmin.controller.js";
+import { PolicydeleteStaff, PolicystaffList, PolicystaffTypes } from "../controller/policytype/addtype.policy.js";
 
 // users Routes
 router.use("/users", routes);
@@ -164,6 +165,13 @@ router.get("/hr/staff/type", listOfEmp);
 router.post("/add/staff", staffType);
 router.get("/staff/lists", staffList);
 router.delete("/staff/lists/:id", deleteStaff);
+
+// add staff type
+router.post("/add/policy/staff", PolicystaffTypes);
+router.get("/staff/policy/lists", PolicystaffList);
+router.delete("/policy/staff/:id", PolicydeleteStaff);
+
+
 
 // ops Admin
 router.post("/ops/register", addOpsRegister);
