@@ -35,9 +35,9 @@ export const addempRegister = async (req, res) => {
      const empaadharfile = req.files && req.files["empaadharfile"] && req.files["empaadharfile"][0]
      ? "https://eleedomimf.onrender.com/uploads/" + req.files["empaadharfile"][0].filename
      : null;
-     const panno = req.files && req.files["panno"] && req.files["panno"][0]
-     ? "https://eleedomimf.onrender.com/uploads/" + req.files["panno"][0].filename
-     : null;
+    //  const panno = req.files && req.files["panno"] && req.files["panno"][0]
+    //  ? "https://eleedomimf.onrender.com/uploads/" + req.files["panno"][0].filename
+    //  : null;
 
        // Generate a password
     const empExist = await AddEmployee.findOne({ empid });
@@ -72,7 +72,7 @@ export const addempRegister = async (req, res) => {
       ifsc,
       bankName,
       pan,
-      panno,
+      // panno,
       empdesignation,
       empaadharfile,
     });
