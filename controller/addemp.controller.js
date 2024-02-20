@@ -54,6 +54,7 @@ export const addempRegister = async (req, res) => {
     // Create a new employee instance
     const addnewEmployee = new AddEmployee({
       empid,
+      uniqueid: empid,
       empname,
       empemail,
       empmobile,

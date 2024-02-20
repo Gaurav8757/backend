@@ -5,9 +5,9 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
-    // uniqueid:{
-    //   type: Number,
-    // },
+    uniqueid:{
+      type: String,
+    },
     empname: {
       type: String,
       required: true,
