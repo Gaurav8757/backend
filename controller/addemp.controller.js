@@ -27,7 +27,6 @@ export const addempRegister = async (req, res) => {
       staffType,  
       pan,
       emppassword,
-      // confirmemp_password,
       empdesignation,
     } = req.body;
 
