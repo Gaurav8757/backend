@@ -59,7 +59,7 @@ import {markAttendance, getEmployeeAttendance} from "../controller/empattendance
 import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
 import { addOpsRegister, forgotOpsPassword, loginOps, opsPasswordReset } from "../controller/opsAdmin/opsAdmin.js";
 import { HrAdPassReset, HrAdRegister, forgotHrAdminPassword, hrAdminLogin } from "../controller/hradmin/hradmin.controller.js";
-import { PolicydeleteStaff, PolicystaffList, PolicystaffTypes, ProductPolicyAdd } from "../controller/policytype/addtype.policy.js";
+import { PolicydeleteStaff, PolicystaffList, PolicystaffTypes, ProductPolicyAdd, ProductPolicyDelete } from "../controller/policytype/addtype.policy.js";
 
 // users Routes
 router.use("/users", routes);
@@ -172,7 +172,7 @@ router.post("/add/policy/staff", PolicystaffTypes);
 router.get("/staff/policy/lists", PolicystaffList);
 router.delete("/policy/staff/:id", PolicydeleteStaff);
 router.put("/api/policy/types/:id/products", ProductPolicyAdd);
-
+router.delete("/api/policy/products/:id/delete", ProductPolicyDelete);
 
 // ops Admin
 router.post("/ops/register", addOpsRegister);

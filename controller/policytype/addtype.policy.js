@@ -84,3 +84,26 @@ export const ProductPolicyAdd= async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+
+// delete product bu pulling from array
+export const ProductPolicyDelete = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { productId } = req.body; // Assuming productId is the ID of the product to be deleted
+
+    // Find the policy type by ID
+    const policyType = await PolicyStaffType.findById(id);
+    if (!policyType) {
+      return res.status(404).json({ message: 'Policy type not found' });
+    }
+
+    // Remove the product from the products array
+    policyType.products.pull(productId);
+    await policyType.save();
+    res.status(200).json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
