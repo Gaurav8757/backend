@@ -3,14 +3,14 @@ const AddEmployeeSchema = new Mongoose.Schema(
   {
     empid: {
       type: String,
-      required: true,
+      // required: true,
     },
     uniqueid:{
       type: String,
     },
     empname: {
       type: String,
-      required: true,
+      // required: true,
     },
     emppassword: {
       type: String,
@@ -21,49 +21,49 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     empdob: {
       type: String,
-      required: true,
+      // required: true,
     },
     empgender: {
       type: String,
-      required: true,
+      // required: true,
     },
     empemail: {
       unique: true,
       type: String,
-      required: true,
+      // required: true,
     },
     empmobile: {
       type: Number,
-      required: true,
+      // required: true,
     },
     empjoiningdate: {
       type: String,
-      required:true,
+      // required:true,
     },
     empbranch: {
       type: String,
-      required: true,
+      // required: true,
     },
     permanentempaddress: {
       type: String,
-      required: true,
+      // required: true,
     },
     currentempaddress: {
       type: String,
-      required: true,
+      // required: true,
     },
     empaadharno: {
       type: Number,
-      required: true,
+      // required: true,
     },
 
     accNumber: {
       type: Number,
-      required: true,
+      // required: true,
     },
     bankName: {
       type: String,
-      required: true,
+      // required: true,
     },
     ifsc: {
       type: String,
@@ -71,19 +71,19 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     pan: {
       type: String,
-      required: true,
+      // required: true,
     },
     panno: {
       type: String,
     },
     empaadharfile: {
       type: String,
-      unique: true,
+      // unique: true,
     },
     staffType:{
       type: String,
       ref: "StaffType",
-      required: true,
+      // required: true,
     },
     empdesignation: {
       type: String,
