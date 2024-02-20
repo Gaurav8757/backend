@@ -313,7 +313,26 @@ export const updateEmployee = async (req, res) => {
   }
 };
 
-
+export const viewByIdEmp = async (req, res) => {
+  const empId = req.params.empId; // Correct the parameter name to match the route
+  try {
+    const empData = await AddEmployee.findById(empId); // Use findById without object syntax
+    if (!empData) {
+      return res.status(404).json({
+        status: "Error",
+        message: "Employee not found",
+      });
+    } else {
+      return res.status(200).json(empData);
+    }
+  } catch (error) {
+    console.error("Error fetching employee data:", error);
+    return res.status(500).json({
+      status: "Error",
+      message: "Internal server error",
+    });
+  }
+};
 
 // .................................Forgot Page Logic......................................//
 export const forgotEmpPassword = async (req, res) => {

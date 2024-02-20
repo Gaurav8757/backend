@@ -17,6 +17,7 @@ import {
   listOfEmp,
   loginEmployee,
   updateEmployee,
+  viewByIdEmp,
   viewEmployee,
 } from "../controller/addemp.controller.js";
 import {
@@ -58,7 +59,7 @@ import {markAttendance, getEmployeeAttendance} from "../controller/empattendance
 import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
 import { addOpsRegister, forgotOpsPassword, loginOps, opsPasswordReset } from "../controller/opsAdmin/opsAdmin.js";
 import { HrAdPassReset, HrAdRegister, forgotHrAdminPassword, hrAdminLogin } from "../controller/hradmin/hradmin.controller.js";
-import { PolicydeleteStaff, PolicystaffList, PolicystaffTypes } from "../controller/policytype/addtype.policy.js";
+import { PolicydeleteStaff, PolicystaffList, PolicystaffTypes, ProductPolicyAdd } from "../controller/policytype/addtype.policy.js";
 
 // users Routes
 router.use("/users", routes);
@@ -104,7 +105,7 @@ router.post("/login/employee", loginEmployee);
 router.get("/api/employee-list", viewEmployee);
 router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
-
+router.get("/api/employee/:empId", viewByIdEmp);
 // password change
 router.post("/forgot/emp/pass", forgotEmpPassword);
 router.post("/emp/pass/:id/:token", empPasswordReset);
@@ -170,7 +171,7 @@ router.delete("/staff/lists/:id", deleteStaff);
 router.post("/add/policy/staff", PolicystaffTypes);
 router.get("/staff/policy/lists", PolicystaffList);
 router.delete("/policy/staff/:id", PolicydeleteStaff);
-
+router.put("/api/policy/types/:id/products", ProductPolicyAdd);
 
 
 // ops Admin

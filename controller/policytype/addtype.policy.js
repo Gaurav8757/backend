@@ -61,3 +61,26 @@ export const PolicydeleteStaff = async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" });
     }
   };
+
+
+
+  // add product inside policy_lists
+  // API endpoint to add a product to a policy type
+export const ProductPolicyAdd= async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { product } = req.body;
+    // Find the policy type by ID
+    const policyType = await PolicyStaffType.findById(id);
+    if (!policyType) {
+      return res.status(404).json({ message: 'Policy type not found' });
+    }
+    // Add the product to the products array
+    policyType.products.push(product);
+    await policyType.save();
+    res.status(200).json({ message: 'Product added successfully' });
+  } catch (error) {
+    console.error('Error adding product:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};

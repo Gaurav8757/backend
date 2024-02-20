@@ -5,6 +5,10 @@ const PolicyTypeSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+    products: {
+      type: [String], // Array of product names
+      default: [],    // Default to an empty array
+    },
   },
   { timestamps: true }
 );
