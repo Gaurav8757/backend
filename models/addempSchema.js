@@ -78,8 +78,8 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     empaadharfile: {
       type: String,
-      // unique: true,
-      default: " "
+      unique: true,
+      default: "NA"
     },
     staffType:{
       type: String,

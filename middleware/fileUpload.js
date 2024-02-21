@@ -37,7 +37,7 @@ const uploadFile = multer({
 })
 .fields([
   { name: "empaadhar", maxCount: 1 },
-  { name: "empaadharfile"},
+  { name: "empaadharfile",   unique: true, partialFilterExpression: { empaadharfile: { $exists: true } }},
 
   { name: "addpolicyimage", maxCount: 1 },
   { name: "addpolicylogo", maxCount: 1 },
