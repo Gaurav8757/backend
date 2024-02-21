@@ -78,7 +78,8 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     empaadharfile: {
       type: String,
-      // unique: true,
+      unique: true, // Ensure uniqueness
+      sparse: true, // Allow multiple documents to have a null value
       default: "NA"
     },
     staffType:{
