@@ -79,6 +79,7 @@ const AddEmployeeSchema = new Mongoose.Schema(
     empaadharfile: {
       type: String,
       // unique: true,
+      default: ""
     },
     staffType:{
       type: String,
