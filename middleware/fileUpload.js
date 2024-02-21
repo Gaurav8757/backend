@@ -37,7 +37,7 @@ const uploadFile = multer({
 })
 .fields([
   { name: "empaadhar", maxCount: 1 },
-  { name: "empaadharfile", maxCount: 1},
+  { name: "empaadharfile", maxCount: null},
 
   { name: "addpolicyimage", maxCount: 1 },
   { name: "addpolicylogo", maxCount: 1 },
