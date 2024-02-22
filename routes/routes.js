@@ -60,6 +60,10 @@ import { deleteStaff, staffList, staffType } from "../controller/staff/type.cont
 import { addOpsRegister, forgotOpsPassword, loginOps, opsPasswordReset } from "../controller/opsAdmin/opsAdmin.js";
 import { HrAdPassReset, HrAdRegister, forgotHrAdminPassword, hrAdminLogin } from "../controller/hradmin/hradmin.controller.js";
 import { PolicydeleteStaff, PolicystaffList, PolicystaffTypes, ProductPolicyAdd, ProductPolicyDelete } from "../controller/policytype/addtype.policy.js";
+import { AddSegment, CategoryAdd, CompanyDelete, CompanyTypeList, CompanyTypes, categoryTypeDelete } from "../controller/companyType/company.controller.js";
+import { FuelDelete, FuelList, FuelTypes } from "../controller/fuel/fuel.controller.js";
+import { PayoutOnAdd, PayoutOnDelete, PayoutOnList } from "../controller/payoutOn/payoutOn.controller.js";
+import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMode/pay.controller.js";
 
 // users Routes
 router.use("/users", routes);
@@ -167,12 +171,35 @@ router.post("/add/staff", staffType);
 router.get("/staff/lists", staffList);
 router.delete("/staff/lists/:id", deleteStaff);
 
-// add staff type
+// add policy type
 router.post("/add/policy/staff", PolicystaffTypes);
 router.get("/staff/policy/lists", PolicystaffList);
 router.delete("/policy/staff/:id", PolicydeleteStaff);
 router.put("/api/policy/types/:id/products", ProductPolicyAdd);
 router.delete("/api/policy/products/:id/delete", ProductPolicyDelete);
+
+// add comapny category type
+router.post("/add/comapny/type", CompanyTypes);
+router.get("/view/company/lists", CompanyTypeList);
+router.delete("/policy/company/:id", CompanyDelete);
+router.put("/api/company/:id/category", CategoryAdd);
+router.delete("/api/company/category/:id/delete", categoryTypeDelete);
+router.post("/api/comp/:companyId/segment", AddSegment);
+// fuel 
+router.post("/add/fuel", FuelTypes);
+router.get("/view/fuel", FuelList);
+router.delete("/fuel/delete/:id", FuelDelete);
+
+
+// PAYOUTON
+router.post("/add/payouton", PayoutOnAdd);
+router.get("/view/payouton", PayoutOnList);
+router.delete("/payouton/delete/:id", PayoutOnDelete);
+
+// PAYment route
+router.post("/add/payment/mode", PaymentAdd);
+router.get("/view/payment/mode", PaymentModeList);
+router.delete("/payment/delete/:id", PaymentDelete);
 
 // ops Admin
 router.post("/ops/register", addOpsRegister);
