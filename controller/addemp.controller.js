@@ -155,9 +155,8 @@ transporter.sendMail(mailOptions, (error, info) => {
       },
     });
   } catch (err) {
-    console.log(err);
     return res.status(400).json({
-      status: "Error during Registration" + err,
+      status: err,
       message: err.message,
     });
   }
