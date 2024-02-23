@@ -156,13 +156,13 @@ export const updateMasterDetails = async (req, res) => {
     );
 
     return res.status(200).json({
-      status: "Policy Sent to ",
+      status: "Policy Updated Successfully..! ",
       message: {
         updatedDetails,
       },
     });
   } catch (err) {
-    console.error("Error during Insurance Update:", err);
+    console.error(err);
 
     // Handle Mongoose validation errors
     if (err.name === "ValidationError") {
