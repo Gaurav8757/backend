@@ -1,18 +1,23 @@
 import Mongoose from "mongoose";
+
 const CompanyTypeSchema = new Mongoose.Schema(
   {
     c_type: {
       type: String,
       required: true,
     },
-    category: {
-      type: [String], // Array of product names
-      default: [],    // Default to an empty array
-    },
-    segment: {
-        type: [String], // Array of product names
-        default: [],    // Default to an empty array
-      },  
+    category: [
+      {
+        category_name: {
+          type: String,
+          required: true,
+        },
+        segments: {
+          type: [String], // Array of segment names
+          default: [],    // Default to an empty array
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

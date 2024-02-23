@@ -109,53 +109,80 @@ export const categoryTypeDelete = async (req, res) => {
     // Remove the product from the products array
     cType.category.pull(categoryId);
     await cType.save();
-    res.status(200).json({ message: 'Category deleted successfully' });
+    return res.status(200).json({ message: 'Category deleted successfully' } );
   } catch (error) {
     console.error('Error deleting Category', error);
-    res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: 'Internal server error' });
   }
 };
 
 
 
-export const AddSegment = async (req, res) => {
-    const { companyId } = req.params;
-    const { segment } = req.body;
+// export const AddSegment = async (req, res) => {
+//     const { companyId } = req.params;
+//     const { segment } = req.body;
     
-    try {
-      const company = await CType.findById(companyId);
-      if (!company) {
-        return res.status(404).json({ message: 'Company not found' });
-      }
+//     try {
+//       const company = await CType.findById(companyId);
+//       if (!company) {
+//         return res.status(404).json({ message: 'Company not found' });
+//       }
   
-      // Transform the data to add the segment to the corresponding category
-      const transformedData = {};
-      company.category.forEach((category, index) => {
-        if (!transformedData[category]) {
-          transformedData[category] = [];
-        }
-        if (company.segment[index]) {
-          transformedData[category].push(company.segment[index]);
-        }
-      });
+//       // Transform the data to add the segment to the corresponding category
+//       const transformedData = {};
+//       company.category.forEach((category, index) => {
+//         if (!transformedData[category]) {
+//           transformedData[category] = [];
+//         }
+//         if (company.segment[index]) {
+//           transformedData[category].push(company.segment[index]);
+//         }
+//       });
   
-      // Add the new segment to the corresponding category
-      if (!transformedData[segment.category]) {
-        transformedData[segment.category] = [];
-      }
-      transformedData[segment.category].push(segment.value);
+//       // Add the new segment to the corresponding category
+//       if (!transformedData[segment.category]) {
+//         transformedData[segment.category] = [];
+//       }
+//       transformedData[segment.category].push(segment.value);
   
-      // Update the company document with the new segment data
-      company.segment = [];
-      company.category = Object.keys(transformedData);
-      company.category.forEach(category => {
-        company.segment = company.segment.concat(transformedData[category]);
-      });
+//       // Update the company document with the new segment data
+//       company.segment = [];
+//       company.category = Object.keys(transformedData);
+//       company.category.forEach(category => {
+//         company.segment = company.segment.concat(transformedData[category]);
+//       });
   
-      await company.save();
-      res.json({ success: true });
-    } catch (error) {
-      console.error('Error saving segment:', error);
-      res.status(500).json({ error: 'Internal server error' });
+//       await company.save();
+//       res.json({ success: true });
+//     } catch (error) {
+//       console.error('Error saving segment:', error);
+//       res.status(500).json({ error: 'Internal server error' });
+//     }
+//   };
+ // Importing your Mongoose model
+
+export const AddSegment = async (req, res) => {
+  try {
+    const { id } = req.params; // Extracting company ID from request parameters
+    const { category, segment } = req.body; // Extracting category and segment from request body
+
+    const cType = await CType.findById(id);
+    if (!cType) {
+      return res.status(404).json({ message: 'Company type not found' });
     }
-  };
+    // Add the product to the products array
+    // cType.category.push(category);
+    // await cType.save();
+    // Finding the company and updating it to add the segment to the specified category
+    // const updatedCompany = await CType.findOne(
+    cType.segment.push(segment);
+    await cType.save();
+
+    // Sending the updated company as the response
+    res.json(cType);
+  } catch (error) {
+    // Handling errors
+    console.error("Error adding segment:", error);
+    res.status(500).json({ error: "Internal Server Error" }+ error);
+  }
+};

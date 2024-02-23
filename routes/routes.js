@@ -184,7 +184,7 @@ router.get("/view/company/lists", CompanyTypeList);
 router.delete("/policy/company/:id", CompanyDelete);
 router.put("/api/company/:id/category", CategoryAdd);
 router.delete("/api/company/category/:id/delete", categoryTypeDelete);
-router.post("/api/comp/:companyId/segment", AddSegment);
+router.put("/api/comp/:id/segment", AddSegment);
 // fuel 
 router.post("/add/fuel", FuelTypes);
 router.get("/view/fuel", FuelList);
