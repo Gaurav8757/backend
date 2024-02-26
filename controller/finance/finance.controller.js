@@ -5,7 +5,7 @@ import Mailgen from "mailgen";
 import FinanceLogin from "../../models/finance/financeSchema.js";
 import jwt from "jsonwebtoken";
 dotenv.config();
-const {SECRET, EMAIL, PASSWORD, LINK} = process.env;
+const {SECRET, EMAIL, PASSWORD} = process.env;
 
 // ####################################### Register finance ###########################################//
 export const financeRegister = async (req, res) => {
@@ -33,6 +33,81 @@ export const financeRegister = async (req, res) => {
     });
     // Save the new user to the database
     await newUser.save();
+     // Send email to the newly registered user
+     const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: EMAIL, // Your email id
+          pass: PASSWORD, // Your email password
+        },
+      });
+  
+  // Mailgen setup
+  const mailGenerator = new Mailgen({
+    theme: "cerberus",
+    product: {
+        name: "Eleedom IMF Pvt Ltd",
+        link: "https://mailgen.js/",
+        // Adjust the following line accordingly
+        // This will be displayed in the footer of the email
+        copyright: `Copyright © ${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
+    },
+  });
+  
+  // Prepare email content
+  const response = {
+    body: {
+        name: finname,
+        intro: [
+            "Welcome to My Company!.",
+            "Your account has been successfully created with the following credentials:",
+          
+        ],
+        
+        action: [{
+            button: {
+                color: "#209320",
+                text: `Email:   ${finemail}`,
+            },
+           
+        },
+        {
+          button: {
+            color: "#209320",
+            text: `Password:   ${finpassword}`, 
+        },
+        }
+      ],
+        
+        outro: "You can now log in to your account and start using our services.",
+    },
+  };
+  
+  // Generate email
+  const mail = mailGenerator.generate(response);
+  
+  
+  
+  
+      const mailOptions = {
+        from: `"Eleedom IMF Pvt Ltd (Finance)" your_email@gmail.com`, // Sender address
+        to: branchemail, // Receiver's email address
+        subject: "Welcome to Our Eleedom IMF Pvt Ltd!", // Email subject
+        html: mail
+        
+      };
+  
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+          return res.status(500).json({
+            status: "Email not sent",
+            message: "Error sending welcome email",
+          }, error);
+        }
+        return res.status(200).json("Email sent successfully...!" + info.response);
+      });
+  
     return res.status(201).json({
       status: "Finance Admin Registered Successfully",
       message: {
