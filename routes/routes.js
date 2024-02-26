@@ -64,6 +64,7 @@ import { AddSegment, CategoryAdd, CompanyDelete, CompanyTypeList, CompanyTypes, 
 import { FuelDelete, FuelList, FuelTypes } from "../controller/fuel/fuel.controller.js";
 import { PayoutOnAdd, PayoutOnDelete, PayoutOnList } from "../controller/payoutOn/payoutOn.controller.js";
 import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMode/pay.controller.js";
+import { financeRegister, loginFinance } from "../controller/finance/finance.controller.js";
 
 // users Routes
 router.use("/users", routes);
@@ -207,5 +208,12 @@ router.post("/ops/login", loginOps);
 // password change
 router.post("/forgot/ops/pass", forgotOpsPassword);
 router.post("/ops/pass/:id/:token", opsPasswordReset);
+
+// finanace
+router.post("/finance/register", financeRegister);
+router.post("/finance/login", loginFinance);
+
+
+
 
 export default router;
