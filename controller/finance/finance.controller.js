@@ -91,7 +91,7 @@ export const financeRegister = async (req, res) => {
   
       const mailOptions = {
         from: `"Eleedom IMF Pvt Ltd (Finance)" your_email@gmail.com`, // Sender address
-        to: branchemail, // Receiver's email address
+        to: finemail, // Receiver's email address
         subject: "Welcome to Our Eleedom IMF Pvt Ltd!", // Email subject
         html: mail
         
