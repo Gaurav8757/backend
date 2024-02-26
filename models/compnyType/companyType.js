@@ -6,18 +6,15 @@ const CompanyTypeSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
-    category: [
-      {
-        category_name: {
-          type: String,
-          required: true,
-        },
-        segments: {
-          type: [String], // Array of segment names
-          default: [],    // Default to an empty array
-        },
-      },
-    ],
+    category: {
+      type: [String], // Array of segment names
+      default: [],
+    },
+    segment: {
+      type: [String], // Array of segment names
+      default: [],
+    }
+      
   },
   { timestamps: true }
 );
