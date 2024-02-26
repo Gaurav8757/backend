@@ -10,9 +10,9 @@ const {SECRET, EMAIL, PASSWORD, LINK} = process.env;
 // ####################################### Register finance ###########################################//
 export const financeRegister = async (req, res) => {
   try {
-    const { name, email, mobile, password, gender } = req.body;
+    const { finname, finemail, finmobile, finpassword, fingender } = req.body;
     // Check if user already exists in the database
-    const emailExist = await FinanceLogin.findOne({ email });
+    const emailExist = await FinanceLogin.findOne({ finemail });
     if (emailExist) {
       return res.status(400).json({
         status: "User Already Exists",
@@ -21,15 +21,15 @@ export const financeRegister = async (req, res) => {
     }
     // Hash the password
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(finpassword, salt);
 
     // Create a new user
     const newUser = new FinanceLogin({
-      name,
-      email,
-      mobile,
-      gender,
-      password: hashedPassword,
+      finname,
+      finemail,
+      finmobile,
+      fingender,
+      finpassword: hashedPassword,
     });
     // Save the new user to the database
     await newUser.save();
@@ -51,11 +51,11 @@ export const financeRegister = async (req, res) => {
 //######################## login finance ###########################//
 export const loginFinance = async (req, res) => {
   try {
-    const { email, mobile, password } = req.body;
+    const { finemail, finmobile, finpassword } = req.body;
 
     let user;
-    if (email) user = await FinanceLogin.findOne({ email });
-    else if (mobile) user = await FinanceLogin.findOne({ mobile });
+    if (finemail) user = await FinanceLogin.findOne({ finemail });
+    else if (finmobile) user = await FinanceLogin.findOne({ finmobile });
 
     if (!user) {
       return res.status(401).json({
@@ -63,7 +63,7 @@ export const loginFinance = async (req, res) => {
       });
     }
     // password check
-    const isValidPassword = await bcrypt.compare(password, user.password);
+    const isValidPassword = await bcrypt.compare(finpassword, user.finpassword);
     if (!isValidPassword) {
       return res.status(400).json("Password is Incorrect");
     }else{
@@ -81,9 +81,9 @@ export const loginFinance = async (req, res) => {
  
    return res.status(200).json({
         message: "Login Successful",
-        email: user.email,
-        mobile: user.mobile,
-        name: user.name,
+        email: user.finemail,
+        mobile: user.finmobile,
+        name: user.finname,
         token,
       });
     }}

@@ -1,29 +1,29 @@
 import Mongoose from "mongoose";
 const financeSchema = new Mongoose.Schema(
   {
-    name: {
+    finname: {
       type: String,
       required: true,
     },
-    email: {
-      type: String,
-      unique: true,
-      required: true,
-    },
-    mobile: {
+    finemail: {
       type: String,
       unique: true,
       required: true,
     },
-    password: {
+    finmobile: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    finpassword: {
       type: String,
       required: true,
     },
-    confirm_password:{
+    finconfirm_password:{
       type: String,
       
     },
-    gender: {
+    fingender: {
       type: String,
     },
 
