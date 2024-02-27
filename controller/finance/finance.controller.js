@@ -5,7 +5,7 @@ import Mailgen from "mailgen";
 import FinanceLogin from "../../models/finance/financeSchema.js";
 import jwt from "jsonwebtoken";
 dotenv.config();
-const {SECRET, EMAIL, PASSWORD} = process.env;
+const {SECRET, EMAIL, PASSWORD, LINK5} = process.env;
 
 // ####################################### Register finance ###########################################//
 export const financeRegister = async (req, res) => {
@@ -22,7 +22,6 @@ export const financeRegister = async (req, res) => {
     // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(finpassword, salt);
-
     // Create a new user
     const newUser = new FinanceLogin({
       finname,
@@ -41,7 +40,6 @@ export const financeRegister = async (req, res) => {
           pass: PASSWORD, // Your email password
         },
       });
-  
   // Mailgen setup
   const mailGenerator = new Mailgen({
     theme: "cerberus",
@@ -53,7 +51,6 @@ export const financeRegister = async (req, res) => {
         copyright: `Copyright © ${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
     },
   });
-  
   // Prepare email content
   const response = {
     body: {
@@ -68,8 +65,7 @@ export const financeRegister = async (req, res) => {
             button: {
                 color: "#209320",
                 text: `Email:   ${finemail}`,
-            },
-           
+            },   
         },
         {
           button: {
@@ -77,24 +73,18 @@ export const financeRegister = async (req, res) => {
             text: `Password:   ${finpassword}`, 
         },
         }
-      ],
-        
+      ],  
         outro: "You can now log in to your account and start using our services.",
     },
   };
   
   // Generate email
   const mail = mailGenerator.generate(response);
-  
-  
-  
-  
       const mailOptions = {
         from: `"Eleedom IMF Pvt Ltd (Finance)" your_email@gmail.com`, // Sender address
         to: finemail, // Receiver's email address
         subject: "Welcome to Our Eleedom IMF Pvt Ltd!", // Email subject
         html: mail
-        
       };
   
       transporter.sendMail(mailOptions, (error, info) => {
@@ -167,3 +157,93 @@ export const loginFinance = async (req, res) => {
     res.status(500).send("Server Error");
   }
 }
+
+// forgot password through email
+
+export const forgotFinancePassword = async (req, res) => {
+  try {
+    const { finemail } = req.body;
+    const user = await FinanceLogin.findOne({ finemail });
+    if (!user) {
+      return res.status(400).json("Email not found. Register Now!");
+    }
+
+    // Generate a random token
+    const secret = user._id + SECRET;
+    const token = jwt.sign({ userId: user._id }, secret, {
+      expiresIn: "15m",
+    });
+
+    // Generate reset password link
+    const link = `${LINK5}/${user._id}/${token}`;
+    // Nodemailer setup
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: EMAIL, // Your email id
+        pass: PASSWORD, // Your email password
+      },
+    });
+
+    // Mailgen setup
+    const mailGenerator = new Mailgen({
+      theme: "cerberus",
+      product: {
+        name: "Eleedom IMF Pvt Ltd",
+        link: "https://mailgen.js/",
+        // Adjust the following line accordingly
+        // This will be displayed in the footer of the email
+        copyright: `Copyright © ${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
+      },
+    });
+
+    // Prepare email content
+    const response = {
+      body: {
+        name: user.finname,
+        intro: [
+          "You have received this email because a password reset request for your account was received.",
+          "Valid for 15 Minutes only!",
+        ],
+        action: {
+          instructions: "Click the button below to reset your password:",
+          // instructions: link,
+          button: {
+            color: "#A31217",
+            text: "Reset your password",
+            link: link,
+          },
+        },
+
+        outro:
+          "If you did not request a password reset, no further action is required on your part.",
+      },
+    };
+
+    // Generate email
+    const mail = mailGenerator.generate(response);
+
+    // Send email
+    transporter.sendMail(
+      {
+        from: '"Eleedom IMF Pvt Ltd (Finance)" <example@gmail.com>', // Sender address
+        to: user.finemail, // Receiver's email address
+        subject: "Password Reset Request", // Email subject
+        html: mail, // Email content
+      },
+      (error, info) => {
+        if (error) {
+          return res
+            .status(500)
+            .json("Email not sent. Register Yourself!", error);
+        }
+        return res
+          .status(200)
+          .json("Email sent successfully...!" + info.response);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("An error occurred..!", error);
+  }
+};
