@@ -65,6 +65,7 @@ import { FuelDelete, FuelList, FuelTypes } from "../controller/fuel/fuel.control
 import { PayoutOnAdd, PayoutOnDelete, PayoutOnList } from "../controller/payoutOn/payoutOn.controller.js";
 import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMode/pay.controller.js";
 import { financePasswordReset, financeRegister, forgotFinancePassword, loginFinance } from "../controller/finance/finance.controller.js";
+import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
 
 // users Routes
 router.use("/users", routes);
@@ -214,6 +215,13 @@ router.post("/finance/register", financeRegister);
 router.post("/finance/login", loginFinance);
 router.post("/forgot/finance/pass", forgotFinancePassword);
 router.post("/finance/pass/:id/:token", financePasswordReset);
+
+// holidays
+router.post("/holidays/add", hDaysAdd);
+router.post("/holidays/alllists", hDaysList);
+router.post("/holidays/:hdId/delete", hDaysDelete);
+
+
 
 
 export default router;
