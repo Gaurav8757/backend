@@ -219,7 +219,7 @@ router.post("/finance/pass/:id/:token", financePasswordReset);
 // holidays
 router.post("/holidays/add", hDaysAdd);
 router.get("/holidays/alllists", hDaysList);
-router.delete("/holidays/:hdId/delete", hDaysDelete);
+router.delete("/holidays/:id/delete", hDaysDelete);
 
 
 
