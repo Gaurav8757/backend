@@ -1,5 +1,4 @@
 import express from "express";
-
 import {
   createAllInsurance,
   viewAllList,
@@ -10,7 +9,6 @@ import {
 } from "../../controller/masterdetails/masterdetails.controller.js";
 
 const m_details_routes = express.Router();
-
 // add
 m_details_routes.post("/adddata", createAllInsurance);
 

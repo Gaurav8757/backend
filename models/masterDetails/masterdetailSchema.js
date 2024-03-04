@@ -161,6 +161,9 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     employee_id:{
       type: String,
     },
+    currentTime:{
+      type: String,
+    },
     status:{
       type: String,
       default:"Pending"
