@@ -26,6 +26,7 @@ export const createAllInsurance = async (req, res) => {
       fuel,
       gvw,
       cc,
+      rsa,
       engNo,
       chsNo,
       policyType,
@@ -58,6 +59,8 @@ export const createAllInsurance = async (req, res) => {
       staffType,
       employee_id,
       currentTime,
+      empTime,
+      overallTime,
     } = req.body;
 
     const newInsurance = new AllInsurance({
@@ -83,6 +86,7 @@ export const createAllInsurance = async (req, res) => {
       fuel,
       gvw,
       cc,
+      rsa,
       engNo,
       chsNo,
       policyType,
@@ -114,6 +118,8 @@ export const createAllInsurance = async (req, res) => {
       staffName,
       staffType,
       currentTime,
+      empTime,
+      overallTime,
       employee_id
     });
 

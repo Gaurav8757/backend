@@ -74,6 +74,9 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     chsNo: {
       type: String,
     },
+    rsa: {
+      type: String,
+    },
     policyType: {
       type: String,
     },
@@ -162,6 +165,12 @@ const AllInsurancePolicySchema = new mongoose.Schema(
       type: String,
     },
     currentTime:{
+      type: String,
+    },
+    empTime:{
+      type: String,
+    },
+    overallTime:{
       type: String,
     },
     status:{
