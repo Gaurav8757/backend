@@ -91,6 +91,14 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: String,
       // required: true,
     },
+    salary: {
+      type: Number,
+      // required: true,
+    },
+    leavemonth: {
+      type: Number,
+      // required: true,
+    },
   },
   { timestamps: true }
 );

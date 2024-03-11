@@ -21,11 +21,11 @@ import {
   viewEmployee,
 } from "../controller/addemp.controller.js";
 import {
-  addsalaryController,
-  deleteSalary,
+  // addsalaryController,
+  // deleteSalary,
   empList,
   updateSalary,
-  viewSalary,
+  // viewSalary,
 } from "../controller/addsalary.controller.js";
 import {
   addpolicyRegister,
@@ -122,10 +122,10 @@ router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
 
 
 // add or view salary
-router.post("/dashboard/addsalary", addsalaryController);
-router.get("/api/salary-list", viewSalary);
+// router.post("/dashboard/addsalary", addsalaryController);
+// router.get("/api/salary-list", viewSalary);
 router.put("/api/salary/update/:id", updateSalary);
-router.delete("/salary/api/:id", deleteSalary);
+// router.delete("/salary/api/:id", deleteSalary);
 
 // for genrate salary
 router.post("/dashboard/gensalary", genSalaryController);
