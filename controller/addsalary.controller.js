@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-
-import AddEmployee from "../models/addempSchema.js";
+;import AddEmployee from "../models/addempSchema.js";
 // export const addsalaryController = async (req, res) => {
 //   try {
 //     const { empName, salmonth, saleavemonth } = req.body;
@@ -76,7 +74,7 @@ export const updateSalary = async (req, res) => {
     );
 
     return res.status(200).json({
-      status: "Salary Updated Successfully!",
+      status: `Salary Updated Successfully of ${updatedSalary.empname}`,
       message: {
         updatedSalary
       },
