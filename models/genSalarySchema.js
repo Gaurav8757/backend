@@ -23,73 +23,73 @@ const GenPolicySchema = new Mongoose.Schema(
 
     totalDays: {
       type: Number,
-      required: true,
+      // required: true,
     },
     presentDays: {
       type: Number,
-      required: true,
+      // required: true,
     },
     totalHalfDays: {
       type: Number,
-      required: true,
+      // required: true,
     },
     totalAbsent: {
       type: Number,
-      required: true,
+      // required: true,
     },
     genSalary: {
       type: Number,
-      required: true,
+      // required: true,
     },
     incentive: {
       type: Number,
-      required: true,
+      // required: true,
     },
     totalAmount: {
       type: Number,
-      required: true,
+      // required: true,
     },
     
     empgrossSalary: {
         type: Number,
-        required: true,
+        // required: true,
       },
       empbasicSalary: {
         type: Number,
-        required: true,
+        // required: true,
       },
       emphra: {
         type: Number,
-        required: true,
+        // required: true,
       },
       empca: {
         type: Number,
-        required: true,
+        // required: true,
       },
       empmedical: {
         type: Number,
-        required: true,
+        // required: true,
       },
       emptiffin: {
         type: Number,
-        required: true,
+        // required: true,
       },
 
       empcompanyPf: {
         type: Number,
-        required: true,
+        // required: true,
       },
       emppf: {
         type: Number,
-        required: true,
+        // required: true,
       },
       empesi: {
         type: Number,
-        required: true,
+        // required: true,
       },
       emploanemi: {
         type: Number,
-        required: true,
+        // required: true,
       },
   },
   { timestamps: true }
