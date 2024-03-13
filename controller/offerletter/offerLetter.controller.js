@@ -13,11 +13,11 @@ function generateCodes() {
         currentNumber = 1; // Reset the number if the year has changed
     }
     // Generate codes for the current year
-    for (let i = currentNumber; i <= currentNumber + 10; i++) {
+    for (let i = currentNumber; i <= currentNumber; i++) {
         let numberPart = i.toString().padStart(4, '0');
         codes.push(codeFormat + numberPart);
     }
-    currentNumber += 11; // Increment the number for next call
+    currentNumber += 1; // Increment the number for next call
     return codes;
 }
 
@@ -94,3 +94,19 @@ export const OfferLetterList = async (req, res) =>{
           });
     }
 }
+
+// delete OFFer LETTER
+export const offersDelete = async (req, res) => {
+  try {
+    const fId = req.params.id;
+    
+    const deletedOffer = await Fuel.findByIdAndDelete(fId);
+    if (!deletedOffer) {
+      return res.status(404).json({ message: "Offer Letter not found" });
+    }
+    return res.json({ message: `${deletedOffer} Offer Letter deleted successfully..!`});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" } + error);
+  }
+};
