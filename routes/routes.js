@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import routes from "./user_routes/usersRoutes.js";
+import Letter from "./letters/letter.routes.js"
 import hr from "./hrsalary/hrattend.routes.js"
 import { loginAdmin, adminRegister, forgotAdminPassword, adminPasswordReset } from "../controller/login.controller.js";
 import {
@@ -66,6 +67,7 @@ import { PayoutOnAdd, PayoutOnDelete, PayoutOnList } from "../controller/payoutO
 import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMode/pay.controller.js";
 import { financePasswordReset, financeRegister, forgotFinancePassword, loginFinance } from "../controller/finance/finance.controller.js";
 import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
+import letters from "./letters/letter.routes.js";
 
 // users Routes
 router.use("/users", routes);
@@ -73,10 +75,11 @@ router.use("/users", routes);
 router.use("/alldetails", m_details_routes);
 // hrsalary
 router.use("/dashboard", hrouter);
-
-
+// letter
+router.use("/letters", letters);
 // hr attendance
 router.use("/hr", hr);
+
 // admin routes
 // login
 router.post("/loginadmin", loginAdmin);
@@ -84,7 +87,6 @@ router.post("/loginadmin", loginAdmin);
 router.post("/registeradmin", adminRegister);
 router.post("/forgot/admin/pass", forgotAdminPassword);
 router.post("/admin/pass/:id/:token", adminPasswordReset);
-
 // add or view branch
 router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
@@ -93,7 +95,6 @@ router.delete("/dashboard/api/:id", deleteBranch);
 // password change
 router.post("/forgot/branch/pass", forgotBranchPassword);
 router.post("/branch/pass/:id/:token", branchPasswordReset);
-
 // COMPANY
 router.post("/dashboard/addcompany", uploadFile, addCompany);
 router.get("/api/company/company-list", viewCompanies);
@@ -102,11 +103,9 @@ router.get("/api/company/motor-list", viewMotorInsuranceCompanies);
 router.get("/api/company/nonmotor-list", viewNonMotorInsuranceCompanies);
 router.put("/api/company/updatecomp/:id", uploadFile, updateCompany);
 router.delete("/company/api/:id", deleteCompany);
-
 // add or view employee
 router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.post("/login/employee", loginEmployee);
-
 // get all employees details inside hr
 router.get("/api/employee-list", viewEmployee);
 router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
@@ -115,57 +114,42 @@ router.get("/api/employee/:empId", viewByIdEmp);
 // password change
 router.post("/forgot/emp/pass", forgotEmpPassword);
 router.post("/emp/pass/:id/:token", empPasswordReset);
-
 // attendace of employee
 router.post("/employee/mark/attendance/:employeeId", markAttendance);
 router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
-
-
 // add or view salary
-// router.post("/dashboard/addsalary", addsalaryController);
-// router.get("/api/salary-list", viewSalary);
 router.put("/api/salary/update/:id", updateSalary);
-// router.delete("/salary/api/:id", deleteSalary);
-
 // for genrate salary
 router.post("/dashboard/gensalary", genSalaryController);
 router.get("/api/salaries-list", salaryList);
 router.put("/api/salaries/:id", updateGenSalary);
 router.delete("/salaries/api/:id", deleteGenSalary);
-
 // add policy
 router.post("/dashboard/addpolicy", uploadFile, addpolicyRegister);
 router.get("/api/policy-list", viewPolicy);
 router.put("/policies/update/:id", updatePolicy);
 router.delete("/policies/api/:id", deletePolicy);
-
 // employee list api for add salary
 router.get("/api/employee-lists", empList);
-
 // advisor register 
 router.post("/advisor/register", advisorRegister);
 router.post("/advisor/login", loginAdvisor);
 router.get("/advisor/lists", viewAdvisor);
 router.put("/advisor/update/:id", uploadFile, updateAdvisor);
 router.delete("/advisor/lists/:id", deleteAdvisor);
-
 // login Branch using Addbranch database
 router.post("/branches/loginbranch", loginBranch);
 // HR ROUTES
 router.post("/hr/addhr",uploadFile ,addHrRegister);
-
 // hr admin register
 router.post("/hradmin/register", HrAdRegister);
 router.post("/hradmin/login", hrAdminLogin);
 router.post("/forgot/hradmin/pass", forgotHrAdminPassword);
 router.post("/hradmin/pass/:id/:token", HrAdPassReset);
-
-
 router.post("/hr/login", loginHr);
 router.get("/hr/lists", viewHr);
 router.put("/hr/update/:id", updateHr);
 router.delete("/hr/data/:id", deleteHr);
-//
 router.get("/hr/staff/type", listOfEmp);
 
 // add staff type
@@ -220,8 +204,5 @@ router.post("/finance/pass/:id/:token", financePasswordReset);
 router.post("/holidays/add", hDaysAdd);
 router.get("/holidays/alllists", hDaysList);
 router.delete("/holidays/:id/delete", hDaysDelete);
-
-
-
 
 export default router;
