@@ -100,7 +100,7 @@ export const offersDelete = async (req, res) => {
   try {
     const fId = req.params.id;
     
-    const deletedOffer = await Fuel.findByIdAndDelete(fId);
+    const deletedOffer = await OfferLetter.findByIdAndDelete(fId);
     if (!deletedOffer) {
       return res.status(404).json({ message: "Offer Letter not found" });
     }
