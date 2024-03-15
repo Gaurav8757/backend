@@ -1,9 +1,31 @@
 // insurancePolicyController.js
 import AllInsurance from "../../models/masterDetails/masterdetailSchema.js";
 
+const generatePolicyRefNo = async () => {
+  // Get the current year
+  const currentYear = new Date().getFullYear();
+
+  try {
+    // Find the count of insurance policies for the current year
+    const count = await AllInsurance.countDocuments({ policyrefno: { $regex: `EIPL/${currentYear}/` } });
+
+    // Generate the new policy number with leading zeros
+    const policyNumber = (count + 1).toString().padStart(5, '0');
+
+    // Return the formatted policyrefno
+    return `EIPL/${currentYear}/${policyNumber}`;
+  } catch (error) {
+    console.error("Error generating policy reference number:", error);
+    // throw new Error("Failed to generate policy reference number");
+  }
+};
+const policyrefno = await generatePolicyRefNo();
+
+console.log(policyrefno);
 export const createAllInsurance = async (req, res) => {
   try {
     const {
+      
       entryDate,
       company,
       category,
@@ -64,6 +86,7 @@ export const createAllInsurance = async (req, res) => {
     } = req.body;
 
     const newInsurance = new AllInsurance({
+      // policyrefno,
       entryDate,
       company,
       category,

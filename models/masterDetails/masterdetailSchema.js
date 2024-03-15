@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 
 const AllInsurancePolicySchema = new mongoose.Schema(
   {
+    policyrefno: {
+      type: String,
+    },
     entryDate: {
       type: String,
     },
