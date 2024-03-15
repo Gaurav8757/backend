@@ -21,7 +21,7 @@ const generatePolicyRefNo = async () => {
 };
 const policyrefno = await generatePolicyRefNo();
 
-console.log(policyrefno);
+// console.log(policyrefno);
 export const createAllInsurance = async (req, res) => {
   try {
     const {
@@ -86,7 +86,7 @@ export const createAllInsurance = async (req, res) => {
     } = req.body;
 
     const newInsurance = new AllInsurance({
-      // policyrefno,
+      policyrefno,
       entryDate,
       company,
       category,
