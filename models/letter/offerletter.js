@@ -47,3 +47,17 @@ const OfferLetterSchema = new Mongoose.Schema(
 
 const OfferLetter = Mongoose.model("OfferLetter", OfferLetterSchema);
 export default OfferLetter;
+
+
+
+const letterSchema = new Mongoose.Schema(
+  {
+    letterno:{
+        type : String,
+    },
+    sequence:{
+      type: Number
+    }
+  }
+)
+export const LetterCounter = Mongoose.model("LetterCounter",letterSchema);
