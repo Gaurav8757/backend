@@ -3,28 +3,29 @@ import { LetterCounter } from "../../models/letter/offerletter.js";
 
 
 
-// add details of an user
 export const addUserOfferLetter = async (req, res) => {
   try {
-  // Find the counter document for the policy reference numbers or create one if it doesn't exist
-  let counter = await LetterCounter.findOneAndUpdate(
-    { letterno: 'autoval' },
-    { $inc: { sequence: 1 } },
-    { new: true, upsert: true }
-  );
+    // Find the counter document for the policy reference numbers or create one if it doesn't exist
+    let counter = await LetterCounter.findOneAndUpdate(
+      { letterno: 'autoval' },
+      { $inc: { sequence: 1 } },
+      { new: true, upsert: true }
+    );
 
-  let seqId;
-  if (!counter) {
-    // If counter doesn't exist, create a new one with sequence value 1
-    const newCounter = new LetterCounter({ letterno: 'autoval', sequence: 1 });
-    await newCounter.save();
-    seqId = 1;
-  } else {
-    // Use the sequence value from the counter document
-    seqId = counter.seq;
-  }
-// Generate the five-digit policy number with leading zeros
-const policyNumber = seqId.toString().padStart(4, '0');
+    let seqId;
+    if (!counter) {
+      // If counter doesn't exist, create a new one with sequence value 1
+      const newCounter = new LetterCounter({ letterno: 'autoval', sequence: 1 });
+      await newCounter.save();
+      seqId = 1;
+    } else {
+      // Use the sequence value from the counter document
+      seqId = counter.sequence; // Change 'seq' to 'sequence'
+    }
+
+    // Generate the five-digit policy number with leading zeros
+    const policyNumber = seqId.toString().padStart(4, '0');
+
     const {
       ofname,
       ofemail,
@@ -36,7 +37,6 @@ const policyNumber = seqId.toString().padStart(4, '0');
       ofgrosalary,
       ofvalidDate,
     } = req.body;
-    // Generate a reference number
   
     // Check if the user with the given email already exists
     const emailExist = await OfferLetter.findOne({ ofemail });
