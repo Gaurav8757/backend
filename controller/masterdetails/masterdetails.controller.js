@@ -1,31 +1,51 @@
 // insurancePolicyController.js
 import AllInsurance from "../../models/masterDetails/masterdetailSchema.js";
+import { Counter } from "../../models/masterDetails/masterdetailSchema.js";
+// const generatePolicyRefNo = async () => {
+//   // Get the current year
+//   const currentYear = new Date().getFullYear();
 
-const generatePolicyRefNo = async () => {
-  // Get the current year
-  const currentYear = new Date().getFullYear();
+//   try {
+//     // Find the count of insurance policies for the current year
+//     const count = await AllInsurance.countDocuments({ policyrefno: { $regex: `EIPL/${currentYear}/` } });
+// console.log(count);
+//     // Generate the new policy number with leading zeros
+//     const policyNumber = (count + 1).toString().padStart(5, '0');
 
-  try {
-    // Find the count of insurance policies for the current year
-    const count = await AllInsurance.countDocuments({ policyrefno: { $regex: `EIPL/${currentYear}/` } });
+//     // Return the formatted policyrefno
+//     return `EIPL/${currentYear}/${policyNumber}`;
+//   } catch (error) {
+//     console.error("Error generating policy reference number:", error);
+//     // throw new Error("Failed to generate policy reference number");
+//   }
+// };
+// const policyrefno = await generatePolicyRefNo();
 
-    // Generate the new policy number with leading zeros
-    const policyNumber = (count + 1).toString().padStart(5, '0');
 
-    // Return the formatted policyrefno
-    return `EIPL/${currentYear}/${policyNumber}`;
-  } catch (error) {
-    console.error("Error generating policy reference number:", error);
-    // throw new Error("Failed to generate policy reference number");
-  }
-};
-const policyrefno = await generatePolicyRefNo();
-
-// console.log(policyrefno);
 export const createAllInsurance = async (req, res) => {
+
   try {
+     // Find the counter document for the policy reference numbers or create one if it doesn't exist
+     let counter = await Counter.findOneAndUpdate(
+      { policyrefno: 'autoval' },
+      { $inc: { seq: 1 } },
+      { new: true, upsert: true }
+    );
+
+    let seqId;
+    if (!counter) {
+      // If counter doesn't exist, create a new one with sequence value 1
+      const newCounter = new Counter({ policyrefno: 'autoval', seq: 1 });
+      await newCounter.save();
+      seqId = 1;
+    } else {
+      // Use the sequence value from the counter document
+      seqId = counter.seq;
+    }
+ // Generate the five-digit policy number with leading zeros
+ const policyNumber = seqId.toString().padStart(6, '0');
+       
     const {
-      
       entryDate,
       company,
       category,
@@ -86,7 +106,7 @@ export const createAllInsurance = async (req, res) => {
     } = req.body;
 
     const newInsurance = new AllInsurance({
-      policyrefno,
+      policyrefno: `EIPL/${new Date().getFullYear()}/${policyNumber}`,
       entryDate,
       company,
       category,
@@ -153,7 +173,7 @@ export const createAllInsurance = async (req, res) => {
       message: {
         newInsurance,
       },
-    });
+    })
   } catch (error) {
     console.error("Error creating insurance policy:", error);
     res.status(500).json({ error: "Internal Server Error", error });

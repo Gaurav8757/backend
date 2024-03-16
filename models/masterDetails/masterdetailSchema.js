@@ -186,3 +186,18 @@ const AllInsurancePolicySchema = new mongoose.Schema(
 
 const AllInsurance = mongoose.model('AllInsurance', AllInsurancePolicySchema);
 export default AllInsurance;
+
+
+
+const counterSchema = new mongoose.Schema(
+  {
+    policyrefno:{
+        type : String,
+    },
+    seq:{
+      type: Number
+    }
+  }
+)
+export const Counter =mongoose.model("Counter",counterSchema);
+
