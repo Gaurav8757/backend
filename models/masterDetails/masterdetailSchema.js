@@ -177,6 +177,9 @@ const AllInsurancePolicySchema = new mongoose.Schema(
       type: String,
       
     },
+    incmoney: {
+      type: String,
+    },
     overallTime:{
       type: String,
     },
