@@ -173,6 +173,10 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     empTime:{
       type: String,
     },
+    incdate: {
+      type: String,
+      
+    },
     overallTime:{
       type: String,
     },

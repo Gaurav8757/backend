@@ -9,6 +9,10 @@ const OfferLetterSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+    incdate: {
+      type: String,
+      required: true,
+    },
     ofname: {
       type: String,
       required: true,
