@@ -95,6 +95,14 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: Number,
       // required: true,
     },
+    incdate: {
+      type: String,
+      
+    },
+    incmoney: {
+      type: Number,
+      default: 0,
+    },
     leavemonth: {
       type: Number,
       // required: true,
