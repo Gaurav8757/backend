@@ -105,11 +105,9 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     currDate: {
       type: String,
-      terminatedate
     },
     terminatedate: {
       type: String,
-      
     },
 
     leavemonth: {
