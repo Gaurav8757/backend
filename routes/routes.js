@@ -17,6 +17,7 @@ import {
   forgotEmpPassword,
   listOfEmp,
   loginEmployee,
+  applyLeave,
   updateEmployee,
   viewByIdEmp,
   viewEmployee,
@@ -117,6 +118,15 @@ router.post("/emp/pass/:id/:token", empPasswordReset);
 // attendace of employee
 router.post("/employee/mark/attendance/:employeeId", markAttendance);
 router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
+
+// apply for leave
+router.put("/employee/leave/:employee_id", applyLeave);
+
+
+
+
+
+
 // add or view salary
 router.put("/api/salary/update/:id", updateSalary);
 // for genrate salary
@@ -204,5 +214,7 @@ router.post("/finance/pass/:id/:token", financePasswordReset);
 router.post("/holidays/add", hDaysAdd);
 router.get("/holidays/alllists", hDaysList);
 router.delete("/holidays/:id/delete", hDaysDelete);
+
+
 
 export default router;
