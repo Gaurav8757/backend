@@ -531,29 +531,5 @@ export const deleteEmployee = async (req, res) => {
 };
 
 
-// Leave  Application Controller
-// export const applyLeave = async (req, res) => {
-//     try {
-//       const { employee_id } = req.params;
-//       const { startDate, endDate, reason } = req.body;
-  
-//       let leave = await AddEmployee.findOne({ employee_id });
-//       if (!leave) {
-//         // If leave application doesn't exist for the employee, create a new one
-//         leave = new AddEmployee({
-//           employee_id,
-//           leaveDetails: [{ dateRange: { startDate, endDate }, reasonForLeave: reason }]
-//         });
-//         await leave.save();
-//       } else {
-//         // If leave application exists for the employee, add a new date range and reason for leave
-//         leave.leaveDetails.push({ dateRange: { startDate, endDate }, reasonForLeave: reason });
-//         await leave.save();
-//       }
-//       res.status(201).json({ message: 'Leave applied successfully', leave });
-//     } catch (error) {
-//       console.error('Error applying leave:', error);
-//       res.status(500).json({ error: 'Error applying leave' });
-//     }
-//   };
+
   

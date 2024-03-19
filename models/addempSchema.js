@@ -5,7 +5,7 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: String,
       // required: true,
     },
-    uniqueid:{
+    uniqueid: {
       type: String,
     },
     empname: {
@@ -67,7 +67,6 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     ifsc: {
       type: String,
-      
     },
     pan: {
       type: String,
@@ -80,9 +79,9 @@ const AddEmployeeSchema = new Mongoose.Schema(
       type: String,
       unique: true, // Ensure uniqueness
       sparse: true, // Allow multiple documents to have a null value
-      default: "NA"
+      default: "NA",
     },
-    staffType:{
+    staffType: {
       type: String,
       ref: "StaffType",
       // required: true,
@@ -97,7 +96,6 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     incdate: {
       type: String,
-      
     },
     incmoney: {
       type: Number,
@@ -110,11 +108,11 @@ const AddEmployeeSchema = new Mongoose.Schema(
       {
         dateRange: {
           startDate: String,
-          endDate: String
+          endDate: String,
         },
         reasonForLeave: String,
         status: Boolean,
-      }
+      },
     ],
     terminatedate: {
       type: String,
@@ -129,4 +127,3 @@ const AddEmployeeSchema = new Mongoose.Schema(
 
 const AddEmployee = Mongoose.model("AddEmployee", AddEmployeeSchema);
 export default AddEmployee;
-
