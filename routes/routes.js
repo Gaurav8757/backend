@@ -125,8 +125,6 @@ router.put("/employee/leave/:employee_id", applyLeave);
 
 
 
-
-
 // add or view salary
 router.put("/api/salary/update/:id", updateSalary);
 // for genrate salary
