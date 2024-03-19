@@ -550,9 +550,9 @@ export const applyLeave = async(req, res)=>{
       leave.leaveDetails.push({ dateRange: { startDate, endDate }, reasonForLeave: reason });
       await leave.save();
     }
-   return res.status(201).json('Leave Applied Successfully...!');
+   return res.status(201).json('Leave Applied Successfully...!'+ leave);
   } catch (error) {
      console.error('Error in Applying leave Application', error);
-    res.status(500).send('Error in Applying leave Application');
+    res.status(500).send('Error in Applying leave Application' + error);
   }
 }

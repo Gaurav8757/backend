@@ -14,7 +14,7 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     emppassword: {
       type: String,
-      required: true,
+      // required: true,
     },
     confirmemp_password: {
       type: String,
