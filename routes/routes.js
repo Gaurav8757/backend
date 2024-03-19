@@ -17,7 +17,7 @@ import {
   forgotEmpPassword,
   listOfEmp,
   loginEmployee,
-  applyLeave,
+  // applyLeave,
   updateEmployee,
   viewByIdEmp,
   viewEmployee,
@@ -120,7 +120,7 @@ router.post("/employee/mark/attendance/:employeeId", markAttendance);
 router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
 
 // apply for leave
-router.put("/employee/leave/:employee_id", applyLeave);
+// router.put("/employee/leave/:employee_id", applyLeave);
 
 
 

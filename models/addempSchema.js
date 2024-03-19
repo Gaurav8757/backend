@@ -128,3 +128,4 @@ const AddEmployeeSchema = new Mongoose.Schema(
 
 const AddEmployee = Mongoose.model("AddEmployee", AddEmployeeSchema);
 export default AddEmployee;
+
