@@ -111,7 +111,7 @@ const AddEmployeeSchema = new Mongoose.Schema(
           endDate: String,
         },
         reasonForLeave: String,
-        status: Boolean,
+        status: String,
         counts: Number,
       },
     ],
