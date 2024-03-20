@@ -108,7 +108,8 @@ const AddEmployeeSchema = new Mongoose.Schema(
       {
         dateRange: {
           startDate: String,
-          endDate: String,
+
+          endDate: { type: String, default: '' },
         },
         reasonForLeave: String,
         status: String,
