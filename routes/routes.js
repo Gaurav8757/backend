@@ -18,6 +18,7 @@ import {
   listOfEmp,
   loginEmployee,
   // applyLeave,
+  updateLeaveStatus,
   updateEmployee,
   viewByIdEmp,
   viewEmployee,
@@ -112,6 +113,7 @@ router.get("/api/employee-list", viewEmployee);
 router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
 router.get("/api/employee/:empId", viewByIdEmp);
+router.put('/employee/:empid/leave/:id', updateLeaveStatus);
 // password change
 router.post("/forgot/emp/pass", forgotEmpPassword);
 router.post("/emp/pass/:id/:token", empPasswordReset);

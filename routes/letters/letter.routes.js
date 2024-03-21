@@ -5,5 +5,6 @@ import { addUserOfferLetter, OfferLetterList, offersDelete, updateLetters } from
 letters.post("/add/offer", addUserOfferLetter);
 letters.get("/view/offer", OfferLetterList);
 letters.put("/update/letter/:id", updateLetters);
+// letters.put("/:empid/leave/:leaveid", updateLeaveStatus);
 letters.delete("/delete/offer/:id", offersDelete);
 export default letters;

@@ -530,6 +530,42 @@ export const deleteEmployee = async (req, res) => {
   }
 };
 
+// Assuming you have a Mongoose model for Employee named AddEmployee
+
+export const updateLeaveStatus = async (req, res) => {
+  try {
+    const { empid, id } = req.params;
+    const { status } = req.body; // Assuming status is sent in the request body
+
+    // Find the employee by ID
+    const employee = await AddEmployee.findById(empid);
+
+    // Check if employee exists
+    if (!employee) {
+      return res.status(404).json({ error: 'Employee not found' });
+    }
+
+    // Find the leave detail with the given ID within the employee's leaveDetails array
+    const leaveDetail = employee.leaveDetails.find(detail => detail._id.toString() === id);
+
+    // Check if leave detail exists
+    if (!leaveDetail) {
+      return res.status(404).json({ error: 'Leave detail not found' });
+    }
+
+    // Update the status of the leave detail
+    leaveDetail.status = status;
+
+    // Save the updated employee document
+    await employee.save();
+
+    // Respond with success message
+    return res.json({ message: 'Leave status updated successfully', leaveDetail });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 
   
