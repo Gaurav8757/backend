@@ -560,7 +560,7 @@ export const updateLeaveStatus = async (req, res) => {
     await employee.save();
 
     // Respond with success message
-    return res.json({ message: 'Leave status updated successfully', leaveDetail });
+    return res.json({ message: 'Leave Status Updated Successfully...!', leaveDetail });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal server error' });
