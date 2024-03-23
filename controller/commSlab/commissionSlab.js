@@ -1,4 +1,4 @@
-import VehicleSlab from "../commSlab/vehicleSlab.js";
+import VehicleSlab from "../../models/commSlab/vehiclesslab.js";
 
 export const cvehicleSlab = async (req, res) => {
   try {
@@ -14,7 +14,7 @@ export const cvehicleSlab = async (req, res) => {
       cvpercentage,
     } = req.body;
     // Create a new VehicleSlab instance
-    const newVehicleSlab = new VehicleSlab({
+    const newVehicleSlab = new vehicleSlab({
       VehicleSlab,
       cnames,
       catnames,
@@ -34,7 +34,7 @@ export const cvehicleSlab = async (req, res) => {
   } catch (error) {
     // Handle errors
     console.error("Error saving CV-VehicleSlab:", error);
-    return res.status(500).json({ error: "Failed to save CV-VehicleSlab" });
+    return res.status(500).json({ error: "Failed to save CV-VehicleSlab" + error });
   }
 };
 
@@ -43,7 +43,7 @@ export const cvehicleSlab = async (req, res) => {
 export const viewAllCVehicleSlab = async (req, res) => {
   try {
     // Fetch all VehicleSlab documents from the database
-    const vehicleSlabs = await VehicleSlab.find();
+    const vehicleSlabs = await vehicleSlab.find();
     // Respond with the retrieved documents
     return res.status(200).json(vehicleSlabs);
   } catch (error) {
@@ -60,7 +60,7 @@ export const TWvehicleSlab = async (req, res) => {
     try {
       const { VehicleSlab, cnames, catnames, segments, policytypes, pcodes, vage, payoutons, cvpercentage, vfuels, vncb, voddiscount, vcc } = req.body;
       // Create a new VehicleSlab instance
-      const newVehicleSlab = new VehicleSlab({
+      const newVehicleSlab = new vehicleSlab({
         VehicleSlab,
         cnames,
         catnames,
