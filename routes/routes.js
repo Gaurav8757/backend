@@ -70,6 +70,7 @@ import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMod
 import { financePasswordReset, financeRegister, forgotFinancePassword, loginFinance } from "../controller/finance/finance.controller.js";
 import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
 import letters from "./letters/letter.routes.js";
+import { TWvehicleSlab, cvehicleSlab } from "../controller/commSlab/commissionSlab.js";
 
 // users Routes
 router.use("/users", routes);
@@ -121,9 +122,9 @@ router.post("/emp/pass/:id/:token", empPasswordReset);
 router.post("/employee/mark/attendance/:employeeId", markAttendance);
 router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
 
-// apply for leave
-// router.put("/employee/leave/:employee_id", applyLeave);
-
+// apply for PAYMENTS
+router.post("/commission/slab/add", cvehicleSlab);
+router.post("/commission/slab/tw/add", TWvehicleSlab);
 
 
 

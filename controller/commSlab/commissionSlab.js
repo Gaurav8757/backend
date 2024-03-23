@@ -1,0 +1,85 @@
+import VehicleSlab from "../../models/commSlab/vehiclesslab.js";
+
+export const cvehicleSlab = async (req, res) => {
+  try {
+    const {
+      VehicleSlab,
+      cnames,
+      segments,
+      policytypes,
+      pcodes,
+      vage,
+      payoutons,
+      cvpercentage,
+    } = req.body;
+    // Create a new VehicleSlab instance
+    const newVehicleSlab = new VehicleSlab({
+      VehicleSlab,
+      cnames,
+      segments,
+      policytypes,
+      pcodes,
+      vage,
+      payoutons,
+      cvpercentage,
+    });
+    // Save the new VehicleSlab document to the database
+    await newVehicleSlab.save();
+    // Respond with success message
+    return res
+      .status(201)
+      .json({ message: "CV-VehicleSlab saved Successfully...!" });
+  } catch (error) {
+    // Handle errors
+    console.error("Error saving CV-VehicleSlab:", error);
+    return res.status(500).json({ error: "Failed to save CV-VehicleSlab" });
+  }
+};
+
+
+// VIEW  ALL DATA OF VEHICLE SLAB
+export const viewAllCVehicleSlab = async (req, res) => {
+  try {
+    // Fetch all VehicleSlab documents from the database
+    const vehicleSlabs = await VehicleSlab.find();
+    // Respond with the retrieved documents
+    return res.status(200).json(vehicleSlabs);
+  } catch (error) {
+    // Handle errors
+    console.error("Error fetching VehicleSlabs:", error);
+    return res.status(500).json({ error: "Failed to fetch CV-VehicleSlab" });
+  }
+};
+
+
+
+// PRIVATE CAR 
+export const TWvehicleSlab = async (req, res) => {
+    try {
+      const { VehicleSlab, cnames, segments, policytypes, pcodes, vage, payoutons, cvpercentage, vfuels, vncb, voddiscount, vcc } = req.body;
+      // Create a new VehicleSlab instance
+      const newVehicleSlab = new VehicleSlab({
+        VehicleSlab,
+        cnames,
+        segments,
+        policytypes,
+        pcodes,
+        vage,
+        payoutons,
+        cvpercentage,
+        vfuels,
+        vncb,
+        voddiscount,
+        vcc
+      });
+      // Save the new VehicleSlab document to the database
+      await newVehicleSlab.save();
+      // Respond with success message
+      return res.status(201).json({ message: 'TW Commission saved Successfully...!' });
+    } catch (error) {
+      // Handle errors
+      console.error('Error saving TW Slab:', error);
+      return res.status(500).json({ error: 'Failed to save TW Slab' });
+    }
+  };
+  
