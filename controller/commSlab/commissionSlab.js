@@ -82,7 +82,7 @@ export const TWvehicleSlab = async (req, res) => {
     } catch (error) {
       // Handle errors
       console.error('Error saving TW Slab:', error);
-      return res.status(500).json({ error: 'Failed to save TW Slab' });
+      return res.status(500).json({ error: 'Failed to save TW Slab' + error});
     }
   };
   
