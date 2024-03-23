@@ -60,7 +60,7 @@ export const TWvehicleSlab = async (req, res) => {
     try {
       const { vehicleSlab, cnames, catnames, segments, policytypes, pcodes, vage, payoutons, cvpercentage, vfuels, vncb, voddiscount, vcc } = req.body;
       // Create a new VehicleSlab instance
-      const newVehicleSlab = new vehicleSlab({
+      const newVehicleSlab = new VehicleSlab({
         vehicleSlab,
         cnames,
         catnames,
