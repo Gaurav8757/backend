@@ -3,7 +3,7 @@ import VehicleSlab from "../../models/commSlab/vehiclesslab.js";
 export const cvehicleSlab = async (req, res) => {
   try {
     const {
-      VehicleSlab,
+      vehicleSlab,
       cnames,
       segments,
       policytypes,
@@ -14,8 +14,8 @@ export const cvehicleSlab = async (req, res) => {
       cvpercentage,
     } = req.body;
     // Create a new VehicleSlab instance
-    const newVehicleSlab = new vehicleSlab({
-      VehicleSlab,
+    const newVehicleSlab = new VehicleSlab({
+      vehicleSlab,
       cnames,
       catnames,
       segments,
@@ -43,7 +43,7 @@ export const cvehicleSlab = async (req, res) => {
 export const viewAllCVehicleSlab = async (req, res) => {
   try {
     // Fetch all VehicleSlab documents from the database
-    const vehicleSlabs = await vehicleSlab.find();
+    const vehicleSlabs = await VehicleSlab.find();
     // Respond with the retrieved documents
     return res.status(200).json(vehicleSlabs);
   } catch (error) {
@@ -58,10 +58,10 @@ export const viewAllCVehicleSlab = async (req, res) => {
 // PRIVATE CAR 
 export const TWvehicleSlab = async (req, res) => {
     try {
-      const { VehicleSlab, cnames, catnames, segments, policytypes, pcodes, vage, payoutons, cvpercentage, vfuels, vncb, voddiscount, vcc } = req.body;
+      const { vehicleSlab, cnames, catnames, segments, policytypes, pcodes, vage, payoutons, cvpercentage, vfuels, vncb, voddiscount, vcc } = req.body;
       // Create a new VehicleSlab instance
       const newVehicleSlab = new vehicleSlab({
-        VehicleSlab,
+        vehicleSlab,
         cnames,
         catnames,
         segments,

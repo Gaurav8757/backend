@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 
 const VehicleSlabSchema = new Mongoose.Schema(
   {
-    VehicleSlab: {
+    vehicleSlab: {
       type: String,
       // required: true,
     },
