@@ -10,46 +10,49 @@ const VehicleSlabSchema = new Mongoose.Schema(
       type: String,
       // required: true,
     },
+    catnames: {
+      type: String,
+    },
     segments: {
-        type: String,
-        // required: true,
-      },
-      policytypes: {
-        type: String,
-        // required: true,
-      },
-      pcodes: {
-        type: String,
-        // required: true,
-      },
-      vage:{
-        type: String,
-        // required: true,
-      },
-       payoutons: {
-        type: String,
-        // required: true,
-      },
-      cvpercentage:{
-        type: Number,
-        // required: true,
-      },
-      vfuels:{
-        type: String,
-        // required: true,
-      },
-       vncb: {
-        type: Number,
-        // required: true,
-      },
-      voddiscount:{
-        type: Number,
-        // required: true,
-      },
-      vcc:{
-        type: String,
-        // required: true,
-      },
+      type: String,
+      // required: true,
+    },
+    policytypes: {
+      type: String,
+      // required: true,
+    },
+    pcodes: {
+      type: String,
+      // required: true,
+    },
+    vage: {
+      type: String,
+      // required: true,
+    },
+    payoutons: {
+      type: String,
+      // required: true,
+    },
+    cvpercentage: {
+      type: Number,
+      // required: true,
+    },
+    vfuels: {
+      type: String,
+      // required: true,
+    },
+    vncb: {
+      type: Number,
+      // required: true,
+    },
+    voddiscount: {
+      type: Number,
+      // required: true,
+    },
+    vcc: {
+      type: String,
+      // required: true,
+    },
   },
   { timestamps: true }
 );
