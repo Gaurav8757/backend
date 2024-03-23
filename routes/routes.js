@@ -71,7 +71,6 @@ import { financePasswordReset, financeRegister, forgotFinancePassword, loginFina
 import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
 import letters from "./letters/letter.routes.js";
 import { TWvehicleSlab, cvehicleSlab, viewAllCVehicleSlab } from "../controller/commSlab/commissionSlab.js";
-
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -82,7 +81,6 @@ router.use("/dashboard", hrouter);
 router.use("/letters", letters);
 // hr attendance
 router.use("/hr", hr);
-
 // admin routes
 // login
 router.post("/loginadmin", loginAdmin);
@@ -121,14 +119,10 @@ router.post("/emp/pass/:id/:token", empPasswordReset);
 // attendace of employee
 router.post("/employee/mark/attendance/:employeeId", markAttendance);
 router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
-
 // apply for PAYMENTS
 router.post("/commission/slab/add", cvehicleSlab);
 router.post("/commission1/slab/tw/add", TWvehicleSlab);
 router.get("/commission/slab/view", viewAllCVehicleSlab);
-
-
-
 // add or view salary
 router.put("/api/salary/update/:id", updateSalary);
 // for genrate salary
