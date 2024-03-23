@@ -4,7 +4,7 @@ const VehicleSlabSchema = new Mongoose.Schema(
   {
     VehicleSlab: {
       type: String,
-      required: true,
+      // required: true,
     },
     cnames: {
       type: String,
