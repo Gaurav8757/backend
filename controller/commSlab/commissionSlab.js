@@ -1,4 +1,4 @@
-import VehicleSlab from "../../models/commSlab/vehiclesslab.js";
+import VehicleSlab from "../../models/commSlab/vehiclesslab";
 
 export const cvehicleSlab = async (req, res) => {
   try {
