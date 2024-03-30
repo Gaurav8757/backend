@@ -37,6 +37,10 @@ const VehicleSlabSchema = new Mongoose.Schema(
       type: Number,
       // required: true,
     },
+    branchpayoutper: {
+      type: Number,
+      // required: true,
+    },
     vfuels: {
       type: String,
       // required: true,

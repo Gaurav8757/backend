@@ -12,6 +12,7 @@ export const cvehicleSlab = async (req, res) => {
       vage,
       payoutons,
       cvpercentage,
+      branchpayoutper,
     } = req.body;
     // Create a new VehicleSlab instance
     const newVehicleSlab = new VehicleSlab({
@@ -24,6 +25,7 @@ export const cvehicleSlab = async (req, res) => {
       vage,
       payoutons,
       cvpercentage,
+      branchpayoutper,
     });
     // Save the new VehicleSlab document to the database
     await newVehicleSlab.save();
@@ -58,7 +60,7 @@ export const viewAllCVehicleSlab = async (req, res) => {
 // PRIVATE CAR 
 export const TWvehicleSlab = async (req, res) => {
     try {
-      const { vehicleSlab, cnames, catnames, segments, policytypes, pcodes, vage, payoutons, cvpercentage, vfuels, vncb, voddiscount, vcc } = req.body;
+      const { vehicleSlab, cnames, catnames, segments, policytypes, pcodes, vage, payoutons, cvpercentage, vfuels, vncb, voddiscount, vcc, branchpayoutper } = req.body;
       // Create a new VehicleSlab instance
       const newVehicleSlab = new VehicleSlab({
         vehicleSlab,
@@ -73,7 +75,8 @@ export const TWvehicleSlab = async (req, res) => {
         vfuels,
         vncb,
         voddiscount,
-        vcc
+        vcc,
+        branchpayoutper
       });
       // Save the new VehicleSlab document to the database
       await newVehicleSlab.save();
