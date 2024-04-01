@@ -56,7 +56,12 @@ const VehicleSlabSchema = new Mongoose.Schema(
     vcc: {
       type: String,
       // required: true,
+    }, 
+    companypayoutper: {
+      type: Number,
+      // required: true,
     },
+
   },
   { timestamps: true }
 );
