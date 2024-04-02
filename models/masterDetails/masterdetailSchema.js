@@ -143,6 +143,9 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     advisorPayableAmount: {
       type: Number,
     },
+    advisorPayoutAmount: {
+      type: Number,
+    },
     branchPayout: {
       type: Number,
     },
