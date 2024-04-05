@@ -14,7 +14,9 @@ const AdvisorSchema = new Mongoose.Schema(
       type: String,
       // required: true,
     },
-
+    branch:{
+      type: String,
+    },
     advisoremail: {
       type: String,
       required: true,
