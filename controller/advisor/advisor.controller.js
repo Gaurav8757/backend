@@ -8,47 +8,6 @@ dotenv.config();
 const { SECRET } = process.env;
 
 // ************************* Advisor ************************* //
-// export const advisorRegister = async (req, res) => {
-//   try {
-//     const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress } =
-//       req.body;
-
-//     // Check if the user with the given email already exists
-//     const emailExist = await Advisor.findOne({ advisoremail });
-//     if (emailExist) {
-//       return res.status(400).json({
-//         status: "Advisor Already Exists",
-//         message: "Advisor with this email already exists.",
-//       });
-//     }
-//    // Hash the password
-//    const salt = await bcrypt.genSalt(10);
-//    const hashedPassword = await bcrypt.hash(advisorpassword, salt);
-//     // Create a new user
-//     const newAdvisor = new Advisor({
-//       advisorname,
-//       advisoremail,
-//       advisormobile,
-//       advisoraddress,
-//       advisorpassword: hashedPassword,
-//     });
-//     // Save the new user to the database
-//     await newAdvisor.save();
-
-//     return res.status(201).json({
-//       status: "New Advisor Added Successfully...!",
-//       message: {
-//         newAdvisor,
-//       },
-//     });
-//   } catch (err) {
-//     return res.status(400).json({
-//       status: "Error to Adding Advisor",
-//       message: err.message,
-//     });
-//   }
-// };
-
 export const advisorRegister = async (req, res) => {
   try {
     const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch } =
@@ -120,11 +79,10 @@ console.log(nextUniqueId);
 
 
 
-//######################## login admin ###########################//
+//######################## login advisor ###########################//
 export const loginAdvisor = async (req, res) => {
     try {
       const { advisoremail, advisormobile, advisorpassword } = req.body;
-  
       let advisory;
       if (advisoremail) advisory = await Advisor.findOne({ advisoremail });
       else if (advisormobile) advisory = await Advisor.findOne({ advisormobile });
@@ -134,7 +92,6 @@ export const loginAdvisor = async (req, res) => {
           message: "Advisor Not Found",
         });
       }
-
 
       const isValidPassword = await bcrypt.compare(advisorpassword, advisory.advisorpassword);
       if (!isValidPassword) {
@@ -152,7 +109,7 @@ export const loginAdvisor = async (req, res) => {
     );
     return res.status(200).json({
         message: "Login Successful",
-        // advisory,
+        advisory,
         token,
     })
 }
