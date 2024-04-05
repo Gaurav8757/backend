@@ -2,6 +2,20 @@ import Mongoose from "mongoose";
 
 const VehicleSlabSchema = new Mongoose.Schema(
   {
+    advisor: {
+      type: Schema.Types.ObjectId,
+      ref: "Advisor",
+      required: true
+    },
+    advisorName: {
+      type: String,
+      required: true
+    },
+    advisorUniqueId: {
+      type: String,
+      required: true
+    },
+    
     vehicleSlab: {
       type: String,
       // required: true,

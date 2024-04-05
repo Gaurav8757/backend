@@ -3,6 +3,10 @@ import VehicleSlab from "../../models/commSlab/vehiclesslab.js";
 export const cvehicleSlab = async (req, res) => {
   try {
     const {
+      advisor,
+      advisorName,
+      advisorUniqueId,
+      
       vehicleSlab,
       cnames,
       segments,
@@ -10,7 +14,10 @@ export const cvehicleSlab = async (req, res) => {
       pcodes,
       catnames,
       vage,
-      vfuels, vncb, voddiscount, vcc,
+      vfuels,
+      vncb,
+      voddiscount,
+      vcc,
       payoutons,
       cvpercentage,
       branchpayoutper,
@@ -18,6 +25,9 @@ export const cvehicleSlab = async (req, res) => {
     } = req.body;
     // Create a new VehicleSlab instance
     const newVehicleSlab = new VehicleSlab({
+      advisor,
+      advisorName,
+      advisorUniqueId,
       vehicleSlab,
       cnames,
       catnames,
@@ -25,11 +35,14 @@ export const cvehicleSlab = async (req, res) => {
       policytypes,
       pcodes,
       vage,
-      vfuels, vncb, voddiscount, vcc,
+      vfuels,
+      vncb,
+      voddiscount,
+      vcc,
       payoutons,
       cvpercentage,
       branchpayoutper,
-      companypayoutper
+      companypayoutper,
     });
     // Save the new VehicleSlab document to the database
     await newVehicleSlab.save();
@@ -40,10 +53,11 @@ export const cvehicleSlab = async (req, res) => {
   } catch (error) {
     // Handle errors
     console.error("Error saving CV-VehicleSlab:", error);
-    return res.status(500).json({ error: "Failed to save CV-VehicleSlab" + error });
+    return res
+      .status(500)
+      .json({ error: "Failed to save CV-VehicleSlab" + error });
   }
 };
-
 
 // VIEW  ALL DATA OF VEHICLE SLAB
 export const viewAllCVehicleSlab = async (req, res) => {
@@ -59,38 +73,59 @@ export const viewAllCVehicleSlab = async (req, res) => {
   }
 };
 
-
-
-// PRIVATE CAR 
+// PRIVATE CAR
 export const TWvehicleSlab = async (req, res) => {
-    try {
-      const { vehicleSlab, cnames, catnames, segments, policytypes, pcodes, vage, payoutons, cvpercentage, vfuels, vncb, voddiscount, vcc, branchpayoutper, companypayoutper } = req.body;
-      // Create a new VehicleSlab instance
-      const newVehicleSlab = new VehicleSlab({
-        vehicleSlab,
-        cnames,
-        catnames,
-        segments,
-        policytypes,
-        pcodes,
-        vage,
-        payoutons,
-        cvpercentage,
-        vfuels,
-        vncb,
-        voddiscount,
-        vcc,
-        branchpayoutper,
-        companypayoutper
-      });
-      // Save the new VehicleSlab document to the database
-      await newVehicleSlab.save();
-      // Respond with success message
-      return res.status(201).json({ message: 'TW Commission saved Successfully...!' });
-    } catch (error) {
-      // Handle errors
-      console.error('Error saving TW Slab:', error);
-      return res.status(500).json({ error: 'Failed to save TW Slab' + error});
-    }
-  };
-  
+  try {
+    const {
+      advisor,
+      advisorName,
+      advisorUniqueId,
+      vehicleSlab,
+      cnames,
+      catnames,
+      segments,
+      policytypes,
+      pcodes,
+      vage,
+      payoutons,
+      cvpercentage,
+      vfuels,
+      vncb,
+      voddiscount,
+      vcc,
+      branchpayoutper,
+      companypayoutper,
+    } = req.body;
+    // Create a new VehicleSlab instance
+    const newVehicleSlab = new VehicleSlab({
+      advisor,
+      advisorName,
+      advisorUniqueId,
+      vehicleSlab,
+      cnames,
+      catnames,
+      segments,
+      policytypes,
+      pcodes,
+      vage,
+      payoutons,
+      cvpercentage,
+      vfuels,
+      vncb,
+      voddiscount,
+      vcc,
+      branchpayoutper,
+      companypayoutper,
+    });
+    // Save the new VehicleSlab document to the database
+    await newVehicleSlab.save();
+    // Respond with success message
+    return res
+      .status(201)
+      .json({ message: "TW Commission saved Successfully...!" });
+  } catch (error) {
+    // Handle errors
+    console.error("Error saving TW Slab:", error);
+    return res.status(500).json({ error: "Failed to save TW Slab" + error });
+  }
+};
