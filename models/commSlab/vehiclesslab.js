@@ -3,7 +3,7 @@ import Mongoose from "mongoose";
 const VehicleSlabSchema = new Mongoose.Schema(
   {
     advisorId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "Advisor",
       required: true
     },
