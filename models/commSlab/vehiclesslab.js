@@ -1,10 +1,10 @@
 import Mongoose from "mongoose";
-// import Advisor from "../advisor/advisorSchema";
+
 const VehicleSlabSchema = new Mongoose.Schema(
   {
-    advisor: {
-      type: String,
-      // ref: "Advisor",
+    advisorId: {
+      type: Schema.Types.ObjectId,
+      ref: "Advisor",
       required: true
     },
     advisorName: {
