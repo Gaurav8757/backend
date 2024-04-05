@@ -75,7 +75,7 @@ export const advisorRegister = async (req, res) => {
 
     // Generate the next unique ID
     let nextUniqueId = "EIMF/ADV/#" + lastId + "A";
-
+console.log(nextUniqueId);
     // Function to cycle through letters
     const getNextLetter = (currentLetter) => {
       const ascii = currentLetter.charCodeAt(0);
