@@ -68,8 +68,8 @@ export const viewAllCVehicleSlab = async (req, res) => {
     return res.status(200).json(vehicleSlabs);
   } catch (error) {
     // Handle errors
-    console.error("Error fetching VehicleSlabs:", error);
-    return res.status(500).json({ error: "Failed to fetch CV-VehicleSlab" });
+    console.error("Error fetching Payout Slab:", error);
+    return res.status(500).json({ error: "Failed to fetch Payout Slab" });
   }
 };
 
