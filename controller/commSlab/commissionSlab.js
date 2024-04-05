@@ -3,7 +3,7 @@ import VehicleSlab from "../../models/commSlab/vehiclesslab.js";
 export const cvehicleSlab = async (req, res) => {
   try {
     const {
-      advisor,
+      advisorId,
       advisorName,
       advisorUniqueId,
       
@@ -25,7 +25,7 @@ export const cvehicleSlab = async (req, res) => {
     } = req.body;
     // Create a new VehicleSlab instance
     const newVehicleSlab = new VehicleSlab({
-      advisor,
+      advisorId,
       advisorName,
       advisorUniqueId,
       vehicleSlab,
@@ -77,7 +77,7 @@ export const viewAllCVehicleSlab = async (req, res) => {
 export const TWvehicleSlab = async (req, res) => {
   try {
     const {
-      advisor,
+      advisorId,
       advisorName,
       advisorUniqueId,
       vehicleSlab,
@@ -98,7 +98,7 @@ export const TWvehicleSlab = async (req, res) => {
     } = req.body;
     // Create a new VehicleSlab instance
     const newVehicleSlab = new VehicleSlab({
-      advisor,
+      advisorId,
       advisorName,
       advisorUniqueId,
       vehicleSlab,

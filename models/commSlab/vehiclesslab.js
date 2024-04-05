@@ -2,8 +2,8 @@ import Mongoose from "mongoose";
 
 const VehicleSlabSchema = new Mongoose.Schema(
   {
-    advisor: {
-      type: Schema.Types.ObjectId,
+    advisorId: {
+      type: String,
       ref: "Advisor",
       required: true
     },
@@ -15,7 +15,7 @@ const VehicleSlabSchema = new Mongoose.Schema(
       type: String,
       required: true
     },
-    
+
     vehicleSlab: {
       type: String,
       // required: true,
