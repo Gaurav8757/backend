@@ -4,7 +4,7 @@ const VehicleSlabSchema = new Mongoose.Schema(
   {
     advisor: {
       type: String,
-      ref: "Advisor",
+      // ref: "Advisor",
       required: true
     },
     advisorName: {
