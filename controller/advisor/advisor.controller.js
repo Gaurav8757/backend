@@ -8,9 +8,50 @@ dotenv.config();
 const { SECRET } = process.env;
 
 // ************************* Advisor ************************* //
+// export const advisorRegister = async (req, res) => {
+//   try {
+//     const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress } =
+//       req.body;
+
+//     // Check if the user with the given email already exists
+//     const emailExist = await Advisor.findOne({ advisoremail });
+//     if (emailExist) {
+//       return res.status(400).json({
+//         status: "Advisor Already Exists",
+//         message: "Advisor with this email already exists.",
+//       });
+//     }
+//    // Hash the password
+//    const salt = await bcrypt.genSalt(10);
+//    const hashedPassword = await bcrypt.hash(advisorpassword, salt);
+//     // Create a new user
+//     const newAdvisor = new Advisor({
+//       advisorname,
+//       advisoremail,
+//       advisormobile,
+//       advisoraddress,
+//       advisorpassword: hashedPassword,
+//     });
+//     // Save the new user to the database
+//     await newAdvisor.save();
+
+//     return res.status(201).json({
+//       status: "New Advisor Added Successfully...!",
+//       message: {
+//         newAdvisor,
+//       },
+//     });
+//   } catch (err) {
+//     return res.status(400).json({
+//       status: "Error to Adding Advisor",
+//       message: err.message,
+//     });
+//   }
+// };
+
 export const advisorRegister = async (req, res) => {
   try {
-    const { advisorname, advisoremail, advisormobile, advisorpassword } =
+    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress } =
       req.body;
 
     // Check if the user with the given email already exists
@@ -21,32 +62,60 @@ export const advisorRegister = async (req, res) => {
         message: "Advisor with this email already exists.",
       });
     }
-   // Hash the password
-   const salt = await bcrypt.genSalt(10);
-   const hashedPassword = await bcrypt.hash(advisorpassword, salt);
-    // Create a new user
+
+    // Generate the unique ID
+    const lastAdvisor = await Advisor.findOne().sort({ _id: -1 }).limit(1); // Get the last advisor
+    let lastId = "0000"; // Default ID if no advisor exists
+    if (lastAdvisor) {
+      const lastAdvisorId = lastAdvisor.uniqueId;
+      const numPart = parseInt(lastAdvisorId.substring(10, 14), 36);
+      const nextNumPart = numPart + 1;
+      lastId = nextNumPart.toString(36).toUpperCase().padStart(4, "0");
+    }
+
+    // Generate the next unique ID
+    let nextUniqueId = "EIMF/ADV/#" + lastId + "A";
+
+    // Function to cycle through letters
+    const getNextLetter = (currentLetter) => {
+      const ascii = currentLetter.charCodeAt(0);
+      const nextAscii = ascii === 90 ? 97 : ascii + 1; // If "Z", start from "a"
+      return String.fromCharCode(nextAscii);
+    };
+
+    // Update the last character of the unique ID
+    const lastCharacter = nextUniqueId.charAt(nextUniqueId.length - 1);
+    const updatedLastCharacter = getNextLetter(lastCharacter);
+    nextUniqueId = nextUniqueId.slice(0, -1) + updatedLastCharacter;
+
+    // Save the new advisor to the database
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(advisorpassword, salt);
     const newAdvisor = new Advisor({
       advisorname,
       advisoremail,
       advisormobile,
+      advisoraddress,
       advisorpassword: hashedPassword,
+      uniqueId: nextUniqueId,
     });
-    // Save the new user to the database
+
     await newAdvisor.save();
 
     return res.status(201).json({
-      status: "Advisor Registered Successfully",
+      status: "New Advisor Added Successfully...!",
       message: {
         newAdvisor,
       },
     });
   } catch (err) {
     return res.status(400).json({
-      status: "Error during registration",
+      status: "Error to Adding Advisor",
       message: err.message,
     });
   }
 };
+
 
 
 //######################## login admin ###########################//
