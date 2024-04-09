@@ -68,11 +68,11 @@ const VehicleSlabSchema = new Mongoose.Schema(
       // required: true,
     },
     vncb: {
-      type: Number,
+      type: String,
       // required: true,
     },
     voddiscount: {
-      type: Number,
+      type: String,
       // required: true,
     },
     vcc: {
