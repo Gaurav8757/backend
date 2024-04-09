@@ -24,6 +24,14 @@ const VehicleSlabSchema = new Mongoose.Schema(
       type: String,
       // required: true,
     },
+    states: {
+      type: String,
+      // required: true,
+    },
+    districts: {
+      type: String,
+      // required: true,
+    },
     catnames: {
       type: String,
     },
