@@ -8,6 +8,12 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     entryDate: {
       type: String,
     },
+    states: {
+      type: String,
+    },
+    district: {
+      type: String,
+    },
     company: {
       type: String,
     },

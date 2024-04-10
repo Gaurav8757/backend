@@ -48,6 +48,8 @@ export const createAllInsurance = async (req, res) => {
     const {
       entryDate,
       company,
+      states,
+      district,
       category,
       segment,
       sourcing,
@@ -111,6 +113,8 @@ export const createAllInsurance = async (req, res) => {
       entryDate,
       company,
       category,
+      states,
+      district,
       segment,
       sourcing,
       policyNo,
