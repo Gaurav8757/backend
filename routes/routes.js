@@ -70,7 +70,7 @@ import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMod
 import { financePasswordReset, financeRegister, forgotFinancePassword, loginFinance } from "../controller/finance/finance.controller.js";
 import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
 import letters from "./letters/letter.routes.js";
-import { TWvehicleSlab, cvehicleSlab, viewAllCVehicleSlab } from "../controller/commSlab/commissionSlab.js";
+import { TWvehicleSlab, cvehicleSlab, updateCVehicleSlab, viewAllCVehicleSlab } from "../controller/commSlab/commissionSlab.js";
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -123,6 +123,7 @@ router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
 router.post("/commission/slab/add", cvehicleSlab);
 router.post("/commission1/slab/tw/add", TWvehicleSlab);
 router.get("/commission/slab/view", viewAllCVehicleSlab);
+router.put("/commission/slab/:id", updateCVehicleSlab);
 // add or view salary
 router.put("/api/salary/update/:id", updateSalary);
 // for genrate salary

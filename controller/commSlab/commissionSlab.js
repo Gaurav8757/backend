@@ -76,6 +76,68 @@ export const viewAllCVehicleSlab = async (req, res) => {
   }
 };
 
+
+
+// UPDATE A VEHICLE SLAB RECORD
+export const updateCVehicleSlab = async (req, res) => {
+  try {
+    const vId = req.params.id;
+    const updateDetails = req.body;
+    // Check if the insurace lists exists before attempting to update
+    const existingDetails = await VehicleSlab.findById(vId);
+
+    if (!existingDetails) {
+      return res.status(404).json({
+        status: "Payout Slab Details not found",
+        message: "The specified Payout ID does not exists in the database",
+      });
+    }
+
+    // Perform the update
+    const updatedDetails = await VehicleSlab.findByIdAndUpdate(
+      vId,
+      updateDetails,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    return res.status(200).json({
+      status: "Slab Updated Successfully..! ",
+      message: {
+        updatedDetails,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+
+    // Handle Mongoose validation errors
+    if (err.name === "ValidationError") {
+      return res.status(400).json({
+        status: "Validation Error",
+        message: err.message,
+      });
+    }
+
+    return res.status(500).json({
+      status: "Internal Server Error",
+      message: err.message,
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 // PRIVATE CAR
 export const TWvehicleSlab = async (req, res) => {
   try {
