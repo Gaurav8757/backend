@@ -3,6 +3,11 @@ import GenSalary from "../models/genSalarySchema.js";
 export const genSalaryController = async (req, res) => {
   try {
     const {
+      empid,
+      empdesignation,
+      empbranch,
+      location,
+      accNum,
       empName,
       monthsalary,
       monthleave,
@@ -27,6 +32,11 @@ export const genSalaryController = async (req, res) => {
     } = req.body;
     // Create a new salary instance
     const genNewSalary = new GenSalary({
+      empid,
+      empdesignation,
+      empbranch,
+      location,
+      accNum,
       empName: empName.toString(),
       monthsalary,
       monthleave,
