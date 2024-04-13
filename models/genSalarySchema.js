@@ -11,6 +11,29 @@ const GenPolicySchema = new Mongoose.Schema(
       ref: "AddSalary",
       required: true,
     },
+    empid: {
+      type: String,
+      ref: "AddSalary",
+      required: true,
+    },
+    empdesignation: {
+      type: String,
+      ref: "AddSalary",
+      required: true,
+    },
+    empbranch: {
+      type: String,
+      ref: "AddSalary",
+      required: true,
+    },
+    location:{
+      type: String
+    },
+    accNum:{
+      type: Number,
+      ref: "AddSalary",
+      required:true
+    },
     monthleave: {
       type: Number,
       ref: "AddSalary",
