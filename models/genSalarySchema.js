@@ -19,7 +19,7 @@ const GenPolicySchema = new Mongoose.Schema(
     empdesignation: {
       type: String,
       ref: "AddSalary",
-      required: true,
+      // required: true,
     },
     empbranch: {
       type: String,
@@ -32,7 +32,7 @@ const GenPolicySchema = new Mongoose.Schema(
     accNum:{
       type: Number,
       ref: "AddSalary",
-      required:true
+      // required:true
     },
     monthleave: {
       type: Number,
