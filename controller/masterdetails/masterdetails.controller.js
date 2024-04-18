@@ -318,11 +318,61 @@ export const viewPolicyBasedonId = async (req, res) => {
 //   }
 // };
 
-export const viewAllList = async (req, res) => {
-  const { page = 1, limit = 20 } = req.query; // Default page: 1, Default limit: 20
+// export const viewAllList = async (req, res) => {
+//   const { page = 1, limit = 20 } = req.query; // Default page: 1, Default limit: 20
   
+//   try {
+//     const skip = (page - 1) * limit; // Calculate the number of documents to skip
+//     const allList = await AllInsurance.aggregate([
+//       {
+//         $lookup: {
+//           from: "addemployees",
+//           let: { empId: "$empname" },
+//           pipeline: [
+//             {
+//               $match: {
+//                 $expr: { $eq: ["$employee_id", "$$empId"] }
+//               }
+//             },
+//             {
+//               $project: {
+//                 _id: 0, // Exclude _id field
+//                 employee_id: 1,
+//                 // Add other fields you need
+//               }
+//             }
+//           ],
+//           as: "allpolicyemployee"
+//         }
+//       },
+//       { $skip: skip },
+//       { $limit: parseInt(limit) }
+//     ]);
+
+//     if (allList.length === 0) {
+//       return res.status(404).json({
+//         status: "Error",
+//         message: "No lists found for the given employee ID"
+//       });
+//     } else {
+//       return res.status(200).json(allList);
+//     }
+//   } catch (error) {
+//     console.error("Error viewing lists:", error);
+//     return res.status(500).json({
+//       status: "Error",
+//       message: "Internal server error"
+//     });
+//   }
+// };
+
+export const viewAllList = async (req, res) => {
+  let { page , limit = 20 } = req.query; // Default page: 1, Default limit: 20
+
   try {
+    page = parseInt(page); // Convert page to integer
     const skip = (page - 1) * limit; // Calculate the number of documents to skip
+
     const allList = await AllInsurance.aggregate([
       {
         $lookup: {
@@ -345,6 +395,7 @@ export const viewAllList = async (req, res) => {
           as: "allpolicyemployee"
         }
       },
+      { $sort: { createdAt: -1 } }, // Sort by createdAt field in descending order
       { $skip: skip },
       { $limit: parseInt(limit) }
     ]);
@@ -365,6 +416,8 @@ export const viewAllList = async (req, res) => {
     });
   }
 };
+
+
 
 
 
