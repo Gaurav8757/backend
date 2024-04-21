@@ -25,4 +25,6 @@ m_details_routes.get("/viewdata/:employee_id", viewPolicyBasedonId);
 // delete
 m_details_routes.delete("/deletedata/:id", deleteAllList);
 
+// lists advisor policy lists based on its id and name
+
 export default m_details_routes;

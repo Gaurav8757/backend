@@ -71,6 +71,7 @@ import { financePasswordReset, financeRegister, forgotFinancePassword, loginFina
 import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
 import letters from "./letters/letter.routes.js";
 import { TWvehicleSlab, cvehicleSlab, updateCVehicleSlab, viewAllCVehicleSlab } from "../controller/commSlab/commissionSlab.js";
+import { viewAdvisorListing } from "../controller/masterdetails/masterdetails.controller.js";
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -109,6 +110,9 @@ router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.post("/login/employee", loginEmployee);
 // get all employees details inside hr
 router.get("/api/employee-list", viewEmployee);
+// advisor policy lists
+router.get('/api/advpolicy', viewAdvisorListing); 
+
 router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
 router.get("/api/employee/:empId", viewByIdEmp);

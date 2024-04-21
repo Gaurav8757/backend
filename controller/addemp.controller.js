@@ -210,6 +210,26 @@ export const loginEmployee = async (req, res) => {
 
 
 //################### views all employees #####################/
+// export const viewEmployee = async (req, res) => {
+//   try {
+//     const result = await AddEmployee.aggregate([
+//       {
+//         $lookup: {
+//           from: "empattendances",
+//           localField: "_id",
+//           foreignField: "employee_id",
+//           as: "employeeDetails"
+//         }
+//       }
+     
+//     ]);
+
+//     res.json(result);
+//   } catch (error) {
+//     console.error("Error fetching employee attendance list:", error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// };
 export const viewEmployee = async (req, res) => {
   try {
     const result = await AddEmployee.aggregate([
@@ -220,8 +240,21 @@ export const viewEmployee = async (req, res) => {
           foreignField: "employee_id",
           as: "employeeDetails"
         }
-      }
-     
+      },
+      // {
+      //   $project: {
+      //     _id: 1, // Include only necessary fields from AddEmployee
+      //     name: 1,
+      //     // Add other fields you need
+      //     employeeDetails: {
+      //       // Project only necessary fields from empattendances
+      //       _id: 1,
+      //       attendanceDate: 1,
+      //       // Add other fields you need
+      //     }
+      //   }
+      // },
+      // { $limit: 100 } 
     ]);
 
     res.json(result);
