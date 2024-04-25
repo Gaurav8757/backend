@@ -12,12 +12,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // middlewares
-app.use(cors());
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "*");
     next();
   });
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // Create a route handler to serve static files from the uploads directory
