@@ -129,7 +129,23 @@ export const updateCVehicleSlab = async (req, res) => {
 
 
 
+export const delVehicleSlab = async (req, res) => {
+  try {
+    const vehId = req.params.id;
 
+    const deletedVeh = await VehicleSlab.findByIdAndDelete(vehId);
+    if (!deletedVeh) {
+      return res.status(404).json({ message: "Slab not found...." });
+    }
+    return res.json({
+      message: "Slab deleted successfully...!",
+      deletedVeh,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 
 
@@ -198,3 +214,22 @@ export const TWvehicleSlab = async (req, res) => {
     return res.status(500).json({ error: "Failed to save TW Slab" + error });
   }
 };
+
+
+// export const delTwSlab = async (req, res) => {
+//   try {
+//     const vehId = req.params.id;
+
+//     const deletedVeh = await VehicleSlab.findByIdAndDelete(vehId);
+//     if (!deletedVeh) {
+//       return res.status(404).json({ message: "Slab not found...." });
+//     }
+//     return res.json({
+//       message: "Slab deleted successfully...!",
+//       deletedVeh,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };

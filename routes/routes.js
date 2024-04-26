@@ -70,8 +70,10 @@ import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMod
 import { financePasswordReset, financeRegister, forgotFinancePassword, loginFinance } from "../controller/finance/finance.controller.js";
 import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
 import letters from "./letters/letter.routes.js";
-import { TWvehicleSlab, cvehicleSlab, updateCVehicleSlab, viewAllCVehicleSlab } from "../controller/commSlab/commissionSlab.js";
+import { TWvehicleSlab, cvehicleSlab, delVehicleSlab, updateCVehicleSlab, viewAllCVehicleSlab } from "../controller/commSlab/commissionSlab.js";
 import { viewAdvisorListing } from "../controller/masterdetails/masterdetails.controller.js";
+import { ODAdd, OdDelete, OdList } from "../controller/oddiscount/OdDiscount.js";
+import { CCDelete, CCList, ccAdd } from "../controller/CC/cc.controller.js";
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -128,6 +130,7 @@ router.post("/commission/slab/add", cvehicleSlab);
 router.post("/commission1/slab/tw/add", TWvehicleSlab);
 router.get("/commission/slab/view", viewAllCVehicleSlab);
 router.put("/commission/slab/:id", updateCVehicleSlab);
+router.delete("/commission/slab/del/:id", delVehicleSlab);
 // add or view salary
 router.put("/api/salary/update/:id", updateSalary);
 // for genrate salary
@@ -216,6 +219,14 @@ router.post("/holidays/add", hDaysAdd);
 router.get("/holidays/alllists", hDaysList);
 router.delete("/holidays/:id/delete", hDaysDelete);
 
+// oddiscount
+router.post('/od/discounts', ODAdd);
+router.get('/od/list', OdList);
+router.delete('/od/del/:id', OdDelete);
 
+// cc add
+router.post('/cc/add', ccAdd);
+router.get('/cc/show', CCList);
+router.delete('/cc/remove/:id', CCDelete);
 
 export default router;

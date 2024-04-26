@@ -385,7 +385,7 @@ export const deleteAllList = async (req, res) => {
       return res.status(404).json({ message: "AllInsurance not found" });
     }
     return res.json({
-      message: "AllInsurance deleted successfully",
+      message: `${deletedAllInsurance.policyrefno} Deleted successfully.....!`,
       deletedAllInsurance,
     });
   } catch (error) {
