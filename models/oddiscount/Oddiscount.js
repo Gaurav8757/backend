@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 const ODSchema = new Mongoose.Schema(
   {
     odDiscount: {
-      type: String,
+      type: Number,
        required: true,
     },
   },

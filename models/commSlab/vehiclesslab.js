@@ -11,6 +11,9 @@ const VehicleSlabSchema = new Mongoose.Schema(
       type: String,
       required: true
     },
+    sitcapacity: {
+      type: String,
+    },
     advisorUniqueId: {
       type: String,
       required: true

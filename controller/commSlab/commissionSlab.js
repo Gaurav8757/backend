@@ -4,6 +4,7 @@ export const cvehicleSlab = async (req, res) => {
   try {
     const {
       advisorId,
+      sitcapacity,
       advisorName,
       advisorUniqueId,
       states,
@@ -28,6 +29,7 @@ export const cvehicleSlab = async (req, res) => {
     const newVehicleSlab = new VehicleSlab({
       advisorId,
       advisorName,
+      sitcapacity,
       states,
       districts,
       advisorUniqueId,
@@ -160,6 +162,7 @@ export const TWvehicleSlab = async (req, res) => {
     const {
       advisorId,
       advisorName,
+      sitcapacity,
       advisorUniqueId,
       vehicleSlab,
       states,
@@ -183,6 +186,7 @@ export const TWvehicleSlab = async (req, res) => {
     const newVehicleSlab = new VehicleSlab({
       advisorId,
       advisorName,
+      sitcapacity,
       states,
       districts,
       advisorUniqueId,
