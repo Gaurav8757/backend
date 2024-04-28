@@ -5,18 +5,18 @@ const VehicleSlabSchema = new Mongoose.Schema(
     advisorId: {
       type: String,
       ref: "Advisor",
-      required: true
+      // required: true
     },
     advisorName: {
       type: String,
-      required: true
+      // required: true
     },
     sitcapacity: {
       type: String,
     },
     advisorUniqueId: {
       type: String,
-      required: true
+      // required: true
     },
     
     vehicleSlab: {

@@ -74,6 +74,7 @@ import { TWvehicleSlab, cvehicleSlab, delVehicleSlab, updateCVehicleSlab, viewAl
 import { viewAdvisorListing } from "../controller/masterdetails/masterdetails.controller.js";
 import { ODAdd, OdDelete, OdList } from "../controller/oddiscount/OdDiscount.js";
 import { CCDelete, CCList, ccAdd } from "../controller/CC/cc.controller.js";
+import { addSitCapacities, deleteSitting, viewSitCapacityList } from "../controller/sittingCapacity/sittingcapacity.js";
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -228,5 +229,10 @@ router.delete('/od/del/:id', OdDelete);
 router.post('/cc/add', ccAdd);
 router.get('/cc/show', CCList);
 router.delete('/cc/remove/:id', CCDelete);
+
+// sitting capacity
+router.post("/sit/set", addSitCapacities);
+router.get("/sit/show", viewSitCapacityList);
+router.delete("/sit/capacity/:id", deleteSitting);
 
 export default router;
