@@ -208,9 +208,73 @@ export const loginEmployee = async (req, res) => {
   }
 }
 
+// #################view nly employee ##############//
+// export const empListed = async (req, res) => {
+//   const employeeList = await AddEmployee.find({});
+//   if (!employeeList) {
+//     return res.status(400).json({
+//       status: "Error during Salary Update",
+//       message: "Invalid employee selected",
+//     });
+//   } else {
+//     return res.status(200).json(employeeList);
+//   }
+// };
+export const empListed = async (req, res) => {
+  try {
+    const employeeList = await AddEmployee.find({}, {
+      _id: 1,
+      empid: 1,
+      uniqueid: 1,
+      empname: 1,
+      empgender: 1,
+      empemail: 1,
+      empmobile: 1,
+      empjoiningdate: 1,
+      empbranch: 1,
+      permanentempaddress: 1,
+      currentempaddress: 1,
+      empaadharno: 1,
+      accNumber: 1,
+      bankName: 1,
+      pan: 1,
+      empdesignation: 1,
+      createdAt: 1,
+      updatedAt: 1,
+      ifsc: 1,
+      staffType: 1,
+      leavemonth: 1,
+      salary: 1,
+      incmoney: 1,
+      incdate: 1,
+      currDate: 1,
+      terminatedate: 1
+    });
+    
+    if (!employeeList || employeeList.length === 0) {
+      return res.status(400).json({
+        status: "Error during Salary Update",
+        message: "Invalid employee selected",
+      });
+    }
+    employeeList.sort((a, b) => {
+      const empidA = parseInt(a.empid.split('-')[1]);
+      const empidB = parseInt(b.empid.split('-')[1]);
+      return empidA - empidB;
+    });
+    return res.status(200).json(employeeList);
+  } catch (error) {
+    return res.status(500).json({
+      status: "Error",
+      message: "Internal Server Error",
+      error: error.message
+    });
+  }
+};
+
 
 //################### views all employees #####################/
-// export const viewEmployee = async (req, res) => {
+// export const viewEmploy = async (req, res) => {
 //   try {
 //     const result = await AddEmployee.aggregate([
 //       {
@@ -292,9 +356,6 @@ export const listOfEmp = async (req, res)=>{
     });
 }
 }
-
-
-
 
 //################ update code ########################/
 export const updateEmployee = async (req, res) => {

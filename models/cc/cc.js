@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 const CCSchema = new Mongoose.Schema(
   {
     cc: {
-      type: Number,
+      type: String,
        required: true,
     },
   },

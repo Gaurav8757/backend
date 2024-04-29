@@ -18,10 +18,12 @@ import {
   listOfEmp,
   loginEmployee,
   // applyLeave,
+
   updateLeaveStatus,
   updateEmployee,
   viewByIdEmp,
   viewEmployee,
+  empListed,
 } from "../controller/addemp.controller.js";
 import {
   // addsalaryController,
@@ -75,6 +77,7 @@ import { viewAdvisorListing } from "../controller/masterdetails/masterdetails.co
 import { ODAdd, OdDelete, OdList } from "../controller/oddiscount/OdDiscount.js";
 import { CCDelete, CCList, ccAdd } from "../controller/CC/cc.controller.js";
 import { addSitCapacities, deleteSitting, viewSitCapacityList } from "../controller/sittingCapacity/sittingcapacity.js";
+import { ncbAdds, ncbDelete, ncbLists } from "../controller/ncb/ncb.contoller.js";
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -111,6 +114,7 @@ router.delete("/company/api/:id", deleteCompany);
 // add or view employee
 router.post("/dashboard/addemployee", uploadFile, addempRegister);
 router.post("/login/employee", loginEmployee);
+router.get("/employees/data", empListed);
 // get all employees details inside hr
 router.get("/api/employee-list", viewEmployee);
 // advisor policy lists
@@ -234,5 +238,10 @@ router.delete('/cc/remove/:id', CCDelete);
 router.post("/sit/set", addSitCapacities);
 router.get("/sit/show", viewSitCapacityList);
 router.delete("/sit/capacity/:id", deleteSitting);
+
+// ncb
+router.post("/ncb/add", ncbAdds);
+router.get("/ncb/show", ncbLists);
+router.delete("/ncb/delete/:id", ncbDelete);
 
 export default router;
