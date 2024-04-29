@@ -1,8 +1,6 @@
 import OfferLetter from "../../models/letter/offerletter.js";
 import { LetterCounter } from "../../models/letter/offerletter.js";
 
-
-
 export const addUserOfferLetter = async (req, res) => {
   try {
     // Find the counter document for the policy reference numbers or create one if it doesn't exist
@@ -22,16 +20,15 @@ export const addUserOfferLetter = async (req, res) => {
       // Use the sequence value from the counter document
       seqId = counter.sequence; // Change 'seq' to 'sequence'
     }
-
     // Generate the five-digit policy number with leading zeros
     const policyNumber = seqId.toString().padStart(4, '0');
-
     const {
       ofname,
       ofemail,
       ofaddress,
       ofmobile,
       ofdate,
+      oflocation,
       ofsalaryWords,
       ofdesignation,
       ofgrosalary,
@@ -54,6 +51,7 @@ export const addUserOfferLetter = async (req, res) => {
       ofemail,
       ofaddress,
       ofmobile,
+      oflocation,
       ofdate,
       ofdesignation,
       ofgrosalary,

@@ -11,7 +11,7 @@ const OfferLetterSchema = new Mongoose.Schema(
     },
     incdate: {
       type: String,
-      required: true,
+      // required: true,
     },
     ofname: {
       type: String,
@@ -40,6 +40,9 @@ const OfferLetterSchema = new Mongoose.Schema(
     ofsalaryWords: {
       type: String,
      
+    },
+    oflocation: {
+      type: String,
     },
     ofvalidDate: {
       type: String,
