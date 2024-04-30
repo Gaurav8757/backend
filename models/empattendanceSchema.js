@@ -15,15 +15,21 @@ const AttendanceSchema = new mongoose.Schema(
     },
     date: {
       type: String,
-      required: true,
+      // required: true,
     },
     time: {
       type: String,
-      required: true,
+      // required: true,
+    },
+    logouttime: {
+      type: String,
+    },
+    totalHours:{
+      type: String
     },
     weekday: {
       type: String,
-      required: true,
+      // required: true,
     },
     status: {
       type: String,

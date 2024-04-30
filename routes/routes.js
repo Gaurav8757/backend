@@ -60,7 +60,7 @@ import m_details_routes from "./masterDetails/masterdetails.routes.js";
 import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdvisor } from "../controller/advisor/advisor.controller.js";
 import { addHrRegister, deleteHr, loginHr, updateHr, viewHr } from "../controller/human_resources/hr.controller.js";
 import hrouter from "./hrsalary/hrsalary.routes.js";
-import {markAttendance, getEmployeeAttendance} from "../controller/empattendance.controller.js"
+import {markAttendance, getEmployeeAttendance, updateEmpAttendance} from "../controller/empattendance.controller.js"
 import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
 import { addOpsRegister, forgotOpsPassword, loginOps, opsPasswordReset } from "../controller/opsAdmin/opsAdmin.js";
 import { HrAdPassReset, HrAdRegister, forgotHrAdminPassword, hrAdminLogin } from "../controller/hradmin/hradmin.controller.js";
@@ -130,6 +130,7 @@ router.post("/emp/pass/:id/:token", empPasswordReset);
 // attendace of employee
 router.post("/employee/mark/attendance/:employeeId", markAttendance);
 router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
+router.put("/employee/update/attendance/:employee_id", updateEmpAttendance);
 // apply for PAYMENTS
 router.post("/commission/slab/add", cvehicleSlab);
 router.post("/commission1/slab/tw/add", TWvehicleSlab);
