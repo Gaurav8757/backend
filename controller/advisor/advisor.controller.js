@@ -24,29 +24,17 @@ export const advisorRegister = async (req, res) => {
 
     // Generate the unique ID
     const lastAdvisor = await Advisor.findOne().sort({ _id: -1 }).limit(1); // Get the last advisor
-    let lastId = "0000"; // Default ID if no advisor exists
+    let lastId = 0; // Default ID if no advisor exists
     if (lastAdvisor) {
-      const lastAdvisorId = lastAdvisor.uniqueId;
-      const numPart = parseInt(lastAdvisorId.substring(10, 14), 36);
-      const nextNumPart = numPart + 1;
-      lastId = nextNumPart.toString(36).toUpperCase().padStart(4, "0");
+      const lastUniqueId = lastAdvisor.uniqueId;
+      // Extract the number part and increment it
+      console.log(lastUniqueId);
+      lastId = (lastUniqueId.split("/")[2], 0) + 1;
     }
 
     // Generate the next unique ID
-    let nextUniqueId = "EIMF/ADV/#" + lastId + "A";
-// console.log(nextUniqueId);
-    // Function to cycle through letters
-    const getNextLetter = (currentLetter) => {
-      const ascii = currentLetter.charCodeAt(0);
-      const nextAscii = ascii === 90 ? 97 : ascii + 1; // If "Z", start from "a"
-      return String.fromCharCode(nextAscii);
-    };
-
-    // Update the last character of the unique ID
-    const lastCharacter = nextUniqueId.charAt(nextUniqueId.length - 1);
-    const updatedLastCharacter = getNextLetter(lastCharacter);
-    nextUniqueId = nextUniqueId.slice(0, -1) + updatedLastCharacter;
-
+    const nextUniqueId = `EIPL/ADV/${String(lastId).padStart(5, "0")}`;
+    console.log(nextUniqueId);
     // Save the new advisor to the database
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(advisorpassword, salt);
@@ -134,6 +122,39 @@ export const viewAdvisor = async (req, res) => {
     return res.status(200).json(advisorList);
   }
 };
+
+
+
+export const viewAdvisor1 = async (req, res) => {
+  let { branch } = req.query;
+
+  try {
+    let query = {};
+    if (branch) {
+      // Convert branch to uppercase for consistency
+      branch = branch.toUpperCase();
+      query.branch = branch; // Filtering advisors by branch
+    }
+    
+    const advisorList = await Advisor.find(query);
+
+    if (advisorList.length === 0) {
+      return res.status(404).json({
+        status: "Error",
+        message: "No advisors found for the provided branch",
+      });
+    }
+
+    return res.status(200).json(advisorList);
+  } catch (error) {
+    return res.status(500).json({
+      status: "Error",
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
 
 // Controller function to handle updating specific fields of a advisor
 export const updateAdvisor = async (req, res) => {

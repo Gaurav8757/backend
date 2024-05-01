@@ -57,7 +57,7 @@ import {
   viewNonMotorInsuranceCompanies,
 } from "../controller/addcompany.controller.js";
 import m_details_routes from "./masterDetails/masterdetails.routes.js";
-import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdvisor } from "../controller/advisor/advisor.controller.js";
+import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdvisor, viewAdvisor1 } from "../controller/advisor/advisor.controller.js";
 import { addHrRegister, deleteHr, loginHr, updateHr, viewHr } from "../controller/human_resources/hr.controller.js";
 import hrouter from "./hrsalary/hrsalary.routes.js";
 import {markAttendance, getEmployeeAttendance, updateEmpAttendance} from "../controller/empattendance.controller.js"
@@ -78,6 +78,7 @@ import { ODAdd, OdDelete, OdList } from "../controller/oddiscount/OdDiscount.js"
 import { CCDelete, CCList, ccAdd } from "../controller/CC/cc.controller.js";
 import { addSitCapacities, deleteSitting, viewSitCapacityList } from "../controller/sittingCapacity/sittingcapacity.js";
 import { ncbAdds, ncbDelete, ncbLists } from "../controller/ncb/ncb.contoller.js";
+import { LeaveDelete, LeaveTypeList, LeaveTypes } from "../controller/leaveBalance/leavebalance.js";
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -149,7 +150,7 @@ router.post("/dashboard/addpolicy", uploadFile, addpolicyRegister);
 router.get("/api/policy-list", viewPolicy);
 router.put("/policies/update/:id", updatePolicy);
 router.delete("/policies/api/:id", deletePolicy);
-// employee list api for add salary
+// employee list aapi for add salary
 router.get("/api/employee-lists", empList);
 // advisor register 
 router.post("/advisor/register", advisorRegister);
@@ -157,6 +158,7 @@ router.post("/advisor/login", loginAdvisor);
 router.get("/advisor/lists", viewAdvisor);
 router.put("/advisor/update/:id", uploadFile, updateAdvisor);
 router.delete("/advisor/lists/:id", deleteAdvisor);
+router.get("/advisor/all/lists", viewAdvisor1);
 // login Branch using Addbranch database
 router.post("/branches/loginbranch", loginBranch);
 // HR ROUTES
@@ -244,5 +246,11 @@ router.delete("/sit/capacity/:id", deleteSitting);
 router.post("/ncb/add", ncbAdds);
 router.get("/ncb/show", ncbLists);
 router.delete("/ncb/delete/:id", ncbDelete);
+
+// LEAVETYPE
+router.post("/leave/type/add", LeaveTypes);
+// router.put("/lt/edit/:id", leaveTypeEdit);
+router.get("/leave/type/show", LeaveTypeList);
+router.delete("/leave/delete/:id", LeaveDelete);
 
 export default router;

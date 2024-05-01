@@ -75,7 +75,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
       type: Number,
     },
     cc: {
-      type: Number,
+      type: String,
     },
     engNo: {
       type: String,
@@ -91,6 +91,9 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     },
     productCode: {
       type: String,
+    },
+    advId:{
+      type : String
     },
     odPremium: {
       type: Number,
