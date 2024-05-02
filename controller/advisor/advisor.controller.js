@@ -10,8 +10,7 @@ const { SECRET } = process.env;
 // ************************* Advisor ************************* //
 export const advisorRegister = async (req, res) => {
   try {
-    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch } =
-      req.body;
+    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch } = req.body;
 
     // Check if the user with the given email already exists
     const emailExist = await Advisor.findOne({ advisoremail });
@@ -22,19 +21,20 @@ export const advisorRegister = async (req, res) => {
       });
     }
 
-    // Generate the unique ID
-    const lastAdvisor = await Advisor.findOne().sort({ _id: -1 }).limit(1); // Get the last advisor
+    // Find the last advisor in the database
+    const lastAdvisor = await Advisor.findOne().sort({ _id: -1 }).limit(1);
+
+    // Generate the next unique ID
     let lastId = 0; // Default ID if no advisor exists
     if (lastAdvisor) {
       const lastUniqueId = lastAdvisor.uniqueId;
+      // console.log(lastAdvisor);
       // Extract the number part and increment it
-      console.log(lastUniqueId);
-      lastId = (lastUniqueId.split("/")[2], 0) + 1;
+      lastId = parseInt(lastUniqueId.split("-")[1]) + 1;
+      // console.log(lastId);
     }
-
-    // Generate the next unique ID
-    const nextUniqueId = `EIPL/ADV/${String(lastId).padStart(5, "0")}`;
-    console.log(nextUniqueId);
+    const nextUniqueId = `EIPLADV-${String(lastId).padStart(5, "0")}`;
+// console.log(nextUniqueId);
     // Save the new advisor to the database
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(advisorpassword, salt);
@@ -60,10 +60,10 @@ export const advisorRegister = async (req, res) => {
     return res.status(400).json({
       status: "Error to Adding Advisor",
       message: err.message,
-      err
     });
   }
 };
+
 
 
 
@@ -136,7 +136,7 @@ export const viewAdvisor1 = async (req, res) => {
       query.branch = branch; // Filtering advisors by branch
     }
     
-    const advisorList = await Advisor.find(query);
+    const advisorList = await Advisor.find(query).sort({ uniqueid: 1 });
 
     if (advisorList.length === 0) {
       return res.status(404).json({
