@@ -48,6 +48,7 @@ export const createAllInsurance = async (req, res) => {
     const {
       entryDate,
       advId,
+      sitcapacity,
       company,
       states,
       district,
@@ -113,6 +114,7 @@ export const createAllInsurance = async (req, res) => {
       policyrefno: `EIPL/${new Date().getFullYear()}/${policyNumber}`,
       entryDate,
       company,
+      sitcapacity,
       category,
       advId,
       states,

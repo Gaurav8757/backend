@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 const sitCapacitySchema = new Mongoose.Schema(
   {
     sitcapacity: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

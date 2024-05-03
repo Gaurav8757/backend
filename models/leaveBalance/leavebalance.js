@@ -7,8 +7,7 @@ const LeaveBalanceSchema = new Mongoose.Schema(
       required: true,
     },
     restleave: {
-      type: [Number], // Array of segment names
-      default: [],
+      type: Number, // Array of segment names
     }, 
   },
   { timestamps: true }

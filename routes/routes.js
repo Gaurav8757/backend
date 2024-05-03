@@ -76,7 +76,7 @@ import { TWvehicleSlab, cvehicleSlab, delVehicleSlab, updateCVehicleSlab, viewAl
 import { viewAdvisorListing } from "../controller/masterdetails/masterdetails.controller.js";
 import { ODAdd, OdDelete, OdList } from "../controller/oddiscount/OdDiscount.js";
 import { CCDelete, CCList, ccAdd } from "../controller/CC/cc.controller.js";
-import { addSitCapacities, deleteSitting, viewSitCapacityList } from "../controller/sittingCapacity/sittingcapacity.js";
+import { addSitCapacities, deleteSitting, updateSeating, viewSitCapacityList } from "../controller/sittingCapacity/sittingcapacity.js";
 import { ncbAdds, ncbDelete, ncbLists } from "../controller/ncb/ncb.contoller.js";
 import { LeaveDelete, LeaveTypeList, LeaveTypes } from "../controller/leaveBalance/leavebalance.js";
 // users Routes
@@ -241,6 +241,7 @@ router.delete('/cc/remove/:id', CCDelete);
 router.post("/sit/set", addSitCapacities);
 router.get("/sit/show", viewSitCapacityList);
 router.delete("/sit/capacity/:id", deleteSitting);
+router.put("/sit/update/:id", updateSeating);
 
 // ncb
 router.post("/ncb/add", ncbAdds);
@@ -252,5 +253,5 @@ router.post("/leave/type/add", LeaveTypes);
 // router.put("/lt/edit/:id", leaveTypeEdit);
 router.get("/leave/type/show", LeaveTypeList);
 router.delete("/leave/delete/:id", LeaveDelete);
-
+// router.put('/leave/update/:id', LeaveNumberAdd);
 export default router;

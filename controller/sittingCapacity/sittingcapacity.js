@@ -43,6 +43,30 @@ export const viewSitCapacityList = async (req, res) =>{
     }
 }
 
+
+export const updateSeating = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { sitcapacity } = req.body;
+
+    // Find the existing seating capacity by its ID
+    const existingSeatingCapacity = await SittingCapacity.findById(id);
+    if (!existingSeatingCapacity) {
+      return res.status(404).json({ message: "Seating capacity not found" });
+    }
+
+    // Update the seating capacity
+    existingSeatingCapacity.sitcapacity = sitcapacity; // Assuming 'sitcapacity' is a field in your SittingCapacity model
+    const updatedSeatingCapacity = await existingSeatingCapacity.save();
+
+    res.json(updatedSeatingCapacity);
+  } catch (error) {
+    console.error("Error updating Seating Capacity:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
 // delete sitting capacity
 export const deleteSitting = async (req, res) => {
     try {

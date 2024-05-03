@@ -128,6 +128,9 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     payoutOn: {
       type: String,
     },
+    sitcapacity:{
+      type: String,
+    },
     taxes: {
       type: Number,
     },

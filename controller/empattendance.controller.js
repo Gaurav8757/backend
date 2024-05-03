@@ -35,10 +35,9 @@ export const markAttendance = async (req, res) => {
       weekday: weekday,
       status: status,
     });
-
     // Save the attendance record
     await attendanceRecord.save();
-    res.status(201).json({ message: "Attendance added successfully" });
+    res.status(201).json({ message: "Attendance Added Successfully" });
   } catch (error) {
     // console.error(error);
     res.status(500).json({ message: "Internal Server Error", error });

@@ -1,7 +1,7 @@
 import LBalance from "../../models/leaveBalance/leavebalance.js";
 export const LeaveTypes = async (req, res) => {
     try {
-      const { leavetype } = req.body;
+      const { leavetype, restleave } = req.body;
       // Create a new branch
       const types = await LBalance.findOne({ leavetype });
       if (types) {
@@ -12,6 +12,7 @@ export const LeaveTypes = async (req, res) => {
       }
       const newStaff = new LBalance({
         leavetype,
+        restleave
       });
       // Save the new branch to the database
       await newStaff.save();
@@ -51,7 +52,6 @@ export const LeaveTypes = async (req, res) => {
       }
   }
   
-  
   // delete staff type
   export const LeaveDelete = async (req, res) => {
       try {
@@ -61,11 +61,12 @@ export const LeaveTypes = async (req, res) => {
         if (!deletedStaff) {
           return res.status(404).json({ message: "Leave Type not found" });
         }
-        return res.json({ message: "Leave Type Deleted Successfully", deletedStaff });
+        return res.json({ message: "Leave Type Deleted Successfully.....!", deletedStaff });
       } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
       }
     };
   
-  
+
+    
