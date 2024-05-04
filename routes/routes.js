@@ -72,7 +72,7 @@ import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMod
 import { financePasswordReset, financeRegister, forgotFinancePassword, loginFinance } from "../controller/finance/finance.controller.js";
 import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
 import letters from "./letters/letter.routes.js";
-import { TWvehicleSlab, cvehicleSlab, delVehicleSlab, updateCVehicleSlab, viewAllCVehicleSlab } from "../controller/commSlab/commissionSlab.js";
+import { TWvehicleSlab, addCompGrid, cvehicleSlab, delVehicleSlab, deleteCompGrid, updateCVehicleSlab, updateCompGrid, viewAllCVehicleSlab, viewAllCompanyGrid } from "../controller/commSlab/commissionSlab.js";
 import { viewAdvisorListing } from "../controller/masterdetails/masterdetails.controller.js";
 import { ODAdd, OdDelete, OdList } from "../controller/oddiscount/OdDiscount.js";
 import { CCDelete, CCList, ccAdd } from "../controller/CC/cc.controller.js";
@@ -138,6 +138,13 @@ router.post("/commission1/slab/tw/add", TWvehicleSlab);
 router.get("/commission/slab/view", viewAllCVehicleSlab);
 router.put("/commission/slab/:id", updateCVehicleSlab);
 router.delete("/commission/slab/del/:id", delVehicleSlab);
+
+// company grid
+router.post("/company/grid/slab/add", addCompGrid);
+router.get("/company/grid/slab/view", viewAllCompanyGrid);
+router.put("/company/grid/slab/:id", updateCompGrid);
+router.delete("/company/grid/slab/del/:id", deleteCompGrid);
+
 // add or view salary
 router.put("/api/salary/update/:id", updateSalary);
 // for genrate salary

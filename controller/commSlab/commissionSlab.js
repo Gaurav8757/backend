@@ -1,5 +1,5 @@
 import VehicleSlab from "../../models/commSlab/vehiclesslab.js";
-
+import CompanyGrid from "../../models/commSlab/companypayout.js";
 export const cvehicleSlab = async (req, res) => {
   try {
     const {
@@ -64,6 +64,87 @@ export const cvehicleSlab = async (req, res) => {
   }
 };
 
+
+export const addCompGrid = async (req, res) => {
+  try {
+    const {
+      advisorId,
+      sitcapacity,
+      advisorName,
+      advisorUniqueId,
+      states,
+      districts,
+      vehicleSlab,
+      cnames,
+      segments,
+      policytypes,
+      pcodes,
+      catnames,
+      vage,
+      vfuels,
+      vncb,
+      voddiscount,
+      vcc,
+      payoutons,
+      cvpercentage,
+      branchpayoutper,
+      companypayoutper,
+    } = req.body;
+    // Create a new CompanyGrid instance
+    const newVehicleSlab1 = new CompanyGrid({
+      advisorId,
+      advisorName,
+      sitcapacity,
+      states,
+      districts,
+      advisorUniqueId,
+      vehicleSlab,
+      cnames,
+      catnames,
+      segments,
+      policytypes,
+      pcodes,
+      vage,
+      vfuels,
+      vncb,
+      voddiscount,
+      vcc,
+      payoutons,
+      cvpercentage,
+      branchpayoutper,
+      companypayoutper,
+    });
+    // Save the new VehicleSlab document to the database
+    await newVehicleSlab1.save();
+    // Respond with success message
+    return res
+      .status(201)
+      .json({ message: "Company Grid saved Successfully...!" });
+  } catch (error) {
+    // Handle errors
+    console.error("Error saving Company Grid", error);
+    return res
+      .status(500)
+      .json({ error: "Failed to save Company Grid" + error });
+  }
+};
+
+
+export const viewAllCompanyGrid = async (req, res) => {
+  try {
+    // Fetch all VehicleSlab documents from the database
+    const CompanyGrids = await CompanyGrid.find();
+    // Respond with the retrieved documents
+    return res.status(200).json(CompanyGrids);
+  } catch (error) {
+    // Handle errors
+    console.error("Error fetching Company Grid", error);
+    return res.status(500).json({ error: "Failed to fetch Company Grid" });
+  }
+};
+
+
+
 // VIEW  ALL DATA OF VEHICLE SLAB
 export const viewAllCVehicleSlab = async (req, res) => {
   try {
@@ -78,6 +159,53 @@ export const viewAllCVehicleSlab = async (req, res) => {
   }
 };
 
+export const updateCompGrid = async (req, res) => {
+  try {
+    const cId = req.params.id;
+    const updateDetails = req.body;
+    // Check if the insurace lists exists before attempting to update
+    const existingDetails = await CompanyGrid.findById(cId);
+
+    if (!existingDetails) {
+      return res.status(404).json({
+        status: " Company Grid Details not found",
+        message: "The specified Payout ID does not exists in the database",
+      });
+    }
+
+    // Perform the update
+    const updatedDetails = await CompanyGrid.findByIdAndUpdate(
+      cId,
+      updateDetails,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    return res.status(200).json({
+      status: "Slab Updated Successfully..! ",
+      message: {
+        updatedDetails,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+
+    // Handle Mongoose validation errors
+    if (err.name === "ValidationError") {
+      return res.status(400).json({
+        status: "Validation Error",
+        message: err.message,
+      });
+    }
+
+    return res.status(500).json({
+      status: "Internal Server Error",
+      message: err.message,
+    });
+  }
+};
 
 
 // UPDATE A VEHICLE SLAB RECORD
@@ -130,6 +258,23 @@ export const updateCVehicleSlab = async (req, res) => {
 };
 
 
+export const deleteCompGrid = async (req, res) => {
+  try {
+    const comId = req.params.id;
+
+    const deletedCom = await CompanyGrid.findByIdAndDelete(comId);
+    if (!deletedCom) {
+      return res.status(404).json({ message: "Company Grid not found...." });
+    }
+    return res.json({
+      message: "Company Grid deleted successfully...!",
+      deletedCom,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 export const delVehicleSlab = async (req, res) => {
   try {
@@ -148,6 +293,7 @@ export const delVehicleSlab = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
 
 
