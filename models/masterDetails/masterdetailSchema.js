@@ -111,7 +111,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
       type: Number,
     },
     ncb: {
-      type: String,
+      type: Number,
     },
     advisorName: {
       type: String,
