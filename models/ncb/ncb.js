@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 const ncbSchema = new Mongoose.Schema(
   {
     ncb: {
-      type: Number,
+      type: String,
        required: true,
     },
   },
