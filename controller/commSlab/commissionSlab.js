@@ -4,6 +4,8 @@ export const cvehicleSlab = async (req, res) => {
   try {
     const {
       advisorId,
+      company,
+      branch,
       sitcapacity,
       advisorName,
       advisorUniqueId,
@@ -28,6 +30,8 @@ export const cvehicleSlab = async (req, res) => {
     // Create a new VehicleSlab instance
     const newVehicleSlab = new VehicleSlab({
       advisorId,
+      company,
+      branch,
       advisorName,
       sitcapacity,
       states,
@@ -69,6 +73,8 @@ export const addCompGrid = async (req, res) => {
   try {
     const {
       advisorId,
+      company,
+      branch,
       sitcapacity,
       advisorName,
       advisorUniqueId,
@@ -93,6 +99,8 @@ export const addCompGrid = async (req, res) => {
     // Create a new CompanyGrid instance
     const newVehicleSlab1 = new CompanyGrid({
       advisorId,
+      company,
+      branch,
       advisorName,
       sitcapacity,
       states,
@@ -158,6 +166,21 @@ export const viewAllCVehicleSlab = async (req, res) => {
     return res.status(500).json({ error: "Failed to fetch Payout Slab" });
   }
 };
+
+export const viewBranchwiseSlab = async (req, res) => {
+  const { branch } = req.query; // Extracting the branch value from req.query
+  try {
+    // Fetch all VehicleSlab documents from the database that match the branch
+    const vehicleSlabs = await CompanyGrid.find({ branch: { $regex: new RegExp(branch, "i") } });
+    // Respond with the retrieved documents
+    return res.status(200).json(vehicleSlabs);
+  } catch (error) {
+    // Handle errors
+    console.error("Error fetching Payout Slab:", error);
+    return res.status(500).json({ error: "Failed to fetch Payout Slab" });
+  }
+};
+
 
 export const updateCompGrid = async (req, res) => {
   try {

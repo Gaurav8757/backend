@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const AllInsurancePolicySchema = new mongoose.Schema(
   {
@@ -92,8 +92,8 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     productCode: {
       type: String,
     },
-    advId:{
-      type : String
+    advId: {
+      type: String,
     },
     odPremium: {
       type: Number,
@@ -128,7 +128,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     payoutOn: {
       type: String,
     },
-    sitcapacity:{
+    sitcapacity: {
       type: String,
     },
     taxes: {
@@ -154,67 +154,116 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     },
     advisorPayableAmount: {
       type: Number,
+      default: 0,
     },
     advisorPayoutAmount: {
       type: Number,
+      default: 0,
     },
     branchPayout: {
       type: Number,
+      default: 0,
     },
     branchPayableAmount: {
       type: Number,
+      default: 0,
     },
     companyPayout: {
       type: Number,
+      default: 0,
     },
     profitLoss: {
       type: Number,
+      default: 0,
     },
-    hypo:{
-      type:String,
-    },
-    staffName:{
-      type: String,
-    }, 
-    staffType:{
+    hypo: {
       type: String,
     },
-    employee_id:{
+    staffName: {
       type: String,
     },
-    currentTime:{
+    staffType: {
       type: String,
     },
-    empTime:{
+    employee_id: {
+      type: String,
+    },
+    currentTime: {
+      type: String,
+    },
+    empTime: {
       type: String,
     },
 
-   
-    overallTime:{
+    debitAmount: {
+      type: Number,
+      // required: true,
+    },
+    paymentDate: {
       type: String,
     },
-    status:{
+    paymentMonthlyDate: {
       type: String,
-      default:"Pending"
-    }
+    },
+    paymentCompanyDate: {
+      type: String,
+    },
+    paymentType: {
+      type: String,
+    },
+    paymentMonthlyType: {
+      type: String,
+    },
+    paymentCompanyType: {
+      type: String,
+    },
+    paymentRefNo: {
+      type: String,
+    },
+    paymentMonthlyRefNo:{
+      type: String,
+    },
+    paymentCompanyRefNo:{
+      type: String,
+    },
+    creditAmount: {
+      type: Number,
+    },
+    creditMonthlyAmount: {
+      type: Number,
+    },
+    creditCompanyAmount: {
+      type: Number,
+    },
+    balance: {
+      type: Number,
+    },
+    balanceMonthly: {
+      type: Number,
+    },
+    balanceCompany: {
+      type: Number,
+    },
+    overallTime: {
+      type: String,
+    },
+    status: {
+      type: String,
+      default: "Pending",
+    },
   },
   { timestamps: true }
 );
 
-const AllInsurance = mongoose.model('AllInsurance', AllInsurancePolicySchema);
+const AllInsurance = mongoose.model("AllInsurance", AllInsurancePolicySchema);
 export default AllInsurance;
 
-
-
-const counterSchema = new mongoose.Schema(
-  {
-    policyrefno:{
-        type : String,
-    },
-    seq:{
-      type: Number
-    }
-  }
-)
-export const Counter =mongoose.model("Counter",counterSchema);
-
+const counterSchema = new mongoose.Schema({
+  policyrefno: {
+    type: String,
+  },
+  seq: {
+    type: Number,
+  },
+});
+export const Counter = mongoose.model("Counter", counterSchema);

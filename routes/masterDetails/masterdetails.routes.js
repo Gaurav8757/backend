@@ -5,7 +5,8 @@ import {
   deleteAllList,
   updateMasterDetails,
   viewHajipurList, 
-  viewPolicyBasedonId
+  viewPolicyBasedonId,
+  viewPoliciesList
 } from "../../controller/masterdetails/masterdetails.controller.js";
 
 const m_details_routes = express.Router();
@@ -26,5 +27,6 @@ m_details_routes.get("/viewdata/:employee_id", viewPolicyBasedonId);
 m_details_routes.delete("/deletedata/:id", deleteAllList);
 
 // lists advisor policy lists based on its id and name
+m_details_routes.get("/view/policies", viewPoliciesList);
 
 export default m_details_routes;

@@ -18,7 +18,6 @@ import {
   listOfEmp,
   loginEmployee,
   // applyLeave,
-
   updateLeaveStatus,
   updateEmployee,
   viewByIdEmp,
@@ -72,13 +71,14 @@ import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMod
 import { financePasswordReset, financeRegister, forgotFinancePassword, loginFinance } from "../controller/finance/finance.controller.js";
 import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
 import letters from "./letters/letter.routes.js";
-import { TWvehicleSlab, addCompGrid, cvehicleSlab, delVehicleSlab, deleteCompGrid, updateCVehicleSlab, updateCompGrid, viewAllCVehicleSlab, viewAllCompanyGrid } from "../controller/commSlab/commissionSlab.js";
+import { TWvehicleSlab, addCompGrid, cvehicleSlab, delVehicleSlab, deleteCompGrid, updateCVehicleSlab, updateCompGrid, viewAllCVehicleSlab, viewAllCompanyGrid, viewBranchwiseSlab } from "../controller/commSlab/commissionSlab.js";
 import { viewAdvisorListing } from "../controller/masterdetails/masterdetails.controller.js";
 import { ODAdd, OdDelete, OdList } from "../controller/oddiscount/OdDiscount.js";
 import { CCDelete, CCList, ccAdd } from "../controller/CC/cc.controller.js";
 import { addSitCapacities, deleteSitting, updateSeating, viewSitCapacityList } from "../controller/sittingCapacity/sittingcapacity.js";
 import { ncbAdds, ncbDelete, ncbLists } from "../controller/ncb/ncb.contoller.js";
 import { LeaveDelete, LeaveTypeList, LeaveTypes } from "../controller/leaveBalance/leavebalance.js";
+import legers from "./leger/leger.routes.js";
 // users Routes
 router.use("/users", routes);
 // master routes
@@ -89,6 +89,8 @@ router.use("/dashboard", hrouter);
 router.use("/letters", letters);
 // hr attendance
 router.use("/hr", hr);
+// leger
+router.use("/leger", legers);
 // admin routes
 // login
 router.post("/loginadmin", loginAdmin);
@@ -138,6 +140,7 @@ router.post("/commission1/slab/tw/add", TWvehicleSlab);
 router.get("/commission/slab/view", viewAllCVehicleSlab);
 router.put("/commission/slab/:id", updateCVehicleSlab);
 router.delete("/commission/slab/del/:id", delVehicleSlab);
+router.get("/commission/grid/branch/view", viewBranchwiseSlab);
 
 // company grid
 router.post("/company/grid/slab/add", addCompGrid);
@@ -261,4 +264,6 @@ router.post("/leave/type/add", LeaveTypes);
 router.get("/leave/type/show", LeaveTypeList);
 router.delete("/leave/delete/:id", LeaveDelete);
 // router.put('/leave/update/:id', LeaveNumberAdd);
+
+
 export default router;

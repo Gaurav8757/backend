@@ -337,6 +337,62 @@ export const viewAllList = async (req, res) => {
 };
 
 
+// export const viewPoliciesList = async (req, res) => {
+//   try {
+//     const allList = await AllInsurance.find({});
+
+//     if (allList.length === 0) {
+//       return res.status(404).json({
+//         status: "Error",
+//         message: "No policies found"
+//       });
+//     } else {
+//       return res.status(200).json({ allList });
+//     }
+//   } catch (error) {
+//     console.error("Error viewing lists:", error);
+//     return res.status(500).json({
+//       status: "Error",
+//       message: "Internal server error"
+//     });
+//   }
+// };
+
+export const viewPoliciesList = async (req, res) => {
+  try {
+    // Extract query parameters from the request
+    const { fromDate, toDate, advisorName, policyNo, insuredName } = req.query;
+
+   
+    // Construct the filter object based on the provided parameters
+    const filter = {};
+    if (fromDate) filter.entryDate = { $gte: new Date(fromDate) };
+    if (toDate) filter.entryDate = { ...filter.entryDate, $lte: new Date(toDate) };
+    if (advisorName) filter.advisorName = { $regex: new RegExp(advisorName, 'i') };
+    if (policyNo) filter.policyNo = { $regex: new RegExp(policyNo, 'i') };
+    if (insuredName) filter.insuredName = { $regex: new RegExp(insuredName, 'i') };
+
+    // Find documents based on the constructed filter
+    const allList = await AllInsurance.find(filter);
+
+    if (allList.length === 0) {
+      return res.status(404).json({
+        status: "Error",
+        message: "No policies found"
+      });
+    } else {
+      return res.status(200).json({ allList });
+    }
+  } catch (error) {
+    console.error("Error viewing lists:", error);
+    return res.status(500).json({
+      status: "Error",
+      message: "Internal server error"
+    });
+  }
+};
+
+
 
 
 

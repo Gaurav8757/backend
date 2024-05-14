@@ -10,7 +10,7 @@ const { SECRET } = process.env;
 // ************************* Advisor ************************* //
 export const advisorRegister = async (req, res) => {
   try {
-    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch } = req.body;
+    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch, advisortype } = req.body;
 
     // Check if the user with the given email already exists
     const emailExist = await Advisor.findOne({ advisoremail });
@@ -43,6 +43,7 @@ export const advisorRegister = async (req, res) => {
       advisoremail,
       advisormobile,
       advisoraddress,
+      advisortype,
       branch,
       advisorpassword: hashedPassword,
       uniqueId: nextUniqueId,
@@ -213,7 +214,7 @@ export const ForgotPassword = async (req, res) => {
       expiresIn: "15m",
     });
     // const link = `https://gauravnodejsauthentication.onrender.com/resetPassword/${user._id}/${token}`;
-    const link = `http://localhost:7000/resetPassword/${user._id}/${token}`;
+    const link = `https://api.eleedomimf.com/resetPassword/${user._id}/${token}`;
     
     //...................................Nodemailer code.......................................//
     const transporter = nodemailer.createTransport({

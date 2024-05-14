@@ -22,6 +22,10 @@ const AdvisorSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+    advisortype:{
+      type : String ,
+      required: true,
+    },
 
     advisormobile: {
         type: Number,
