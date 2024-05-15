@@ -169,9 +169,16 @@ export const viewAllCVehicleSlab = async (req, res) => {
 
 export const viewBranchwiseSlab = async (req, res) => {
   const { branch } = req.query; // Extracting the branch value from req.query
+
+  // Check if branch is provided
+  if (!branch) {
+    return res.status(400).json({ error: "Branch parameter is required" });
+  }
+
   try {
     // Fetch all VehicleSlab documents from the database that match the branch
     const vehicleSlabs = await CompanyGrid.find({ branch: { $regex: new RegExp(branch, "i") } });
+
     // Respond with the retrieved documents
     return res.status(200).json(vehicleSlabs);
   } catch (error) {
@@ -180,6 +187,7 @@ export const viewBranchwiseSlab = async (req, res) => {
     return res.status(500).json({ error: "Failed to fetch Payout Slab" });
   }
 };
+
 
 
 export const updateCompGrid = async (req, res) => {

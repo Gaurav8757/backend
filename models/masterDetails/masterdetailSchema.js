@@ -106,6 +106,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     },
     finalEntryFields: {
       type: Number,
+      default: 0
     },
     odDiscount: {
       type: Number,
