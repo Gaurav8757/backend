@@ -68,7 +68,7 @@ export const updateDailyLeger = async (req, res) => {
 
     // Iterate over each update and construct bulk write operations
     updates.forEach(update => {
-      const { advId, advisorName, entryDate, policyNo, insuredName, debitAmount, paymentDate,paymentMonthlyDate,paymentCompanyDate, paymentType,paymentMonthlyType, paymentCompanyType, paymentRefNo,paymentMonthlyRefNo ,paymentCompanyRefNo, creditAmount,creditMonthlyAmount,creditCompanyAmount, balance, balanceMonthly, balanceCompany } = update;
+      const { advId, advisorName, debitCompanyAmount, debitMonthlyAmount, entryDate, policyNo, insuredName, debitAmount, paymentDate,paymentMonthlyDate,paymentCompanyDate, paymentType,paymentMonthlyType, paymentCompanyType, paymentRefNo,paymentMonthlyRefNo ,paymentCompanyRefNo, creditAmount,creditMonthlyAmount,creditCompanyAmount, balance, balanceMonthly, balanceCompany } = update;
       
       // Construct the filter criteria
       const filter = { advId, advisorName, entryDate, policyNo, insuredName };
@@ -77,6 +77,8 @@ export const updateDailyLeger = async (req, res) => {
       const updateOperation = {
         $set: {
           debitAmount,
+          debitMonthlyAmount,
+          debitCompanyAmount,
           paymentDate,
           paymentMonthlyDate,
           paymentCompanyDate,

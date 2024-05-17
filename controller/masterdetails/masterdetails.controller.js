@@ -278,7 +278,7 @@ export const viewAdvisorListing = async (req, res) => {
 
 
 export const viewAllList = async (req, res) => {
-  let { page, limit=100 } = req.query; // Default page: 1, Default limit: 20
+  let { page, limit=1000 } = req.query; // Default page: 1, Default limit: 20
   try {
     page = parseInt(page); // Convert page to integer
     // Check if page is not a valid integer or less than 1
@@ -314,7 +314,7 @@ export const viewAllList = async (req, res) => {
           as: "allpolicyemployee"
         }
       },
-      { $sort: { createdAt: -1 } }, // Sort by createdAt field in descending order
+      { $sort: { entryDate: -1 } }, // Sort by createdAt field in descending order
       { $skip: skip },
       { $limit: parseInt(limit) }
     ]);

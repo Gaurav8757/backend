@@ -195,11 +195,29 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     empTime: {
       type: String,
     },
+    cvpercentage:{
+      type: Number,
+    },
+    branchpayoutper:{
+      type: Number,
+    },
+    companypayoutper:{
+      type: Number,
+    },
 
     debitAmount: {
       type: Number,
       // required: true,
     },
+    debitMonthlyAmount: {
+      type: Number,
+      // required: true,
+    },
+    debitCompanyAmount: {
+      type: Number,
+      // required: true,
+    },
+
     paymentDate: {
       type: String,
     },
