@@ -116,7 +116,7 @@ export const updateLetters = async (req, res) => {
       }
     );
     return res.status(200).json({
-      status: "Offer Letter Updated Successfully....! ",
+      status: "Letter Updated Successfully....! ",
       message: {
         updatedDetails,
       },

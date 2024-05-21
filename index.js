@@ -2,26 +2,28 @@ import express from "express";
 import connectDB from "./connection/connection.js";
 import cors from "cors";
 import path from "path";
+import compression from "compression";
 import Routes from "./routes/routes.js";
 import { fileURLToPath } from "url";
-
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 7000;
-
+const {CORS, CORS1, CORSLOCAL} = process.env;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// middlewares
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers", "*");
-    next();
-  });
+const corsOptions = {
+    origin: [CORS, CORS1, CORSLOCAL], // Specify trusted domains
+    methods: ['GET', 'POST', 'PUT','PATCH','DELETE', 'OPTIONS'], // Specify allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Specify allowed headers
+};
+
+app.use(cors(corsOptions));
+app.use(compression());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// Create a route handler to serve static files from the uploads directory
-// const uploadsDirectory = ;
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/', Routes);

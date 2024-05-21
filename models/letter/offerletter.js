@@ -39,7 +39,6 @@ const OfferLetterSchema = new Mongoose.Schema(
     },
     ofsalaryWords: {
       type: String,
-     
     },
     oflocation: {
       type: String,
@@ -48,6 +47,72 @@ const OfferLetterSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+    joinempdate: {
+      type: String,
+    },
+    joinsigndate: {
+      type: String,
+    },
+    joinbasicSalaryPercent: {
+      type: Number,
+    },
+    joinbasicSalary: {
+      type: Number,
+    },
+    joinhrapercentage: {
+      type: Number,
+    },
+    joinhrapercentageamount: {
+      type: Number,
+    },
+    joinmapercent: {
+      type: Number,
+    },
+    joinma: {
+      type: Number,
+    },
+    joinkitallowpercent: {
+      type: Number,
+    },
+    joinkitallowance: {
+      type: Number,
+    },
+    joinbenefitspercent: {
+      type: Number,
+    },
+    joinbenefitsamount: {
+      type: Number,
+    },
+    joinpipercent: {
+      type: Number,
+    },
+    joinpi: {
+      type: Number,
+    },
+    joinpf: {
+      type: Number,
+    },
+    joinpfpercent: {
+      type: Number,
+    },
+    joinesi: {
+      type: Number,
+    },
+    joinesipercent: {
+      type: Number,
+    },
+    joinstock: {
+      type: Number,
+    },
+    joinstockpercent: {
+      type: Number,
+    },
+    joincar: {
+      type: Number,
+    },
+    joiningtotal: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );
@@ -55,16 +120,12 @@ const OfferLetterSchema = new Mongoose.Schema(
 const OfferLetter = Mongoose.model("OfferLetter", OfferLetterSchema);
 export default OfferLetter;
 
-
-
-const letterSchema = new Mongoose.Schema(
-  {
-    letterno:{
-        type : String,
-    },
-    sequence:{
-      type: Number
-    }
-  }
-)
-export const LetterCounter = Mongoose.model("LetterCounter",letterSchema);
+const letterSchema = new Mongoose.Schema({
+  letterno: {
+    type: String,
+  },
+  sequence: {
+    type: Number,
+  },
+});
+export const LetterCounter = Mongoose.model("LetterCounter", letterSchema);
