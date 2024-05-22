@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --max-old-space-size=4096 index.js",
+    "test": "nodemon index.js"
   },
   "author": "Gaurav Kumar",
   "license": "ISC",
