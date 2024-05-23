@@ -176,7 +176,6 @@ export const updateMasterDetails = async (req, res) => {
   try {
     const detailsId = req.params.id;
     const updateDetails = req.body;
-
     // Check if the insurace lists exists before attempting to update
     const existingDetails = await AllInsurance.findById(detailsId);
 
@@ -220,6 +219,76 @@ export const updateMasterDetails = async (req, res) => {
     });
   }
 };
+
+
+// export const updateMasterDetails = async (req, res) => {
+//   try {
+//     const { policyRefNo } = req.query; // Destructure policyRefNo from query string
+
+//     // Fetch the existing insurance details
+//     const existingDetails = await AllInsurance.findOne({ policyRefNo });
+
+//     // If no existing document found, return 404
+//     if (!existingDetails) {
+//       return res.status(404).json({
+//         status: "Error",
+//         message: "Insurance Details not found",
+//       });
+//     }
+
+//     // Perform the update
+//     Object.assign(existingDetails, req.body); // Update existingDetails with req.body fields
+//     const updatedDetails = await existingDetails.save();
+
+//     // Return updated document
+//     return res.status(200).json({
+//       status: "Success",
+//       message: "Policy Updated Successfully",
+//       data: updatedDetails, // Updated details
+//     });
+//   } catch (error) {
+//     console.error("Error updating insurance details:", error);
+
+//     // Handle Mongoose validation errors
+//     if (error.name === "ValidationError") {
+//       return res.status(400).json({
+//         status: "Error",
+//         message: error.message,
+//       });
+//     }
+
+//     // Internal server error
+//     return res.status(500).json({
+//       status: "Error",
+//       message: "Internal Server Error",
+//     });
+//   }
+// };
+
+
+
+
+// export const getMasterDetails = async (req, res) => {
+//   const { policyrefno } = req.query;
+//   console.log(policyrefno);
+//   try {
+//       const policyBasedonId = await AllInsurance.find({ policyrefno });
+//       if (policyBasedonId.length === 0) {
+//           return res.status(404).json({
+//               status: "Error during view lists Update",
+//               message: "No records found for the provided policyrefno",
+//           });
+//       } else {
+//           return res.status(200).json(policyBasedonId);
+//       }
+//   } catch (error) {
+//       console.error("Error fetching insurance details:", error);
+//       return res.status(500).json({
+//           status: "Error",
+//           message: "Internal Server Error",
+//       });
+//   }
+// };
 
 
 
