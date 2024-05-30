@@ -72,7 +72,21 @@ const GenPolicySchema = new Mongoose.Schema(
       type: Number,
       // required: true,
     },
-    
+    totalMonthDays:{
+      type: Number,
+    },
+    email:{
+      type: String,
+    },
+    mobile:{
+      type: Number,
+    },
+    sundays:{
+      type: Number,
+    },
+    holidayCount:{
+      type: Number,
+    },
     empgrossSalary: {
         type: Number,
         // required: true,

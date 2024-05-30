@@ -209,17 +209,6 @@ export const loginEmployee = async (req, res) => {
 }
 
 // #################view nly employee ##############//
-// export const empListed = async (req, res) => {
-//   const employeeList = await AddEmployee.find({});
-//   if (!employeeList) {
-//     return res.status(400).json({
-//       status: "Error during Salary Update",
-//       message: "Invalid employee selected",
-//     });
-//   } else {
-//     return res.status(200).json(employeeList);
-//   }
-// };
 export const empListed = async (req, res) => {
   try {
     const employeeList = await AddEmployee.find({}, {
@@ -274,26 +263,7 @@ export const empListed = async (req, res) => {
 
 
 //################### views all employees #####################/
-// export const viewEmploy = async (req, res) => {
-//   try {
-//     const result = await AddEmployee.aggregate([
-//       {
-//         $lookup: {
-//           from: "empattendances",
-//           localField: "_id",
-//           foreignField: "employee_id",
-//           as: "employeeDetails"
-//         }
-//       }
-     
-//     ]);
 
-//     res.json(result);
-//   } catch (error) {
-//     console.error("Error fetching employee attendance list:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
 export const viewEmployee = async (req, res) => {
   try {
     const result = await AddEmployee.aggregate([

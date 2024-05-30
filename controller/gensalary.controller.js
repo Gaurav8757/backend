@@ -8,8 +8,13 @@ export const genSalaryController = async (req, res) => {
       empbranch,
       location,
       accNum,
+      totalMonthDays,
       empName,
       monthsalary,
+      sundays,
+      email,
+      mobile,
+      holidayCount,
       monthleave,
       totalDays,
       presentDays,
@@ -30,24 +35,38 @@ export const genSalaryController = async (req, res) => {
       emploanemi,
       totalAmount,
     } = req.body;
+
+    // Check if the salary for the given empName and genMonths already exists
+    const existingSalary = await GenSalary.findOne({ empName, genMonths });
+
+    if (existingSalary) {
+      return res.status(400).json({
+        message: "Error",
+        status: `Salary for ${genMonths} for ${empName} is already available! Please update it instead.`,
+      });
+    }
     // Create a new salary instance
     const genNewSalary = new GenSalary({
       empid,
+      sundays,
       empdesignation,
       empbranch,
+      email,
+      mobile,
       location,
       accNum,
       empName: empName.toString(),
       monthsalary,
       monthleave,
       totalDays,
+      totalMonthDays,
       presentDays,
       totalHalfDays,
+      holidayCount,
       totalAbsent,
       genSalary,
       genMonths,
-      incentive,
-      
+      incentive, 
       empgrossSalary,
       empbasicSalary,
       emphra,

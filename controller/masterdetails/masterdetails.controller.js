@@ -4,7 +4,6 @@ import { Counter } from "../../models/masterDetails/masterdetailSchema.js";
 
 
 export const createAllInsurance = async (req, res) => {
-
   try {
      // Find the counter document for the policy reference numbers or create one if it doesn't exist
      let counter = await Counter.findOneAndUpdate(
@@ -220,78 +219,6 @@ export const updateMasterDetails = async (req, res) => {
   }
 };
 
-
-// export const updateMasterDetails = async (req, res) => {
-//   try {
-//     const { policyRefNo } = req.query; // Destructure policyRefNo from query string
-
-//     // Fetch the existing insurance details
-//     const existingDetails = await AllInsurance.findOne({ policyRefNo });
-
-//     // If no existing document found, return 404
-//     if (!existingDetails) {
-//       return res.status(404).json({
-//         status: "Error",
-//         message: "Insurance Details not found",
-//       });
-//     }
-
-//     // Perform the update
-//     Object.assign(existingDetails, req.body); // Update existingDetails with req.body fields
-//     const updatedDetails = await existingDetails.save();
-
-//     // Return updated document
-//     return res.status(200).json({
-//       status: "Success",
-//       message: "Policy Updated Successfully",
-//       data: updatedDetails, // Updated details
-//     });
-//   } catch (error) {
-//     console.error("Error updating insurance details:", error);
-
-//     // Handle Mongoose validation errors
-//     if (error.name === "ValidationError") {
-//       return res.status(400).json({
-//         status: "Error",
-//         message: error.message,
-//       });
-//     }
-
-//     // Internal server error
-//     return res.status(500).json({
-//       status: "Error",
-//       message: "Internal Server Error",
-//     });
-//   }
-// };
-
-
-
-
-// export const getMasterDetails = async (req, res) => {
-//   const { policyrefno } = req.query;
-//   console.log(policyrefno);
-//   try {
-//       const policyBasedonId = await AllInsurance.find({ policyrefno });
-//       if (policyBasedonId.length === 0) {
-//           return res.status(404).json({
-//               status: "Error during view lists Update",
-//               message: "No records found for the provided policyrefno",
-//           });
-//       } else {
-//           return res.status(200).json(policyBasedonId);
-//       }
-//   } catch (error) {
-//       console.error("Error fetching insurance details:", error);
-//       return res.status(500).json({
-//           status: "Error",
-//           message: "Internal Server Error",
-//       });
-//   }
-// };
-
-
-
 // // view lists
 export const viewPolicyBasedonId = async (req, res) => {
   const { employee_id } = req.params;
@@ -342,6 +269,180 @@ export const viewAdvisorListing = async (req, res) => {
   }
 };
 
+
+// export const viewMonthlyData = async (req, res) => {
+//   let { page = 1, limit = 1000 } = req.query; // Default page: 1, Default limit: 1000
+//   try {
+//     page = parseInt(page); // Convert page to integer
+//     limit = parseInt(limit); // Convert limit to integer
+
+//     // Check if page is not a valid integer or less than 1
+//     if (isNaN(page) || page < 1) {
+//       return res.status(400).json({
+//         status: "Error",
+//         message: "Invalid page number"
+//       });
+//     }
+
+//     const skip = (page - 1) * limit; // Calculate the number of documents to skip
+
+//     // Get the current month and year
+//     const currentDate = new Date();
+//     const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get month as MM
+//     const currentYear = currentDate.getFullYear().toString(); // Get year as YYYY
+
+//     // Construct the regex for the current month and year in the format "yyyy-mm"
+//     const currentMonthRegex = new RegExp(`^${currentYear}-${currentMonth}-`);
+
+//     const totalCount = await AllInsurance.countDocuments({
+//       entryDate: { $regex: currentMonthRegex }
+//     }); // Count total documents for the current month
+
+//     const totalPages = Math.ceil(totalCount / limit); // Calculate total pages
+
+//     const allList = await AllInsurance.aggregate([
+//       {
+//         $match: {
+//           entryDate: { $regex: currentMonthRegex }
+//         }
+//       },
+//       {
+//         $lookup: {
+//           from: "addemployees",
+//           let: { empId: "$empname" },
+//           pipeline: [
+//             {
+//               $match: {
+//                 $expr: { $eq: ["$employee_id", "$$empId"] }
+//               }
+//             },
+//             {
+//               $project: {
+//                 _id: 0, // Exclude _id field
+//                 employee_id: 1,
+//                 // Add other fields you need
+//               }
+//             }
+//           ],
+//           as: "allpolicyemployee"
+//         }
+//       },
+//       { $sort: { entryDate: -1 } }, // Sort by entryDate field in descending order
+//       { $skip: skip },
+//       { $limit: limit }
+//     ]);
+
+//     if (allList.length === 0) {
+//       return res.status(404).json({
+//         status: "Error",
+//         message: "No lists found for the current month"
+//       });
+//     } else {
+//       return res.status(200).json({ allList, totalPages });
+//     }
+//   } catch (error) {
+//     console.error("Error viewing lists:", error);
+//     return res.status(500).json({
+//       status: "Error",
+//       message: "Internal server error"
+//     });
+//   }
+// };
+
+
+export const viewMonthlyData = async (req, res) => {
+  let { page = 1, limit = 1000 } = req.query; // Default page: 1, Default limit: 1000
+  try {
+    page = parseInt(page); // Convert page to integer
+    limit = parseInt(limit); // Convert limit to integer
+
+    // Check if page and limit are valid integers
+    if (isNaN(page) || page < 1 || isNaN(limit) || limit < 1) {
+      return res.status(400).json({
+        status: "Error",
+        message: "Invalid page or limit"
+      });
+    }
+
+    // Calculate the month offset based on the page number
+    const monthOffset = page - 1;
+
+    // Get the current date, and adjust the month based on the offset
+    const currentDate = new Date();
+    const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + monthOffset, 1);
+
+    const targetYear = targetDate.getFullYear();
+    const targetMonth = (targetDate.getMonth() + 1).toString().padStart(2, '0');
+
+    // Calculate the start and end dates for the target month
+    const startDate = new Date(`${targetYear}-${targetMonth}-01`);
+    const endDate = new Date(targetYear, targetDate.getMonth() + 1, 0); // Last day of the target month
+
+    // Convert dates to ISO format strings for MongoDB query
+    const startISODate = startDate.toISOString().split('T')[0];
+    const endISODate = endDate.toISOString().split('T')[0];
+
+    // Optimize the query by selecting only necessary fields
+    const matchStage = {
+      $match: {
+        entryDate: { $gte: startISODate, $lte: endISODate }
+      }
+    };
+
+    const lookupStage = {
+      $lookup: {
+        from: "addemployees",
+        let: { empId: "$empname" },
+        pipeline: [
+          {
+            $match: {
+              $expr: { $eq: ["$employee_id", "$$empId"] }
+            }
+          },
+          {
+            $project: {
+              _id: 0, // Exclude _id field
+              employee_id: 1,
+              // Add other fields you need
+            }
+          }
+        ],
+        as: "allpolicyemployee"
+      }
+    };
+
+    const sortStage = { $sort: { entryDate: -1 } }; // Sort by entryDate field in descending order
+    const skipStage = { $skip: (page - 1) * limit };
+    const limitStage = { $limit: limit };
+
+    const totalCount = await AllInsurance.countDocuments(matchStage.$match); // Count total documents for the current date range
+
+    const totalPages = Math.ceil(totalCount / limit); // Calculate total pages
+
+    const allList = await AllInsurance.aggregate([
+      matchStage,
+      lookupStage,
+      sortStage,
+      skipStage,
+      limitStage
+    ]);
+
+    if (allList.length === 0) {
+      return res.status(404).json({
+        status: "Error",
+        message: "No lists found for the current period"
+      });
+    } else {
+      return res.status(200).json({ allList, totalPages });
+    }
+  } catch (error) {
+    console.error("Error viewing lists:", error);
+    return res.status(500).json({
+      status: "Error",
+      message: "Internal server error"
+    });
+  }
+};
 
 
 
@@ -406,33 +507,18 @@ export const viewAllList = async (req, res) => {
 };
 
 
-// export const viewPoliciesList = async (req, res) => {
-//   try {
-//     const allList = await AllInsurance.find({});
 
-//     if (allList.length === 0) {
-//       return res.status(404).json({
-//         status: "Error",
-//         message: "No policies found"
-//       });
-//     } else {
-//       return res.status(200).json({ allList });
-//     }
-//   } catch (error) {
-//     console.error("Error viewing lists:", error);
-//     return res.status(500).json({
-//       status: "Error",
-//       message: "Internal server error"
-//     });
-//   }
-// };
+
+
+
+
+
+
 
 export const viewPoliciesList = async (req, res) => {
   try {
     // Extract query parameters from the request
     const { fromDate, toDate, advisorName, policyNo, insuredName } = req.query;
-
-   
     // Construct the filter object based on the provided parameters
     const filter = {};
     if (fromDate) filter.entryDate = { $gte: new Date(fromDate) };
@@ -460,10 +546,6 @@ export const viewPoliciesList = async (req, res) => {
     });
   }
 };
-
-
-
-
 
 // show data on the basis of branch name query
 export const viewHajipurList = async (req, res) => {

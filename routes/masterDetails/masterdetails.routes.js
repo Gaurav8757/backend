@@ -7,6 +7,7 @@ import {
   viewHajipurList, 
   viewPolicyBasedonId,
   viewPoliciesList,
+  viewMonthlyData,
   // getMasterDetails
 } from "../../controller/masterdetails/masterdetails.controller.js";
 
@@ -31,7 +32,7 @@ m_details_routes.delete("/deletedata/:id", deleteAllList);
 m_details_routes.get("/view/policies", viewPoliciesList);
 
 // by query string
-// m_details_routes.get("/update/policies", getMasterDetails);
+m_details_routes.get("/view/insurance/policies", viewMonthlyData);
 
 
 export default m_details_routes;
