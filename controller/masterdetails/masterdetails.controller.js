@@ -512,7 +512,7 @@ export const viewHajipurList = async (req, res) => {
   const branchRegex = new RegExp(`^${branch}$`, 'i');
   const hajipurList = await AllInsurance.find({
     branch: branchRegex
-  });
+  }).sort({ entryDate: -1 });
   
   if (!hajipurList || hajipurList.length === 0) {
     return res.status(400).json({
