@@ -161,15 +161,6 @@ export const updateGenSalary = async (req, res) => {
   }
 };
 
-
-
-
-
-
-
-
-
-
 // ************************* view salarylist ************************* //
 export const viewGenList = async (req, res) => {
   const SalaryList = await GenSalary.find({});

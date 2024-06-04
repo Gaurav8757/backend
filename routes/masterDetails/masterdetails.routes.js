@@ -8,6 +8,7 @@ import {
   viewPolicyBasedonId,
   viewPoliciesList,
   viewMonthlyData,
+  updateByAdvisor,
   // getMasterDetails
 } from "../../controller/masterdetails/masterdetails.controller.js";
 
@@ -17,6 +18,9 @@ m_details_routes.post("/adddata", createAllInsurance);
 
 // update
 m_details_routes.put("/updatedata/:id", updateMasterDetails);
+
+
+m_details_routes.put("/update/adv/percentage", updateByAdvisor);
 
 // view
 m_details_routes.get("/viewdata", viewAllList);

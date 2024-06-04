@@ -270,84 +270,51 @@ export const viewAdvisorListing = async (req, res) => {
 };
 
 
-// export const viewMonthlyData = async (req, res) => {
-//   let { page = 1, limit = 1000 } = req.query; // Default page: 1, Default limit: 1000
-//   try {
-//     page = parseInt(page); // Convert page to integer
-//     limit = parseInt(limit); // Convert limit to integer
+export const updateByAdvisor = async (req, res) => {
+  const updates = req.body;
 
-//     // Check if page is not a valid integer or less than 1
-//     if (isNaN(page) || page < 1) {
-//       return res.status(400).json({
-//         status: "Error",
-//         message: "Invalid page number"
-//       });
-//     }
+  try {
+    // Check if the updates array is empty
+    if (updates.length === 0) {
+      return res.status(400).json({ message: "No updates found" });
+    }
 
-//     const skip = (page - 1) * limit; // Calculate the number of documents to skip
+    // Prepare an array to store the bulk write operations
+    const bulkOperations = [];
 
-//     // Get the current month and year
-//     const currentDate = new Date();
-//     const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get month as MM
-//     const currentYear = currentDate.getFullYear().toString(); // Get year as YYYY
+    // Iterate over each update and construct bulk write operations
+    updates.forEach(update => {
+      const { policyrefno, company, insuredName, policyMadeBy, cvpercentage } = update;
 
-//     // Construct the regex for the current month and year in the format "yyyy-mm"
-//     const currentMonthRegex = new RegExp(`^${currentYear}-${currentMonth}-`);
+      // Construct the filter criteria
+      const filter = { policyrefno, company, insuredName, policyMadeBy };
 
-//     const totalCount = await AllInsurance.countDocuments({
-//       entryDate: { $regex: currentMonthRegex }
-//     }); // Count total documents for the current month
+      // Construct the update operation
+      const updateOperation = {
+        $set: {
+          cvpercentage,
+          // advisorPayoutAmount,
+          // advisorPayableAmount,
+        }
+      };
 
-//     const totalPages = Math.ceil(totalCount / limit); // Calculate total pages
+      // Add the update operation to the bulk operations array
+      bulkOperations.push({
+        updateOne: {
+          filter,
+          update: updateOperation
+        }
+      });
+    });
 
-//     const allList = await AllInsurance.aggregate([
-//       {
-//         $match: {
-//           entryDate: { $regex: currentMonthRegex }
-//         }
-//       },
-//       {
-//         $lookup: {
-//           from: "addemployees",
-//           let: { empId: "$empname" },
-//           pipeline: [
-//             {
-//               $match: {
-//                 $expr: { $eq: ["$employee_id", "$$empId"] }
-//               }
-//             },
-//             {
-//               $project: {
-//                 _id: 0, // Exclude _id field
-//                 employee_id: 1,
-//                 // Add other fields you need
-//               }
-//             }
-//           ],
-//           as: "allpolicyemployee"
-//         }
-//       },
-//       { $sort: { entryDate: -1 } }, // Sort by entryDate field in descending order
-//       { $skip: skip },
-//       { $limit: limit }
-//     ]);
+    // Perform bulk updates using bulkWrite method
+    await AllInsurance.bulkWrite(bulkOperations);
 
-//     if (allList.length === 0) {
-//       return res.status(404).json({
-//         status: "Error",
-//         message: "No lists found for the current month"
-//       });
-//     } else {
-//       return res.status(200).json({ allList, totalPages });
-//     }
-//   } catch (error) {
-//     console.error("Error viewing lists:", error);
-//     return res.status(500).json({
-//       status: "Error",
-//       message: "Internal server error"
-//     });
-//   }
-// };
+    return res.status(200).json({ message: "Advisor data updated successfully", bulkOperations });
+  } catch (error) {
+    return res.status(500).json({ message: "Error updating advisor data: " + error.message });
+  }
+};
 
 
 export const viewMonthlyData = async (req, res) => {
@@ -505,15 +472,6 @@ export const viewAllList = async (req, res) => {
     });
   }
 };
-
-
-
-
-
-
-
-
-
 
 export const viewPoliciesList = async (req, res) => {
   try {
