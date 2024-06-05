@@ -26,10 +26,10 @@ const GenPolicySchema = new Mongoose.Schema(
       ref: "AddSalary",
       required: true,
     },
-    location:{
-      type: String
+    location: {
+      type: String,
     },
-    accNum:{
+    accNum: {
       type: Number,
       ref: "AddSalary",
       // required:true
@@ -72,62 +72,80 @@ const GenPolicySchema = new Mongoose.Schema(
       type: Number,
       // required: true,
     },
-    totalMonthDays:{
+    arrear:{
       type: Number,
     },
-    email:{
+    totalMonthDays: {
+      type: Number,
+    },
+    email: {
       type: String,
     },
-    mobile:{
+    mobile: {
       type: Number,
     },
-    sundays:{
+    sundays: {
       type: Number,
     },
-    holidayCount:{
+    holidayCount: {
+      type: Number,
+    },
+    kit: {
+      type: Number,
+    },
+    additional: {
       type: Number,
     },
     empgrossSalary: {
-        type: Number,
-        // required: true,
-      },
-      empbasicSalary: {
-        type: Number,
-        // required: true,
-      },
-      emphra: {
-        type: Number,
-        // required: true,
-      },
-      empca: {
-        type: Number,
-        // required: true,
-      },
-      empmedical: {
-        type: Number,
-        // required: true,
-      },
-      emptiffin: {
-        type: Number,
-        // required: true,
-      },
+      type: Number,
+      // required: true,
+    },
+    empbasicSalary: {
+      type: Number,
+      // required: true,
+    },
+    emphra: {
+      type: Number,
+      // required: true,
+    },
+    empca: {
+      type: Number,
+      // required: true,
+    },
+    empmedical: {
+      type: Number,
+      // required: true,
+    },
+    emptiffin: {
+      type: Number,
+      // required: true,
+    },
 
-      empcompanyPf: {
-        type: Number,
-        // required: true,
-      },
-      emppf: {
-        type: Number,
-        // required: true,
-      },
-      empesi: {
-        type: Number,
-        // required: true,
-      },
-      emploanemi: {
-        type: Number,
-        // required: true,
-      },
+    empcompanyPf: {
+      type: Number,
+      // required: true,
+    },
+    emppf: {
+      type: Number,
+      // required: true,
+    },
+    empesi: {
+      type: Number,
+      // required: true,
+    },
+    emploanemi: {
+      type: Number,
+      // required: true,
+    },
+    finalAmountSalary: {
+      type: Number,
+    },
+    otherDeduction: {
+      type: Number,
+    },
+    finalDeduction:{
+      type: Number,
+    }
   },
   { timestamps: true }
 );
