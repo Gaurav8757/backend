@@ -40,6 +40,8 @@ export const genSalaryController = async (req, res) => {
       emploanemi,
       totalAmount,
       arrear,
+      fuelExpense,
+      otherExpense
     } = req.body;
 
     // Check if the salary for the given empName and genMonths already exists
@@ -90,6 +92,8 @@ export const genSalaryController = async (req, res) => {
       finalDeduction,
       totalAmount,
       arrear,
+      fuelExpense,
+      otherExpense
     });
     // Save the salary to the database
     await genNewSalary .save();

@@ -9,7 +9,7 @@ export const firstUserCarousel = async (req, res) => {
       req.files &&
       req.files["usercarousel_upload"] &&
       req.files["usercarousel_upload"][0]
-        ? "https://api.eleedomimf.com/uploads/" +
+        ? "http://localhost:7000/uploads/" +
           req.files["usercarousel_upload"][0].filename
         : null;
 

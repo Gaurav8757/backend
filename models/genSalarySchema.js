@@ -145,6 +145,12 @@ const GenPolicySchema = new Mongoose.Schema(
     },
     finalDeduction:{
       type: Number,
+    },
+    fuelExpense: {
+      type: Number,
+    },
+    otherExpense:{
+      type: Number,
     }
   },
   { timestamps: true }
