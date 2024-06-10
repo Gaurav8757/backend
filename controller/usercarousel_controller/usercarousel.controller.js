@@ -9,7 +9,7 @@ export const firstUserCarousel = async (req, res) => {
       req.files &&
       req.files["usercarousel_upload"] &&
       req.files["usercarousel_upload"][0]
-        ? "https://api.eleedomimf.com/uploads/" +
+        ?  `${req.protocol}://${req.get('host')}/uploads/`+
           req.files["usercarousel_upload"][0].filename
         : null;
 
@@ -62,7 +62,16 @@ export const updateCarousel = async (req, res) => {
     const carouselId = req.params.id;
     const carouselData = req.body;
 
-    // Check if the empoyee exists before attempting to update
+    // Handle file upload if present
+    const usercarousel_upload =
+      req.files &&
+      req.files["usercarousel_upload"] &&
+      req.files["usercarousel_upload"][0]
+        ? `${req.protocol}://${req.get('host')}/uploads/` +
+          req.files["usercarousel_upload"][0].filename
+        : null;
+
+    // Check if the carousel exists before attempting to update
     const existingCarousel = await UserCarousel.findById(carouselId);
 
     if (!existingCarousel) {
@@ -70,6 +79,11 @@ export const updateCarousel = async (req, res) => {
         status: "Carousel not found",
         message: "The specified Carousel ID does not exist in the database",
       });
+    }
+
+    // If a new file is uploaded, add it to the carousel data
+    if (usercarousel_upload) {
+      carouselData.usercarousel_upload = usercarousel_upload;
     }
 
     // Perform the update
@@ -90,8 +104,6 @@ export const updateCarousel = async (req, res) => {
     });
   } catch (err) {
     console.error("Error during Carousel Update:", err);
-
-   
 
     return res.status(500).json({
       status: "Internal Server Error",
