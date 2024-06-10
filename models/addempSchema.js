@@ -1,4 +1,29 @@
 import Mongoose from "mongoose";
+
+// Leave Balance Schema
+const leaveBalanceSchema = new Mongoose.Schema(
+  {
+    restLeave: {
+      type: String,
+      required: true,
+      enum: ["CL", "SL", "PL", "EL"],
+    },
+    num: {
+      type: Number,
+      required: true,
+    },
+  },
+
+); // Disabling _id for subdocuments
+
+// Default Leave Balances
+const defaultLeaveBalances = [
+  { restLeave: "CL", num: 6 },
+  { restLeave: "SL", num: 4 },
+  { restLeave: "PL", num: 2 },
+  { restLeave: "EL", num: 0 },
+];
+
 const AddEmployeeSchema = new Mongoose.Schema(
   {
     empid: {
@@ -104,18 +129,25 @@ const AddEmployeeSchema = new Mongoose.Schema(
     currDate: {
       type: String,
     },
+    leavebalance: {
+      type: [leaveBalanceSchema],
+      default: defaultLeaveBalances,
+    },
     leaveDetails: [
       {
         dateRange: {
           startDate: String,
 
-          endDate: { type: String, default: '' },
+          endDate: { type: String, default: "" },
         },
         reasonForLeave: String,
         status: String,
         counts: Number,
         leavetype: String,
-        restleave: Number
+        restleave: Number,
+        remarks: String,
+        applyDate: String,
+        applytime: String,
       },
     ],
     terminatedate: {

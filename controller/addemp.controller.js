@@ -14,6 +14,8 @@ export const addempRegister = async (req, res) => {
       empid,
       empname,
       empemail,
+      leavebalance,
+      defaultLeaveBalances,
       empmobile,
       empgender,
       empdob,
@@ -73,7 +75,7 @@ export const addempRegister = async (req, res) => {
       ifsc,
       bankName,
       pan,
-      // panno,
+      leavebalance: leavebalance || defaultLeaveBalances,
       empdesignation,
       empaadharfile,
     });
@@ -599,7 +601,7 @@ export const deleteEmployee = async (req, res) => {
 export const updateLeaveStatus = async (req, res) => {
   try {
     const { empid, id } = req.params;
-    const { status } = req.body; // Assuming status is sent in the request body
+    const { status, remarks } = req.body; // Assuming status is sent in the request body
 
     // Find the employee by ID
     const employee = await AddEmployee.findById(empid);
@@ -619,15 +621,20 @@ export const updateLeaveStatus = async (req, res) => {
 
     // Update the status of the leave detail
     leaveDetail.status = status;
-
+    leaveDetail.remarks = remarks;
     // Save the updated employee document
     await employee.save();
-
-    // Respond with success message
-    return res.json({ message: 'Leave Status Updated Successfully...!', leaveDetail });
+ // Respond with success or failure message based on status
+ let message = '';
+ if (status === 'approved') {
+   message = 'Leave Granted Successfully...!';
+ } else if (status === 'rejected') {
+   message = 'Leave Cancelled Successfully...!';
+ }
+    return res.json({ message, empname: employee.empname, leaveDetail  });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: 'Internal server error' });
+    
+    return res.status(500).json({ error: 'Internal server error', error });
   }
 };
 
