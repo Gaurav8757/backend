@@ -33,6 +33,11 @@ const AddEmployeeSchema = new Mongoose.Schema(
     uniqueid: {
       type: String,
     },
+    flags: {
+      type: Boolean,
+      default:true,
+      required: true
+    },
     empname: {
       type: String,
       // required: true,

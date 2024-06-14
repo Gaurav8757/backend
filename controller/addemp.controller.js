@@ -12,6 +12,7 @@ export const addempRegister = async (req, res) => {
   try {
     const {
       empid,
+      flags,
       empname,
       empemail,
       leavebalance,
@@ -58,6 +59,7 @@ export const addempRegister = async (req, res) => {
     const addnewEmployee = new AddEmployee({
       empid,
       uniqueid: empid,
+      flags,
       empname,
       empemail,
       empmobile,
@@ -181,6 +183,12 @@ export const loginEmployee = async (req, res) => {
         message: "Employee Not Found",
       });
     }
+      // Check if user.flags is true
+      if (!user.flags) {
+        return res.status(401).json({
+          message: "Access denied. Please contact your administrator/hr.",
+        });
+      }
 
     const isValidPassword = await bcrypt.compare(emppassword, user.emppassword);
     if (!isValidPassword) {
@@ -595,48 +603,6 @@ export const deleteEmployee = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-// Assuming you have a Mongoose model for Employee named AddEmployee
-
-// export const updateLeaveStatus = async (req, res) => {
-//   try {
-//     const { empid, id } = req.params;
-//     const { status, remarks } = req.body; // Assuming status is sent in the request body
-
-//     // Find the employee by ID
-//     const employee = await AddEmployee.findById(empid);
-
-//     // Check if employee exists
-//     if (!employee) {
-//       return res.status(404).json({ error: 'Employee not found' });
-//     }
-
-//     // Find the leave detail with the given ID within the employee's leaveDetails array
-//     const leaveDetail = employee.leaveDetails.find(detail => detail._id.toString() === id);
-
-//     // Check if leave detail exists
-//     if (!leaveDetail) {
-//       return res.status(404).json({ error: 'Leave detail not found' });
-//     }
-
-//     // Update the status of the leave detail
-//     leaveDetail.status = status;
-//     leaveDetail.remarks = remarks;
-//     // Save the updated employee document
-//     await employee.save();
-//  // Respond with success or failure message based on status
-//  let message = '';
-//  if (status === 'approved') {
-//    message = 'Leave Granted Successfully...!';
-//  } else if (status === 'rejected') {
-//    message = 'Leave Cancelled Successfully...!';
-//  }
-//     return res.json({ message, empname: employee.empname, leaveDetail  });
-//   } catch (error) {
-    
-//     return res.status(500).json({ error: 'Internal server error', error });
-//   }
-// };
 
 
 export const updateLeaveStatus = async (req, res) => {

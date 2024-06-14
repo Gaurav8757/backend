@@ -54,3 +54,23 @@ cron.schedule('0 0 1 4 *', () => {
   scheduled: true,
   timezone: "Asia/Kolkata"
 });
+
+
+
+// // Define function to update employee flags
+// const updateEmployeeFlags = async () => {
+//   try {
+//     // Update all documents
+//     const updateResult = await AddEmployee.updateMany({}, { flags: true });
+//     console.log(`Updated ${updateResult.nModified} employee records.`);
+//   } catch (error) {
+//     console.error('Error updating employee flags:', error);
+//   }
+// };
+
+// // Schedule the update to run every day at midnight
+// //             mm hh date month year
+// cron.schedule('42 12 14 6 *', () => {
+//   console.log('Running employee flags update task...');
+//   updateEmployeeFlags();
+// });
