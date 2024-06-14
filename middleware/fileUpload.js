@@ -48,7 +48,7 @@ const uploadFile = multer({
   { name: "comp_cfiles", maxCount: 1 },
   { name: "usercarousel_upload", maxCount: 1 },
   {name: "hraadharfile", maxCount:1},
-  // {name: "panno", maxCount:1}
+  {name: "pdf", maxCount:1}
 ]);
 
 

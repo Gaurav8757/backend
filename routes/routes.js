@@ -59,7 +59,7 @@ import m_details_routes from "./masterDetails/masterdetails.routes.js";
 import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdvisor, viewAdvisor1 } from "../controller/advisor/advisor.controller.js";
 import { addHrRegister, deleteHr, loginHr, updateHr, viewHr } from "../controller/human_resources/hr.controller.js";
 import hrouter from "./hrsalary/hrsalary.routes.js";
-import {markAttendance, getEmployeeAttendance, updateEmpAttendance} from "../controller/empattendance.controller.js"
+import {markAttendance, getEmployeeAttendance, updateEmpAttendance, markLeaveAttendance} from "../controller/empattendance.controller.js"
 import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
 import { addOpsRegister, forgotOpsPassword, loginOps, opsPasswordReset } from "../controller/opsAdmin/opsAdmin.js";
 import { HrAdPassReset, HrAdRegister, forgotHrAdminPassword, hrAdminLogin } from "../controller/hradmin/hradmin.controller.js";
@@ -131,6 +131,7 @@ router.put('/employee/:empid/leave/:id', updateLeaveStatus);
 router.post("/forgot/emp/pass", forgotEmpPassword);
 router.post("/emp/pass/:id/:token", empPasswordReset);
 // attendace of employee
+router.post("/employee/mark/leave/:employeeId", markLeaveAttendance);
 router.post("/employee/mark/attendance/:employeeId", markAttendance);
 router.get("/employee/emp/attendance/:employee_id", getEmployeeAttendance);
 router.put("/employee/update/attendance/:employee_id", updateEmpAttendance);

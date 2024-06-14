@@ -6,6 +6,7 @@ import { deleteComplaint, userComplaint, viewComplaint } from "../../controller/
 import { userContact, viewContacts, deleteContact, updateContact } from "../../controller/user_controller/contact.controller.js";
 import { userFeedback,viewFeedback, deleteFeedback, updateFeedback, getActiveUsers} from "../../controller/user_controller/feedback.controller.js";
 import { deleteUserFillCompanyForm, userFillCompanyForm, viewUserFillCompanyForm } from "../../controller/user_controller/compForm.contoller.js";
+import { deleteUserApplyForm, userApplyForm, viewUserApplyForm } from "../../controller/user_controller/career_controller.js";
 
 const router = express.Router();
 // carousel router imports
@@ -24,6 +25,12 @@ router.get("/viewcomplaint", viewComplaint);
 router.delete("/deletecomplaint/:id", deleteComplaint);
 // add feedback
 router.post("/feedback", uploadFile, userFeedback);
+// careers
+router.post("/career/posts", uploadFile, userApplyForm);
+// career get
+router.get("/career/lists", viewUserApplyForm);
+// delete career
+router.delete("/career/delete/:id", deleteUserApplyForm);
 // view all feedback
 router.get("/viewfeedback", viewFeedback);
 // active deactive feedback_user button
