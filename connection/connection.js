@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import Mongoose from "mongoose";
 import cron from 'node-cron';
 import AddEmployee from "../models/addempSchema.js";
+// import GenSalary from "../models/genSalarySchema.js";
 dotenv.config();
 const { MONGODB_URI, DB_NAME } = process.env;
 const connectDB = async() => {
@@ -61,7 +62,7 @@ cron.schedule('0 0 1 4 *', () => {
 // const updateEmployeeFlags = async () => {
 //   try {
 //     // Update all documents
-//     const updateResult = await AddEmployee.updateMany({}, { flags: true });
+//     const updateResult = await GenSalary.updateMany({}, { flags: false });
 //     console.log(`Updated ${updateResult.nModified} employee records.`);
 //   } catch (error) {
 //     console.error('Error updating employee flags:', error);
@@ -70,7 +71,7 @@ cron.schedule('0 0 1 4 *', () => {
 
 // // Schedule the update to run every day at midnight
 // //             mm hh date month year
-// cron.schedule('42 12 14 6 *', () => {
+// cron.schedule('13 17 14 6 *', () => {
 //   console.log('Running employee flags update task...');
 //   updateEmployeeFlags();
 // });

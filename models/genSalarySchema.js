@@ -6,6 +6,11 @@ const GenPolicySchema = new Mongoose.Schema(
       ref: "AddSalary",
       required: true,
     },
+    empUniqueId: {
+      type: String,
+      // ref: "AddEmployee",
+      required: true,
+    },
     monthsalary: {
       type: Number,
       ref: "AddSalary",
@@ -43,7 +48,6 @@ const GenPolicySchema = new Mongoose.Schema(
     genMonths: {
       type: String,
     },
-
     totalDays: {
       type: Number,
       // required: true,
@@ -151,6 +155,11 @@ const GenPolicySchema = new Mongoose.Schema(
     },
     otherExpense:{
       type: Number,
+    },
+    flags:{
+      type: Boolean,
+      default: false
+      // required: true
     }
   },
   { timestamps: true }

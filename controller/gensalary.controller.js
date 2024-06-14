@@ -1,8 +1,10 @@
 import GenSalary from "../models/genSalarySchema.js";
 
 export const genSalaryController = async (req, res) => {
+  console.log(empUniqueId);
   try {
     const {
+      empUniqueId,
       empid,
       empdesignation,
       empbranch,
@@ -41,7 +43,8 @@ export const genSalaryController = async (req, res) => {
       totalAmount,
       arrear,
       fuelExpense,
-      otherExpense
+      otherExpense,
+      flags
     } = req.body;
 
     // Check if the salary for the given empName and genMonths already exists
@@ -55,6 +58,7 @@ export const genSalaryController = async (req, res) => {
     }
     // Create a new salary instance
     const genNewSalary = new GenSalary({
+      empUniqueId,
       empid,
       sundays,
       empdesignation,
@@ -93,7 +97,8 @@ export const genSalaryController = async (req, res) => {
       totalAmount,
       arrear,
       fuelExpense,
-      otherExpense
+      otherExpense,
+      flags
     });
     // Save the salary to the database
     await genNewSalary .save();
