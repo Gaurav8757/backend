@@ -8,7 +8,6 @@ const GenPolicySchema = new Mongoose.Schema(
     },
     empUniqueId: {
       type: String,
-      // ref: "AddEmployee",
       required: true,
     },
     monthsalary: {

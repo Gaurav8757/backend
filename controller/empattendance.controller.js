@@ -44,6 +44,10 @@ export const markAttendance = async (req, res) => {
   }
 };
 
+
+
+
+
 export const markLeaveAttendance = async (req, res) => {
   const { employeeId } = req.params;
   const { status, date, time, weekday } = req.body;
@@ -97,91 +101,32 @@ export const getEmployeeAttendance = async (req, res) => {
 };
 
 
-// export const updateEmpAttendance = async (req, res) => {
-//   try {
-//     const { employee_id } = req.params;
-//     const employeeData = req.body;
-    
-//     // Get the current date in the format dd/mm/yyyy
-//     const currentDate = new Date();
-//     const day = String(currentDate.getDate()).padStart(2, '0');
-//     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-//     const year = currentDate.getFullYear();
-//     const formattedCurrentDate = `${day}/${month}/${year}`;
-
-//     // Perform the update only if the date matches the current date
-//     const updatedEmployeeAttendance = await EmpAttendance.findOneAndUpdate(
-//       { employee_id, date: formattedCurrentDate }, // Find the attendance record by employee_id and date
-//       { logouttime: employeeData.logouttime }, // Update the logouttime
-//       { new: true } // Return the updated record
-//     );
-
-//     if (!updatedEmployeeAttendance) {
-//       return res.status(404).json({
-//         status: "Employee Attendance not found",
-//         message: "The specified Employee Attendance does not exist in the database for the current date",
-//       });
-//     }
-
-//     return res.status(200).json({
-//       status: "Employee Attendance Updated Successfully",
-//       message: {
-//         updatedEmployeeAttendance,
-//       },
-//     });
-//   } catch (err) {
-//     console.error("Error during Employee Attendance Update:", err);
-
-//     // Handle Mongoose validation errors
-//     if (err.name === 'ValidationError') {
-//       return res.status(400).json({
-//         status: "Validation Error",
-//         message: err.message,
-//       });
-//     }
-
-//     return res.status(500).json({
-//       status: "Internal Server Error",
-//       message: err.message,
-//     });
-//   }
-// };
-
-
 export const updateEmpAttendance = async (req, res) => {
   try {
     const { employee_id } = req.params;
-    const employeeData = req.body;
-    // Check if the attendance record exists before attempting to update
-    const existingEmployeeAttendance = await AddEmployee.findById(employee_id);
+    const { status, date, time, weekday } = req.body;
 
-    if (!existingEmployeeAttendance) {
+    // Find employee attendance by empid and date
+    const employeeAttendance = await EmpAttendance.findOneAndUpdate(
+      { employee_id: employee_id, date: date },
+      { status, time, weekday },
+      { new: true, upsert: true }
+    );
+
+    if (!employeeAttendance) {
       return res.status(404).json({
         status: "Employee Attendance not found",
-        message: "The specified Employee Attendance does not exist in the database for the current date",
+        message: "The specified Employee Attendance does not exist in the database for the given date",
       });
     }
 
-    // Perform the update
-    const updatedEmployeeAttendance = await EmpAttendance.findOneAndUpdate(
-      employee_id,
-      employeeData,
-      {
-        new: true,
-        runValidators: true, // Optional: Run Mongoose validation
-      }
-    );
-
     return res.status(200).json({
       status: "Employee Attendance Updated Successfully",
-      message: {
-        updatedEmployeeAttendance,
-      },
+      data: employeeAttendance,
     });
   } catch (err) {
     console.error("Error during Employee Attendance Update:", err);
 
-    // Handle Mongoose validation errors
     if (err.name === 'ValidationError') {
       return res.status(400).json({
         status: "Validation Error",

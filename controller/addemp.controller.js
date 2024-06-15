@@ -221,7 +221,7 @@ export const loginEmployee = async (req, res) => {
 // #################view nly employee ##############//
 export const empListed = async (req, res) => {
   try {
-    const employeeList = await AddEmployee.find({}, {
+    const employeeList = await AddEmployee.find( { flags: true }, {
       _id: 1,
       empid: 1,
       uniqueid: 1,
@@ -285,20 +285,7 @@ export const viewEmployee = async (req, res) => {
           as: "employeeDetails"
         }
       },
-      // {
-      //   $project: {
-      //     _id: 1, // Include only necessary fields from AddEmployee
-      //     name: 1,
-      //     // Add other fields you need
-      //     employeeDetails: {
-      //       // Project only necessary fields from empattendances
-      //       _id: 1,
-      //       attendanceDate: 1,
-      //       // Add other fields you need
-      //     }
-      //   }
-      // },
-      // { $limit: 100 } 
+     
     ]);
 
     res.json(result);
@@ -309,33 +296,39 @@ export const viewEmployee = async (req, res) => {
 };
 
 //####### list of employee name based on staff type #######/
-export const listOfEmp = async (req, res)=>{
+export const listOfEmp = async (req, res) => {
   try {
-    // Aggregate to group employees by staffType and push empname into an array
+    // Aggregate to filter employees by flags and group them by staffType, pushing empname into an array
     const aggregatedResult = await AddEmployee.aggregate([
-        {
-            $group: {
-                _id: "$staffType",
-                empnames: { $push: { _id: "$_id", empname: "$empname" } }
-            }
+      {
+        $match: {
+          flags: true
         }
+      },
+      {
+        $group: {
+          _id: "$staffType",
+          empnames: { $push: { _id: "$_id", empname: "$empname" } }
+        }
+      }
     ]);
-    
+
     if (!aggregatedResult || aggregatedResult.length === 0) {
-        return res.status(404).json({
-            status: "Error",
-            message: "No data found"
-        });
+      return res.status(404).json({
+        status: "Error",
+        message: "No data found"
+      });
     }
     return res.status(200).json(aggregatedResult);
-} catch (error) {
+  } catch (error) {
     console.error("Error during aggregation:", error);
     return res.status(500).json({
-        status: "Error",
-        message: "Internal server error"
+      status: "Error",
+      message: "Internal server error"
     });
-}
-}
+  }
+};
+
 
 //################ update code ########################/
 export const updateEmployee = async (req, res) => {
