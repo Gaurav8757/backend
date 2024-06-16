@@ -42,7 +42,7 @@ const GenPolicySchema = new Mongoose.Schema(
       type: Number,
       ref: "AddSalary",
       default: 0,
-      required: true,
+      // required: true,
     },
     genMonths: {
       type: String,
