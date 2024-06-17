@@ -411,6 +411,26 @@ export const viewMonthlyData = async (req, res) => {
   }
 };
 
+export const viewAllPoliciesLists = async (req, res) =>{
+  try {
+      const dayss = await AllInsurance.find({});
+
+      if (!dayss) {
+          return res.status(400).json({
+            status: "Error during policies lists Update",
+            message: "Invalid policies selected..!",
+          });
+        }else{
+          return res.status(200).json(dayss);
+        }
+      
+  } catch (error) {
+      return res.status(400).json({
+          status: "Error during View policies Lists....!",
+          message: error.message,
+        });
+  }
+}
 
 
 

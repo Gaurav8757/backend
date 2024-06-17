@@ -9,13 +9,14 @@ import {
   viewPoliciesList,
   viewMonthlyData,
   updateByAdvisor,
+  viewAllPoliciesLists,
   // getMasterDetails
 } from "../../controller/masterdetails/masterdetails.controller.js";
 
 const m_details_routes = express.Router();
 // add
 m_details_routes.post("/adddata", createAllInsurance);
-
+m_details_routes.get("/show/view", viewAllPoliciesLists);
 // update
 m_details_routes.put("/updatedata/:id", updateMasterDetails);
 
