@@ -71,7 +71,7 @@ cron.schedule('0 0 1 4 *', () => {
 
 // // Schedule the update to run every day at midnight
 // //             mm hh date month year
-// cron.schedule('13 17 14 6 *', () => {
+// cron.schedule('05 12 17 6 *', () => {
 //   console.log('Running employee flags update task...');
 //   updateEmployeeFlags();
 // });
