@@ -113,6 +113,7 @@ const AllInsurancePolicySchema = new mongoose.Schema(
     },
     ncb: {
       type: String,
+      default: ""
     },
     advisorName: {
       type: String,
