@@ -84,6 +84,7 @@ const AddEmployeeSchema = new Mongoose.Schema(
     },
     empaadharno: {
       type: Number,
+      default: 0
       // required: true,
     },
 

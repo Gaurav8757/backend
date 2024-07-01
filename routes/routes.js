@@ -79,8 +79,12 @@ import { addSitCapacities, deleteSitting, updateSeating, viewSitCapacityList } f
 import { ncbAdds, ncbDelete, ncbLists } from "../controller/ncb/ncb.contoller.js";
 import { LeaveDelete, LeaveTypeList, LeaveTypes } from "../controller/leaveBalance/leavebalance.js";
 import legers from "./leger/leger.routes.js";
+import cics from "./cic/cic.routes.js";
 // users Routes
 router.use("/users", routes);
+
+// cic
+router.use("/cic", cics);
 // master routes
 router.use("/alldetails", m_details_routes);
 // hrsalary
