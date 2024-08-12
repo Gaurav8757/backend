@@ -33,7 +33,7 @@ export const advisorRegister = async (req, res) => {
       lastId = parseInt(lastUniqueId.split("-")[1]) + 1;
       // console.log(lastId);
     }
-    const nextUniqueId = `EIPLADV-${String(lastId).padStart(5, "0")}`;
+    // const nextUniqueId = `EIPLADV-${String(lastId).padStart(5, "0")}`;
 // console.log(nextUniqueId);
     // Save the new advisor to the database
     const salt = await bcrypt.genSalt(10);
@@ -46,7 +46,7 @@ export const advisorRegister = async (req, res) => {
       advisortype,
       branch,
       advisorpassword: hashedPassword,
-      uniqueId: nextUniqueId,
+      uniqueId,
     });
 
     await newAdvisor.save();
