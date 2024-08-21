@@ -1,9 +1,14 @@
 import express from "express";
 const router = express.Router();
 import routes from "./user_routes/usersRoutes.js";
-import Letter from "./letters/letter.routes.js"
-import hr from "./hrsalary/hrattend.routes.js"
-import { loginAdmin, adminRegister, forgotAdminPassword, adminPasswordReset } from "../controller/login.controller.js";
+import Letter from "./letters/letter.routes.js";
+import hr from "./hrsalary/hrattend.routes.js";
+import {
+  loginAdmin,
+  adminRegister,
+  forgotAdminPassword,
+  adminPasswordReset,
+} from "../controller/login.controller.js";
 import {
   addbranchRegister,
   viewBranch,
@@ -45,7 +50,11 @@ import {
   salaryList,
   updateGenSalary,
 } from "../controller/gensalary.controller.js";
-import { branchPasswordReset, forgotBranchPassword, loginBranch } from "../controller/branch.controller.js";
+import {
+  branchPasswordReset,
+  forgotBranchPassword,
+  loginBranch,
+} from "../controller/branch.controller.js";
 import {
   addCompany,
   deleteCompany,
@@ -56,28 +65,123 @@ import {
   viewNonMotorInsuranceCompanies,
 } from "../controller/addcompany.controller.js";
 import m_details_routes from "./masterDetails/masterdetails.routes.js";
-import { advisorRegister, deleteAdvisor, loginAdvisor, updateAdvisor, viewAdvisor, viewAdvisor1 } from "../controller/advisor/advisor.controller.js";
-import { addHrRegister, deleteHr, loginHr, updateHr, viewHr } from "../controller/human_resources/hr.controller.js";
+import {
+  advisorRegister,
+  deleteAdvisor,
+  loginAdvisor,
+  updateAdvisor,
+  viewAdvisor,
+  viewAdvisor1,
+} from "../controller/advisor/advisor.controller.js";
+import {
+  addHrRegister,
+  deleteHr,
+  loginHr,
+  updateHr,
+  viewHr,
+} from "../controller/human_resources/hr.controller.js";
 import hrouter from "./hrsalary/hrsalary.routes.js";
-import {markAttendance, getEmployeeAttendance, updateEmpAttendance, markLeaveAttendance, updateEmpLogoutTime} from "../controller/empattendance.controller.js"
-import { deleteStaff, staffList, staffType } from "../controller/staff/type.controller.js";
-import { addOpsRegister, forgotOpsPassword, loginOps, opsPasswordReset } from "../controller/opsAdmin/opsAdmin.js";
-import { HrAdPassReset, HrAdRegister, forgotHrAdminPassword, hrAdminLogin } from "../controller/hradmin/hradmin.controller.js";
-import { PolicydeleteStaff, PolicystaffList, PolicystaffTypes, ProductPolicyAdd, ProductPolicyDelete } from "../controller/policytype/addtype.policy.js";
-import { AddSegment, CategoryAdd, CompanyDelete, CompanyTypeList, CompanyTypes, categoryTypeDelete } from "../controller/companyType/company.controller.js";
-import { FuelDelete, FuelList, FuelTypes } from "../controller/fuel/fuel.controller.js";
-import { PayoutOnAdd, PayoutOnDelete, PayoutOnList } from "../controller/payoutOn/payoutOn.controller.js";
-import { PaymentAdd, PaymentDelete, PaymentModeList } from "../controller/payMode/pay.controller.js";
-import { financePasswordReset, financeRegister, forgotFinancePassword, loginFinance } from "../controller/finance/finance.controller.js";
-import { hDaysAdd, hDaysDelete, hDaysList } from "../controller/holiday/holiday.controller.js";
+import {
+  markAttendance,
+  getEmployeeAttendance,
+  updateEmpAttendance,
+  markLeaveAttendance,
+  updateEmpLogoutTime,
+} from "../controller/empattendance.controller.js";
+import {
+  deleteStaff,
+  staffList,
+  staffType,
+} from "../controller/staff/type.controller.js";
+import {
+  addOpsRegister,
+  forgotOpsPassword,
+  loginOps,
+  opsPasswordReset,
+} from "../controller/opsAdmin/opsAdmin.js";
+import {
+  HrAdPassReset,
+  HrAdRegister,
+  forgotHrAdminPassword,
+  hrAdminLogin,
+} from "../controller/hradmin/hradmin.controller.js";
+import {
+  PolicydeleteStaff,
+  PolicystaffList,
+  PolicystaffTypes,
+  ProductPolicyAdd,
+  ProductPolicyDelete,
+} from "../controller/policytype/addtype.policy.js";
+import {
+  AddSegment,
+  CategoryAdd,
+  CompanyDelete,
+  CompanyTypeList,
+  CompanyTypes,
+  categoryTypeDelete,
+} from "../controller/companyType/company.controller.js";
+import {
+  FuelDelete,
+  FuelList,
+  FuelTypes,
+} from "../controller/fuel/fuel.controller.js";
+import {
+  PayoutOnAdd,
+  PayoutOnDelete,
+  PayoutOnList,
+} from "../controller/payoutOn/payoutOn.controller.js";
+import {
+  PaymentAdd,
+  PaymentDelete,
+  PaymentModeList,
+} from "../controller/payMode/pay.controller.js";
+import {
+  financePasswordReset,
+  financeRegister,
+  forgotFinancePassword,
+  loginFinance,
+} from "../controller/finance/finance.controller.js";
+import {
+  hDaysAdd,
+  hDaysDelete,
+  hDaysList,
+} from "../controller/holiday/holiday.controller.js";
 import letters from "./letters/letter.routes.js";
-import { TWvehicleSlab, addCompGrid, cvehicleSlab, delVehicleSlab, deleteCompGrid, updateCVehicleSlab, updateCompGrid, viewAllCVehicleSlab, viewAllCompanyGrid, viewBranchwiseSlab } from "../controller/commSlab/commissionSlab.js";
+import {
+  TWvehicleSlab,
+  addCompGrid,
+  cvehicleSlab,
+  delVehicleSlab,
+  deleteCompGrid,
+  updateCVehicleSlab,
+  updateCompGrid,
+  viewAllCVehicleSlab,
+  viewAllCompanyGrid,
+  viewBranchwiseSlab,
+} from "../controller/commSlab/commissionSlab.js";
 import { viewAdvisorListing } from "../controller/masterdetails/masterdetails.controller.js";
-import { ODAdd, OdDelete, OdList } from "../controller/oddiscount/OdDiscount.js";
+import {
+  ODAdd,
+  OdDelete,
+  OdList,
+} from "../controller/oddiscount/OdDiscount.js";
 import { CCDelete, CCList, ccAdd } from "../controller/CC/cc.controller.js";
-import { addSitCapacities, deleteSitting, updateSeating, viewSitCapacityList } from "../controller/sittingCapacity/sittingcapacity.js";
-import { ncbAdds, ncbDelete, ncbLists } from "../controller/ncb/ncb.contoller.js";
-import { LeaveDelete, LeaveTypeList, LeaveTypes } from "../controller/leaveBalance/leavebalance.js";
+import {
+  addSitCapacities,
+  deleteSitting,
+  updateSeating,
+  viewSitCapacityList,
+} from "../controller/sittingCapacity/sittingcapacity.js";
+import {
+  ncbAdds,
+  ncbDelete,
+  ncbLists,
+} from "../controller/ncb/ncb.contoller.js";
+import {
+  LeaveDelete,
+  LeaveTypeList,
+  LeaveTypes,
+} from "../controller/leaveBalance/leavebalance.js";
 import legers from "./leger/leger.routes.js";
 import cics from "./cic/cic.routes.js";
 import cancels from "./cancelForm/cancelForms.js";
@@ -117,7 +221,7 @@ router.post("/admin/pass/:id/:token", adminPasswordReset);
 // add or view branch
 router.post("/dashboard/addbranch", addbranchRegister);
 router.get("/api/branch-list", viewBranch);
-router.put("/api/branch/update/:id", updateBranch)
+router.put("/api/branch/update/:id", updateBranch);
 router.delete("/dashboard/api/:id", deleteBranch);
 // password change
 router.post("/forgot/branch/pass", forgotBranchPassword);
@@ -137,12 +241,12 @@ router.get("/employees/data", empListed);
 // get all employees details inside hr
 router.get("/api/employee-list", viewEmployee);
 // advisor policy lists
-router.get('/api/advpolicy', viewAdvisorListing); 
+router.get("/api/advpolicy", viewAdvisorListing);
 
-router.put("/api/emp/update/:id", uploadFile ,updateEmployee);
+router.put("/api/emp/update/:id", uploadFile, updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
 router.get("/api/employee/:empId", viewByIdEmp);
-router.put('/employee/:empid/leave/:id', updateLeaveStatus);
+router.put("/employee/:empid/leave/:id", updateLeaveStatus);
 // password change
 router.post("/forgot/emp/pass", forgotEmpPassword);
 router.post("/emp/pass/:id/:token", empPasswordReset);
@@ -178,9 +282,11 @@ router.post("/dashboard/addpolicy", uploadFile, addpolicyRegister);
 router.get("/api/policy-list", viewPolicy);
 router.put("/policies/update/:id", updatePolicy);
 router.delete("/policies/api/:id", deletePolicy);
+
 // employee list aapi for add salary
 router.get("/api/employee-lists", empList);
-// advisor register 
+
+// advisor register
 router.post("/advisor/register", advisorRegister);
 router.post("/advisor/login", loginAdvisor);
 router.get("/advisor/lists", viewAdvisor);
@@ -190,7 +296,7 @@ router.get("/advisor/all/lists", viewAdvisor1);
 // login Branch using Addbranch database
 router.post("/branches/loginbranch", loginBranch);
 // HR ROUTES
-router.post("/hr/addhr",uploadFile ,addHrRegister);
+router.post("/hr/addhr", uploadFile, addHrRegister);
 // hr admin register
 router.post("/hradmin/register", HrAdRegister);
 router.post("/hradmin/login", hrAdminLogin);
@@ -221,11 +327,10 @@ router.delete("/policy/company/:id", CompanyDelete);
 router.put("/api/company/:id/category", CategoryAdd);
 router.delete("/api/company/category/:id/delete", categoryTypeDelete);
 router.put("/api/comp/:id/segment", AddSegment);
-// fuel 
+// fuel
 router.post("/add/fuel", FuelTypes);
 router.get("/view/fuel", FuelList);
 router.delete("/fuel/delete/:id", FuelDelete);
-
 
 // PAYOUTON
 router.post("/add/payouton", PayoutOnAdd);
@@ -256,14 +361,14 @@ router.get("/holidays/alllists", hDaysList);
 router.delete("/holidays/:id/delete", hDaysDelete);
 
 // oddiscount
-router.post('/od/discounts', ODAdd);
-router.get('/od/list', OdList);
-router.delete('/od/del/:id', OdDelete);
+router.post("/od/discounts", ODAdd);
+router.get("/od/list", OdList);
+router.delete("/od/del/:id", OdDelete);
 
 // cc add
-router.post('/cc/add', ccAdd);
-router.get('/cc/show', CCList);
-router.delete('/cc/remove/:id', CCDelete);
+router.post("/cc/add", ccAdd);
+router.get("/cc/show", CCList);
+router.delete("/cc/remove/:id", CCDelete);
 
 // sitting capacity
 router.post("/sit/set", addSitCapacities);
@@ -282,6 +387,5 @@ router.post("/leave/type/add", LeaveTypes);
 router.get("/leave/type/show", LeaveTypeList);
 router.delete("/leave/delete/:id", LeaveDelete);
 // router.put('/leave/update/:id', LeaveNumberAdd);
-
 
 export default router;

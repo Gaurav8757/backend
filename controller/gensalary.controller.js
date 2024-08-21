@@ -5,6 +5,7 @@ export const genSalaryController = async (req, res) => {
   try {
     const {
       empid,
+      salDate,
       empdesignation,
       empbranch,
       location,
@@ -41,8 +42,10 @@ export const genSalaryController = async (req, res) => {
       emploanemi,
       totalAmount,
       arrear,
+      bankNamed,
       fuelExpense,
       otherExpense,
+      inWords,
       flags,
       empUniqueId,
     } = req.body;
@@ -60,6 +63,7 @@ export const genSalaryController = async (req, res) => {
     const genNewSalary = new GenSalary({
      
       empid,
+      salDate,
       sundays,
       empdesignation,
       empbranch,
@@ -96,8 +100,10 @@ export const genSalaryController = async (req, res) => {
       finalDeduction,
       totalAmount,
       arrear,
+      bankNamed,
       fuelExpense,
       otherExpense,
+      inWords,
       flags,
       empUniqueId,
     });

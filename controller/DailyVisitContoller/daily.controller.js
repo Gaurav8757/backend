@@ -2,7 +2,7 @@ import DailyVisits from "../../models/DailyVisitReport/dailyVisits.js";
 
 export const createRecord = async (req, res) => {
   try {
-    const {id, currdate, name, category, address, mobile, branch, location } = req.body;
+    const {ids, currdate, name, category, address, mobile, branch, location } = req.body;
     const today = new Date().toISOString().split("T")[0];
     console.log(today);
 
@@ -12,7 +12,8 @@ export const createRecord = async (req, res) => {
       });
     }
     const newRecord = new DailyVisits({
-      id,
+      
+      ids,
       currdate,
       name,
       category,

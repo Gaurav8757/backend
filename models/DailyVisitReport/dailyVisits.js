@@ -1,9 +1,10 @@
 import Mongoose from "mongoose";
 
 const DailyVisitsSchema = new Mongoose.Schema({
-  id:{
-    type: Mongoose.Types.ObjectId,
-    ref: "AddEmployee"
+  ids:{
+    type: String,
+    ref: "AddEmployee",
+    required: true
   },
   srNo: {
     type: Number,

@@ -155,6 +155,15 @@ const GenPolicySchema = new Mongoose.Schema(
     otherExpense:{
       type: Number,
     },
+    salDate:{
+      type: String,
+    },
+    inWords:{
+      type: String
+    },
+    bankNamed:{
+      type: String
+    },
     flags:{
       type: Boolean,
       default: false
