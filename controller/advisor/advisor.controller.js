@@ -10,7 +10,8 @@ const { SECRET } = process.env;
 // ************************* Advisor ************************* //
 export const advisorRegister = async (req, res) => {
   try {
-    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch, advisortype } = req.body;
+    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch, advisortype, uniqueIDS } = req.body;
+
 
     // Check if the user with the given email already exists
     const emailExist = await Advisor.findOne({ advisoremail });
@@ -21,21 +22,6 @@ export const advisorRegister = async (req, res) => {
       });
     }
 
-    // Find the last advisor in the database
-    const lastAdvisor = await Advisor.findOne().sort({ _id: -1 }).limit(1);
-
-    // Generate the next unique ID
-    let lastId = 0; // Default ID if no advisor exists
-    if (lastAdvisor) {
-      const lastUniqueId = lastAdvisor.uniqueId;
-      // console.log(lastAdvisor);
-      // Extract the number part and increment it
-      lastId = parseInt(lastUniqueId.split("-")[1]) + 1;
-      // console.log(lastId);
-    }
-    // const nextUniqueId = `EIPLADV-${String(lastId).padStart(5, "0")}`;
-// console.log(nextUniqueId);
-    // Save the new advisor to the database
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(advisorpassword, salt);
     const newAdvisor = new Advisor({
@@ -46,7 +32,7 @@ export const advisorRegister = async (req, res) => {
       advisortype,
       branch,
       advisorpassword: hashedPassword,
-      uniqueId,
+      uniqueIDS,
     });
 
     await newAdvisor.save();

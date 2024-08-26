@@ -6,32 +6,31 @@ const AdvisorSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
-    uniqueId:{
+    uniqueIDS: {
       type: String,
       required: true,
+      unique: true
     },
-    advisoraddress:{
+    advisoraddress: {
       type: String,
       // required: true,
     },
-    branch:{
+    branch: {
       type: [String],
-      required:true
+      required: true,
     },
     advisoremail: {
       type: String,
       required: true,
     },
-    advisortype:{
-      type : String ,
+    advisortype: {
+      type: String,
       required: true,
     },
-
     advisormobile: {
-        type: Number,
-        // required: true,
-      },
-
+      type: Number,
+      // required: true,
+    },
     advisorpassword: {
       type: String,
       required: true,
