@@ -6,7 +6,7 @@ const AdvisorSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
-    uniqueIDS: {
+    uniqueId: {
       type: String,
       required: true,
       unique: true

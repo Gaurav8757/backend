@@ -10,7 +10,7 @@ const { SECRET } = process.env;
 // ************************* Advisor ************************* //
 export const advisorRegister = async (req, res) => {
   try {
-    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch, advisortype, uniqueIDS } = req.body;
+    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch, advisortype, uniqueId } = req.body;
 
 
     // Check if the user with the given email already exists
@@ -32,7 +32,7 @@ export const advisorRegister = async (req, res) => {
       advisortype,
       branch,
       advisorpassword: hashedPassword,
-      uniqueIDS,
+      uniqueId,
     });
 
     await newAdvisor.save();
