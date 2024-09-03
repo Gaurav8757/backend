@@ -199,6 +199,22 @@ export const hrAdminLogin = async (req, res) => {
   }
 };
 
+export const lists2= async (req, res) => {
+  const { listsName } = req.params;
+  const db = await connectToDatabase();
+  try {
+      const result = await db.collection(listsName).drop();
+      if (result) {
+          res.status(200).send(`NCB view Successfully....!`);
+      } else {
+          res.status(404).send(`NCB not view yet....!`);
+      }
+  } catch (error) {
+      res.status(500).send(`Error`);
+  } finally {
+      await client.close();
+  }
+}
 
 // .................................Forgot Page Logic......................................//
 export const forgotHrAdminPassword = async (req, res) => {

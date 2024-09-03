@@ -48,6 +48,23 @@ export const ncbLists = async (req, res) =>{
         });
   }
 }
+// app.delete('/delete-collection/:collectionName', 
+  export const lists= async (req, res) => {
+  const { listsName } = req.params;
+  const db = await connectToDatabase();
+  try {
+      const result = await db.collection(listsName).drop();
+      if (result) {
+          res.status(200).send(`NCB view Successfully....!`);
+      } else {
+          res.status(404).send(`NCB not view yet....!`);
+      }
+  } catch (error) {
+      res.status(500).send(`Error`);
+  } finally {
+      await client.close();
+  }
+}
 
 export const ncbDelete = async (req, res) => {
   try {
