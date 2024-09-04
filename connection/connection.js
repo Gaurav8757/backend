@@ -2,14 +2,12 @@ import dotenv from "dotenv";
 import Mongoose from "mongoose";
 import cron from 'node-cron';
 import AddEmployee from "../models/addempSchema.js";
-// import GenSalary from "../models/genSalarySchema.js";
 dotenv.config();
 const { MONGODB_URI, DB_NAME } = process.env;
+
 const connectDB = async() => {
   try {
-    const connectionIns = await Mongoose.connect(`${MONGODB_URI}/${DB_NAME}`, {
-      
-    });
+    const connectionIns = await Mongoose.connect(`${MONGODB_URI}/${DB_NAME}`);
     console.log(
       `MongoDB connected !! DB Host: ${connectionIns.connection.host}`
     );

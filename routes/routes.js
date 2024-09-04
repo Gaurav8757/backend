@@ -121,6 +121,7 @@ import {
   categoryTypeDelete,
 } from "../controller/companyType/company.controller.js";
 import {
+  apiListFuels,
   FuelDelete,
   FuelList,
   FuelTypes,
@@ -326,7 +327,9 @@ router.get("/view/company/lists", CompanyTypeList);
 router.delete("/policy/company/:id", CompanyDelete);
 router.put("/api/company/:id/category", CategoryAdd);
 router.delete("/api/company/category/:id/delete", categoryTypeDelete);
+router.get("/api/comp/cat/user", apiListFuels);
 router.put("/api/comp/:id/segment", AddSegment);
+
 // fuel
 router.post("/add/fuel", FuelTypes);
 router.get("/view/fuel", FuelList);

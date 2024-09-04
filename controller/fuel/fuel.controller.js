@@ -30,7 +30,23 @@ export const FuelTypes = async (req, res) => {
       });
     }
   };
-  
+
+ export const apiListFuels = async (req, res) => {
+    const { dbName, cName } = req.query;
+    if (!dbName || !cName) {
+        return res.status(400).send('Missing fuels or fuels name');
+    }
+    try {
+        const db = mongoose.connection.useDb(dbName);
+        console.log(db);
+        
+        const collection = db.collection(cName);
+        const data = await collection.find({}).toArray();
+        res.json(data);
+    } catch (error) {
+        console.error('Error', error);
+    }
+};
   export const FuelList = async (req, res) =>{
     try {
         const staff = await Fuel.find({});
