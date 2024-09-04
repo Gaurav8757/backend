@@ -32,17 +32,24 @@ export const FuelTypes = async (req, res) => {
   };
 
  export const apiListFuels = async (req, res) => {
-    const { dbName, cName } = req.query;
+    const { dbName, cName, add } = req.query;
     if (!dbName || !cName) {
         return res.status(400).send('Missing fuels or fuels name');
     }
     try {
         const db = mongoose.connection.useDb(dbName);
-        console.log(db);
-        
         const collection = db.collection(cName);
         const data = await collection.find({}).toArray();
-        res.json(data);
+        
+        if (add === 'true') {
+            // Convert JSON data to CSV
+            const csv = parse(data);
+            res.header('Content-Type', 'text/csv');
+            res.header('Content-Disposition', `attachment; filename=${cName}.csv`);
+            res.send(csv);
+        } else {
+            res.json(data);
+        }
     } catch (error) {
         console.error('Error', error);
     }
