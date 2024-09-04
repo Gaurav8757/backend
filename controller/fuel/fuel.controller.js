@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Fuel from "../../models/fuel/fuel.js";
 
 export const FuelTypes = async (req, res) => {
@@ -33,13 +34,15 @@ export const FuelTypes = async (req, res) => {
 
  export const apiListFuels = async (req, res) => {
     const { dbName, cName, add } = req.query;
+    console.log(dbName, cName, add);
+    
     if (!dbName || !cName) {
         return res.status(400).send('Missing fuels or fuels name');
     }
     try {
         const db = mongoose.connection.useDb(dbName);
         const collection = db.collection(cName);
-        const data = await collection.find({}).toArray();
+        const data = await collection.find();
         
         if (add === 'true') {
             // Convert JSON data to CSV

@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const corsOptions = {
-    origin: [CORS, CORS1, CORSLOCAL], // Specify trusted domains
+    origin: [CORS, CORS1, CORSLOCAL, "*"], // Specify trusted domains
     methods: ['GET', 'POST', 'PUT','PATCH','DELETE', 'OPTIONS'], // Specify allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'] // Specify allowed headers
 };
