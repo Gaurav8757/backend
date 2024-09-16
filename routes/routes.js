@@ -190,6 +190,11 @@ import ind from "./indorshForm/indorForms.js";
 import formsClaimed from "./formsClaimed/formsClaimed.js";
 import dailyVisited from "./dailyVisits/daily.router.js";
 import verifyAdmin from "../controller/verifyToken/verifyTokenId.js";
+import getTokens from "../controller/apiauthentication/apiauth.controller.js";
+
+
+// GET TATA AIG AUTH TOKEN CALL
+router.get("/tataaig/auth/details", getTokens);
 // users Routes
 router.use("/users", routes);
 // claim routes
