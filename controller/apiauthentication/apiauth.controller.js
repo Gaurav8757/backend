@@ -10,6 +10,7 @@ const {
   TATA_AIG_4_WHEELER_SCOPE,
   TATA_AIG_4_WHEELER_TOKEN_CLIENT_ID,
   TATA_AIG_4_WHEELER_TOKEN_CLIENT_SECRET,
+  TATA_AIG_4_WHEELER_QUOTE_URL
 } = process.env;
 
 // Function to make a POST request to the first API
@@ -55,18 +56,15 @@ const getCombinedTokens = async () => {
       fetchUatListsToken(),
       fetchAuthToken(),
     ]);
-
     // Get the current timestamp
     const currentTime = Date.now();
 
     // Calculate the expiration time for both tokens (in milliseconds)
     const uatListsExpiresInMs = uatLists.expires_in * 1000; // Assuming `expires_in` is in seconds
     const authExpiresInMs = auth.expires_in * 1000; // Assuming `expires_in` is in seconds
-
     // Set timers to expire 30 seconds before actual expiration
     const timerDuration =
-      Math.min(uatListsExpiresInMs, authExpiresInMs) - 30000; // 30 seconds before the minimum of both
-
+      Math.min(uatListsExpiresInMs, authExpiresInMs) - 30000; // 30 seconds before the minimum of both  
     // Return combined response with timer
     return {
       uatLists,
@@ -82,14 +80,14 @@ const getCombinedTokens = async () => {
 const getTokens = async (req, res) => {
   try {
     const tokens = await getCombinedTokens();
-
+ 
     // Schedule a timer that expires in 29 minutes and 30 seconds
     setTimeout(() => {
       console.log(
         "Your time is up. Restart the policy or fill out the form again."
       );
       // If you want to trigger any other action, you can do it here
-    }, tokens.token_refresh_timer);
+    }, tokens.token_refresh_timer || 29 * 60 * 1000 + 30 * 1000);
 
     res.status(200).json({
       ...tokens,
