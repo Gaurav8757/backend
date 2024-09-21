@@ -80,7 +80,6 @@ const getCombinedTokens = async () => {
 const getTokens = async (req, res) => {
   try {
     const tokens = await getCombinedTokens();
- 
     // Schedule a timer that expires in 29 minutes and 30 seconds
     setTimeout(() => {
       console.log(
@@ -88,7 +87,6 @@ const getTokens = async (req, res) => {
       );
       // If you want to trigger any other action, you can do it here
     }, tokens.token_refresh_timer || 29 * 60 * 1000 + 30 * 1000);
-
     res.status(200).json({
       ...tokens,
       message: "Token acquired. You will be notified when your time is up.",
