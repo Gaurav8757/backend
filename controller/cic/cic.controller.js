@@ -209,7 +209,7 @@ export const forgotCicPassword = async (req, res) => {
       });
   
       // Generate reset password link
-      const link = `${LINK6}/${user._id}/${token}`;
+      const link = `${LINK7}/${user._id}/${token}`;
      
       // Nodemailer setup
       const transporter = nodemailer.createTransport({

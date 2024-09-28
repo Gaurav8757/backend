@@ -5,14 +5,21 @@ import nodemailer from "nodemailer";
 import Mailgen from "mailgen";
 import Advisor from "../../models/advisor/advisorSchema.js";
 dotenv.config();
-const { SECRET } = process.env;
+const { SECRET, EMAIL, PASSWORD, LINK6 } = process.env;
 
 // ************************* Advisor ************************* //
 export const advisorRegister = async (req, res) => {
   try {
-    const { advisorname, advisoremail, advisormobile, advisorpassword, advisoraddress, branch, advisortype, uniqueId } = req.body;
-
-
+    const {
+      advisorname,
+      advisoremail,
+      advisormobile,
+      advisorpassword,
+      advisoraddress,
+      branch,
+      advisortype,
+      uniqueId,
+    } = req.body;
     // Check if the user with the given email already exists
     const emailExist = await Advisor.findOne({ advisoremail });
     if (emailExist) {
@@ -36,6 +43,81 @@ export const advisorRegister = async (req, res) => {
     });
 
     await newAdvisor.save();
+    // Send email to the newly registered user
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: EMAIL, // Your email id
+        pass: PASSWORD, // Your email password
+      },
+    });
+
+    // Mailgen setup
+    const mailGenerator = new Mailgen({
+      theme: "cerberus",
+      product: {
+        name: "Eleedom IMF Pvt Ltd",
+        link: "https://mailgen.js/",
+        // Adjust the following line accordingly
+        // This will be displayed in the footer of the email
+        copyright: `Copyright © ${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
+      },
+    });
+
+    // Prepare email content
+    const response = {
+      body: {
+        name: advisorname,
+        intro: [
+          "Welcome to My Company!.",
+          "Your account has been successfully created with the following credentials:",
+        ],
+
+        action: [
+          {
+            button: {
+              color: "#209320",
+              text: `Email:   ${advisoremail}`,
+            },
+          },
+          {
+            button: {
+              color: "#209320",
+              text: `Password:   ${advisorpassword}`,
+            },
+          },
+        ],
+
+        outro:
+          "You can now log in to your account (as Advisor) and start using our services.",
+      },
+    };
+
+    // Generate email
+    const mail = mailGenerator.generate(response);
+
+    const mailOptions = {
+      from: `Eleedom IMF Pvt Ltd your_email@gmail.com`, // Sender address
+      to: advisoremail, // Receiver's email address
+      subject: "Welcome to Our Eleedom IMF Pvt Ltd!", // Email subject
+      html: mail,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json(
+          {
+            status: "Email not sent",
+            message: "Error sending welcome email",
+          },
+          error
+        );
+      }
+      return res
+        .status(200)
+        .json("Email sent successfully...!" + info.response);
+    });
 
     return res.status(201).json({
       status: "New Advisor Added Successfully...!",
@@ -51,51 +133,47 @@ export const advisorRegister = async (req, res) => {
   }
 };
 
-
-
-
 //######################## login advisor ###########################//
 export const loginAdvisor = async (req, res) => {
-    try {
-      const { advisoremail, advisormobile, advisorpassword } = req.body;
-      let advisory;
-      if (advisoremail) advisory = await Advisor.findOne({ advisoremail });
-      else if (advisormobile) advisory = await Advisor.findOne({ advisormobile });
- 
-      if (!advisory) {
-        return res.status(401).json({
-          message: "Advisor Not Found",
-        });
-      }
+  try {
+    const { advisoremail, advisormobile, advisorpassword } = req.body;
+    let advisory;
+    if (advisoremail) advisory = await Advisor.findOne({ advisoremail });
+    else if (advisormobile) advisory = await Advisor.findOne({ advisormobile });
 
-      const isValidPassword = await bcrypt.compare(advisorpassword, advisory.advisorpassword);
-      if (!isValidPassword) {
-        return res.status(400).json("Password is Incorrect");
-      }else{
-     
-    const token = jwt.sign(
+    if (!advisory) {
+      return res.status(401).json({
+        message: "Advisor Not Found",
+      });
+    }
+
+    const isValidPassword = await bcrypt.compare(
+      advisorpassword,
+      advisory.advisorpassword
+    );
+    if (!isValidPassword) {
+      return res.status(400).json("Password is Incorrect");
+    } else {
+      const token = jwt.sign(
         {
-            advisorId: advisory._id,
+          advisorId: advisory._id,
         },
         SECRET,
         {
-            expiresIn: "24h",
+          expiresIn: "24h",
         }
-    );
-    return res.status(200).json({
+      );
+      return res.status(200).json({
         message: "Login Successful",
         advisory,
         token,
-    })
-}
+      });
     }
-     catch (err) {
-      console.log(err);
-      res.status(500).send("Server Error");
-    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error");
   }
-
-
+};
 
 //################### views all advisors #####################/
 export const viewAdvisor = async (req, res) => {
@@ -110,8 +188,6 @@ export const viewAdvisor = async (req, res) => {
   }
 };
 
-
-
 export const viewAdvisor1 = async (req, res) => {
   let { branch } = req.query;
 
@@ -122,7 +198,7 @@ export const viewAdvisor1 = async (req, res) => {
       branch = branch.toUpperCase();
       query.branch = branch; // Filtering advisors by branch
     }
-    
+
     const advisorList = await Advisor.find(query).sort({ uniqueid: 1 });
 
     if (advisorList.length === 0) {
@@ -141,7 +217,6 @@ export const viewAdvisor1 = async (req, res) => {
     });
   }
 };
-
 
 // Controller function to handle updating specific fields of a advisor
 export const updateAdvisor = async (req, res) => {
@@ -184,14 +259,11 @@ export const updateAdvisor = async (req, res) => {
   }
 };
 
-
-
 // forgot password
-export const ForgotPassword = async (req, res) => {
+export const ForgotAdvisorPassword = async (req, res) => {
   try {
-    const user = await Advisor.findOne({ email: req.body.email });
+    const user = await Advisor.findOne({ advisoremail: req.body.advisoremail });
     if (!user) {
-      req.flash("error", );
       return res.status(400).json("Email not found. Register Now!");
     }
     // Generate a random token
@@ -199,15 +271,15 @@ export const ForgotPassword = async (req, res) => {
     let token = jwt.sign({ userId: user._id }, secret, {
       expiresIn: "15m",
     });
-    // const link = `https://gauravnodejsauthentication.onrender.com/resetPassword/${user._id}/${token}`;
-    const link = `https://api.eleedomimf.com/resetPassword/${user._id}/${token}`;
-    
+
+    const link = `${LINK6}/${user._id}/${token}`;
+
     //...................................Nodemailer code.......................................//
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL, //own email id
-        pass: process.env.PASSWORD, // own emailid password
+        user: EMAIL, //own email id
+        pass: PASSWORD, // own emailid password
       },
     });
     const mailGenerator = new Mailgen({
@@ -216,14 +288,13 @@ export const ForgotPassword = async (req, res) => {
         // .......................Appears in header & footer of e-mails......................//
         name: "Eleedom Pvt Ltd",
         link: "https://mailgen.js/",
-        copyright:
-          "Copyright © 2024 Eleedom Pvt Ltd. All rights reserved.",
+        copyright: "Copyright © 2024 Eleedom Pvt Ltd. All rights reserved.",
       },
     });
     //...................................Prepare email contents..............................//
     let response = {
       body: {
-        name: "User",
+        name: `${user.advisorname}`,
         intro: [
           "You have received this email because a password reset request for your account was received.",
           "Valid till 15 Minutes only!",
@@ -246,7 +317,7 @@ export const ForgotPassword = async (req, res) => {
     transporter.sendMail(
       {
         from: '"Eleedom Pvt Ltd"<example@gmail.com>', // sender address
-        to: user.email, // list of receivers
+        to: user.advisoremail, // list of receivers
         subject: "Password Reset Request", // Subject line
         html: mail,
       },
@@ -261,7 +332,7 @@ export const ForgotPassword = async (req, res) => {
   } catch (error) {
     return res.status(500).json("An error occurred");
   }
-}
+};
 
 //################### delete advisors #####################/
 export const deleteAdvisor = async (req, res) => {
@@ -279,5 +350,93 @@ export const deleteAdvisor = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+// .......................................Update Password..................................//
+export const advisorPasswordReset = async (req, res) => {
+  const { advisorpassword, confirm_advisorpassword } = req.body;
+  const { id, token } = req.params; // Access id from params
+  const user = await Advisor.findById(id);
+  const new_secret = user._id + SECRET;
+
+  try {
+    jwt.verify(token, new_secret);
+
+    if (advisorpassword && confirm_advisorpassword) {
+      if (advisorpassword !== confirm_advisorpassword) {
+        return res.status(400).json("Passwords doesn't Match. Try Again..!");
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(advisorpassword, salt);
+      const hashedPassword1 = await bcrypt.hash(confirm_advisorpassword, salt);
+      await Advisor.findByIdAndUpdate(user._id, {
+        $set: {
+          advisorpassword: hashedPassword,
+          confirm_advisorpassword: hashedPassword1,
+        },
+      });
+
+      // Send email to user with the updated password
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: EMAIL,
+          pass: PASSWORD,
+        },
+      });
+
+      // Mailgen setup
+      const mailGenerator = new Mailgen({
+        theme: "cerberus",
+        product: {
+          name: "Eleedom IMF Pvt Ltd",
+          link: "https://mailgen.js/",
+          // Adjust the following line accordingly
+          // This will be displayed in the footer of the email
+          copyright: `Copyright ©${new Date().getFullYear()} Eleedom IMF Pvt Ltd. All rights reserved.`,
+        },
+      });
+      // Prepare email content
+      const response = {
+        body: {
+          name: `, ${user.advisorname}`,
+          intro: [
+            "You have received this email because a password reset request.",
+            "Your password has been successfully reset. Your new password is:",
+          ],
+          action: {
+            button: {
+              color: "#A31217",
+              text: `${advisorpassword}`,
+            },
+          },
+          //   utro: "If you did not request a password reset, no further action is required on your part.",
+        },
+      };
+
+      // Generate email
+      const mail = mailGenerator.generate(response);
+      const mailOptions = {
+        from: "Eleedom IMF Pvt Ltd <your_email@gmail.com>",
+        to: user.advisoremail,
+        subject: "Your Password has been Reset",
+        html: mail,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return res
+            .status(500)
+            .json("Error Occurred While Sending Email..!" + error);
+        } else {
+          return res.status(200).json("Email sent" + info.response);
+        }
+      });
+      return res.status(200).json("Password Updated Successfully....!");
+    }
+  } catch (error) {
+    return res.status(500).json("Invalid Link or Expired....!" + error);
   }
 };

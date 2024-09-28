@@ -66,8 +66,10 @@ import {
 } from "../controller/addcompany.controller.js";
 import m_details_routes from "./masterDetails/masterdetails.routes.js";
 import {
+  advisorPasswordReset,
   advisorRegister,
   deleteAdvisor,
+  ForgotAdvisorPassword,
   loginAdvisor,
   updateAdvisor,
   viewAdvisor,
@@ -298,7 +300,10 @@ router.post("/advisor/login", loginAdvisor);
 router.get("/advisor/lists", viewAdvisor);
 router.put("/advisor/update/:id", uploadFile, updateAdvisor);
 router.delete("/advisor/lists/:id", deleteAdvisor);
+router.post("/forgot/advisor/password", ForgotAdvisorPassword);
 router.get("/advisor/all/lists", viewAdvisor1);
+router.post("/advisor/password/:id/:token", advisorPasswordReset);
+
 // login Branch using Addbranch database
 router.post("/branches/loginbranch", loginBranch);
 // HR ROUTES

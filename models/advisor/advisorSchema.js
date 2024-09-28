@@ -35,6 +35,9 @@ const AdvisorSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+    confirm_advisorpassword: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
