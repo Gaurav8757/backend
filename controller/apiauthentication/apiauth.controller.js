@@ -10,7 +10,6 @@ const {
   TATA_AIG_4_WHEELER_SCOPE,
   TATA_AIG_4_WHEELER_TOKEN_CLIENT_ID,
   TATA_AIG_4_WHEELER_TOKEN_CLIENT_SECRET,
-  TATA_AIG_4_WHEELER_QUOTE_URL
 } = process.env;
 
 // Function to make a POST request to the first API
@@ -45,6 +44,7 @@ const fetchAuthToken = async () => {
     );
     return response.data;
   } catch (error) {
+    console.error(`Failed to fetch Auth token: ${error.message}`);
     throw new Error(`Failed to fetch Auth token: ${error.message}`);
   }
 };
@@ -64,7 +64,7 @@ const getCombinedTokens = async () => {
     const authExpiresInMs = auth.expires_in * 1000; // Assuming `expires_in` is in seconds
     // Set timers to expire 30 seconds before actual expiration
     const timerDuration =
-      Math.min(uatListsExpiresInMs, authExpiresInMs) - 30000; // 30 seconds before the minimum of both  
+      Math.min(uatListsExpiresInMs, authExpiresInMs) - 30000; // 30 seconds before the minimum of both
     // Return combined response with timer
     return {
       uatLists,

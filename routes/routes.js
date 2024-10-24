@@ -193,6 +193,7 @@ import formsClaimed from "./formsClaimed/formsClaimed.js";
 import dailyVisited from "./dailyVisits/daily.router.js";
 import verifyAdmin from "../controller/verifyToken/verifyTokenId.js";
 import getTokens from "../controller/apiauthentication/apiauth.controller.js";
+import {proposalApi, quoteApi} from "../controller/apiauthentication/quoteProposalApi.js";
 
 
 // GET TATA AIG AUTH TOKEN CALL
@@ -250,6 +251,10 @@ router.get("/employees/data", empListed);
 router.get("/api/employee-list", viewEmployee);
 // advisor policy lists
 router.get("/api/advpolicy", viewAdvisorListing);
+
+// Quote post data 
+router.post("/taig/motor/quote", quoteApi);
+router.post("/taig/motor/proposal", proposalApi);
 
 router.put("/api/emp/update/:id", uploadFile, updateEmployee);
 router.delete("/emp/api/:id", deleteEmployee);
