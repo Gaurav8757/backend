@@ -193,7 +193,7 @@ import formsClaimed from "./formsClaimed/formsClaimed.js";
 import dailyVisited from "./dailyVisits/daily.router.js";
 import verifyAdmin from "../controller/verifyToken/verifyTokenId.js";
 import getTokens from "../controller/apiauthentication/apiauth.controller.js";
-import {proposalApi, quoteApi} from "../controller/apiauthentication/quoteProposalApi.js";
+import {proposalApi, quoteApi, rto, vehicleMfg, vehicleMfgModel, vehicleMfgModelVariant, vehicleMfgModelVariantData, vehicleMfgModelVariantPriceData} from "../controller/apiauthentication/quoteProposalApi.js";
 
 
 // GET TATA AIG AUTH TOKEN CALL
@@ -251,6 +251,21 @@ router.get("/employees/data", empListed);
 router.get("/api/employee-list", viewEmployee);
 // advisor policy lists
 router.get("/api/advpolicy", viewAdvisorListing);
+
+// Vehicle Manufacturer
+router.get("/taig/pc/mfg", vehicleMfg);
+// Manufacturer Model
+router.get("/taig/pc/mfg/model/:id/:name", vehicleMfgModel);
+// Manufacturer Model Variant
+router.get("/taig/pc/mfg/model/variant/:id/:name", vehicleMfgModelVariant);
+// Model Variant Data
+router.get("/taig/pc/mfg/model/variant/:id/:name/:vid/:vname", vehicleMfgModelVariantData);
+// Model Variant Data Price
+router.get("/taig/pc/mfg/model/variant/price/:id/:name/:vid/:vname/:txt_uw_zone", vehicleMfgModelVariantPriceData);
+// rto all lists
+router.get("/taig/pc/rto", rto);
+// RTO BY id and location
+// router.get("/taig/pc/rto/loc/:id/:location", rto);
 
 // Quote post data 
 router.post("/taig/motor/quote", quoteApi);

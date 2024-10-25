@@ -15,10 +15,18 @@ const {
 // Function to make a POST request to the first API
 const fetchUatListsToken = async () => {
   try {
-    const response = await axios.post(`${TATA_AIG_4_WHEELER_TOKEN_LINK}`, {
-      email: `${TATA_AIG_4_WHEELER_EMAIL}`,
-      pwd: `${TATA_AIG_4_WHEELER_PWD}`,
-    });
+    const response = await axios.post(
+      `${TATA_AIG_4_WHEELER_TOKEN_LINK}`,
+      {
+        email: `${TATA_AIG_4_WHEELER_EMAIL}`,
+        pwd: `${TATA_AIG_4_WHEELER_PWD}`,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
     return response.data;
   } catch (error) {
     throw new Error(`Failed to fetch UAT token: ${error.message}`);
