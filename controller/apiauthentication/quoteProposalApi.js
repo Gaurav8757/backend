@@ -8,7 +8,12 @@ const {
   TATA_AIG_4_WHEELER_MANUFACTURER_MODEL,
   TATA_AIG_4_WHEELER_MANUFACTURER_MODEL_VARIANT,
   TATA_AIG_4_WHEELER_MANUFACTURER_MODEL_VARIANT_PRICEDATA,
-  TATA_AIG_4_WHEELER_RTO
+  TATA_AIG_4_WHEELER_RTO,
+  TATA_AIG_4_WHEELER_RTO_BY_CODE,
+  TATA_AIG_4_WHEELER_PINCODE,
+  TATA_AIG_4_WHEELER_PREV_INSURER,
+  TATA_AIG_4_WHEELER_FINANCIER,
+  TATA_AIG_4_WHEELER_POLICY_PLAN
 } = process.env;
 
 const quoteApi = async (req, res) => {
@@ -180,24 +185,125 @@ const rto = async (req, res) => {
   }
 };
 
-// const rtoByLocation = async (req, res) => {
-//   const rtoToken = req.headers.authorization;
-//   const location = req.params;
-//   try {
-//     const response = await axios.get(`${TATA_AIG_4_WHEELER_RTO}`, {
-//       headers: {
-//         Authorization: `${rtoToken}`,
-//       },
-//     });
-//     if (response.data.status === 0) {
-//       return res.json(response?.data);
-//     } else {
-//       return res.json(response?.data);
-//     }
-//   } catch (error) {
-//     return res.json(error.response?.data?.txt);
-//   }
-// };
+const rtoByLocation = async (req, res) => {
+  const rtoToken = req.headers.authorization;
+  const { code, location } = req.params;
+  try {
+    const response = await axios.get(
+      `${TATA_AIG_4_WHEELER_RTO}/${code}/${location}`,
+      {
+        headers: {
+          Authorization: `${rtoToken}`,
+        },
+      }
+    );
+    if (response.data.status === 0) {
+      return res.json(response?.data);
+    } else {
+      return res.json(response?.data);
+    }
+  } catch (error) {
+    return res.json(error.response?.data?.txt);
+  }
+};
+
+const rtoByCode = async (req, res) => {
+  const rtoToken = req.headers.authorization;
+  const { code1, code2 } = req.params;
+  try {
+    const response = await axios.get(
+      `${TATA_AIG_4_WHEELER_RTO_BY_CODE}/${code1}/${code2}`,
+      {
+        headers: {
+          Authorization: `${rtoToken}`,
+        },
+      }
+    );
+    if (response.data.status === 0) {
+      return res.json(response?.data);
+    } else {
+      return res.json(response?.data);
+    }
+  } catch (error) {
+    return res.json(error.response?.data?.txt);
+  }
+};
+
+const pincode = async (req, res) => {
+  const rtoToken = req.headers.authorization;
+  const { pin } = req.query;
+  try {
+    const response = await axios.get(`${TATA_AIG_4_WHEELER_PINCODE}`, {
+      headers: {
+        Authorization: `${rtoToken}`,
+      },
+      params: {
+        pin, // Pass the pin as a query parameter
+      },
+    });
+    if (response.data.status === 0) {
+      return res.json(response?.data);
+    } else {
+      return res.json(response?.data);
+    }
+  } catch (error) {
+    return res.json(error.response?.data?.txt);
+  }
+};
+
+const prevInsurer = async (req, res) => {
+  const prevToken = req.headers.authorization;
+  try {
+    const response = await axios.get(`${TATA_AIG_4_WHEELER_PREV_INSURER}`, {
+      headers: {
+        Authorization: `${prevToken}`,
+      },
+    });
+    if (response.data.status === 0) {
+      return res.json(response?.data);
+    } else {
+      return res.json(response?.data);
+    }
+  } catch (error) {
+    return res.json(error.response?.data?.txt);
+  }
+};
+
+const financier = async (req, res) => {
+  const prevToken = req.headers.authorization;
+  try {
+    const response = await axios.get(`${TATA_AIG_4_WHEELER_FINANCIER}`, {
+      headers: {
+        Authorization: `${prevToken}`,
+      },
+    });
+    if (response.data.status === 0) {
+      return res.json(response?.data);
+    } else {
+      return res.json(response?.data);
+    }
+  } catch (error) {
+    return res.json(error.response?.data?.txt);
+  }
+};
+
+const policyPlans = async (req, res) => {
+  const planToken = req.headers.authorization;
+  try {
+    const response = await axios.get(`${TATA_AIG_4_WHEELER_POLICY_PLAN}`, {
+      headers: {
+        Authorization: `${planToken}`,
+      },
+    });
+    if (response.data.status === 0) {
+      return res.json(response?.data);
+    } else {
+      return res.json(response?.data);
+    }
+  } catch (error) {
+    return res.json(error.response?.data?.txt);
+  }
+};
 
 export {
   quoteApi,
@@ -207,5 +313,11 @@ export {
   vehicleMfgModelVariant,
   vehicleMfgModelVariantData,
   vehicleMfgModelVariantPriceData,
-  rto
+  rto,
+  rtoByLocation,
+  rtoByCode,
+  pincode,
+  prevInsurer,
+  financier,
+  policyPlans
 };

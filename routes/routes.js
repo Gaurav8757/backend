@@ -193,7 +193,7 @@ import formsClaimed from "./formsClaimed/formsClaimed.js";
 import dailyVisited from "./dailyVisits/daily.router.js";
 import verifyAdmin from "../controller/verifyToken/verifyTokenId.js";
 import getTokens from "../controller/apiauthentication/apiauth.controller.js";
-import {proposalApi, quoteApi, rto, vehicleMfg, vehicleMfgModel, vehicleMfgModelVariant, vehicleMfgModelVariantData, vehicleMfgModelVariantPriceData} from "../controller/apiauthentication/quoteProposalApi.js";
+import {financier, pincode, policyPlans, prevInsurer, proposalApi, quoteApi, rto, rtoByCode, rtoByLocation, vehicleMfg, vehicleMfgModel, vehicleMfgModelVariant, vehicleMfgModelVariantData, vehicleMfgModelVariantPriceData} from "../controller/apiauthentication/quoteProposalApi.js";
 
 
 // GET TATA AIG AUTH TOKEN CALL
@@ -265,7 +265,18 @@ router.get("/taig/pc/mfg/model/variant/price/:id/:name/:vid/:vname/:txt_uw_zone"
 // rto all lists
 router.get("/taig/pc/rto", rto);
 // RTO BY id and location
-// router.get("/taig/pc/rto/loc/:id/:location", rto);
+router.get("/taig/pc/rto/:code/:location", rtoByLocation);
+// rto by code1 and code 2
+router.get("/taig/pc/code/rto/:code1/:code2", rtoByCode);
+// pincode
+router.get("/taig/pc/pincode", pincode);
+// prev insurer
+router.get("/taig/pc/prev/insurer", prevInsurer);
+// financier
+router.get("/taig/pc/financier", financier);
+// policy bundle
+router.get("/taig/pc/policy/plan", policyPlans);
+
 
 // Quote post data 
 router.post("/taig/motor/quote", quoteApi);
